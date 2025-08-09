@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   # Custom health endpoint for external checks
   get "health" => "health#show"
 
+  # JWKS endpoint for public key discovery
+  get "/.well-known/jwks.json" => "jwks#show"
+
   namespace :api do
     namespace :v1 do
       get "health" => "health#show"
