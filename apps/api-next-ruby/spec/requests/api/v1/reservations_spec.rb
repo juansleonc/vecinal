@@ -17,4 +17,35 @@ RSpec.describe 'Reservations API', type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
+
+  describe 'POST /api/v1/reservations' do
+    let(:body) do
+      {
+        reservation: {
+          amenityId: SecureRandom.uuid,
+          date: Date.today.to_s,
+          timeFrom: '10:00',
+          timeTo: '11:00',
+          message: 'Reserva de prueba'
+        }
+      }
+    end
+
+    it 'creates a reservation skeleton and returns 201' do
+      post '/api/v1/reservations', params: body
+      expect(response).to have_http_status(:created)
+      json = JSON.parse(response.body)
+      expect(json['id']).to be_present
+      expect(json['status']).to eq('pending')
+      expect(json['amenityId']).to eq(body[:reservation][:amenityId])
+    end
+
+    it 'validates required fields' do
+      post '/api/v1/reservations', params: { reservation: {} }
+      expect(response).to have_http_status(:unprocessable_entity)
+      json = JSON.parse(response.body)
+      expect(json['errors']).to be_an(Array)
+      expect(json['errors']).not_to be_empty
+    end
+  end
 end
