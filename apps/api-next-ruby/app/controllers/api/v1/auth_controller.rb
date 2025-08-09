@@ -5,8 +5,8 @@ class Api::V1::AuthController < ApplicationController
     params.require(:email)
     params.require(:password)
     user = User.create!(email: params[:email], password: params[:password])
-    token = Authentication.issue_token(user_id: user.id)
-    render json: { token: token, user: { id: user.id, email: user.email } }, status: :created
+    access_token, refresh_token = Authentication.issue_token_pair(user_id: user.id)
+    render json: { accessToken: access_token, refreshToken: refresh_token.token, user: { id: user.id, email: user.email } }, status: :created
   rescue ActiveRecord::RecordInvalid => e
     render json: { error: 'invalid', message: e.record.errors.full_messages }, status: :unprocessable_entity
   end
@@ -19,7 +19,23 @@ class Api::V1::AuthController < ApplicationController
       render json: { error: 'invalid_credentials' }, status: :unauthorized
       return
     end
-    token = Authentication.issue_token(user_id: user.id)
-    render json: { token: token, user: { id: user.id, email: user.email } }
+    access_token, refresh_token = Authentication.issue_token_pair(user_id: user.id)
+    render json: { accessToken: access_token, refreshToken: refresh_token.token, user: { id: user.id, email: user.email } }
+  end
+
+  def refresh
+    params.require(:refreshToken)
+    rt = RefreshToken.active.find_by!(token: params[:refreshToken])
+    access_token, _ = Authentication.issue_token_pair(user_id: rt.user_id)
+    render json: { accessToken: access_token }
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'invalid_refresh' }, status: :unauthorized
+  end
+
+  def logout
+    params.require(:refreshToken)
+    rt = RefreshToken.find_by(token: params[:refreshToken])
+    rt&.revoke!
+    head :no_content
   end
 end

@@ -30,8 +30,11 @@ module Authentication
 
   module_function
 
-  def issue_token(user_id:, exp: 24.hours.from_now)
-    payload = { sub: user_id, exp: exp.to_i, iat: Time.now.to_i }
-    JWT.encode(payload, SECRET, ALGORITHM)
+  def issue_token_pair(user_id:, access_exp: 15.minutes.from_now, refresh_exp: 30.days.from_now)
+    access_payload = { sub: user_id, exp: access_exp.to_i, iat: Time.now.to_i, typ: 'access' }
+    access_token = JWT.encode(access_payload, SECRET, ALGORITHM)
+
+    rt = RefreshToken.create!(user_id: user_id, expires_at: refresh_exp)
+    [access_token, rt]
   end
 end

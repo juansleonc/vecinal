@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       get "health" => "health#show"
       post "auth/signup" => "auth#signup"
       post "auth/login" => "auth#login"
+      post "auth/refresh" => "auth#refresh"
+      post "auth/logout" => "auth#logout"
       resources :reservations, only: [:index, :show, :create, :update, :destroy]
     end
   end
