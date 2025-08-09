@@ -23,22 +23,22 @@ Template
 
 Log
 - 2025-08-09: Initialized tracker.
-\n+## Estado actual (2025-08-09)
+
+## Estado actual (2025-08-09)
 
 - API `apps/api-next-ruby` actualizado a **Rails 8.0.2** y **Ruby 3.3.9**.
 - Configurado CORS, endpoints de salud, manejo global de excepciones, logging JSON y RSpec.
 - `apps/legacy-rails` permanece sin cambios funcionales.
-- Intento de push a `juansleonc/vecinal.git` falló inicialmente por archivo >100MB y luego por detección de claves Stripe de prueba.
-- Acciones realizadas: eliminación de `.git` anidado en `apps/api-next-ruby`, creación de `.gitignore` raíz, limpieza de `log/`, `tmp/` y `dump.rdb` del índice, amend del commit.
-- Bloqueo actual: GitHub Push Protection detecta claves Stripe en `apps/legacy-rails/config/secrets.yml`.
+- Repositorio publicado en GitHub (`origin/main`) tras limpiar la historia y retirar secretos de `secrets.yml`.
+- Gestión de claves: en pausa por decisión (cuentas obsoletas).
 
 ## Próximos pasos
 
-- [ ] Sustituir claves Stripe hardcodeadas en `apps/legacy-rails/config/secrets.yml` por variables de entorno/credentials.
-- [ ] Rotar las claves en Stripe (test y, si aplica, live).
-- [ ] Purgar historia para eliminar secretos expuestos (git filter-repo/BFG) si estuvieron alguna vez commiteados.
-- [ ] Confirmar `.gitignore` para evitar reintroducción de secretos y artefactos.
-- [ ] Reintentar push a `juansleonc/vecinal.git`.
+- [ ] CI/CD: pruebas y linters para `apps/api-next-ruby` y `apps/legacy-rails` (incl. Brakeman, RuboCop).
+- [ ] API Next: primeros endpoints reales (p.ej., `reservations`, `users`) con request specs y auth (JWT).
+- [ ] Legacy Rails: smoke tests de rutas críticas de pagos y reservas.
+- [ ] Devex: refinar `docker-compose` para stack completo y comandos en `Makefile`.
+- [ ] Documentación: mantener este tracker al día y completar `.env.example`.
 
 Notas
-- En curso: localización exacta de las claves en `apps/legacy-rails/config/secrets.yml` para su reemplazo.
+- Gestión de claves se pospone hasta nuevo aviso.
