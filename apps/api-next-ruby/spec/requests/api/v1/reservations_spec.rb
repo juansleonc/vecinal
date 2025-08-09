@@ -48,4 +48,25 @@ RSpec.describe 'Reservations API', type: :request do
       expect(json['errors']).not_to be_empty
     end
   end
+
+  describe 'PATCH /api/v1/reservations/:id' do
+    it 'updates status when valid' do
+      patch '/api/v1/reservations/abc', params: { reservation: { status: 'approved' } }
+      expect(response).to have_http_status(:ok)
+      json = JSON.parse(response.body)
+      expect(json['ok']).to be true
+    end
+
+    it 'rejects invalid status' do
+      patch '/api/v1/reservations/abc', params: { reservation: { status: 'invalid' } }
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
+
+  describe 'DELETE /api/v1/reservations/:id' do
+    it 'returns 204' do
+      delete '/api/v1/reservations/abc'
+      expect(response).to have_http_status(:no_content)
+    end
+  end
 end

@@ -38,4 +38,20 @@ class Api::V1::ReservationsController < ApplicationController
 
     render json: reservation, status: :created
   end
+
+  def update
+    body = params.require(:reservation).permit(:status, :responsibleId)
+    allowed_status = %w[pre-approved approved cancelled]
+
+    if body[:status].present? && !allowed_status.include?(body[:status])
+      render json: { errors: ["invalid status"] }, status: :unprocessable_entity
+      return
+    end
+
+    render json: { ok: true }
+  end
+
+  def destroy
+    head :no_content
+  end
 end
