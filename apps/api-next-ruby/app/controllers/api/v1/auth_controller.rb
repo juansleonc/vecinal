@@ -25,9 +25,13 @@ class Api::V1::AuthController < ApplicationController
 
   def refresh
     params.require(:refreshToken)
-    rt = RefreshToken.active.find_by!(token: params[:refreshToken])
-    access_token, _ = Authentication.issue_token_pair(user_id: rt.user_id)
-    render json: { accessToken: access_token }
+    RefreshToken.transaction do
+      rt = RefreshToken.active.find_by!(token: params[:refreshToken])
+      # One-time use: revoke current refresh and issue a new pair
+      rt.revoke!
+      access_token, new_rt = Authentication.issue_token_pair(user_id: rt.user_id)
+      render json: { accessToken: access_token, refreshToken: new_rt.token }
+    end
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'invalid_refresh' }, status: :unauthorized
   end
