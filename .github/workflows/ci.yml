@@ -10,6 +10,16 @@ jobs:
   api-next-ruby:
     name: API Next Ruby (lint + security + tests)
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres" --health-interval=10s --health-timeout=5s --health-retries=5
     defaults:
       run:
         working-directory: apps/api-next-ruby
@@ -26,6 +36,12 @@ jobs:
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
 
+      - name: Prepare test database
+        env:
+          DATABASE_TEST_URL: postgres://postgres:postgres@localhost:5432/vecinal_api_test
+        run: |
+          bin/rails db:prepare
+
       - name: RuboCop
         run: |
           if [ -f bin/rubocop ]; then bin/rubocop --version; fi
@@ -37,6 +53,8 @@ jobs:
           bundle exec brakeman -q -w2
 
       - name: RSpec
+        env:
+          DATABASE_TEST_URL: postgres://postgres:postgres@localhost:5432/vecinal_api_test
         run: |
           if [ -d spec ]; then bundle exec rspec --format documentation; else echo "No spec directory, skipping"; fi
 
