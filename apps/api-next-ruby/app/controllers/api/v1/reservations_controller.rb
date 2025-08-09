@@ -1,6 +1,6 @@
 class Api::V1::ReservationsController < ApplicationController
   def index
-    render json: { data: [], meta: { count: 0 } }
+    render json: []
   end
 
   def show

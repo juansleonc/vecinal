@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Reservations API', type: :request do
   describe 'GET /api/v1/reservations' do
-    it 'returns an empty list with meta' do
+    it 'returns an empty array' do
       get '/api/v1/reservations'
       expect(response).to have_http_status(:ok)
       json = JSON.parse(response.body)
-      expect(json['data']).to be_an(Array)
-      expect(json['data']).to be_empty
-      expect(json['meta']).to include('count' => 0)
+      expect(json).to be_an(Array)
+      expect(json).to be_empty
     end
   end
 
