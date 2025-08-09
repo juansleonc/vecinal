@@ -1,3 +1,12 @@
+require 'simplecov'
+SimpleCov.start do
+  enable_coverage :branch
+  add_filter '/config/'
+  add_filter '/spec/'
+  minimum_coverage 80
+  minimum_coverage_by_file 70
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
