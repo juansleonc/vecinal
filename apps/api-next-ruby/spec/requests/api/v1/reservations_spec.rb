@@ -12,8 +12,8 @@ RSpec.describe 'Reservations API', type: :request do
   end
 
   describe 'GET /api/v1/reservations/:id' do
-    it 'returns 404 for now' do
-      get '/api/v1/reservations/123'
+    it 'returns 404 for missing id' do
+      get '/api/v1/reservations/00000000-0000-0000-0000-000000000000'
       validate_response(status: 404)
     end
   end
@@ -31,7 +31,7 @@ RSpec.describe 'Reservations API', type: :request do
       }
     end
 
-    it 'creates a reservation skeleton and returns 201' do
+    it 'creates a reservation and returns 201' do
       post '/api/v1/reservations', params: body
       validate_response(status: 201)
       json = JSON.parse(response.body)

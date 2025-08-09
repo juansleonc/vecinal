@@ -1,10 +1,12 @@
 class Api::V1::ReservationsController < ApplicationController
   def index
-    render json: []
+    reservations = Reservation.all.order(created_at: :desc)
+    render json: reservations.map { |r| serialize(r) }
   end
 
   def show
-    render json: { error: 'not found' }, status: :not_found
+    reservation = Reservation.find(params[:id])
+    render json: serialize(reservation)
   end
 
   def create
@@ -22,21 +24,18 @@ class Api::V1::ReservationsController < ApplicationController
       return
     end
 
-    reservation = {
-      id: SecureRandom.uuid,
-      amenityId: payload[:amenityId],
-      reserverId: SecureRandom.uuid,
-      responsibleId: nil,
+    record = Reservation.create!(
+      amenity_id: payload[:amenityId],
+      reserver_id: SecureRandom.uuid,
+      responsible_id: nil,
       date: payload[:date],
-      timeFrom: payload[:timeFrom],
-      timeTo: payload[:timeTo],
+      time_from: payload[:timeFrom],
+      time_to: payload[:timeTo],
       status: 'pending',
-      message: payload[:message],
-      createdAt: Time.now.utc.iso8601,
-      updatedAt: Time.now.utc.iso8601
-    }
+      message: payload[:message]
+    )
 
-    render json: reservation, status: :created
+    render json: serialize(record), status: :created
   end
 
   def update
@@ -48,10 +47,30 @@ class Api::V1::ReservationsController < ApplicationController
       return
     end
 
+    # Fake update since we don't persist user context yet
+    Reservation.find(params[:id]) # raise not found if missing
     render json: { ok: true }
   end
 
   def destroy
     head :no_content
+  end
+
+  private
+
+  def serialize(record)
+    {
+      id: record.id,
+      amenityId: record.amenity_id,
+      reserverId: record.reserver_id,
+      responsibleId: record.responsible_id,
+      date: record.date,
+      timeFrom: record.time_from,
+      timeTo: record.time_to,
+      status: record.status,
+      message: record.message,
+      createdAt: record.created_at&.iso8601,
+      updatedAt: record.updated_at&.iso8601
+    }
   end
 end
