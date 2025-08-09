@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Reservations API', type: :request do
+  let(:user) { User.create!(email: 'r@example.com', password: 'secret123') }
+  let(:token) { Authentication.issue_token(user_id: user.id) }
+  let(:auth_headers) { { 'Authorization' => "Bearer #{token}" } }
   describe 'GET /api/v1/reservations' do
     it 'returns an empty array' do
-      get '/api/v1/reservations'
+      get '/api/v1/reservations', headers: auth_headers
       validate_response(status: 200)
       json = JSON.parse(response.body)
       expect(json).to be_an(Array)
@@ -13,7 +16,7 @@ RSpec.describe 'Reservations API', type: :request do
 
   describe 'GET /api/v1/reservations/:id' do
     it 'returns 404 for missing id' do
-      get '/api/v1/reservations/00000000-0000-0000-0000-000000000000'
+      get '/api/v1/reservations/00000000-0000-0000-0000-000000000000', headers: auth_headers
       validate_response(status: 404)
     end
   end
@@ -32,7 +35,7 @@ RSpec.describe 'Reservations API', type: :request do
     end
 
     it 'creates a reservation and returns 201' do
-      post '/api/v1/reservations', params: body
+      post '/api/v1/reservations', params: body, headers: auth_headers
       validate_response(status: 201)
       json = JSON.parse(response.body)
       expect(json['id']).to be_present
@@ -41,7 +44,7 @@ RSpec.describe 'Reservations API', type: :request do
     end
 
     it 'validates required fields' do
-      post '/api/v1/reservations', params: { reservation: {} }
+      post '/api/v1/reservations', params: { reservation: {} }, headers: auth_headers
       validate_response(status: 422)
       json = JSON.parse(response.body)
       expect(json['errors']).to be_an(Array)
@@ -51,21 +54,21 @@ RSpec.describe 'Reservations API', type: :request do
 
   describe 'PATCH /api/v1/reservations/:id' do
     it 'updates status when valid' do
-      patch '/api/v1/reservations/abc', params: { reservation: { status: 'approved' } }
+      patch '/api/v1/reservations/abc', params: { reservation: { status: 'approved' } }, headers: auth_headers
       validate_response(status: 200)
       json = JSON.parse(response.body)
       expect(json['ok']).to be true
     end
 
     it 'rejects invalid status' do
-      patch '/api/v1/reservations/abc', params: { reservation: { status: 'invalid' } }
+      patch '/api/v1/reservations/abc', params: { reservation: { status: 'invalid' } }, headers: auth_headers
       validate_response(status: 422)
     end
   end
 
   describe 'DELETE /api/v1/reservations/:id' do
     it 'returns 204' do
-      delete '/api/v1/reservations/abc'
+      delete '/api/v1/reservations/abc', headers: auth_headers
       expect(response).to have_http_status(:no_content)
     end
   end

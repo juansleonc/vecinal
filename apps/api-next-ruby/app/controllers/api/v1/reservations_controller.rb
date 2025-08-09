@@ -26,7 +26,7 @@ class Api::V1::ReservationsController < ApplicationController
 
     record = Reservation.create!(
       amenity_id: payload[:amenityId],
-      reserver_id: SecureRandom.uuid,
+      reserver_id: current_user_id || SecureRandom.uuid,
       responsible_id: nil,
       date: payload[:date],
       time_from: payload[:timeFrom],

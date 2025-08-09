@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "health" => "health#show"
+      post "auth/signup" => "auth#signup"
+      post "auth/login" => "auth#login"
       resources :reservations, only: [:index, :show, :create, :update, :destroy]
     end
   end
