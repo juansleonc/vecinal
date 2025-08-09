@@ -50,4 +50,7 @@ group :development, :test do
 
   # RSpec for testing
   gem "rspec-rails"
+
+  # OpenAPI request/response validation in tests/CI
+  gem "committee", require: false
 end
