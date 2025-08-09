@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   def me
-    render json: { id: current_user_id }
+    user = User.find(current_user_id)
+    render json: { id: user.id, email: user.email, roles: [] }
   end
 end
