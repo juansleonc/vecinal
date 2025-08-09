@@ -1,6 +1,14 @@
 class Api::V1::ReservationsController < ApplicationController
   def index
-    reservations = Reservation.all.order(created_at: :desc)
+    reservations = Reservation.all
+    reservations = reservations.where(amenity_id: params[:amenityId]) if params[:amenityId].present?
+    if params[:from].present?
+      reservations = reservations.where('date >= ?', params[:from])
+    end
+    if params[:to].present?
+      reservations = reservations.where('date <= ?', params[:to])
+    end
+    reservations = reservations.order(created_at: :desc)
     render json: reservations.map { |r| serialize(r) }
   end
 
@@ -40,19 +48,17 @@ class Api::V1::ReservationsController < ApplicationController
 
   def update
     body = params.require(:reservation).permit(:status, :responsibleId)
-    allowed_status = %w[pre-approved approved cancelled]
-
-    if body[:status].present? && !allowed_status.include?(body[:status])
-      render json: { errors: ["invalid status"] }, status: :unprocessable_entity
-      return
-    end
-
-    # Fake update since we don't persist user context yet
-    Reservation.find(params[:id]) # raise not found if missing
-    render json: { ok: true }
+    record = Reservation.find(params[:id])
+    update_attrs = {}
+    update_attrs[:status] = body[:status] if body[:status].present?
+    update_attrs[:responsible_id] = body[:responsibleId] if body[:responsibleId].present?
+    record.update!(update_attrs) if update_attrs.any?
+    render json: serialize(record)
   end
 
   def destroy
+    record = Reservation.find(params[:id])
+    record.destroy!
     head :no_content
   end
 

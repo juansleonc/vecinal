@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "health" => "health#show"
+      get "me" => "users#me"
       post "auth/signup" => "auth#signup"
       post "auth/login" => "auth#login"
       post "auth/refresh" => "auth#refresh"

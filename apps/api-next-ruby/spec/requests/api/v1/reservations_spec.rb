@@ -54,10 +54,14 @@ RSpec.describe 'Reservations API', type: :request do
 
   describe 'PATCH /api/v1/reservations/:id' do
     it 'updates status when valid' do
-      patch '/api/v1/reservations/abc', params: { reservation: { status: 'approved' } }, headers: auth_headers
+      post '/api/v1/reservations', params: {
+        reservation: { amenityId: SecureRandom.uuid, date: Date.today.to_s, timeFrom: '10:00', timeTo: '11:00', message: 'x' }
+      }, headers: auth_headers
+      created = JSON.parse(response.body)
+      patch "/api/v1/reservations/#{created['id']}", params: { reservation: { status: 'approved' } }, headers: auth_headers
       validate_response(status: 200)
       json = JSON.parse(response.body)
-      expect(json['ok']).to be true
+      expect(json['status']).to eq('approved')
     end
 
     it 'rejects invalid status' do
@@ -68,7 +72,11 @@ RSpec.describe 'Reservations API', type: :request do
 
   describe 'DELETE /api/v1/reservations/:id' do
     it 'returns 204' do
-      delete '/api/v1/reservations/abc', headers: auth_headers
+      post '/api/v1/reservations', params: {
+        reservation: { amenityId: SecureRandom.uuid, date: Date.today.to_s, timeFrom: '10:00', timeTo: '11:00', message: 'x' }
+      }, headers: auth_headers
+      created = JSON.parse(response.body)
+      delete "/api/v1/reservations/#{created['id']}", headers: auth_headers
       expect(response).to have_http_status(:no_content)
     end
   end
