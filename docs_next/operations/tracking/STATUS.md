@@ -35,10 +35,11 @@ Log
 ## Próximos pasos
 
 - [ ] CI/CD: pruebas y linters para `apps/api-next-ruby` y `apps/legacy-rails` (incl. Brakeman, RuboCop).
-- [ ] API Next: primeros endpoints reales (p.ej., `reservations`, `users`) con request specs y auth (JWT).
+- [ ] API Next: completar CRUD de `reservations` con persistencia (en progreso) y endpoints de `users`.
+- [ ] Auth: JWT con RS256 y JWKS (listo), añadir tests extra y rotación programada de llaves.
 - [ ] Legacy Rails: smoke tests de rutas críticas de pagos y reservas.
 - [ ] Devex: refinar `docker-compose` para stack completo y comandos en `Makefile`.
-- [ ] Documentación: mantener este tracker al día y completar `.env.example`.
+- [ ] Documentación: mantener este tracker al día y completar `.env.example` (actualizado con JWT/envs).
 
 Notas
 - Gestión de claves se pospone hasta nuevo aviso.
