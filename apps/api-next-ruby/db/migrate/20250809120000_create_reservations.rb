@@ -1,5 +1,6 @@
 class CreateReservations < ActiveRecord::Migration[8.0]
   def change
+    enable_extension 'pgcrypto' unless extension_enabled?('pgcrypto')
     create_table :reservations, id: :uuid do |t|
       t.uuid :amenity_id, null: false
       t.uuid :reserver_id
