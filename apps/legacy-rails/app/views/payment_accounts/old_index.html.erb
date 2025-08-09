@@ -1,0 +1,69 @@
+<% @submenu_title = t('payments.name')
+  @submenu_item = 'payments'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 payment-accounts">
+  <div class="clearfix well">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="autohide-finder pull-right">
+          <input type="text" class="form-control">
+          <%= link_to '#' do %>
+            <i class="fa fa-search"></i>
+          <% end %>
+        </div>
+        <ul class="nav nav-tabs">
+          <li>
+            <%= link_to payments_path do %>
+              <i class=" fa fa-credit-card"></i> <%= Payment.model_name.human(count: 2).capitalize %>
+            <% end %>
+          </li>
+          <li class="active">
+            <%= link_to '#' do %>
+              <i class=" fa fa-users"></i> <%= t('general.submenu.communities')%>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-12">
+        <div class="row image-gallery-grid" id="buildings">
+          <% @buildings.each do |building| %>
+            <div class="col-sm-3 img-gallery-column building" id="building-<%= building.id %>">
+              <div class="img-container">
+                <%= image_tag building.home_image.image.url(:medium_thumb) %>
+                <%= image_tag building.logo.url(:standard), class: 'logo' %>
+              </div>
+              <div class="img-description">
+                <div class="description-header">
+                  <span class="header-name italic"><%= building.name %></span>
+                </div>
+                <i class="fa fa-map-marker"></i> <%= building.address %>, <%= building.city %>
+                <br/><br/>
+                <i class="fa fa-credit-card"></i>
+                <% if building.payment_account && building.payment_account.status? %>
+                  <% status = building.payment_account.status %>
+                  <span class="<%= PaymentAccount::STATUS_COLORS[status.to_sym] %> status"><%= status.upcase %></span>
+                  <div class="dropup pull-right">
+                    <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, id: "building-#{building.id}-dropdown" do %>
+                      <i class="fa fa-ellipsis-v"></i>
+                    <% end %>
+                    <ul class="dropdown-menu" aria-labelledby="building-<%= building.id %>-dropdown">
+                      <li>
+                        <%= link_to t('general.edit'), '#', data: { toggle: 'modal', target: "#edit-payment-account-modal-#{building.id}" } %>
+                      </li>
+                    </ul>
+                  </div>
+                  <%= render 'edit', building: building %>
+                <% else %>
+                  <%= link_to 'GET STARTED', '#', data: { toggle: 'modal', target: '#new-payment-account-modal' } %>
+                <% end %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'new', account: PaymentAccount.new %>
+

@@ -1,0 +1,64 @@
+<% @submenu_title = Deal.model_name.human(count: 2).capitalize
+  @navbar_style = 'green'
+  @submenu_item = 'deals'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 residents-vouchers">
+  <div class="well clearfix">
+    <div class="white-box">
+      <div>
+        <div class="google-map" data-longitude="<%= current_building.longitude %>"
+          data-latitude="<%= current_building.latitude %>" data-name="<%= current_building.name %>"
+          data-markers="<%= get_markers @near_businesses[:businesses], :deals %>"
+          data-drop-main="<%= asset_url 'drop_blue.png' %>" data-drop-sec="<%= asset_url 'drop_green.png' %>">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-7 col-xs-12 no-padding">
+      <h4>
+        <i class="fa fa-tag"></i>
+        <span class="italic"><%= Deal.model_name.human(count: 2).capitalize %></span>
+      </h4>
+      <span class="page-descriptor"><%= t 'deals.find_best_promotions' %></span>
+    </div>
+
+    <div class="finder pull-right col-sm-5 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-deals-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <div class="col-xs-12 no-padding">
+      <div class="row image-gallery-grid deals" id="deals">
+        <% @near_businesses[:deals].each do |deal| %>
+          <% business = deal.business %>
+          <div class="col-sm-4 col-lg-3 img-gallery-column deal">
+            <%= image_tag 'star_icon.png', class: 'highlight' if deal.highlight? %>
+            <%= link_to image_tag(deal.main_image.image.url :medium_thumb),
+                resident_business_deal_add_click_path(business, deal)
+            %>
+            <div class="img-description">
+              <div class="description-header">
+                <%= deal.title %>
+              </div>
+              <span class="medium-soft"><%= business.name %></span><br/>
+              <strong><i class="fa fa-map-marker"></i> <%= business.city %></strong>
+              <%= business.distance_rounded request.location %>
+              <div class="price-offer">
+                <span class="old-amount <%= 'hidden' if deal.discount == 0 %>"><%= number_to_currency deal.price %></span>
+                <span class="new-amount active"><%= number_to_currency deal.payable_price %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if @near_businesses[:deals].blank? %>
+    <div class="empty-items-container">
+      <%= t 'general.you_have_no', objects: Deal.model_name.human(count: 2) %>
+      <br/>
+      <%= t 'general.comming_soon' %>
+    </div>
+  <% end %>
+
+</div>

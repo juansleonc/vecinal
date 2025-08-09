@@ -1,0 +1,60 @@
+<%= form_for AccountBalance.new, remote: true do |f| %>
+
+  <div class="errors-container"></div>
+
+  <div class="form-group row">
+    <div class="col-sm-6 col-xs-12">
+      <%= f.text_field :subject,
+      placeholder: t('account_balances.form.subject'),
+      class: 'form-control' %>  
+    </div>
+    
+    <div class="with-icon col-sm-6 col-xs-12">
+      <%= f.text_field :publication_date,
+        placeholder: t('account_balances.form.upload_date'),
+        class: 'form-control',
+        data: { picker: "months" } %>
+      <i class="fa fa-calendar-o on-input"></i>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.hidden_field :community_id %>
+    <%= f.hidden_field :community_type, value: 'Building' %>
+    <div class="dropdown col-sm-6 col-xs-12 as-select"
+      data-target="#account_balance_community_id"
+      data-target-type="#account_balance_community_type"
+      id="community-selector">
+      <button class="dropdown-toggle form-control" data-toggle="dropdown">
+        <span>
+          <i class="fa fa-circle-o with-background"></i> 
+          <%= t 'general.choose_community' %> <sup class="red">*</sup>
+        </span>
+
+        <i class="fa fa-caret-down"></i>
+        <i class="fa fa-caret-up"></i>
+      </button>
+      <ul class="dropdown-menu">
+        <% current_user.buildings.order(:name).each do |building| %>
+          <li>
+            <%= link_to '#', data: { id: building.id, type: building.class.name } do %>
+              <%= mi.business %>
+              <%#= render 'shared/logo_left', logoable: building, left: '' %>
+              <%= building.name %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-sm-6 attachment-field">
+      <%= f.fields_for :attachment, f.object.build_attachment do |fa| %>
+        <%= fa.file_field :file_attachment, 
+          class: 'form-control attachment-container',
+          accept: AccountBalance::ALLOWED_ATTACHMENT_EXTENSIONS %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= f.submit t('account_balances.form.submit'), class: 'btn btn-primary' %>
+<% end %>

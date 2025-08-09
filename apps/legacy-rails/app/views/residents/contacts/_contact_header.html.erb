@@ -1,0 +1,14 @@
+<div class="contact-header">
+  <%= render 'shared/logo_left', logoable: contact %>
+  <%= link_to user_profile_path(contact.id), class: 'username', data: { action: user_profile_banner_path(contact.id) } do %>
+    <!-- <span class="name with-profile-banner" data-user-id="<%#= contact.id %>"><%#= contact.full_name %></span> -->
+    <%= with_profile_banner_link contact %>
+    <br/>
+    <span class="info"><i class="fa fa-home"></i> <%= contact.accountable.name %></span>
+    <% if contact.admin? || ( contact.resident? && current_user.admin? ) %>
+      <span class="info">, <%= t('contacts.unit') %> <%= contact.contact_details.apartment_numbers_joined %></span>
+      <br/>
+      <span class="info"><i class="fa fa-mobile"></i> <%= number_to_phone contact.contact_details.phone %></span>
+    <% end %>
+  <% end %>
+</div>

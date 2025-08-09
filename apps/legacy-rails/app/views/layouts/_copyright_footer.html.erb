@@ -1,0 +1,19 @@
+<% current_path = request.path %>
+<footer class="row copyright-footer">
+  <div class="col-xs-10 col-xs-offset-1">
+    <!-- <strong><%#= t 'home.footer.condo_media' %></strong>
+    <ul class="social-icons">
+      <li><a target="_blank" href="https://www.facebook.com/condomediainc"><i class="fa fa-facebook"></i></a></li>
+      <li><a target="_blank" href="https://plus.google.com/+Condomediainc"><i class="fa fa-google-plus"></i></a></li>
+      <li><a target="_blank" href="https://www.linkedin.com/company/condo-media"><i class="fa fa-linkedin"></i></a></li>
+    </ul> -->
+    <p class="terms <%= 'black-text' if local_assigns[:black] %>">
+      <%= t 'footer.copyright' %> |
+      <%= link_to t('footer.privacy'), send("privacy_#{I18n.locale.to_s}_path"), target: '_blank' %> |
+      <%= link_to t('footer.terms'), send("terms_#{I18n.locale.to_s}_path"), target: '_blank' %> |
+      <%= link_to '#', data: { toggle: 'modal', target: '#change-language-modal' } do %>
+        <i class="fa fa-globe"></i> <%= t "footer.language.#{locale}" %>
+      <% end %>
+    </p>
+  </div>
+</footer>

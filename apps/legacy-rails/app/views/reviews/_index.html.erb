@@ -1,0 +1,22 @@
+<% reviews = reviewable.reviews.order(updated_at: :desc).filtered_for(current_user, params[:filter])
+  avg = reviewable.average_rank.round 1
+%>
+
+<%= render 'reviews/new', reviewable: reviewable if can?(:review, reviewable) %>
+
+<div class="reviews-average cols-divided-banner">
+  <div class="average-star">
+    <span class="average"><%= avg %></span>
+    <i class="fa fa-star"></i>
+  </div>
+  <div class="data">
+    <span class="average"><%= avg %></span> <%= "#{t('general.of')} #{Review::MAX_RANK} #{t('general.stars')}" %>
+    <br/>
+    <span class="reviews-count">
+      <span class="count"><%= reviews.count %></span> <%= Review.model_name.human(count: 2) %>
+    </span>
+  </div>
+  <%= render 'reviews/star_bars', reviewable: reviewable %>
+</div>
+
+<%= render partial: 'reviews/review', collection: reviews %>

@@ -1,0 +1,9 @@
+$('#new-message-select-recipients').empty().val(null).change();
+<% if current_user.admin? %>
+  $('#new-message-select-recipients').append(
+    $('<option>',
+      { value : '<%= @company.id %>', 'data-name': '<%= @company.name %>' }
+    ).text('<%= @company.name %> , <%= @company.address%>')
+  );
+  $('#new-message-select-recipients').val(["<%= @company.id %>"]).change().prop('disabled', true);
+<% end %>

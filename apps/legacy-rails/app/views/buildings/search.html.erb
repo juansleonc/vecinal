@@ -1,0 +1,12 @@
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 buildings-index">
+
+  <%= render 'shared/search_results_headers', current_model: Building.model_name.human(count: 2).capitalize %>
+
+  <div class="cm-gallery-grid load-more-at-bottom" id="buildings" data-next-path="<%= @next_path %>">
+    <%= render @buildings %>
+  </div>
+
+  <%= render 'shared/empty_items', icon: 'fa-location-arrow', objects: Building.model_name.human(count: 2) if @buildings.blank? %>
+
+</div>

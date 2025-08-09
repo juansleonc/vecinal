@@ -1,0 +1,7 @@
+$('#communities .community a.btn').removeClass('disabled');
+$('#communities #<%= @community.class.name %>-<%= @community.id %>').replaceWith(
+  '<%= j render("finish_registration/community", community: @community) %>'
+);
+$('.finish-registration-communities .under-tabs').removeClass('requested');
+$('.cm-tabs i.fa.pending').removeClass('requested');
+$('#new-community-launcher').removeClass('hidden');

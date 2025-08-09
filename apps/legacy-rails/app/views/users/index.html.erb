@@ -1,0 +1,34 @@
+<% @submenu_title = t 'general.submenu.page_roles'; @submenu_item = 'people' %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 contacts-index">
+
+  <div class="cm-nav-links">
+    <%= link_to t('contacts.title'), contacts_path %>
+    <%= link_to t('general.submenu.page_roles'), company_users_path(current_user.accountable), class: 'active' %>
+    <%#= link_to t('general.submenu.create_user'), create_users_url if current_user.admin? %>
+    <%#= link_to '+ ' + t('general.add_record', record_name: t('contacts.title').downcase), '#', class: 'btn btn-primary',
+      data: { toggle: 'modal', target: '#new-invite-modal' } if can?(:create, Invite)
+    %>
+    <%#= link_to '+ ' + t('general.add_record', record_name: t('contacts.title').downcase), '#', class: 'btn btn-primary capitalize',
+      data: { toggle: 'modal', target: '#new-user-modal' }
+    %>
+  </div>
+
+  <div class="under-tabs">
+    <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+  </div>
+
+  <% if @users.present? %>
+    <div class="contacts-panels row load-more-at-bottom" id="users" data-next-path="<%= @next_path %>">
+      <%= render @users %>
+    </div>
+    <div class='content-pagination'>
+      <%= page_entries_info @users %>
+      <%= will_paginate @users, :renderer => 'LinkRenderer' %>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-address-card-o', objects: User.model_name.human(count: 2) %>
+  <% end %>
+</div>
+
+

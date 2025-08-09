@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  emails: MyText
+  accountable_type: MyString
+  accountable_id: 1
+  role: MyString
+
+two:
+  emails: MyText
+  accountable_type: MyString
+  accountable_id: 1
+  role: MyString

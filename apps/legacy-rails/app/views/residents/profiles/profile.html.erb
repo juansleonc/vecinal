@@ -1,0 +1,96 @@
+<% @submenu_title = t('general.submenu.profile'); @submenu_item = 'profile' if @user == current_user; can_see_details = can?(:see_profile_details, @user) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 timeline-view profile">
+  <%= render 'residents/profiles/header' %>
+
+  <div class="cols-divided-sm-2">
+    <%= render 'comments/new_timeline_comment', commentable: @user, allow_shareable: @user == current_user if can?(:post_on_timeline, @user) %>
+
+    <div class="content-box with-table">
+      <div class="header">
+        <% if can?(:about, @user) %>
+          <%= link_to user_about_path(@user) do %>
+            <%= t 'general.intro' %>
+            <i class="fa fa-chevron-right pull-right"></i>
+          <% end %>
+        <% else %>
+          <%= t 'general.intro' %>
+        <% end %>
+      </div>
+      <div class="content has-word-break-normal">
+        <table >
+          <tr>
+            <% unit = ", #{t 'general.apartment_number'}: #{@user.contact_details.apartment_numbers_joined}" %>
+            <td><%= t 'users.community' %></td>
+            <td>
+              <%= link_to @user.accountable.name, url_to_profile(@user.accountable) %>
+              <%= unit if @user.contact_details.apartment_numbers.present? && can_see_details %>
+            </td>
+          </tr>
+          <% if can_see_details %>
+            <% if @user.details_attr(:phone).present? || @user.details_attr(:mobile_phone).present? %>
+              <tr>
+                <td><%= Company.human_attribute_name :phone %></td>
+                <% phone = @user.details_attr(:phone).present? ? @user.details_attr(:phone) : @user.details_attr(:mobile_phone) %>
+                <td><%= number_to_phone phone %></td>
+              </tr>
+             <% end %>
+            <tr>
+              <td><%= User.human_attribute_name :email %></td>
+              <td><%= current_user.check_settings(current_user, "who_can_see_your_email", @user) ? @user.email : '*****@*****.com' %></td>
+            </tr>
+            <% if @user.details_attr :work %>
+              <tr>
+                <td><%= t 'users.work' %></td>
+                <td><%= @user.details_attr :work %></td>
+              </tr>
+            <% end %>
+            <% if @user.details_attr :education %>
+              <tr>
+                <td></i> <%= t 'users.education' %></td>
+                <td><%= @user.details_attr :education %></td>
+              </tr>
+            <% end %>
+            <% if @user.details_attr :hometown %>
+              <tr>
+                <td></i> <%= t 'users.hometown' %></td>
+                <td><%= @user.details_attr :hometown %></td>
+              </tr>
+            <% end %>
+            <% if @user.details_attr :birth_day %>
+              <tr>
+                <td></i> <%= t 'users.birthday' %></td>
+                <td><%= @user.details_attr(:birth_day).strftime '%B %m, %Y' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+    <% if can_see_details %>
+      <div class="photos content-box">
+        <div class="header">
+          <%= link_to user_photos_path(@user) do %>
+            <%= t 'public_pages.photos.title' %>
+            <i class="fa fa-chevron-right pull-right"></i>
+          <% end %>
+        </div>
+        <div class="content clearfix">
+          <% @user.images.first(Image::MAX_IN_TIMELINE).each do |image| %>
+            <div class="col-xs-6 image">
+              <%= link_to image.image.url(:original), data: { lightbox: true } do %>
+                <%= image_tag image.image.url(:thumb) %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="load-more-at-bottom" data-next-path="<%= @next_path %>" id="comments">
+      <%= render partial: 'comments/timeline_comment', collection: @comments %>
+    </div>
+
+  </div>
+</div>

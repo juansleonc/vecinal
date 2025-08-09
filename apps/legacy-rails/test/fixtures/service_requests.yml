@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  responsible_id: 
+  responsible_type: Responsible
+  title: MyString
+  content: MyText
+  urgent: false
+  category: MyString
+  status: MyString
+
+two:
+  user_id: 
+  responsible_id: 
+  responsible_type: Responsible
+  title: MyString
+  content: MyText
+  urgent: false
+  category: MyString
+  status: MyString

@@ -1,0 +1,134 @@
+@import 'utilities'
+
+.user-balances, .user-balances-index
+  .with-profile-banner
+    color: $black
+  .no-records
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin-top: 5em
+    .fa-credit-card
+      margin: 20px
+
+  .user-balance-min
+    display: flex
+    align-items: center
+
+  .user-balance-full
+    .table
+      color: $black
+      font-size: 11px
+      td:first-child
+        padding-left: 0
+      &:not(.header) > tbody > tr > td
+        border: none
+    .header
+      border-bottom: $border
+    .actions 
+      display: flex
+      align-items: center
+      margin-right: 1rem
+      .fa
+        position: relative
+        top: 2px
+      .icon-option
+        position: relative
+        top: 3px
+      .fa-trash
+        margin-right: 10px
+    
+    .user-balance-content
+      padding: 15px !important
+
+    .user-balance-info
+      display: flex
+      justify-content: space-between
+      margin-bottom: 1em
+
+    .title
+      .logo-wrapper
+        margin-right: 10px
+        img
+          width: 30px
+      > span
+        color: $black
+      
+  .menu-item, .confirm-destroy
+    display: flex
+    align-items: center
+  .material-icons
+    color: $gray_icon
+    cursor: pointer
+    &.options
+      position: relative
+      top: 4px
+    &.toggle, &.options
+      color: $blue_light
+    &.option
+      margin-right: 1.5rem
+
+  
+  .close-item-content
+    cursor: pointer
+
+  .resident-info .apartment-number
+    font-size: 0.8em
+  .resident-info
+    display: flex
+    .logo-wrapper
+      width: 41px
+      img
+        width: 41px
+
+  .filters
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    margin-bottom: 10px
+
+    .toggle-content
+      display: inline-block
+      margin-right: .5em
+      .content
+        padding: 0
+        display: flex
+        align-items: center
+
+    .dropdown-filter
+      margin-left: .5em
+      .fa
+        color: $gray_icon
+      .btn span:not(.no-logo-letter)
+        margin-left: .5em
+
+    .dropdown-toggle
+      cursor: pointer
+
+  .user-balance-info
+    display: flex
+    .logo-wrapper
+      margin-right: 1rem
+    .info-secondary
+      display: inline-block
+
+  .with-logo, .with-logo:hover, .with-logo:visited
+    color: black
+  .with-logo:hover
+    background-color: $gray_background
+  .col-xs-5, .col-xs-4
+    padding-left: 0
+  .create-button
+    margin-bottom: 10px
+    .create-button-content
+      display: flex
+      justify-content: flex-end
+
+  .attachment-field
+    display: inline-block
+
+  @media (max-width: $sc_xs)
+    .list-group-item
+      pointer-events: none
+    .filters .building-filter .visible-xs
+      display: inline-block !important

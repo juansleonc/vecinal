@@ -1,0 +1,186 @@
+<%
+  publisher = event.sender
+  community = publisher.accountable
+  informed = event.users.count
+  going = event.marks_count('yes')
+  not_going = event.marks_count('no')
+  maybe = event.marks_count('maybe')
+  status = event.is_reported(current_user)
+%>
+
+<div class="event cols-divided-banner post <%= community.class.name %>-<%= community.id %> <%= 'unread' if event.unread?(current_user) %> <%= 'Reported' if status %> <%= 'Hidden' if event.marked?(current_user, 'hidden') && params[:category] != 'hidden' %><%= 'Saved' if event.marked?(current_user, 'saved') %>"
+  id="event-<%= event.id %>" data-id="<%= event.id %>">
+
+  <%= render 'shared/post_dropdown_actions', model_object: event %>
+
+  <%= render 'shared/info_reported_icon', object_name: event.class.name.downcase, status: status %>
+
+  <%= render 'marks/toggle_save_link', markable: event, toggle_link: toggle_save_event_path(event) %>
+
+  <div class="publisher">
+    <%= render 'shared/logo_left', logoable: publisher %>
+    <span class="username">
+      <%= with_profile_banner_link publisher %>
+      <br/>
+      <span class="info"><i class="fa fa-calendar"></i> <%= event.created_at.strftime '%B %d, %Y' %></span>
+      <span>&bull;</span>
+      <span class="info"><%= publisher.accountable.name %></span>
+    </span>
+  </div>
+
+  <% if event.details.present? %>
+    <div class="event-content">
+      <%= content_with_emoji simple_format(event.details) %>
+    </div>
+  <% end %>
+
+  <%= render 'attachments/attachments', attachmentable: event %>
+
+  <div class="event-well">
+    <small class="month red"><%= event.date.strftime('%b').upcase %></small>
+    <br/>
+    <big class="day"><%= event.date.day %></big> <big><%= event.title %></big>
+    <br/><br/>
+    <i class="fa fa-clock-o pull-left"></i>
+    <div class="whith-icon-left">
+      <span class="gray"><%= t 'general.when' %></span>
+      <br/>
+      <%= event.date.strftime '%A, %B %d' %> at
+      <%= event.time_from.strftime '%l:%M %p' %> - <%= event.time_to.strftime '%l:%M %p' %>
+    </div>
+    <br/><br/>
+    <i class="fa fa-map-marker pull-left"></i>
+    <div class="whith-icon-left">
+      <span class="gray"><%= t 'general.where' %></span>
+      <br/>
+      <%= event.location %>
+    </div>
+  </div>
+
+  <% if event.rsvp %>
+    <div class="btn-group" role="group" aria-label="...">
+      <%= link_to t('general.yes_word'), events_mark_as_yes_path(id: event),
+        class: "btn btn-default btn-sm #{'disabled' if event.marked?(current_user, 'yes') }", remote: true
+      %>
+      <%= link_to t('general.no_word'), events_mark_as_no_path(id: event),
+        class: "btn btn-default btn-sm #{'disabled' if event.marked?(current_user, 'no') }", remote: true
+      %>
+      <%= link_to t('general.maybe'), events_mark_as_maybe_path(id: event),
+        class: "btn btn-default btn-sm #{'disabled' if event.marked?(current_user, 'maybe') }", remote: true
+      %>
+    </div>
+  <% end %>
+
+  <% content_for "replies_and_likes_additional_links_#{event.id}" do %>
+    <%= link_to '#', class: 'info', data: { toggle: 'modal', target: "#event-rsvp-#{event.id}" } do %>
+      <span class="informed">
+        <%= t 'events.people' %> (<%= informed %>)
+      </span>
+      <% if event.rsvp && false %>
+        <span class="going">
+          <%= t 'events.going' %> (<%= going %>)
+        </span>
+        <span class="not_going">
+          <%= t 'events.not_going' %> (<%= not_going %>)
+        </span>
+        <span class="maybe">
+          <%= t 'events.maybe' %> (<%= maybe %>)
+        </span>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= render 'comments/replies_and_likes', likeable: event %>
+
+  <% options = {
+    commentable: event,
+    attachments_enabled: true,
+    disable_new: !can?(:comment_posts, Comment)
+  } %>
+
+  <%= render partial: 'comments/commentable_comments', locals: options %>
+</div>
+
+<div class="modal fade form-new-object receivers-list-modal" id="event-rsvp-<%= event.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Guests</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="list-inline">
+          <li class="active">
+            <%= link_to '#', data: { target: "#rsvp-informed-#{event.id}" } do %>
+              People <span class="gray">(<%= informed %>)</span>
+            <% end %>
+          </li>
+          <% if event.rsvp %>
+            <li>
+              <%= link_to '#', data: { target: "#rsvp-going-#{event.id}" } do %>
+                <%= t 'events.going' %> <span class="gray">(<%= going %>)</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#', data: { target: "#rsvp-not-going-#{event.id}" } do %>
+                <%= t 'events.not_going'  %> <span class="gray">(<%= not_going %>)</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#', data: { target: "#rsvp-maybe-#{event.id}" } do %>
+                <%= t 'events.maybe' %> <span class="gray">(<%= maybe %>)</span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+        <div class="active" id="rsvp-informed-<%= event.id %>">
+          <% event.users.each do |receiver| %>
+            <div class="clearfix">
+              <%= render 'shared/logo_left', logoable: receiver %>
+              <%= link_to user_profile_path(receiver) do %>
+                <span class="username"><strong><%= receiver.full_name %></strong></span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <% if event.rsvp %>
+          <div id="rsvp-going-<%= event.id %>">
+            <% event.users_marked_with('yes').each do |receiver| %>
+              <div class="clearfix">
+                <%= render 'shared/logo_left', logoable: receiver %>
+                <%= link_to user_profile_path(receiver) do %>
+                  <span class="username"><strong><%= receiver.full_name %></strong></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div id="rsvp-not-going-<%= event.id %>">
+            <% event.users_marked_with('no').each do |receiver| %>
+              <div class="clearfix">
+                <%= render 'shared/logo_left', logoable: receiver %>
+                <%= link_to user_profile_path(receiver) do %>
+                  <span class="username"><strong><%= receiver.full_name %></strong></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div id="rsvp-maybe-<%= event.id %>">
+            <% event.users_marked_with('maybe').each do |receiver| %>
+              <div class="clearfix">
+                <%= render 'shared/logo_left', logoable: receiver %>
+                <%= link_to user_profile_path(receiver) do %>
+                  <span class="username"><strong><%= receiver.full_name %></strong></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% event.mark_as_read! for: current_user %>
+

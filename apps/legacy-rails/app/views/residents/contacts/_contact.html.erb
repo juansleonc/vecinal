@@ -1,0 +1,111 @@
+<% status = contact.is_reported(current_user)  %>
+
+<div class="col-md-3 col-sm-6 col-xs-12 contact-panel <%= contact.accountable.class.name %>-<%= contact.accountable.id %> <%= 'Reported' if status %>"
+  id="User-<%= contact.id %>">
+  <div class="contact-panel-content">
+    <div class="dropdown actions">
+      <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, id: "dropdown-options-contact-#{contact.id}" do %>
+        <%= mi.more_vert %>
+      <% end %>
+      <ul class="dropdown-menu" role="menu">
+        <% if can?(:create, Message) %>
+          <li role="presentation">
+            <%= link_to '#', class: 'modal-or-remote', data: { target: "#new-message-modal-contact-#{contact.id}",
+              path: new_message_path(to_contact: contact.id) } do %>
+              <i class="fa fa-envelope-o"></i> <%= Message.model_name.human.capitalize %>
+            <% end %>
+          </li>
+        <% end %>
+
+        <li role="presentation">
+          <%= link_to user_profile_path(contact.id) do %>
+            <i class="fa fa-user-circle-o"></i> <%= t('profiles.timeline') %>
+          <% end %>
+        </li>
+        <% if can? :toggle_report, User %>
+          <li role = "presentation">
+            <% action_report = (status ? 'Unreport' : 'Report') %>
+            <%= link_to toggle_report_user_path(id: contact.id) do %>
+              <i class = "fa fa-ban"></i> <%= action_report %> user
+            <% end %>
+          </li>
+        <% end %>
+        <% if can? :destroy, contact %>
+          <li role="presentation">
+            <%= confirm_destroy contact.reject_path(current_user.accountable), method: :post, remote: true do %>
+              <i class="fa fa-trash-o"></i> Remove user
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <%= render 'shared/info_reported_icon',
+      object_name: contact.class.name.downcase,
+      status: status,
+      toggle: "modal",
+      target: "#reporters-modal-#{contact.id}" %>
+
+    <%= render 'shared/user_logo_on_panel', user: contact %>
+    <br>
+    <%= link_to contact.accountable.name, contact.accountable.link_to_home(request.base_url), class: 'gray' %>
+    <br>
+    
+    <%= contact.contact_details.apartment_numbers_joined %>
+    <br>
+    <%= current_user.check_settings(current_user, "who_can_see_your_email", contact) ? contact.email : '*****@*****.com' %>
+    <br>
+    <i class="fa fa-user-circle-o"></i> <%= t "roles.#{contact.role}" %>
+
+    <%= link_to '#', class: "tag-tooltip " + (if contact.confirmed_at.present? then  "active" else "inactive" end),
+                    :data => {:toggle=>"tooltip"},
+                    'data-original-title' =>  (if contact.confirmed_at.present? then t "contacts.confirmed" else t "contacts.unconfirmed" end),
+                    'data-placement' => 'top' do %>
+      <i class="material-icons">fiber_manual_record</i>
+    <% end %>
+    
+    <br>
+
+    <% if can?(:create, Message) %>
+      <strong>
+        <%= link_to Message.model_name.human.upcase, '#', class: 'modal-or-remote at-bottom',
+          data: { target: "#new-message-modal-contact-#{contact.id}", path: new_message_path(to_contact: contact.id) } %>
+      </strong>
+    <% end %>
+
+    
+  </div>
+
+  <% if contact.reported? %>
+    <!-- Reporters popover -->
+    <div class="modal fade form-new-object" id="reporters-modal-<%= contact.id %>">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title"><%= t 'contacts.reported' %></h4>
+          </div>
+          <div class="modal-body">
+            <div class="reporters">
+              <div class="navigation-tabs">
+                <a class="tab active">
+                  <span><%= t 'general.people' %></span>
+                  <span class="reporters-counter">
+                    (<%= contact.marks_count "reported" %>)
+                  </span>
+                </a>
+              </div>
+               <% contact.markers.reported.includes(:user).each do |marker| %>
+                <div class="reporter">
+                  <%= render 'shared/logo_left', logoable: marker.user, left: '' %>
+                  <span class="user-name"><%= marker.user.full_name %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

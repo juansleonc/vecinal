@@ -1,0 +1,72 @@
+<% message_id = @to_contact.present? ? "new-message-modal-contact-#{@to_contact.id}" : "new-message-modal" %>
+<div class="modal fade form-new-object" id="<%= message_id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"><%= t 'general.create_record', record_name: Message.model_name.human.capitalize %></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for Message.new, remote: true do |f| %>
+          <%= hidden_field_tag :to_contact, @to_contact.id if @to_contact.present? %>
+          <div class="form-errors-container"></div>
+
+          <div class="user clearfix">
+            <%= render 'shared/logo_left', logoable: current_user, size: :standard %>
+            <strong><%= current_user.full_name %></strong>
+          </div>
+
+          <br/>
+
+          <div class="form-group">
+            <%= f.text_field :title, class: 'form-control', placeholder: Message.human_attribute_name(:title) %>
+          </div>
+
+          <div class="form-group with-icon emoji-picker-container">
+            <%= f.text_area :content, class: 'form-control', placeholder: t('messages.placeholder'), data: { emojiable: true } %>
+            <%= link_to_add_attachment f %>
+          </div>
+          <div class="form-group no-margin">
+            <div class="row attachments-container"></div>
+          </div>
+
+          <% if @to_contact %>
+            <%= f.hidden_field :receivers, value: "#{@to_contact.class.name},#{@to_contact.id}", multiple: true %>
+            <div class="form-group">
+              <p class="default-color"><%= "#{t('messages.to')}: #{@to_contact.full_name} - #{@to_contact.accountable.name}" %></p>
+            </div>
+          <% else %>
+            <div class="input-group form-group">
+              <span class="input-group-addon"><i class="fa fa-users"></i></span>
+              <%= f.select :receivers, [], {},
+                { multiple: true, class: 'select2-with-format-ajax', id: "new-message-select-recipients",
+                  data: { placeholder: t('messages.recipients'), path: receivers_messages_path, lang: I18n.locale }, style: 'width: 100%;'
+                }
+              %>
+            </div>
+          <% end %>
+
+          <div class="form-group check-with-text">
+            <label class="switch">
+              <%= f.check_box :urgent %>
+              <span class="slider round"></span>
+            </label>
+            <span><%=  Message.human_attribute_name(:urgent) %></span>
+            
+          </div>
+
+          <div class="form-group check-with-text">
+            <label class="switch">
+              <%= f.check_box :warning, {}, true, false %>
+              <span class="slider round"></span>
+            </label>
+            <span><%=  t('messages.warning') %></span>
+            <%= f.submit t('general.send'), class: 'btn btn-primary pull-right' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="commentable-comment" id="<%= comment.commentable.class.to_s.underscore %>-<%= comment.commentable.id %>-comment-<%= comment.id %>">
+  <%#= render 'shared/logo_left', logoable: comment.user %>
+  <div class="comment-content">
+    <p>
+      <%= with_profile_banner_link comment.user %>
+      <%= comment.content.present? ? content_with_emoji(t(comment.content, default: comment.content)) : comment.content %>
+    </p>
+    <span class="info"><i class="fa fa-comment-o"></i> <%= timeago comment.created_at %></span>
+  </div>
+  <%= render 'attachments/attachments', attachmentable: comment %>
+</div>

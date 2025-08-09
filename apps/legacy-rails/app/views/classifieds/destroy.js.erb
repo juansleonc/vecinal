@@ -1,0 +1,5 @@
+<% if @classified.destroyed? %>
+  $(".classifieds-index #classified-<%= @classified.id %>").remove();
+<% else %>
+  toastr.error("<%= @classified.errors.full_messages.join(', ') %>");
+<% end %>

@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default navbar-fixed-top cm-navbar public">
+  <div class="container-fluid">
+    <div class="navbar-header clearfix public">
+      <%= link_to root_path(subdomain: 'www') do %>
+        <%= image_tag 'condomedia_white.png' %>
+      <% end %>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#public-menu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse public" id="public-menu">
+      <ul class="nav navbar-nav navbar-right">
+<!--         <li class="external-pages hidden-xs">
+          <%#= render 'layouts/external_pages_content', menu_id: 'external-pages-menu-2' %>
+        </li> -->
+        <li><%= link_to t('devise.sign_in').upcase, new_session_url(:user, subdomain: 'www') %></li>
+        <!-- <li><%#= link_to t('devise.sign_up').upcase, new_registration_url(:user, subdomain: 'www') %></li> -->
+      </ul>
+    </div>
+  </div>
+</nav>

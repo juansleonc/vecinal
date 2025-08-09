@@ -1,0 +1,3 @@
+$('.poll#poll-<%= @poll_vote.poll_id %> form').replaceWith('<%= j render("poll_votes/update_vote_form", poll_vote: @poll_vote) %>');
+$('[data-toggle="popover"]').popover();
+set_poll_answer_bg_width();

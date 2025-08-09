@@ -1,0 +1,4 @@
+<div class="commentable-comments clearfix" id="<%= commentable.class.to_s.underscore %>-<%= commentable.id %>-comments">
+  <%= render('comments/new', commentable: commentable, attachments_enabled: true) unless local_assigns[:disable_new] %>
+  <%#= render commentable.comments %>
+</div>

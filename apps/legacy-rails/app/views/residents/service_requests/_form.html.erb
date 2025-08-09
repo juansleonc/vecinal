@@ -1,0 +1,92 @@
+<%= form_for ServiceRequest.new, remote: true do |f| %>
+
+  <div class="errors-container"></div>
+
+  <div class="user clearfix flex-centered-container">
+    <%= render 'shared/logo_left', logoable: current_user, size: :standard %>
+    <div>
+      <div class="user-name"><%= current_user.full_name %></div>
+      <% if can? :select_publisher, current_user %>
+        <a class="open-as-button"><%= t 'service_requests.open_with' %></a>
+        <div class="input-group hidden publisher-selector">
+          <span class="input-group-addon"><%= fa_icon 'user' %></span>
+          <%= f.select :user_id, [], {},
+            { 
+              class: 'select2-with-format-ajax',
+              id: 'service-request-publisher',
+              data: { 
+                placeholder: t('service_requests.publisher'), 
+                lang: I18n.locale, 
+                path: selectable_publishers_service_requests_path
+              }
+            }
+          %>
+        </div>
+
+        <button type="button" class="close-publisher-selector btn btn-default hidden">
+          <%= t 'general.cancel' %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :title, class: 'form-control', placeholder: ServiceRequest.human_attribute_name(:title) %>
+  </div>
+
+  <div class="form-group with-icon emoji-picker-container">
+    <%= f.text_area :content, class: 'form-control', placeholder: t('messages.placeholder'), data: { emojiable: true } %>
+    <%= link_to_add_attachment f %>
+  </div>
+  <div class="form-group no-margin">
+    <div class="row attachments-container"></div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.hidden_field :category %>
+    <div class="dropdown <%= current_user.admin? ? 'col-sm-6 col-xs-12' : 'col-xs-12' %> as-select" data-target="#service_request_category">
+      <button class="dropdown-toggle form-control" data-toggle="dropdown">
+        <i class="fa fa-pencil-square-o with-background"></i>
+        <span><%= t('service_requests.select_category') %></span>
+        <i class="fa fa-caret-down"></i>
+        <i class="fa fa-caret-up"></i>
+      </button>
+      <ul class="dropdown-menu">
+        <% ServiceRequest::CATEGORIES.each do |category| %>
+          <li><%= link_to t("general.service_request_categories.#{category}"), '#', data: { id: category } %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <% if current_user.admin? %>
+      <%= f.hidden_field :responsible_type, value: 'User' %>
+      <%= f.hidden_field :responsible_id, value: current_user.id %>
+      <div class="dropdown as-select col-sm-6 col-xs-12" data-target="#service_request_responsible_id">
+        <button class="dropdown-toggle form-control" data-toggle="dropdown">
+          <span><i class="fa fa-user with-background"></i><%= t 'service_requests.assign_to' %></span>
+          <i class="fa fa-caret-down"></i>
+          <i class="fa fa-caret-up"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <% current_user.company_contacts.order(:first_name).each do |contact| %>
+            <li>
+              <%= link_to '#', data: { id: contact.id } do %>
+                <%= render 'shared/logo_left', logoable: contact, left: '' %> <%= contact.full_name %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group check-with-text">
+    <label class="switch">
+      <%= f.check_box :urgent %>
+      <span class="slider round"></span>
+    </label>
+    <span><%= ServiceRequest.human_attribute_name(:urgent) %></span>
+    <%= f.submit t('service_requests.open'), class: 'btn btn-primary pull-right' %>
+  </div>
+
+<% end %>

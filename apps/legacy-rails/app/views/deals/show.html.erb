@@ -1,0 +1,91 @@
+<% @submenu_title = Deal.model_name.human.capitalize
+  @submenu_item = 'deals'
+%>
+<% @navbar_style = 'green' if current_user && current_user.accountable_type == 'Building' %>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix promotion-detail">
+    <div class="col-sm-12 title">
+      <h3 class="italic">
+        <i class="fa fa-tag"></i>
+        <%= @deal.title %>
+      </h3>
+      <div class="pull-right">
+        <%= link_to t('general.report'), deal_purchases_path(@deal.id) if can? :manage, DealPurchase %>
+        <%= link_to " - #{t('general.edit')}", edit_business_deal_path(@business, @deal) if can? :update, @deal %>
+      </div>
+    </div>
+    <div class="col-sm-12 no-padding">
+      <div class="col-sm-4 promotion-buy">
+        <h1><%= number_to_currency @deal.payable_price %></h1><br/>
+        <%= link_to t('deals.buy_now'), deal_purchase_pay_path(@deal.id),
+            class: 'btn btn-primary btn-block btn-lg' if @deal.active? %>
+        <table class="discount-detail">
+          <tr>
+            <td>
+              <%= t('deals.value').upcase %>
+              <h5><%= number_to_currency @deal.price %></h5>
+            </td>
+          <% if @deal.discount > 0 %>
+            <td>
+              <%= t('deals.discount').upcase %>
+              <h5><%= number_to_percentage @deal.discount, precision: 0 %></h5>
+            </td>
+            <td>
+              <%= t('deals.you_save').upcase %>
+              <h5><%= number_to_currency @deal.saving %></h5>
+            </td>
+          <% end %>
+          </tr>
+        </table>
+        <hr/>
+        <div class="countdown-container">
+          <%= t('deals.limited_time_only').upcase %><br/>
+          <h5>
+            <i class="fa fa-clock-o">&nbsp;</i>
+            <span class="countdown" data-until="<%= @deal.finish_at.strftime '%Y/%m/%d %H:%M:%S' %>"
+              data-ftime="%-D <%= t 'general.days' %> %H:%M:%S"></span>
+          </h5>
+        </div>
+        <hr/>
+        <div class="acquisitions">
+          <i class="fa fa-users"></i>
+          <%= @deal.acquisitions %> <%= t 'promotions.sold' %>
+        </div>
+        <hr/>
+        <div class="back_to">
+          <i class="fa fa-caret-left "></i>
+          <%= link_to t('general.back_to', destiny: Deal.model_name.human(count: 2).capitalize), back_to_deals(@business) %>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <%= render 'shared/images_carousel', model_object: @deal %>
+      </div>
+    </div>
+
+    <div class="col-lg-5 col-lg-pull-1 col-lg-offset-1 col-sm-6 description-list">
+      <h3><%= t 'deals.the_deal' %></h3>
+      <br/>
+      <ul>
+        <% @deal.split_description.each do |description| %>
+          <li><span><%= description %></span></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-lg-5 col-lg-pull-1 col-lg-offset-1 col-sm-6 description-list">
+      <h3><%= t 'deals.the_fine_print' %></h3>
+      <br/>
+      <ul>
+        <% @deal.split_fine_print.each do |fine_print| %>
+          <li><span><%= fine_print %></span></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-sm-12 description-list">
+      <h3><%= t 'general.about', name: @business.name %></h3>
+      <p><%= @deal.business.description %></p>
+    </div>
+    <%= render 'businesses/contact_details', business: @deal.business %>
+  </div>
+</div>

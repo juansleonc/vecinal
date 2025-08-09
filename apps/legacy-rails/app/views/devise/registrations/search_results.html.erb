@@ -1,0 +1,31 @@
+<% @submenu_title = 'Search'; @action_for_search = search_contacts_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 contacts-index">
+
+  <%= render 'shared/search_results_headers', current_model: t('contacts.title') %>
+  <div class="under-tabs compactable">
+    
+    <%= render 'shared/communities_filter_new',
+        items: '#amenities .amenity',
+        width_company: true,
+        class_objects: 'users',
+        with_filter_options: true,
+        to_controller: 'amenities',
+        data_by_community: @contacts_by_accountable %>
+        
+
+    <%= render 'shared/order_by_button', btn_text: ' AZ ', add_class: 'hidden-xs' %>
+  </div>
+  <% if @contacts.present? %>
+    <div class="contacts-panels row load-more-at-bottom" id="contacts" data-next-path="<%= @next_path %>">
+      <%= render partial: 'devise/registrations/contact', collection: @contacts %>
+    </div>
+    <div class='content-pagination'>
+      <%= page_entries_info @contacts %>
+      <%= will_paginate @contacts, :renderer => 'LinkRenderer' %>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-address-book-o', objects: User.model_name.human(count: 2) %>
+  <% end %>
+
+</div>

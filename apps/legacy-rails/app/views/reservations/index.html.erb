@@ -1,0 +1,48 @@
+<% @submenu_title = Amenity.model_name.human(count: 2).capitalize; @submenu_item = 'amenities'; @action_for_search = search_reservations_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 reservations-index">
+
+  <div class="cm-nav-links">
+    <%= link_to t('stats.amenities').capitalize, amenities_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+    <%= link_to Reservation.model_name.human(count: 2).capitalize, reservations_path, class: 'active' %>
+
+    <% if can? :create, Amenity %>
+      <%= link_to '+ ' + t('general.create_record_f', record_name: Amenity.model_name.human.capitalize), '#', class: 'btn btn-primary new-record',
+        data: { toggle: 'modal', target: '#new-amenity-modal' } %>
+    <% end %>
+  </div>
+
+  <div class="under-tabs">
+    <%= render 'status_filter' %>  
+    <% if current_user.admin? %>
+      <%= render 'shared/communities_filter_new',
+      items: '#reservations .reservation',
+      width_company: true,
+      class_objects: 'users',
+      with_filter_options: true,
+      to_controller: 'reservations',
+      data_by_community: @contacts_by_accountable %>
+
+    <% end %>
+      <%= render 'shared/admins_filter' %>
+      
+    <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+    <%= render 'shared/month_filter' %>
+  </div>
+
+  <% if @reservations.present? %>
+    <ul class="list-group cm-list load-more-at-bottom" id="reservations" data-next-path="<%= @next_path %>">
+      <%= render @reservations %>
+    </ul>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-calendar-check-o', objects: Reservation.model_name.human(count: 2) %>
+  <% end %>
+
+  <div class='content-pagination'>
+    <%= page_entries_info @reservations %>
+    <%= will_paginate @reservations, :renderer => 'LinkRenderer' %>
+  </div>
+
+</div>
+
+<%= render 'amenities/new' %>

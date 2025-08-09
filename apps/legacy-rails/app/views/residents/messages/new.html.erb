@@ -1,0 +1,88 @@
+<% @submenu_title = t 'general.create_record', record_name: 'Message'
+  @submenu_item = 'messages'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <h1>
+      <i class="fa fa-comments-o"></i>
+      <span class="black"><%= t 'general.create_record', record_name: Message.model_name.human %></span>
+    </h1>
+
+    <div class="new-message blue-borders">
+      <%= form_for @message do |f| %>
+        <%= render 'shared/model_errors', resource: @message %>
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <%= f.text_field :title, class: 'form-control', placeholder: Message.human_attribute_name('title'), value: params[:title] %>
+          </div>
+          <div class="form-group col-xs-12">
+            <%= f.text_area :content, class: 'form-control js-auto-size', placeholder: t('messages.placeholder'), rows: 6 %>
+            <%= link_to_add_attachment f %>
+          </div>
+
+          <%= f.hidden_field :receiver_type, value: Message.receiver_types_for(current_user).first %>
+
+          <% if params[:to].present? && current_user.contacts.ids.include?(params[:to].to_i) %>
+            <%= f.hidden_field :receivers, value: params[:to], multiple: true %>
+            <% contact = User.find params[:to] %>
+            <div class="col-xs-12">
+              <p class="default-color"><%= "#{t('messages.to')}: #{contact.full_name} - #{contact.accountable.name}" %></p>
+            </div>
+          <% else %>
+            <% if current_user.accountable_type == 'Company' %>
+              <div class="form-group col-xs-12 col-xs-12">
+                <div class="input-group receivers-selector">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                      <i class="fa fa-users" id="receivers-selector-icon"></i> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <% Message.receiver_types_for(current_user).each_with_index do |type, index| %>
+                        <% icon = Message.receiver_types_icon(type) %>
+                        <li>
+                          <%= link_to '#', data: { type: type, icon: icon } do %>
+                            <i class="fa <%= icon %>"></i> <%= t("messages.receiver_types.#{type}") %>
+                            <i class="fa fa-check green <%= 'hidden' unless index == 0 %>"></i>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <%= f.select :receivers, [],
+                    {include_blank: false},
+                    { multiple: true, class: 'form-control select2-multiple-with-format',
+                      id: "new-message-select-recipients", data: { prompt: '+ ' + t('messages.add_names') }
+                    }
+                  %>
+                </div>
+              </div>
+            <% else %>
+              <div class="form-group col-xs-12">
+                <%= f.select :receivers, [],
+                  { include_blank: false },
+                  { multiple: true, class: 'form-control select2-multiple-with-format',
+                    id: "new-message-select-recipients", data: { prompt: '+ ' + t('messages.add_names') }
+                  }
+                %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <div class="form-group col-xs-12">
+            <%= condomedia_checkbox f, :urgent, Message.human_attribute_name(:urgent) %>
+            <%= condomedia_checkbox f, :notify_user, Message.human_attribute_name(:notify_user) %>
+            <%#= condomedia_checkbox f, :add_to_sticky_notes, Message.human_attribute_name(:add_to_sticky_notes) %>
+          </div>
+
+          <div class="col-xs-12">
+            <div class="row attachments-container"></div>
+          </div>
+        </div>
+        <div class="actions action-buttons">
+          <%= f.submit t('general.send'), class: 'btn btn-primary', 'disable-with' => t('general.please_wait') %>
+          <%= link_to t('general.cancel'), messages_path, class: 'cancel' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<!-- this partial view is actually not used, we keep it for testing -->
+
+<% @submenu_title = t 'general.edit_profile' %>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <h1>
+      <i class="fa fa-user"></i>
+      <span class="black"><%= t 'general.edit_profile' %></span>
+    </h1>
+
+    <div class="row blue-borders">
+      <%= condomedia_form_for resource, as: resource_name, url: registration_path(resource_name),
+        html: { method: :put } do |f|
+      %>
+
+        <%= render 'shared/model_errors', resource: resource %>
+
+        <div class="col-xs-12"><h4 class="blue"><%= t 'devise.user_details' %></h4></div>
+
+        <div class="form-group col-sm-6">
+          <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
+        </div>
+        <div class="form-group col-sm-6">
+          <%= f.text_field :last_name, class: 'form-control' %>
+        </div>
+
+        <%= render resource.devise_form_fields_by_role, f: f %>
+
+        <div class="col-xs-12"><hr/></div>
+
+        <div class="form-group col-sm-12">
+          <%= render 'images/logo_field', f: f, model_object: current_user %>
+        </div>
+
+        <div class="col-xs-12"><hr/></div>
+
+        <div class="form-group col-sm-6">
+          <p><%= t('devise.current_password_explanation') %></p>
+          <%= f.password_field :current_password, autocomplete: 'off', skip_autolabel: true, class: 'form-control' %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div class="col-xs-12"><%= t('devise.waiting_confirmation_for') %> <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="col-xs-12 action-buttons">
+          <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+          <%= link_to t('general.cancel'), user_dashboard, class: 'cancel' %>
+        </div>
+
+      <% end %>
+    </div>
+
+    <%# Just hidding it since we don't handle account cancellation yet %>
+    <% if false %>
+      <h3>Cancel my account</h3>
+      <p>
+        Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+      </p>
+    <% end %>
+  </div>
+</div>

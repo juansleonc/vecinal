@@ -1,0 +1,36 @@
+<div class="dropdown" id="ticket-status-selector">
+    <button class="badge status-<%= service_request.status %>" data-toggle="dropdown">
+    <span>
+        <%= service_request.status_translation %>
+    </span>
+    </button>
+    
+    <ul class="dropdown-menu">
+        <li class="dropdown-title">
+        <div>Status</div>
+        
+        </li>
+        <li>
+        <hr></li>
+        <% ServiceRequest::STATUSES.each do |status| %>
+        <li>              
+        <a href="<%= change_status_service_request_path service_request, status: status %>" class="status-<%= status %>" data-remote="true"
+            <%= cm_popover '', t("service_requests.mark_as_#{status}"), container: 'body' %>>
+            <%= t("service_requests.mark_as_#{status}") %>
+            <% if service_request.status == status %>
+            <i class="fa fa-check" aria-hidden="true"></i> 
+            <% end %>
+        </a>
+        </li>
+        <% end %>
+        
+        
+        <% if can? :destroy, service_request %>
+        <%= link_to '', service_request, class: 'confirmed-destroy hidden', remote: true, method: :delete %>
+        <li>
+            <%= confirm_destroy service_request, {}, t('service_requests.delete') if can? :destroy, service_request %>
+        </li>
+        <% end %>
+    
+    </ul>
+</div>

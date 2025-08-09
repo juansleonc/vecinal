@@ -1,0 +1,206 @@
+<% user = service_request.user %>
+<% ranked = service_request.rate_score > 0 && service_request.closed? %>
+
+<div class="service-request <%= user.accountable.class.name %>-<%= user.accountable.id %> responsible-<%= service_request.responsible_user_id %>
+  <%= 'unread' if service_request.unread?(current_user) %>" id="service-request-<%= service_request.id %>"
+  data-mark-as-read-path="<%= mark_as_read_service_request_path service_request %>">
+  <li class="list-group-item clearfix <%= 'unread' if service_request.unread?(current_user) %> with-content <%= service_request.status %>"
+    data-read-path="<%= mark_as_read_service_request_path(service_request) %>" data-target="#content-service-request-<%= service_request.id %>">
+    <div class="col-xs-6 no-padding overflow-e hidden-xs">
+      <div class="content-logo">
+        <%= render 'shared/logo_left', logoable: user %>
+        <p><%= with_profile_banner_link user %></p>
+        <p><%= user.contact_details.apartment_numbers.join(',') + ' - ' + user.accountable.name %></p>
+        <p><% if service_request.urgent %>
+          <i class="fa fa-exclamation" aria-hidden="true"></i>
+        <% end %>
+        <span class="title"><%= service_request.title %></span></p>
+        <% if ranked %>
+          <span class="stars">
+            <% Review::MAX_RANK.times do |i| %>
+              <%= link_to rank_service_request_path(service_request, score: i + 1), remote: true, class: 'star' do %>
+                <i class="fa fa-star<%= '-o' if (i + 1 > service_request.rate_score) %> yellow"></i>
+              <% end %>
+            <% end %>
+          </span>
+        <% end %>
+      </div>
+      
+    </div>
+    
+    <div class="col-xs-3 content_short_description overflow-e hidden-xs">
+      <div class="col-xs-5 no-padding overflow-e hidden-xs">
+        <%= mi.error_outline %>
+        <div>
+          <p><span style="color:#acacae;"><%= t 'service_requests.case' %> </span> </p>
+          <p>#<%= service_request.id %></p>
+        </div>
+        
+      </div>
+      <div class="col-xs-7 no-padding overflow-e hidden-xs">
+        <%= mi.turned_in_not %>
+        <div>
+          <p><span style="color:#acacae;"><%= t 'general.category' %> </span> </p>
+          <p><%= service_request.category_translation %></p>
+        </div>
+        
+      </div>
+      
+    </div>
+
+    <div class="col-xs-1 no-padding overflow-e case-number hidden-xs text-centered">
+      
+
+      <% responsible = service_request.responsible %>
+      <% unless responsible.nil? %>
+      <% responsible_name = responsible.is_a?(Company) ? 'Unassigned' : responsible.full_name %>
+      <div class="logo-wrapper left">
+        <%= image_tag responsible.logo.url(:square), data: { toggle: 'popover', content: responsible_name,
+          trigger: 'hover', placement: 'top' } %>
+        <span class="no-logo-letter"><%= responsible.first_name_letter %></span>
+      </div>
+      <% end %>
+
+    </div>
+    <div class="col-xs-2 text-center no-padding overflow-e case-number hidden-xs">
+      <span class="badge status-<%= service_request.status %>">
+        <%= service_request.status_translation %>
+      </span>
+      
+    </div>
+    <div class="visible-xs">
+      
+      
+      <span class="badge danger pull-right status-<%= service_request.status %>">
+        <%= service_request.status_translation %>
+      </span>
+      
+      
+      <%= render 'shared/logo_left', logoable: user %>
+      <div>
+        <div class="username overflow-e"><%= user.full_name %></div>
+        <div class="overflow-e"><%= user.contact_details.apartment_numbers.join(',') + ' - ' + user.accountable.name %></div>
+        <div class="overflow-e"><%= t 'service_requests.case' %> #<%= service_request.id %></div>
+        <div class="title overflow-e">
+          <% if service_request.urgent %>
+            <i class="fa fa-exclamation" aria-hidden="true"></i>
+          <% end %>
+          <%= service_request.title %>
+          <% if ranked %>
+            <span class="badge average-xs">
+              <%= service_request.rate_score %><i class="fa fa-star"></i>
+            </span>
+          <% end %>
+        </div>
+        <!--<div class="info overflow-e gray-text"><%#= content_with_emoji service_request.content %></div>-->
+      </div>
+    </div>
+  </li>
+
+  <div class="list-group-item-content" id="content-service-request-<%= service_request.id %>">
+    <div class="title <%= service_request.status %> hidden-xs">
+      
+      <span class="black"><%= service_request.title %></span>
+      <div class="actions">
+        
+        
+        <%= render 'residents/service_requests/actions', service_request: service_request %>
+        
+      </div>
+    </div>
+
+    <div class="title <%= service_request.status %> visible-xs">
+      <div class="actions-mobile">
+        <% options = { service_request: service_request, mobile: true, left: '' } %>
+        <%= render 'residents/service_requests/actions', options %>
+        <%= link_to '#', class: 'close-item-content' do %>
+          <i class="fa fa-times"></i>
+        <% end %>
+      </div>
+      <!--<div class="title-text case"><%#= ServiceRequest.human_attribute_name('case', num: service_request.id) %></div>-->
+      <div class="title-text"><%= service_request.title %></div>
+    </div>
+
+    <div class="username">
+      <span class="pull-right hidden-xs"><%= service_request.created_at.strftime('%l:%M %P %b %e, %Y') %></span>
+      <span class="pull-right visible-xs"><%= service_request.created_at.strftime('%b %e') %></span>
+      <%= render 'shared/logo_left', logoable: user %>
+      <span class="with-profile-banner" data-user-id="<%= user.id %>"><%= user.full_name %></span>
+      <br/>
+      <p><%= user.contact_details.apartment_numbers.join(',') + ' - ' + user.accountable.name %></p>
+    </div>
+
+    <div class="content">
+      <div class="paragraph">
+        <%= content_with_emoji service_request.content %>
+        
+        <div class="content-service-request">
+            <%#= content_with_emoji simple_format(reservation.message) %>
+            <div>
+                <div class="header">
+                    <h4><%= t 'general.details' %></h4>
+                </div>
+                <div class="content_details">
+                    <%= mi.error_outline %>
+                    <p style="color:#acacae;"><%= t 'service_requests.case' %></p>
+                    <p>#<%= service_request.id %></p>
+                </div>
+                <div class="content_details">
+                    <%= mi.turned_in_not %>
+                    <p style="color:#acacae;"><%= t 'general.category' %></p>
+                    <p><%= service_request.category_translation %></p>
+                </div>
+                <div class="content_details">
+                    <%= mi.event %>
+                    <p style="color:#acacae;"><%= t 'general.when' %></p>
+                    <p><%= service_request.created_at.strftime('%l:%M %P %b %e, %Y') %></p>
+                </div>
+                <div class="content_details">
+                    <%= mi.domain %>
+                    <p style="color:#acacae;"><%= t 'general.community' %></p>
+                    <p><%= user.accountable.name %></p>
+                </div>
+            </div>
+        </div>
+
+
+        <%= render 'attachments/attachments', attachmentable: service_request %>
+        <%= link_to "#{service_request.comments.count} #{t('general.comments').capitalize}", '#', class: 'toggle-comments count-comments comments-replies', data_comment: service_request.class.to_s.underscore + '-' + service_request.id.to_s + '-comments' %>
+      </div>
+      <% if can? :rank, service_request %>
+        <% if service_request.user_id == current_user.id %>
+          <div class="rate-reopen">
+            <%= link_to change_status_service_request_path(service_request, status: 'pending'), remote: true, class: 'reopen' do %>
+              <%= material_icon.reply %>
+              <br/>
+              <span class="info"><%= t 'service_requests.re_open_case' %></span>
+            <% end %>
+            <%= t 'reviews.rate_experience' %>
+            <br/>
+            
+              <span class="stars">
+                <% Review::MAX_RANK.times do |i| %>
+                  <%= link_to rank_service_request_path(service_request, score: i + 1), remote: true, class: 'star' do %>
+                    <i class="fa fa-star<%= '-o' if (i + 1 > service_request.rate_score) %> yellow"></i>
+                  <% end %>
+                <% end %>
+              </span>
+            
+          </div>
+        
+        <% end %>
+      <% end %>
+        <hr>
+        <div class="comments-replies" data_comment="<%= service_request.class.to_s.underscore + '-' + service_request.id.to_s + '-comments' %>"><i class="material-icons">mode_comment</i><%= t 'general.actions.comment' %></div>
+
+      <% options = {
+        commentable: service_request,
+        attachments_enabled: true, hidden: true,
+        disable_new: false
+      } %>
+      
+        <%= render partial: 'comments/commentable_comments', locals: options %>
+      
+    </div>
+  </div>
+</div>

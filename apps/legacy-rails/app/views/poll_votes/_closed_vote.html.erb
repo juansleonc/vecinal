@@ -1,0 +1,10 @@
+<% poll.poll_answers.each do |pa| %>
+  <hr class="pa-separator"/>
+  <div class="answer answered" data-bg-width="<%= pa.percentage_votes %>">
+    <%= pa.name %>
+    <% if poll_vote.persisted? && pa.id == poll_vote.poll_answer_id %>
+      <i class="fa fa-check green"></i>
+    <% end %>
+    <span class="pull-right" <%= cm_popover '', "#{pa.poll_votes.count} #{t 'contacts.title'}" %>><%= pa.percentage_votes %>%</span>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<% @submenu_title = t 'invites.invites'; @submenu_item = 'invites'; @action_for_search = search_sent_invites_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 contacts-index">
+
+  <%= render 'invites/tabs' %>
+
+  <div class="under-tabs hidden-xs">
+    <%= render 'shared/communities_filter_invites_sent', items: '#contacts .contact-panel', width_company: true %>
+    <%= render 'shared/order_by_button', btn_text: ' DATE ' %>
+  </div>
+
+  <% if @invites_sent.present? %>
+    <div class="contacts-panels row load-more-at-bottom" id="contacts" data-next-path="<%= @next_path %>">
+      <%= render partial: 'invites/invite_sent', collection: @invites_sent %>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-user-plus', objects: Invite.model_name.human(count: 2) %>
+  <% end %>
+
+</div>
+

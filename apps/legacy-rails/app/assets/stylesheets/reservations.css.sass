@@ -1,0 +1,212 @@
+@import 'utilities'
+body .logo-wrapper.left > img
+  width: 30px
+.option-selected
+  background: #ffffff
+  color: #ff0000
+.modal.new-reservation-modal.form-new-object
+  .modal-body form
+    .dropdown.availabily
+      > a.dropdown-toggle
+        color: #000
+        i.fa
+          font-size: 20px
+          color: $gray
+          line-height: 2em
+          vertical-align: middle
+          margin-right: 5px
+      ul.dropdown-menu li
+        padding: 5px
+    
+.fa-clock-o
+  padding-right: 5px
+.modal-content
+  .open-as-button
+    color: $link-color
+    cursor: pointer
+    display: block
+
+  .user .user-name
+    font-weight: bold
+
+  .user
+    margin-bottom: 15px
+
+  .input-group .select2-container--bootstrap
+    width: 100% !important
+
+  .select2-container--bootstrap .select2-selection
+    font-family: inherit
+
+  .close-publisher-selector
+    float: right
+    margin-top: 15px
+    font-weight: 600
+.reservation
+  .status-pending
+    background-color: #ffa500
+    color: #ffffff
+  .status-pre-approved
+    background-color: #3fa2e8
+    color: #ffffff
+  .status-approved
+    background-color: #008000
+    color: #ffffff
+  .status-cancelled
+    background-color: #ff0000
+    color: #ffffff
+.list-group .reservation
+  #reservation-status-selector
+    width: 100%
+    margin-right: 10px
+    height: 25px
+    button.badge
+      border: none
+    .form-control
+      padding: 0px
+      height: 30px
+    a
+      width: 100%
+      margin: 0px
+    ul
+      width: 190px
+    
+    a.close-item-content
+      vertical-align: middle
+    .logo-wrapper img
+      width: 30px
+         
+    .dropdown-menu 
+      padding: 7px
+      li
+        margin-bottom: 3px
+        a
+          border-radius: 5px
+          text-transform: lowercase
+          i
+            position: absolute
+            right: 15px
+          .fa-trash
+            position: initial
+            right: 0px
+      .confirm-destroy
+        background-color: #ddd
+        color: #7f7d7d
+      .dropdown-title
+        display: flex
+        height: 25px
+        div
+          margin: auto
+      hr
+        margin: 7px
+      
+  span.pending
+    color: orange
+  span.approved
+    color: green
+  span.denied
+    color: red
+  span.cancelled
+    color: red
+  .list-group-item-content
+    .reservation-details
+      border: 1px solid $gray_border
+      display: inline-block
+      min-width: 200px
+      margin-bottom: 10px
+      .title, .data
+        padding: 7px
+      .title
+        background-color: $gray_blue
+        font-weight: 600
+        color: #000
+      .data
+        span
+          float: right
+        i.fa
+          margin-right: 5px
+    .title .actions
+      display: flex
+.content-reservation
+  padding: 15px
+  p
+    margin: 0 0 10px 0
+    color: #000000
+
+#status_filter
+  .material-icons
+    font-size: 15px
+  
+.badge
+  height: 20px
+
+.under-tabs
+  .dropdown
+    .dropdown-toggle
+      img 
+        width: 15px
+  #month-filter
+    i
+      font-size: 13px
+    
+@media (max-width: $sc_xs)
+  .reservations-index .cm-list.list-group#reservations .reservation
+    &.denied
+      .list-group-item, .list-group-item-content .actions
+        border-left: 2px solid $cm_red
+    &.approved
+      .list-group-item, .list-group-item-content .actions
+        border-left: 2px solid $cm_green
+    &.pending
+      .list-group-item, .list-group-item-content .actions
+        border-left: 2px solid $cm_yellow
+
+
+.toggle-comments.count-comments.comments-replies
+  background: none
+  padding: 0px
+#reservations
+  .reservation
+    li
+      .visible-xs
+        .logo-wrapper.left 
+          margin-bottom: 20px
+      .content-logo
+        padding: 10px
+        p
+          line-height: normal
+          margin: 0px
+      .content_short_description
+        background: #f4f7fa
+        padding: 10px
+        .material-icons
+          float: left
+          min-height: 30px
+          margin-right: 5px
+        div
+          float: left
+          p
+            margin: 0px
+            line-height: normal
+      .col-xs-2
+        .dropdown
+          margin-left: 10px
+      .content-status
+        padding: 10px 0px 10px 10px
+        .logo-wrapper.left
+          margin-right: 5px
+    .content-reservation
+      div
+        background: #f4f7fa
+        padding: 1px 10px 10px 10px
+        .content_details
+          margin-bottom: 10px
+          p
+            line-height: normal
+            margin: 0px
+          i
+            float: left
+            margin-right: 10px
+            color: $black
+        .header
+          color: $black

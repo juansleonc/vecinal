@@ -1,0 +1,40 @@
+<div class="cm-nav-links">
+  <%= link_to t('finish_registration.buildings'), finish_registration_buildings_path, class: "#{'active' if @buildings.present?}" %>
+  <%= link_to t('finish_registration.managers'), finish_registration_companies_path, class: "#{'active' if @companies.present?}" %>
+
+  <%= link_to new_button_name, '#', id: 'new-community-launcher', class: "btn btn-primary #{'hidden' if current_user.accountable.present?}",
+    data: { toggle: 'modal', target: modal_target }
+  %>
+</div>
+
+<!-- please do not delete following lines for now, as you can see, there is logic to know if a user requested a susbscription or not
+<div class="cm-tabs">
+  <ul class="nav nav-tabs">
+    <li class="black resident <%#= 'active' if @buildings.present? %>"">
+      <%#= link_to finish_registration_buildings_path do %>
+        <i class="fa fa-building-o"></i> <%#= t('finish_registration.buildings') %>
+        <%# requested = 'requested' if current_user.accountable.present? && current_user.accountable_type == 'Building' %>
+        <i class="fa fa-exclamation-circle pending <%#= requested %>"></i>
+      <%# end %>
+    </li>
+    <li class="black administrator <%#= 'active' if @companies.present? %>">
+      <%#= link_to finish_registration_companies_path do %>
+        <i class="fa fa-briefcase"></i> <%#= t('finish_registration.managers') %>
+        <%# requested = 'requested' if current_user.accountable.present? && current_user.accountable_type == 'Company' %>
+        <i class="fa fa-exclamation-circle pending <%#= requested %>"></i>
+      <%# end %>
+    </li>
+    <!commented until active business again >
+    <! <li class="hidden green supplier <%#= 'active' if @businesses.present? %>">
+      <%#= link_to '#' do %>
+        <i class="fa fa-shopping-cart"></i>
+        <span class="hidden-xs">Local Business</span>
+        <span class="visible-inline-xs">Business</span>
+        <%# requested = 'requested' if current_user.accountable.present? && current_user.accountable_type == 'Business' %>
+        <i class="fa fa-exclamation-circle pending <%#= requested %>"></i>
+      <%# end %>
+    </li>
+  </ul>
+  <div class="white-bar"></div>
+</div>
+ -->

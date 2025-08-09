@@ -1,0 +1,48 @@
+<% building = payment.payment_account.building %>
+<div class="payment <%= building.class.name %>-<%= building.id %>" id="payment-<%= payment.id %>">
+  <li class="list-group-item clearfix with-content text-centered" data-target="#content-payment-<%= payment.id %>">
+    <div class="col-xs-2"><%= payment.transaction_date.strftime '%b %d, %Y' %></div>
+    <div class="col-xs-2"><%= number_to_currency payment.amount %> <%= payment.currency_code %></div>
+    <div class="col-xs-3"><%= payment.payer_full_name %></div>
+    <div class="col-xs-3"><%= payment.payment_account.building.name %></div>
+    <!-- <div class="col-xs-1"><%#= t('payments.statuses')[payment.cod_response] %></div> -->
+    <div class="col-xs-2"><%= payment.transaction_id %></div>
+  </li>
+  <div class="list-group-item-content" id="content-payment-<%= payment.id %>">
+    <%= render 'residents/contacts/contact_header', contact: payment.user %>
+    <%= link_to '#', class: 'close-item-content pull-right' do %>
+      <i class="fa fa-times"></i>
+    <% end %>
+    <span class="pull-right payment-date"><%= payment.transaction_date.strftime '%b %d, %Y, %l:%M %p' %></span>
+    <table class="table">
+      <thead>
+        <th><%= t('payments.description') %></th>
+        <th><%= t('payments.card') %></th>
+        <th><%= t('payments.ref') %></th>
+        <th><%= t('payments.statuses') %></th>
+        <th><%= t('payments.total') %></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="description"><%= payment.description %></td>
+          <td><%= payment.cardnumber[8..-1] %></td>
+          <td><%= payment.transaction_id %></td>
+          <td><%= t('payments.statuses')[payment.cod_response] %></td>
+          <td></td>
+        </tr>
+        <tr class="totals">
+          <td colspan="4"></td>
+          <td><strong>Sub total</strong> <%= number_to_currency(payment.amount - payment.service_fee) %> <%= payment.currency_code %></td>
+        </tr>
+        <tr class="totals">
+          <td colspan="4"></td>
+          <td><strong>Service fee</strong> <%= number_to_currency payment.service_fee %> <%= payment.currency_code %></td>
+        </tr>
+        <tr class="totals">
+          <td colspan="4"></td>
+          <td><strong>Total</strong> <%= number_to_currency payment.amount %> <%= payment.currency_code %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

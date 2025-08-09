@@ -1,0 +1,33 @@
+<% 
+@order = params[:order]
+if @order == :desc
+  dir_icon, order = 'fa-arrow-down', 'asc'
+else
+  dir_icon, order = 'fa-arrow-up', 'desc'
+end
+btn_text ||= 'DATE'
+query = "&query=#{params[:query]}" if params[:query].present? 
+building = "&b=#{params[:b]}" if params[:b].present?
+company = "&c=#{params[:c]}" if params[:c].present?
+status = "&status=#{params[:status]}" if params[:status].present?
+responsible = "&responsible=#{params[:responsible]}" if params[:responsible].present?
+%>
+  
+
+  <div class="order-by-button <%= local_assigns[:add_class] %> dropdown" id="order_by">
+    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span>
+        <i class="material-icons">filter_list</i>
+        <%= t 'general.' + @order.to_s %>
+      </span>
+      <i class="fa fa-caret-down"></i>
+      <!--<i class="fa fa-caret-up"></i>-->
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="<%= "#{request.path}?order=asc#{query}#{building}#{company}#{status}#{responsible}" %>"><%= t 'general.asc' %></a></li>
+      <li><a href="<%= "#{request.path}?order=desc#{query}#{building}#{company}#{status}#{responsible}" %>"><%= t 'general.desc' %></a></li>
+      <li><a href="<%= "#{request.path}?order=last#{query}#{building}#{company}#{status}#{responsible}" %>"><%= t 'general.last' %></a></li>
+      <li><a href="<%= "#{request.path}?order=oldest#{query}#{building}#{company}#{status}#{responsible}" %>"><%= t 'general.oldest' %></a></li>
+    </ul>
+  </div>
+

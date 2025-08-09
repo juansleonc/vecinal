@@ -1,0 +1,40 @@
+<% building = current_user.accountable %>
+<li class="<%= 'active' if @submenu_item == 'profile' %>">
+  <%= link_to user_profile_url(current_user, subdomain: building, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <%= mi.account_circle %>
+    <%= t 'general.submenu.profile' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'communities' %>">
+  <%= link_to communities_url(subdomain: building, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <%= mi.group_work %>
+    <%= t 'general.submenu.communities' %>
+  <% end %>
+</li>
+
+<%= render 'layouts/building_items', subdomain: building, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c] %>
+
+<li class="<%= 'active' if @submenu_item == 'nearby' %>">
+  <%= link_to businesses_nearby_url(subdomain: building, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <%= mi.place %>
+    <%= t 'businesses.nearby' %>
+  <% end %>
+</li>
+<li class="hidden <%= 'active' if @submenu_item == 'coupons' %>">
+  <%= link_to resident_coupons_url(subdomain: building, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-scissors"></i>
+    <%= Coupon.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="hidden <%= 'active' if @submenu_item == 'deals' %>">
+  <%= link_to resident_deals_url(subdomain: building, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-tag"></i>
+    <%= Deal.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="hidden <%= 'active' if @submenu_item == 'my_stuff' %>">
+  <%= link_to my_stuff_url(subdomain: building, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-cart-arrow-down"></i>
+    <%= t('general.submenu.my_stuff') %>
+  <% end %>
+</li>

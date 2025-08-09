@@ -1,0 +1,10 @@
+<% if @service_request.valid? %>
+  $('#service-request-<%= @service_request.id %>').replaceWith(
+    '<%= j render("residents/service_requests/service_request", service_request: @service_request) %>'
+  );
+  $("span.timeago").timeago();
+  $('.popover').remove();
+  $('[data-toggle="popover"]').popover();
+<% else %>
+  toastr.error('<%= @service_request.errors.full_messages.join(", ") %>');
+<% end %>

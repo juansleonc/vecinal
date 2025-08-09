@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @page_title || 'Condo Media' %></title>
+    <link rel="icon" type="image/png" href="<%= asset_url 'favicon.png' %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%= yield :meta_tags %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= csrf_meta_tags %>
+    <%= yield :head %>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KBW87G');</script>
+    <!-- End Google Tag Manager -->
+  </head>
+
+  <body>
+    <%= render user_signed_in? ? 'layouts/navbar' : 'layouts/navbar_public' %>
+    <%= render 'layouts/toastr_messages' %>
+
+    <div class="container">
+      <div class="row">
+        <%= yield %>
+      </div>
+    </div>
+    
+    <%#= render 'layouts/tours' %>
+
+    <% unless user_signed_in? %>
+      <%= render 'layouts/copyright_footer' %>
+      <%= render 'shared/change_language_modal' %>
+    <% end %>
+
+    <%= render 'layouts/menu_bottom', subdomain: 'www' %>
+    
+    <div class="loading-overlay">
+      <i class="fa fa-spinner fa-pulse fa-4x fa-fw"></i>
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <%= javascript_include_tag "application" %>
+
+    <% if @show_map %>
+      <%= javascript_include_tag "jquery.gmap" %>
+      <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyB4jmqyVpIrq8dmRYdw34AXaY2eQBlMjH8&callback=initMap" %>
+    <% end %>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KBW87G"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="spinner"></div>
+    
+  </body>
+</html>

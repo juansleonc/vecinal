@@ -1,0 +1,25 @@
+<% message_on_trash = message.marked?(current_user, 'deleted') %>
+<% delete_path = message_on_trash ? messages_mark_as_destroyed_path(message) : messages_mark_as_deleted_path(message) %>
+<% if local_assigns[:mobile] && mobile %>
+  <%= link_to messages_mark_as_unread_path(message), remote: true do %> <i class="fa fa-eye"></i> <% end %>
+  <%= link_to messages_mark_as_done_path(message), remote: true do %> <i class="fa fa-check-square-o"></i><% end %>
+  <%= link_to delete_path, remote: true do %> <i class="fa fa-trash"></i> <% end %>
+<% else %>
+  <a href="<%= messages_mark_as_unread_path(message) %>" data-remote="true"
+    <%= cm_popover '', t('messages.mark_as_unread'), container: 'body' %>>
+    <i class="fa fa-eye"></i>
+  </a>
+  <% if request.path == messages_done_path %>
+    <a href="<%= messages_move_to_inbox_path(message) %>" data-remote="true" <%= cm_popover '', 'Move to inbox', container: 'body' %> >
+      <i class="fa fa-inbox"></i>
+    </a>
+  <% else %>
+    <a href="<%= messages_mark_as_done_path(message) %>" data-remote="true" <%= cm_popover '', t('messages.mark_as_done'), container: 'body' %> >
+      <i class="fa fa-check-square-o"></i>
+    </a>
+  <% end %>
+  <% delete_popover = message_on_trash ? t('folders.delete') : t('messages.move_to_trash') %>
+  <a href="<%= delete_path %>" data-remote="true" <%= cm_popover '', delete_popover, container: 'body' %>>
+    <i class="fa fa-trash"></i>
+  </a>
+<% end %>

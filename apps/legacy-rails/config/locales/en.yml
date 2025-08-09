@@ -1,0 +1,2202 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  activerecord:
+    models:
+      user:
+        one: "user"
+        other: "users"
+      company:
+        one: "company"
+        other: "companies"
+      building:
+        one: "building"
+        other: "buildings"
+      image:
+        one: "image"
+        other: "images"
+      apartment:
+        one: "apartment"
+        other: "apartments"
+      comment:
+        one: "post"
+        other: "posts"
+      service_request:
+        one: "service request"
+        other: "service requests"
+      event:
+        one: "event"
+        other: "events"
+      business:
+        one: 'business'
+        other: 'businesses'
+      deal:
+        one: 'deal'
+        other: 'deals'
+      coupon:
+        one: 'coupon'
+        other: 'coupons'
+      coupon_redemption:
+        one: 'coupon redemption'
+        other: 'coupon redemptions'
+      deal_purchase:
+        one: 'purchase'
+        other: 'purchases'
+      message:
+        one: 'message'
+        other: 'messages'
+      invite:
+        one: 'invite'
+        other: 'invites'
+      folder:
+        one: document
+        other: documents
+      amenity:
+        one: amenity
+        other: amenities
+      availability:
+        one: availability
+        other: availabilities
+      reservation:
+        one: reservation
+        other: reservations
+      poll:
+        one: poll
+        other: polls
+      poll_answer:
+        one: poll answer
+        other: poll answers
+      poll_vote:
+        one: vote
+        other: votes
+      review:
+        one: review
+        other: reviews
+      classified:
+        one: ad
+        other: ads
+      payment:
+        one: payment
+        other: Billing
+      like:
+        one: Like
+        other: Likes
+      user_balance:
+        one: "user balance"
+        other: "user balances"
+    attributes:
+      user:
+        first_name: "First name"
+        last_name: "Last name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Confirm password"
+        current_password: "Current password"
+        accountable_code: "Code"
+        role: "Role"
+        full_name: "Full name"
+        building_name: "Building name"
+        apartment_number: "Unit number"
+        locale: 'Language'
+        role: Page role
+        accountable: Community
+        education: Education
+        relationship: Relationship
+        hometown: Hometown
+      company:
+        name: Company name
+        name1: Company
+        namespace: Condo Media URL
+        category: Category
+        email: Email
+        phone: Phone
+        extension: Ext
+        fax: Fax
+        website: Website
+        country: Country
+        region: State/Province
+        city: City
+        address: Address
+        zip: Zip/Postal Code
+        opening_hours: Hours
+        description: Description
+        logo: Logo
+        code: Page ID
+        location: Location (opcional)
+        sign_agreement: Terms & conditions
+        confirm_legal_representation: Confirm legal representation
+      business:
+        code: ID
+        name: Business or organization name
+        name1: Business
+        phone: Phone Number
+        extension: Ext
+        country: Country
+        region: Region
+        city: City
+        address: Address
+        zip: Zip / Postal Code
+        email: "Email"
+        namespace: Condo Media URL
+        description: Description
+        opening_hours: Hours
+        website: Website
+        location: Location
+        sign_agreement: Terms & conditions
+        confirm_legal_representation: Confirm legal representation
+      building:
+        code: Page ID
+        name: Building name
+        name1: "Community"
+        building_or_place_name: Building or place name
+        street_address: Street address
+        state_providence: State/Providence
+        subdomain: URL
+        category: Category
+        description: Description
+        size: Units
+        address: Address
+        city: City
+        region: Region
+        country: Country
+        zip: Zip / Postal Code
+        images: Home Photos
+        logo: Logo
+        units: Units
+        email: Email
+        phone: Phone
+        website: Website
+        opening_hours: Hours
+        community_id: "Community ID"
+        managed_by: 'Managed By'
+        remove_page: 'Remove Page'
+        billing_information: "Billing Information"
+      contact_details:
+        apartment_number: Suite
+        phone: Phone
+        emergency_contact_name: Emergency Contact Name
+        emergency_contact_phone: Emergency Contact Phone
+        tenant: Tenant
+        owner: Owner
+        move_in_date: Member since
+        user_type: User type
+        mobile_phone: Mobile phone
+        home_phone: Home phone
+        garage: Garage
+        locker: Locker
+        links: Website
+        birth_day: Birthday
+        birth_year: Birthyear
+        sex: Gender
+        work: Work
+        education: Education
+        relationship: Relationship
+        hometown: Hometown
+      contact_form:
+        name: Full name
+        email: Your email
+        subject: Subject
+        message: Message
+      apartment:
+        building_id: 'Select building'
+        apartment_number: 'Unit number'
+        category: 'Category'
+        available_at: 'Available from'
+        show_price: 'Price'
+        price: '$'
+        size_ft2: 'Size (ft2)'
+        bedrooms: 'Bedrooms'
+        bathrooms: 'Bathrooms'
+        furnished: 'Furnished'
+        pets: 'Pets'
+        show_contact: 'Contact info'
+        secondary_phone_number: 'Phone number'
+        secondary_email: 'Email'
+        title: 'Title'
+        description: 'Description'
+        images: 'Images'
+      message:
+        sender: From
+        receiver: To
+        title: Subject
+        content: Content
+        urgent: Urgent
+        notify_user: Notify user by email
+        add_to_sticky_notes: Add to sticky notes
+        receivers: Receivers
+      service_request:
+        responsible_id: Responsible
+        title: Subject
+        content: Description
+        urgent: Urgent
+        category: Select a category
+        case: "case # %{num}"
+      event:
+        sender_id: Sender
+        title: Name
+        category: Category
+        date: Date
+        repeat_frequency: Recurrence
+        expires_at: Repeat until
+        location: Location (optional)
+        receiver_type: 'To:'
+        receivers: Share with
+        details: Details (optional)
+        add_to_sticky_notes: Add to sticky notes
+        logo: Image
+        rsvp: rsvp
+        end_time: End time
+        notify_user: Notify by email
+        sign_agreement: Terms & conditions
+      deal:
+        category: 'Category'
+        title: 'Title'
+        price: 'Undiscounted Price'
+        discount: 'Percent Discount'
+        number: 'Number of vouchers'
+        description: 'The Deal... describe your offering'
+        fine_print: 'Fine Print... list the restrictions of your offering'
+        sign_agreement: 'I understand the laws that apply to me as a seller on this website and I agree to only list, and sell products and services that comply with those laws.'
+        available_at: 'Available from'
+        finish_at: 'Until'
+        highlight: 'Highlight ad'
+        top: 'Top ad'
+        images: 'Images'
+        show_highlight: 'Highlight add'
+        show_top: 'Top add'
+        last_day_to_claim: 'Last day to claim vouchers'
+        requires_shipping: 'Requires Shipping'
+        impressions: 'Impressions'
+        clicks: 'Clicks'
+        sign_agreement: 'Terms & conditions'
+      coupon:
+        category: 'Category'
+        title: 'Title'
+        number: 'Number of vouchers'
+        description: 'The Promotion... describe your offering'
+        fine_print: 'Fine Print... list the restrictions of your offering'
+        sign_agreement: 'I understand the laws that apply to me as a seller on this website and only list, and sell products and services that comply with those laws.'
+        available_at: 'Available from'
+        finish_at: 'Until'
+        highlight: 'Highlight ad'
+        top: 'Top ad'
+        show_highlight: 'Highlight add'
+        show_top: 'Top add'
+        last_day_to_claim: 'Last day to claim vouchers'
+        impressions: 'Impressions'
+        clicks: 'Clicks'
+        sign_agreement: 'Terms & conditions'
+        images: 'Images'
+      coupon_redemption:
+        coupon: 'Coupon'
+        user: 'User'
+        created_at: 'Printed'
+        redeemed: 'Redeemed'
+      deal_purchase:
+        user: 'User'
+        deal: 'Deal'
+        created_at: 'Purchased'
+        status: 'Status'
+        price: 'Price'
+        quantity: 'Quantity'
+        address: 'Address'
+        city: 'City'
+        region: 'Region'
+        country: 'Country'
+        sign_agreement: 'Terms & conditions'
+      invite:
+        first_name: 'First name'
+        last_name: 'Last name'
+        email: 'Email'
+        emails: 'Emails'
+        role: 'Role'
+        accountable_id: 'Community'
+      comment:
+        content: 'Content'
+      folder:
+        name: Name
+        level: Level
+        father: Father
+      attachment:
+        file_attachment_file_name: File Name
+        file_attachment_content_type: Content Type
+        file_attachment_file_size: File Size
+        file_attachment_updated_at: Updated At
+      amenity:
+        name: Name
+        description: Description
+        rental_fee: Rental fee
+        rental_value: Rental value
+        deposit: Deposit
+        deposit_value: Deposit value
+        maximun_rental_time: Maximum rental time
+      availability:
+        day: Day
+        time_from: From
+        time_to: Until
+      reservation:
+        date: Date
+        time_from: From
+        time_to: Until
+        status: Status
+        payment: Payment
+        message: Message
+        amenity: Amenity
+      poll:
+        publisher: Publisher
+        question: Question
+        end_date: End Date
+        duration: Duration
+        num_days: '# days'
+        end_date_date: Date
+      poll_answer:
+        name: Name
+        add_choice: Add choice
+      review:
+        user: User
+        rank: Rank
+        comment: Comment
+      classified:
+        title: Title
+        price: Price
+        description: Description
+        publisher: Publisher
+        building: Building
+    errors:
+      models:
+        business:
+          owner_has_a_role_already: "has a role already"
+          can_not_update_plan: 'Unable to update the plan, the number of active coupons exceeds the limit of the plan selected'
+        company:
+          owner_has_a_role_already: "has a role already"
+          namespace_format: "can only contain lowecase letters, numbers '-' and '_'"
+          can_not_update_plan: 'Unable to update the plan, the number of active buildings exceeds the limit of the plan selected'
+        user:
+          accountable_not_found: "not found"
+        contact_details:
+          tenant_or_owner: 'or Owner must be selected'
+        building:
+          subdomain_format: "can only contain lowecase letters, '-' and numbers, must begin with a letter, must end with a letter or number"
+          email_or_password_wrong: 'Email or Password are incorrect'
+        message:
+          cant_be_blank: "field can't be blank"
+        event:
+          cant_be_blank: "field can't be blank"
+        coupon_redemption:
+          no_coupons_available: 'There are no coupons available at this time'
+          not_available_yet: 'Not available yet'
+          currently_unavailable: 'Currently unavailable'
+        deal_purchase:
+          no_deals_available: 'There are no deals available at this time'
+          not_available_yet: 'Not available yet'
+          currently_unavailable: 'Currently unavailable'
+        deal:
+          cant_delete_has_purchases: "Unable to delete it, there are purchases associated with it"
+          minimum_4_weeks_after_end: 'Minimum 4 weeks after the end of sale'
+        coupon:
+          cant_delete_has_redemptions: "Unable to delete it, there are redemptions associated with it"
+          minimum_4_weeks_after_end: 'Minimum 4 weeks after the end of sale'
+        invite:
+          community_not_exists: 'This community does not exist'
+        folder:
+          not_self: can not be it self
+          limit_reached: reach limit
+          can_not_delete_root_folder: You can not delete a root folder
+        attachment:
+          less_than: "Files must be less than %{max_size}"
+        reservation:
+          not_available: is not available in this time
+        poll:
+          be_in_future: must be in the future
+        account_balance:
+          attributes:
+            community_id:
+              inclusion: "selected is not between your buildings"
+      messages:
+        model_invalid: "Validation has Failed: %{errors}"
+        inclusion: "don’t included on list"
+        exclusion: "reserved"
+        invalid: "it’s not valid"
+        confirmation: "don’t match %{attribute}"
+        accepted: "it should be accepted"
+        empty: "can’t be empty"
+        blank: "can’t be empty"
+        present: "should be empty"
+        too_long:
+          one: "too long (max 1 character)"
+          other: "too long (máximo %{count} characters)"
+        too_short:
+          one: "too short (minimun 1 character)"
+          other: "too short (minimun %{count} character)"
+        wrong_length:
+          one: "wrong length (should be 1 character)"
+          other: "wrong length (should be %{count} characters)"
+        not_a_number: "it’s not a number"
+        not_an_integer: "it’s not a integer"
+        greater_than: "should be greater than %{count}"
+        greater_than_or_equal_to: "should be greater than or equal to %{count}"
+        equal_to: "should be equal to %{count}"
+        less_than: "should be less than %{count}"
+        less_than_or_equal_to: "should be less than or equal to %{count}"
+        other_than: "should be different than %{count}"
+        odd: "should be odd"
+        even: "should be even"
+  accountable:
+    building:
+      name: "Building"
+      code: "Building code"
+    company:
+      name: "Company"
+      code: "Company code"
+  general:
+    category: 'Category'
+    when: 'When'
+    time: 'Time'
+    amenity: 'Amenity'
+    post_all: 'All Posts'
+    post_hidden: 'Hidden Posts'
+    post_reported: 'Reported Posts'
+    asc: 'Name, A-Z'
+    desc: 'Name, Z-A'
+    last: 'Last created'
+    oldest: 'Oldest created'
+    i_received: 'Received'
+    i_sent: 'Sent'
+    change_password: 'You must update the password to continue in the application'
+    change_password_confirmation: 'The fields must match to continue'
+    terms_conditions: "Accept <a href='https://communities.condo-media.com/terms'>terms</a> and <a href='https://communities.condo-media.com/privacy'>conditions</a> "
+    add_record: "Add %{record_name}"
+    choose_record: "Choose %{record_name}"
+    create_record: "New %{record_name}"
+    create_record_f: "New %{record_name}"
+    edit_record: "Edit %{record_name}"
+    create_timeline_comment: New post
+    index_record: "All %{record_name}"
+    hidden_record_m: "Hidden %{record_name}"
+    reported_record_m: "Reported %{record_name}"
+    hidden_record_f: "Hidden %{record_name}"
+    reported_record_f: "Reported %{record_name}"
+    saved_record_f: "Saved %{record_name}"
+    saved_record_m: "Saved %{record_name}"
+    your_record: "Your %{record_name}"
+    no_records: "There are no %{record_name} yet"
+    please_wait: "Please wait.."
+    welcome: "Welcome %{record_name}"
+    create: "Create"
+    new: 'New'
+    new_f: 'New'
+    edit: 'Edit'
+    save: "Save"
+    post: "Post"
+    posts: Posts
+    the_posts: Posts
+    the_reviews: Reviews
+    reviews: reviews
+    the_comments: comments
+    comments: comments
+    users: users
+    the_users: Users
+    events: events
+    the_events: Events
+    items: items
+    polls: polls
+    classifieds: classifieds
+    edit_profile: "Edit Profile"
+    update: "Update"
+    back: "Back"
+    continue: "Continue"
+    remove: "Remove"
+    hide_post: "Hide post"
+    report_post: "Report post"
+    report_user: "Report user"
+    cancel: "Cancel"
+    yes_word: 'Yes'
+    no_word: 'No'
+    maybe: "Maybe"
+    confirm: 'Are you sure?'
+    dashboard: 'Dashboard'
+    requests: 'Invites'
+    number_request: 'Request #'
+    news_feed: 'News feed'
+    text: 'Text'
+    others: 'Others'
+    photo: 'Photo'
+    file: 'File'
+    search: 'Search'
+    account: 'Account'
+    company_dashboard: "%{company_name} dashboard"
+    owner_information: 'Owner Information'
+    days: 'days'
+    actions: 'Actions'
+    pay: 'Pay'
+    empty: 'Empty'
+    report: 'Show report'
+    redeem: 'Redeem'
+    stripe_connect: 'Connect with Stripe'
+    no_javascript_error: 'JavaScript is not enabled and is required for this form. First enable it in your web browser settings.'
+    generic_error_message: 'An error has occurred, please try again later.'
+    highlight: 'Highlight'
+    top: 'Top'
+    me: 'Me'
+    group: 'Group'
+    page_not_exist: 'The page does not exist'
+    certify_adult_and_agree: 'I certify that I am least 18 years old and I have read and agree to the'
+    terms_of_use: 'Terms of Service'
+    privacy_policy: 'Privacy policy'
+    and: 'and'
+    refund_policy: 'Refund Policy'
+    got_questions: 'Got Questions? Checkout our FAQs'
+    code: 'Code'
+    postal_code: 'Zip / Postal code'
+    view_all: 'View all'
+    details: 'Details'
+    description: 'Description'
+    media: 'Media'
+    total: 'Total'
+    create_a: "Create a %{object_name}"
+    back_to: "Back to %{destiny}"
+    extension: 'ext'
+    from: 'From'
+    to: 'To'
+    delete: "Delete %{object_name}"
+    to_delete: "Delete"
+    delete_warning: 'Be careful, this action can not be undone'
+    my_profile_edit: 'My profile - Edit'
+    options: 'options'
+    administration_office: 'administration office'
+    privacy: 'Privacy'
+    terms: 'Terms'
+    take_tour: 'Take a tour'
+    report_software_problem: 'Report a software problem'
+    sales: 'Sales'
+    customer_service: 'Customer service'
+    id: 'ID'
+    overview: 'Overview'
+    directions: 'Directions'
+    logo: 'Logo'
+    info: 'Info'
+    connect_with: 'Connect with'
+    connected_with: 'Connected with'
+    stripe: 'Stripe'
+    print: 'Print'
+    month: 'Month'
+    year: "Year"
+    voucher: 'Voucher'
+    cm_url: 'CM URL'
+    terms_of_service: 'Terms of service'
+    send: 'Send'
+    about: "About %{name}"
+    year: 'Year'
+    every_until: "Every %{frequency} until"
+    at: 'at'
+    confirm_change: 'Are you sure to change this value?'
+    highlights: 'Highlights'
+    vouchers: 'Vouchers'
+    managed: 'Managed'
+    managed_by: 'Managed by'
+    building_url: 'Building URL'
+    people: 'People'
+    more: 'More'
+    you_have_no: "You have no %{objects}."
+    start_conversation: 'Start a conversation with your community members.'
+    comming_soon: 'Comming soon.'
+    close: 'Close'
+    left: left
+    closed: Closed
+    of: of
+    stars: stars
+    free: free
+    re_send: Re-Send
+    re_open: Re-Open
+    accept: Accept
+    ignore: Ignore
+    or: or
+    insights: Insights
+    shareable:
+      public: Public
+      who_should_see: Who should see this?
+      anyone: Anyone on Condo Media
+      my_community: My Community
+      all_your_contacts: All your contacts on Condo Media
+      my_communities: My Communities
+      my_contacts: My contacts in Condo Media
+      community_members: Community members
+      only_community_members: Only people in this community
+      management_only: Management only
+    report_user:
+      reported: Reported
+      unreport: Unreport
+      report: Report
+      hidden: Hidden
+      unhide: Unhide
+      hide: Hide
+      post: Post
+      user: User
+    sexes:
+      m: Male
+      f: Female
+    relationships:
+      single: Single
+      in_one: In a relationship
+      married: Married
+      separated: Separated
+      divorced: Divorced
+    submenu:
+      management_portal: 'Management Portal'
+      my_stuff: 'My Stuff'
+      profile: 'Profile'
+      communities: Communities
+      plan: 'Plan'
+      billing: 'Billing'
+      subscription: 'Subscription'
+      sales: 'Sales'
+      page_roles: 'Page roles'
+      version: 'version'
+      upgrade_storage: 'Upgrade Storage'
+      create_user: 'Create users'
+    building_types:
+      condominiums: "Condominiums"
+      apartment_building: "Apartment building"
+      student_housing: "Student housing"
+      senior_housing: "Senior housing"
+    company_types:
+      property_managers: "Property Managers"
+      real_estate: "Real estate"
+      hoa: "HOA"
+      cooperative: "Cooperative"
+      other: "Other"
+    apartment_categories:
+      for_rent: 'Rent'
+      for_sale: 'Sale'
+      only_display: 'Showcase only'
+    apartment_bedrooms:
+      one: '1'
+      two: '2'
+      three: '3'
+      four: '4'
+      more: 'More'
+    apartment_bathrooms:
+      one: '1'
+      one_and_half: '1.5'
+      two: '2'
+      two_and_half: '2.5'
+      three: '3'
+      three_and_half: '3.5'
+      four: '4'
+      more: 'More'
+    apartment_price_options:
+      set_price: 'Set price'
+      please_contact: 'Please contact'
+    apartment_contact_options:
+      company_details: "Use my company's contact info"
+      other: 'Other'
+    service_request_categories:
+      general: 'General'
+      repairs: 'Repairs'
+      complaints: 'Complaints'
+      fees: 'Fees'
+      rent: 'Rent'
+      lease: 'Lease'
+      reservations: 'Reservations'
+      other: 'Other'
+      plumbing: "Plumbing"
+      heating: "Heating"
+      appliances: "Appliances"
+      electricity: "Electricity"
+      complaint: "Complaint"
+      authorized_guests: "Authorized Guests"
+    service_request_statuses:
+      pending: "Pending"
+      in_progress: "In progress"
+      resolved: "Resolved"
+      closed: "Closed"
+      cancelled: "Cancelled"
+    event_categories:
+      informational: "Informational"
+      social: "Social"
+    event_repeat_options:
+      no_repeat: "No repeat"
+      weekly: "Weekly"
+      monthly: "Monthly"
+      yearly: "Yearly"
+    images:
+      select_home_picture: "Select as home photo"
+      home_picture: "Home photo"
+      formats: "(Image Formats allowed PNG, JPEG, or GIF)"
+    errors:
+      one: "1 error prohibited this %{resource} from being saved:"
+      other: "%{count} errors prohibited this %{resource} from being saved:"
+    promotion_categories:
+      food_and_drink: 'Food & Drink'
+      local_services: 'Local Services'
+      things_to_do: 'Things To Do'
+      boutique: 'Boutique'
+      getaways: 'Getaways'
+      beauty_and_spas: 'Beauty & Spas'
+      health_and_fitness: 'Health & Fitness'
+    deal_contact_options:
+      business_details: 'Business Details'
+      other: 'Other'
+    deal_purchase_statuses:
+      redeemed: 'Redeemed'
+      not_redeemed: 'Not redeemed'
+    days_for_price: '%{days} days for $%{price}'
+    payment_options:
+      card_on_file: 'Use card on file *** %{last4card}'
+      another_card: 'Use Another card'
+      select: 'Select payment option'
+      no_card: 'No card saved'
+    locales:
+      en: 'English'
+      fr: 'Français'
+      es: 'Español'
+    marketplace: Marketplace
+    optional: Optional
+    choose_community: Choose community
+    all_communities: My communities
+    all_categories: All categories
+    public: Public
+    choose_role: Choose role
+    empty_items: "No %{objects} to show"
+    confirm: Confirm
+    transactions: Transactions
+    activations: Activations
+    verification: Verification
+    action: Action
+    card: Card
+    intro: Intro
+    when: When
+    where: Where
+    amount: amount
+    community: Community
+    next: Next
+    clicking_agree: By clicking Next, you agree to our
+    actions:
+      comment: Comment
+      add: Add
+    offer: offer
+    home_page: "Home Page"
+    account_balances: "Billing"
+    submit: "Submit"
+    filters:
+      all_communities: "All Communities"
+      all: "All"
+    apartment_number: "Apt/Suite/Floor"
+    maps: "Maps"
+  routes:
+    privacy: privacy
+    terms: terms
+  stats:
+    last_days:   "last %{n} days"
+    last_months: "last %{n} months"
+    this_year:    this year
+    last_year:    last year
+    my_communities: my communities
+    users: users
+    users_class: users
+    comments_class: news
+    comments: comments
+    messages: messages
+    messages_class: messages
+    service_requests: service requests
+    service_requests_class: requests
+    events: events
+    events_class: events
+    reservations: reservations
+    reservations_class: reservations
+    polls: polls
+    polls_class: polls
+    payments: payments
+    payments_class: payments
+    posts: posts
+    replies: replies
+    open: open
+    closed: closed
+    past: past
+    upcoming: upcoming
+    attachments: attachments
+    attachments_class: documents
+    files: files
+    files_class: files
+    storage: storage
+    amenities_class: amenities
+    amenities: amenities
+    votes: votes
+    transactions: transactions
+    amount: amount
+    all_communities: all communities
+    print_report: print report
+  finish_registration:
+    title: "Welcome to Condo Media"
+    choose_role: "Continue as"
+    hello_user: "Hello %{name},"
+    im_a: "I'm a:"
+    resident: "Resident"
+    property_manager: "Property Manager"
+    property_managers: "Property Managers"
+    managers: "Managers"
+    residents: "Residents"
+    buildings: "Buildings"
+    business: "Business"
+    supplier: "Local Business"
+    buildings: "Buildings"
+    building_code: "Please find your building"
+    company_joined: "Has your company joined Condo Media?"
+    create_company: "Please fill out the following form to create your company profile"
+    company_code: "Please find your company"
+    create_business: "Please fill out the following form to create your business profile"
+    cancel_join_request: "Cancel join request"
+    ask_to_join: "Ask to join"
+    new_buisness: "New Local Business"
+    new_property_management_company: "New property management company"
+    pending_access_request: "Pending access request"
+    company_join_banner1: "Join your company. If is not listed,"
+    building_join_banner1: "Join your building. If is not listed,"
+    click_here: "Click here"
+    company_join_banner2: "to create it!"
+    building_join_banner2: "to create it!"
+    next_agree: "By clicking Next, you agree to our"
+    building_warning_title: "Only registered property management organizations are allowed to create  residential buildings."
+    building_warning_banner1: "If you are a condo owner, board member or tenant, fill out the following form and invite your building manager to create the building."
+    building_warning_banner2: "If you are a building manager, create a property management company first and then create all your buildings."
+    get_started: "Get started"
+    getting_started: "Getting Started"
+    select_profile: "Select your profile and connect with your community"
+    building_email_manager: "Building manager email address"
+    building_message_invitation: "Write a short invitation message"
+    application: 'Application'
+    notification: Notification
+  comments:
+    placeholder: 'Write a comment...'
+    all_buildings: 'All buildings'
+    management_office: "Management Office"
+    shared_with: "Shared with %{with}"
+    share_with: 'Share with'
+    comment: 'Comments'
+    reported: "Reported comment"
+  messages:
+    export_by_days: 'Export report (last %{days} days)' 
+    status:
+      all: 'All Status'
+      unread: 'Unread'
+      urgent: 'Urgent'
+      warning: 'Warning'
+    title: "Messages"
+    filters:
+      inbox: 'Inbox'
+      unread: "Unread"
+      deleted: "Trash"
+      done: "Done"
+    placeholder: 'Write a message...'
+    to_placeholder: 'To:'
+    management_office: "Management Office"
+    urgent: Urgent
+    receiver_types:
+      users: "Selected contacts"
+      buildings: "All building contacts"
+      companies: "All company contacts"
+    select_receivers: "+ Add names..."
+    select_receivers_group: "To:"
+    recipients: 'Recipients'
+    read: 'Read'
+    buildings_group: 'Buildings group'
+    to: 'To'
+    add_names: 'Add names...'
+    empty_trash: 'Empty trash'
+    mark_as_unread: 'Mark as unread'
+    mark_as_done: 'Mark as done'
+    move_to_trash: 'Move to trash'
+    warning: 'Warning'
+  service_requests:
+    title: "Service Requests"
+    re_open_case: Re-Open Case
+    open_with: "Open as"
+    filters:
+      all: "All"
+      all_users: "All users"
+      date: "Date"
+      pending: "Pending"
+      in_progress: "In progress"
+      closed: "Closed"
+      cancelled: "Cancelled"
+      all_responsibles: "All responsibles"
+      mine: "Assigned to me"
+      company: "Unassigned"
+      open: 'Open'
+    management_office: "Management Office"
+    urgent: Urgent
+    to_placeholder: 'Responsible:'
+    responsible: "Responsible"
+    status: "Status"
+    ticket: 'Ticket'
+    case: "Case"
+    requests: 'Requests'
+    request: 'Request'
+    request_spec: Request
+    change_status: "changed status to: %{status}"
+    change_responsible: "changed responsible to: %{responsible}"
+    mark_as_pending: "Mark as pending"
+    mark_as_in_progress: "Mark as in progress"
+    mark_as_resolved: "Mark as resolved"
+    mark_as_closed: "Mark as closed"
+    delete: "Delete"
+    content: Write a message
+    select_category: Select category
+    open: open
+    assign_to: Assign to
+    publisher: "Publisher"
+  contacts:
+    title: "People"
+    type: "Type"
+    filters:
+      all: "All"
+      company: "Company"
+    management_office: "Management Office"
+    unit: "Unit"
+    reported: "Reported user"
+    unconfirmed: 'Inactive'
+    user_unconfirmed: 'Users inactive'
+    confirmed: 'Active'
+    user_confirmed: 'Users active'
+    export_csv: 'Export user list' 
+  events:
+    select_receivers: "+ Add names..."
+    select_receivers_group: "To:"
+    select_category: "Category"
+    select_repeat_frequency: "Recurrence"
+    management_office: "Management Office"
+    informed: "Informed"
+    acknowledged: "Acknowledged"
+    going: "Yes"
+    not_going: "No"
+    maybe: "Maybe"
+    are_you_aware: "Are you aware?"
+    are_you_going: "Are you going?"
+    receiver_types:
+      users: "Selected contacts"
+      buildings: "All building contacts"
+      companies: "All company contacts"
+    next_event: 'Next event'
+    upcoming: 'Upcoming'
+    past: 'Past'
+    to: 'to'
+    edit: "Edit"
+    name: "Event name"
+    location: "Location"
+    date: "Date"
+    start_time: "Start time"
+    end_time: "End time"
+    write_comment: "Write a comment"
+    share_with: "Share with"
+    people: people
+  contact_details:
+    title: "Contact details"
+    add_contact_details: "Please fill out the following form to request access to %{building}"
+    emergency_contact: 'Emergency contact'
+    type: 'Type'
+    tenant: Tenant
+    owner: Owner
+  wait_for_acceptance:
+    title: "Wait for acceptace"
+    description: "Your access request has been sent to %{company}.<br/><br/>You will receive an email confirmation as soon as it is approved.<br/><br/>For more information please contact them directly."
+  mailer:
+    new_message:
+      subject: "%{name} sent you a message on Condo Media"
+      header: "sent you a %{message}."
+    new_event:
+      subject: "%{name} posted a new event on Condo Media"
+      header: "posted an %{event}."
+    new_invite:
+      subject: "%{name} invites you to join the community %{community} on Condo Media"
+      header: "sent you an invitation."
+      content: "<strong>%{name}</strong> invites you to join the community <strong>%{community}</strong>"
+      content_extra: ''
+      content_extra2: 'To enter please click on the following button.'
+    request_processed:
+      subject: "Your request to join %{community} was %{outcome} on Condo Media"
+      header: "Administrator %{outcome} your join request."
+      content: "Your request to join <strong>%{community}</strong> was %{outcome} on Condo Media."
+      approved: approved
+      declined: declined
+    new_join_request:
+      subject: "%{name} wants to join the community %{community} on Condo Media"
+      header: "sent a %{request}."
+      content: "%{name} wants to join the community <strong>%{community}</strong>."
+      request: join request
+    new_wall_comment:
+      subject: "%{name} wrote on your timeline on Condo Media"
+      header: "wrote on your %{timeline}."
+      timeline: timeline
+    new_classified:
+      subject: "%{name} posted a new offer on Condo Media"
+      header: "posted a new %{offer}."
+      offer: offer
+    new_poll:
+      subject: "%{name} posted a new poll on Condo Media"
+      header: "posted a new %{poll}."
+    new_reservation_repĺay:
+      subject: "Reservation - %{amenity} - %{building}"
+    new_news_repĺay:
+      subject: "News - %{building}"
+    new_comment_reply:
+      subject: "%{name} replied to your comment on Condo Media"
+      header: "replied to your %{commentable}."
+    new_service_request:
+      subject: "%{name} created a new service request on Condo Media"
+      header: "created a new %{request}."
+    new_reservation:
+      subject: "%{name} created a new amenity reservation request on Condo Media"
+      header: "created a new amenity %{reservation}."
+      request: reservation request
+    report_software_problem:
+      header: "created a new report software problem."
+    report_payment_account_updated:
+      subject: "Payment account from %{building} was saved"
+      header: "saved the payment account for building %{building}"
+    new_review:
+      subject: "%{name} makes a new review on Condo Media"
+      header: "makes a new %{review} on this community"
+    new_review_reply:
+      subject: "%{name} replied to a review on Condo Media"
+      header: "replied a review on your community."
+    view_on_condomedia: View on Condo Media
+    footer: "This message was sent to %{email}. If you don't want to receive these emails from Condo Media in the future, please change your notification settings, contact the system administrator of your community, send an email to info@condo-media.com or unsubscribe (if applicable)."
+    # These translations are not used, we kept it here for future implementation for sales and purchases.
+    new_sale:
+      subject: 'New sale'
+      have_sale_from: "Congratulations, %{buyer} bought  a new voucher for '%{deal_name}'"
+      visit_condomedia: 'Please visit condo media for more details'
+    new_purchase:
+      subject: 'New purchase'
+      have_new_purchase: "Thank you for shopping at Condo Media. You have purchased a voucher for '%{deal_name}'. For more details or to print your voucher please visit My Stuff"
+    above_link: 'If the above link does not work, please click on this URL or copy and paste it into your browser:'
+  businesses:
+    contact_details: 'Contact Details'
+    redeem: 'Redeem'
+    mark_not_redeemed: 'Mark as not redeemed'
+    reports: 'Reports'
+    online_redemption: 'Redeem'
+    customers: 'Customers'
+    revenue: 'Revenue'
+    nearby: 'Nearby'
+    confirm_legal_representation: 'I confirm that I am a legal representative of this company and have the right to act on its behalf for the creation of this page'
+    track_sales: 'Track sales and customer engagement by redeeming your vouchers'
+    whats_nearby: "What's Nearby"
+    plans:
+      desc_1: 'Customizable business portal'
+      desc_2: 'Business profile listing'
+      desc_3a: 'Showcase up to'
+      desc_3b: 'printable coupon (unlimited vouchers)'
+      desc_4: 'Advertise and sell unlimited Deals'
+      desc_5: 'Geo-marketing'
+      desc_6: 'Smart reports'
+      desc_7: 'Track sales'
+      desc_8: 'and more'
+    vouchers_available: 'Vouchers available'
+  subscriptions:
+    name: Subscriptions
+    stripe_successfully_connected: 'Successfully connected to Stripe'
+    was_problem_with_payment_info: 'There was a problem with the payment info, please try again'
+    stripe_problem_connecting_payment_account: 'There was a problem connecting to your Stripe account, please try again'
+    subscription: 'Plan'
+    subscription_made_correctly: 'You have successfully subscribed to the plan'
+    must_select_plan: 'You must select a plan'
+    must_be_accepted: 'must be accepted'
+    next_payment: Next Payment
+    used: used
+    upgrade_storage: 'Upgrade Storage'
+  deals:
+    buy_now: 'Buy Now!'
+    value: 'Value'
+    discount: 'discount'
+    you_save: 'you save'
+    limited_time_only: 'limited time only!'
+    the_deal: 'The Deal'
+    the_fine_print: 'The Fine Print'
+    sale_vouchers: 'Deals'
+    offer_to_customer: 'Offer the best deals to the customers closest to you'
+    how_does_work: 'How does it work?'
+    connect_with_stripe: 'Connect with Stripe'
+    promote_deal: 'Promote deal'
+    include_shipping_costs: 'Please include the shipping costs in the undisconted price'
+    not_create_deals_until_register: 'You can not create any deals until you connect with Stripe (to be paid, you must provide your bank account information).'
+    sell_your_vouchers: 'Sell your promotional vouchers to local customers'
+    purchase_latestes_promotions: 'Purchase the latestes specials & promotions near you'
+    find_best_promotions: 'Find the best promotions in your area'
+    new: New Deal
+  coupons:
+    description: 'Description'
+    the_fine_print: 'The Fine Print'
+    print: 'Print Coupon'
+    limited_time_only: 'limited time only!'
+    can_not_update_coupon_limit_of_plan: "You can not update coupons because you have exceeded your plan"
+    can_not_create_coupon_limit_of_plan: "You can not create coupons because you have exceeded your plan"
+    promote_coupon: 'Promote coupon'
+    printed: 'Printed'
+    promotion: 'The Promotion'
+    offer_discount_vouchers: 'Offer discount vouchers to the customers closest to you'
+    find_exclusive_vouchers: 'Find exclusive discount vouchers from local stores'
+    print_date: 'Print date'
+    valid_from: 'Valid from'
+  coupon_redemptions:
+    print_before_closing: 'Please print before closing this page'
+    cut_along_the_dotted_line: 'Please cut along the dotted line (the date must be visible on the coupon)'
+    must_be_present: 'Voucher must be present upon ordering or may be refused'
+    coupons_condo_media: 'Coupons Condo Media'
+    valid_till: 'Valid until'
+    search_by_id: "Track your redemptions by id (separated by commas)"
+    not_found: 'No redemptions found'
+    coupons_are_redeemed: 'Coupons are now redeemed'
+    your_coupons: 'Your coupons'
+    reprint: 'Reprint'
+    how_to_use: 'How to use this'
+    print_voucher: 'Print voucher'
+    scheduled_reservation: 'Scheduled reservation with merchand if required'
+    present_voucher: 'Present voucher upon arrival'
+    enjoy: 'Enjoy'
+    customer_support: 'Customer support'
+    contact_us: 'Contact us'
+    right_to_cancel: 'Right to cancel'
+    see: 'See'
+    full_terms: 'for full terms and conditions'
+  deal_purchases:
+    card_number:  'Credit Card Number'
+    search_by_id: "Enter voucher ID's (separated by commas)"
+    deals_are_redeemed: 'Deals are now redeemed'
+    payment_made_correctly: 'Payment made correctly'
+    your_purchased_deals: 'Your purchased deals'
+    security_code: 'Security Code (CVC)'
+    card_expiration: 'Card Expiration'
+    item_description: 'Item description'
+    unit_price: 'Unit price'
+    total: 'Total'
+    payment_information: 'Payment information'
+    complete_order: 'Complete order'
+    address: 'Address'
+    redeemed: 'Redeemed'
+    print_before_closing: 'Please print before closing this page'
+    cut_along_the_dotted_line: 'Please cut along the dotted line (the date must be visible on the deal)'
+    must_be_present: 'Voucher must be present upon ordering or may be refused'
+    deals_condo_media: 'Deals Condo Media'
+    valid_till: 'Valid until'
+  plans:
+    title: 'Plan'
+    choose_plan: 'Choose the plan that better suites your business needs in'
+    three_steps: '3 simple steps'
+    free: 'Free'
+    select: 'Select plan'
+    step: "Step %{step}"
+    step1: 'Select your plan'
+    step2: 'Review order'
+    item: 'Item'
+    unit_price: 'Unit price'
+    number_units: 'No. of units'
+    total_month: 'Total / month'
+    cancel_any_time: 'You can cancel at any time or downgrade to our FREE plan'
+  invoices:
+    history: 'History'
+    due_date: 'Due date'
+    concept: 'Concept'
+    amount: 'Amount'
+    period: 'Period'
+    payment_interval: 'Payment interval'
+    plan: 'Plan'
+    type: 'Type'
+    next_invoice: 'Next payment'
+    date: 'Date'
+    status: 'Status'
+    reference: 'Reference'
+    paid: 'Paid'
+    not_paid: 'Not paid'
+    description: 'Description'
+    view_plan: 'View plan'
+  promotions:
+    active: 'Active'
+    expired: 'Expired'
+    scheduled: 'Scheduled'
+    type: 'Type'
+    launched: 'Launched'
+    expires: 'Expires'
+    status: 'Status'
+    views: 'Views'
+    sold: 'Sold'
+    clicks: 'Clicks'
+    acquisitions: 'Acquisitions'
+    last_day_to_claim: 'Last day to claim'
+    purchase_date: 'Purchase date'
+    voucher_only_for_condomedia_users: 'This voucher is only available for Condo Media community'
+    redeemed: 'Redeemed'
+    print_voucher: 'Print voucher'
+    view_reports: 'View reports'
+    find_stores_and_shops: 'Find the stores & shops closest to you'
+    voucher_must_present: 'Voucher must be present upon ordering or maybe refused'
+    mark_redeemed: 'Mark as redeemed'
+    mark_not_redeemed: 'Mark as not redeemed'
+  reports:
+    insights_your_offerings: 'Reports'
+    filters:
+      all: 'All'
+      coupons: 'Coupons'
+      deals: 'Deals'
+  payments:
+    name: Payments
+    username: 'Name'
+    date: 'Date'
+    community: 'Community'
+    description: 'Description'
+    card: 'Card'
+    ref: 'Ref #'
+    total: 'Total'
+    amount: 'Amount'
+    customer: 'Customer'
+    quantity: 'Quantity'
+    balance: Balance
+    statuses: [~, Paid, Rejected, Pending, Failed]
+    get_started:
+      accept: Accept payments online
+      get_paid: Get paid instantly by enabling online payments
+      details: Condo fees, rent, bookings and more<br/>Get set up in seconds<br/>Simple pricing
+      button: Get started
+    history: Payment history
+    enable: Enable payments
+    account_created: Payment account created
+  companies:
+    new: "New Company"
+    confirm_legal_representation: 'I confirm that I am a legal representative of this company and have the right to act on its behalf for the creation of this page'
+    plans:
+      desc_1: 'Centralized management portal'
+      desc_2: 'Customizable community websites'
+      desc_3a: "Create & manage up to"
+      desc_3b: 'Create & manage'
+      desc_4: 'Showcase unlimited apartments'
+      desc_5: 'Invite unlimited users'
+      desc_6: 'News feed'
+      desc_7: 'Private messaging'
+      desc_8: 'Service requests'
+      desc_9: 'Events'
+      desc_10: 'Calendar'
+      desc_11: 'and more'
+      unlimited: 'UNLIMITED'
+      buildings: "Buildings"
+      basic: 
+        name: 'BASIC'
+        price: '$20/month'
+      premiun: 
+        name: 'PROFESSIONAL'
+        price: '$60/month'
+      pro: 
+        name: 'ENTERPRISE'
+        price: '$350/month'
+      elite: 
+        name: 'ELITE'
+        price: 'CONTACT US'
+  roles:
+    administrator: 'Administrator'
+    resident: 'Owner'
+    residents: 'Owners'
+    supplier: 'Supplier'
+    admins: 'Admins'
+    board_member: 'Board member'
+    tenant: 'Tenant'
+    agent: 'Agent'
+    collaborator: 'Collaborator'
+    header:
+      company: Join your community. If your property management company is not listed, create it.
+      building: Join your community. If your building is not listed, invite your property manager to create it.
+      business: Join your community. If your business is not listed, create it.
+  buildings:
+    create_and_invite: 'Create your buildings and invite residents to join'
+    new: 'New Building'
+  apartments:
+    create_and_showcase: 'Create unlimited apatments and showcase them to the public'
+    bedrooms: 'Bedrooms'
+    bathrooms: 'Bathrooms'
+    available: 'Available'
+    filters:
+      all: 'All'
+      for_rent: 'For rent'
+      for_sale: 'For sale'
+  users:
+    edit_or_remove: Edit or remove people from your community
+    status: Status
+    active: Active
+    pending: Pending
+    date: Date
+    community: Community
+    links: Website
+    work: Work
+    education: Education
+    hometown: Hometown
+    birthday: Birthday
+    privated: "Privated"
+    resend: 'The confirmation email was sent again'
+  requests:
+    invite_people: 'Invite people to your community'
+  invites:
+    invites: 'Invitations'
+    sent: 'Invites sent'
+    received: 'Invites received'
+    i_sent: 'Sent'
+    i_received: 'Received'
+    invites_sent: 'Invites sent successfully'
+    email_list: 'Emails (add multiple addresses separated by comma)'
+    invalid_email_format: "The email: '%{email}' has an invalid format"
+    sent_on: "Invitation sent on %{date}"
+    resent_successfully: 'Your invitation has been resent successfully'
+    resend: 'Resend'
+    accept: 'Accept'
+    reject: 'Reject'
+    expel: 'Remove user'
+    now_member: "You are now member of the %{community} community"
+    single: "Single invitation"
+    bulk: "Bulk import"
+    message_bulk: "Copy and paste contacts information from .xls or .xlsx files"
+    fields_for_bulk: |
+      First name...        Last name...        Email address...        Apt/Suite/Floor...
+      First name...        Last name...        Email address...        Apt/Suite/Floor...
+      First name...        Last name...        Email address...        Apt/Suite/Floor...
+      First name...        Last name...        Email address...        Apt/Suite/Floor...
+  home:
+    sign_up: sign up free
+    sign_in: log in
+    section-1:
+      header: Connect with people in your building
+      paragraph: Condo Media is a free and secure cloud based property management solution that residents love and managers trust.
+    section-2:
+      paragraph: Fast, simple and secure
+    section-3:
+      header: Hundreds of property managers and residents use Condo Media to link and exchange
+      paragraph: Condo Media makes it fast and easy to collaborate with people in your building. Don’t stay behind, obtain better results and transform the way you work.
+    section-4:
+      header: Get started in three simple steps
+      step-1: Create an account
+      step-2: Join your community
+      step-3: Enjoy
+    section-5:
+      benefits: Community benefits
+      header: Designed for your building, professional and ad-free
+      panel-1:
+        header: CONNECT
+        paragraph: Send instant messages, share news and private notifications.
+      panel-2:
+        header: COLLABORATE
+        paragraph: Publish events, polls, amenity reservations and classified ads.
+      panel-3:
+        header: ACCESS
+        paragraph: Exchange documents and access your files from anywhere.
+      panel-4:
+        header: PAY
+        paragraph: Online payments of rent, condo fees, reservations and more.
+      panel-5:
+        header: KEEP
+        paragraph: Monitor the status of all your service and repair requests.
+      panel-6:
+        header: CONTROL
+        paragraph: Your information is completely private and protected.
+    section-6:
+      header: Try Condo Media for free
+      paragraph: No credit card or software download required. Call us any time you need help.
+    footer:
+      condo_media: Condo Media Inc.
+  footer:
+    copyright: © 2017 Condo Media Inc.
+    privacy: Privacy
+    terms: Terms
+    language:
+      en: 'English'
+      fr: 'Français'
+      es: 'Español'
+      change: Change Language
+  public_pages:
+    home:
+      title: "Home"
+    about:
+      title: "About"
+    contact:
+      title: "Contact"
+      send: "Send"
+      message_sent: "Message sent"
+    apartments:
+      title: "Apartments"
+      no_apartments: "There are no apartments to show."
+    apartment:
+      title: "Apartment"
+      no_photos: "There are no photos to show"
+      contact_details: "Contact details"
+    buildings:
+      title: "Buildings"
+      no_buildings: "There are no buildings to show."
+    building:
+      title: "Building"
+      no_photos: "There are no photos to show"
+      contact_details: "Contact details"
+    photos:
+      title: "Photos"
+      no_photos: "There are no photos to show."
+    coupons_deals:
+      title: 'Coupons & Deals'
+      no_coupons_deals: 'There are no coupons or deals to show'
+    contact_us: 'Contact us'
+    nearby:
+      title: 'Nearby'
+      no_businesses: 'There are no businesses to show'
+  tours:
+    next: "Next"
+    back: "Back"
+    finish: "Finish"
+    exit: "Exit"
+    property_managers:
+      step_1:
+        title: "Take a tour"
+        description: "Learn how to succeed with condo media. We’ll help you make the most out of our tools, so you can grow your business and improve resident experience."
+        attach: ".navbar .container-fluid top"
+      step_2:
+        title: "Home"
+        description: "Home is your company’s public portal where you can connect with external customers and showcase all your properties."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(1) right"
+      step_3:
+        title: "News Feed"
+        description: "Your news feed is the place where you discover what is happening inside your community and where residents and staff post and share valuable information. As a property manager you will be able to see and manage the posts from all your buildings, while resident will only be able to see information from the building they live in."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(2) right"
+      step_4:
+        title: "Messages"
+        description: "Use your Inbox to send private messages or blast announcements to your community. You can tag your messages by level of urgency, send copies to the users’ personal email address and even confirm when they have read it."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(3) right"
+      step_5:
+        title: "Contacts"
+        description: "The contacts folder it’s a directory where you can quickly find relevant information about  residents and managers, such as phone number, email address, emergency contact and more. Here you could also update user information or view the activity log of all community members."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(4) right"
+      step_6:
+        title: "Service requests"
+        description: "Service requests is a simple and quick ticketing system that allows you to manage service and maintenance request from all your properties. You can assign tickets to staff and change the level of priority for each task, while maintaining residents informed about the status of their requests in real time."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(5) right"
+      step_7:
+        title: "Events"
+        description: "Scheduling meetings with RSVP requests or informing residents about activities such as elevator maintenance or bookings have never been so easy. The calendar of events allows you to keep residents informed about what is happening in their building."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(6) right"
+      step_8:
+        title: "Invites"
+        description: "Invite people to your community or accept incoming access request from residents and  managers. You can either invite people to join through their email addresses or simply share the condo media url of your properties so they can request access directly."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(8) right"
+      step_9:
+        title: "User roles"
+        description: "Here you can fully manage user privileges and/or delete users.  User roles let you scan your community and verify the status of each user to make sure everyone has the proper access rights and belongs to the proper network."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(9) right"
+      step_10:
+        title: "Apartments"
+        description: "Showcase your apartments in a private network. You will be able to advertise for rent or for sale apartments associated to your buildings. They will appear in the public profile of your properties so people all around the world can see them."
+        attach: ".container .row .public-header .public-submenu ul li:nth-of-type(3) top"
+      step_11:
+        title: "Buildings"
+        description: "Create professional resident portals. Right after you create a building page, you can start asking residents to join their community and showcasing apartments associated to it."
+        attach: ".container .row .public-header .public-submenu ul li:nth-of-type(4) top"
+    residents:
+      step_1:
+        title: "Take a tour"
+        description: "Learn how to succeed with condo media. We’ll help you make the most out of our tools, so you can improve your experience as a resident."
+        attach: ".navbar .container-fluid top"
+      step_2:
+        title: "Home"
+        description: "Home is the public portal of your building where you can quickly find relevant information about the property, from contact details to apartments for rent, you can find it all here."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(1) right"
+      step_3:
+        title: "News Feed"
+        description: "Your news feed is the place where neighbors and property managers post and share valuable information. Do you have something to say and want everybody in your building to know about it ? Are you selling your stuff ? Need help from your neighbors? News feed is the place for all of these."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(2) right"
+      step_4:
+        title: "Messages"
+        description: "Use your Inbox to send private messages to  your neighbors or to the management office. You can tag your messages by level of urgency and even send a copy directly to the users’ personal email address."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(3) right"
+      step_5:
+        title: "Contacts"
+        description: "The contacts folder it’s a directory where you can find information about your neighbors and property managers. *Your personal information is completely private and it’s only visible to your property managers. Neighbors have limited access to your confidential information (they will only see your profile photo and full name, but not your contact details or apartment number)."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(4) right"
+      step_6:
+        title: "Service requests"
+        description: "Have a complaint ? Is your sink leaking? Need to book the elevator? Open a ticket at anytime from anywhere and track the status of your request in real time."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(5) right"
+      step_7:
+        title: "Events"
+        description: "Here you can see and stay informed about the calendar of events of your building. You will also be able to create personal event and invite people from your building to it."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(6) right"
+    suppliers:
+      step_1:
+        title: "Take a tour"
+        description: "Learn how to succeed with condo media. We’ll help you make the most out of our tools, so you can grow your business and improve customer retention."
+        attach: ".navbar .container-fluid top"
+      step_2:
+        title: "Home"
+        description: "Home is your business public portal where you can connect with local customers, establish your brand and showcase your offerings and promotions."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(1) right"
+      step_3:
+        title: "Printable Coupons"
+        description: "Target and attract new customers with free discount vouchers. Advertise your coupons while generating additional profits through sale of related items, increasing loyalty and brand awareness."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(2) right"
+      step_4:
+        title: "Deals"
+        description: "Increase your revenues by offering attractive paid deals to local customers.  People will be able to purchase your products and services directly through our platform and you can close sales instantly."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(3) right"
+      step_5:
+        title: "Redeem & Reports"
+        description: "Mark the used coupons and deals as Redeemed to keep track of your revenue and customer engagement, and explore the Report tab to understand the impact and insights of your offerings."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(4) right"
+  devise:
+    welcome: Welcome to Condo Media
+    welcome_content: 'Condo Media is a property management sotfware that connects neighbors and building managers. All you need to do is log in to get started.'
+    to_enter: "Login to Condo Media"
+    sign_up: Sign up
+    its_free: "It's free"
+    sign_out: "Sign out"
+    need_help: "Help"
+    next: "Next"
+    didnt_receive_confirmation_instructions: "Didn't receive e-mail with sign up instructions"
+    sign_in_with: "Sign in with"
+    resend_confirmation_instructions: "Resend confirmation instructions"
+    change_your_password: "Change your password"
+    set_change_your_password: "Please set a new password"
+    new_password: "New password"
+    confirm_new_password: "Confirm new password"
+    forgot_your_password: "Forgot your password?"
+    forgot_my_password: "Forgot my password"
+    send_me_reset_password_instructions: "Send me reset password instructions"
+    send: "Send"
+    edit_user: "Edit user"
+    waiting_confirmation_for: "Currently waiting confirmation for:"
+    password_leave_blank: "leave blank if you don't want to change it"
+    current_password_explanation: "Enter your password to confirm changes"
+    sign_in: "Log in"
+    start: 'Log in'
+    sign_up_social: 'Sign up'
+    remember_me: "Keep me logged in"
+    finish_registration: "Finish registration"
+    sign_in_facebook_linkedin: 'Sign in with your facebook or Linkedin account'
+    quick_easy_secure: "It's quick, easy and secure - Your condo media data will be completely private"
+    create_account: 'Create an account'
+    hereby_agree: 'By signing up, I hereby agree with the'
+    already_a_member: 'Already a member?'
+    company_id_address_zip: 'Company ID, Address or Zip/Postal code'
+    building_id_address_zip: 'Building ID, Address or Zip/Postal code'
+    user_details: 'User details'
+    community_details: 'Community details'
+    password_changed: Your password has been changed successfully!
+    sign_up_free: Sign up free
+    select_issue: Need help? Select the issue
+    recovery_email: Recovery email
+    continue_with: Continue with %{option}
+    use_email_way: Or use email to
+    registrations:
+      user:
+        use_email_way: 'Registered user'
+  faqs:
+    plans:
+      q1: 'Is my personal information safe?'
+      a1: 'Absolutely. We value your privacy and security. Your credit card number is transmitted through a Secure Socket Layer (SSL) encryption, which then goes directly into a secure electronic vault. At no time is your credit card information stored on our servers. Furthermore, we do not sell any of your personal information to any third parties, including merchants from whom you have purchased a product or service. If you would still like more information about the privacy of your information, please refer to our detailed'
+      q2: 'Can I change or cancel my order?'
+      a2: 'If you buy at condo media, you can downgrade to our FREE plan at any time and  you can cancel your order up to 14 days after the date of purchase, no questions asked; or unless otherwise specified in the offer’s details.'
+      q3: 'Can I get a refund for my order?'
+      a3: 'Condo media  has a flexible refund policy with a « 14 day money back guarantee » for all the offers with the exception of those specified otherwise.'
+      complete_policy_here: 'complete policy here'
+      q4: 'Got more questions?'
+      a4: 'Please do not hesitate to visit our site or to contact us by email at'
+    deals:
+      q1: 'What happens after I place the order?'
+      a1a: 'You will receive a confirmation email.'
+      a1b: 'Once you click on the purchase button (« Complete order »), your credit card will be charged and you will receive by email your voucher that includes everything you need to redeem your product or service.'
+      q2: 'Can I change or cancel my order?'
+      a2: 'If you buy a condo media voucher, you can cancel your order up to 14 days after the date of purchase, no questions asked, if the coupon hasn’t been used and is not expired; and unless otherwise specified in the offer’s details.'
+      q3: 'Is my personal information safe?'
+      a3: 'Absolutely. We value your privacy and security. Your credit card number is transmitted through a Secure Socket Layer (SSL) encryption, which then goes directly into a secure electronic vault. At no time is your credit card information stored on our servers. Furthermore, we do not sell any of your personal information to any third parties, including merchants from whom you have purchased a product or service. If you would still like more information about the privacy of your information, please refer to our detailed'
+      q4: 'Can I get a refund for my order?'
+      a4: 'Condo media has a flexible refund policy with a « 14 day money back guarantee » for all the offers with the exception of those specified.'
+      q5: 'Got more questions?'
+      a5a: 'Please do not hesitate to visit our site or contact us by phone at 438-998-5221 or by e-mail at'
+      a5b: 'and we will get back to you within the next 24 hours.'
+  folders:
+    folder_name: Folder name
+    header_names:
+      name: Name
+      date: Date
+      size: Size
+      created_by: Created By
+    link_description:
+      list: View as list
+      icons: View as icons
+      u_file: Upload a file
+      new_foler: Create new folder
+      delete: Delete selected
+    errors:
+      limit_files: "You can not upload more than %{number} files"
+      file_size_less_than: "Each file must be less than %{size}"
+    new_item_menu:
+      new_folder: New folder
+      upload_files: Upload Files
+    rename: Rename
+    delete: Delete
+    download: Download
+    home: Home
+    files: files
+  amenities:
+    new: New amenity
+    list: Amenity list
+    add_short_name: Add a short name
+    tell_more_about: Tell people more
+    add_value: $ Add value
+    hours: '# Hours'
+    availability_types:
+      selected_hours: Open on selected hours
+      allways_open: Allways open
+      no_available: No hours available
+    reserve: Reserve
+    fee: Fee
+    deposit: Deposit
+    max_time: "%{hours} hours max"
+    calendar: 'Calendar'
+    days: 'Day(s)'
+    hours: 'Hour(s)'
+    week: 'Week(s)'
+    month: 'Month(s)'
+    year: 'Year'
+    per: 'per'
+    subtitle_length: 'Maximum reservation length'
+    subtitle_max: 'Maximum reservation per user'
+    subtitle_approval: 'Automatic approval'
+    auto_approval: 'Automatic approval'
+    interval: 'Reservation Interval'
+    approval:
+      istrue: 'Yes'
+      isfalse: 'No'
+    errors:
+      reservation_length: "The reservation has a maximum time of %{length} %{type}"
+      reservations_per_user: "You can not have more than %{max_reservations_per_user} reservations per %{type} "
+      reservations_working_hours: 'You can only choose the schedule established for the amenity reservations that is from %{time_from} to %{time_to}'
+  reservations:
+    all_status_reservation: 'All status'
+    all_month_filter: 'All month'
+    write_about: Write a message or special request
+    amenity: Reserve amenity
+    time: Time
+    statuses:
+      pending: Pending
+      approved: Approved
+      pre-approved: Pre-approved
+      cancelled: Rejected
+      denied: Deny
+      past:
+        pending: Pending
+        approved: Approved
+        cancelled: Rejected
+        denied: Denied
+    mark_statuses:
+      pending: Mark as pending
+      approved: Mark as approved
+      pre-approved: Mark as pre-approved
+      cancelled: Mark as rejected
+      denied: Mark as deny
+    change_status: "changed status to %{status}"
+    submition: Submition
+    created: Your reservation has been created
+    booking_request: Booking request
+    date: "Date"
+    start_time: "Start time"
+    end_time: "End time"
+    write_message_or_request: "Write a message or special request"
+    view_hours: "View hours"
+    reply: "Reply"
+    details: "Details"
+    changed_status_to_pending: "changed status to pending"
+    changed_status_to_approved : "changed status to approved"
+    changed_status_to_cancelled: "changed status to cancelled"
+    changed_status_to_pre-approved : "changed status to pre-approved"
+    where: 'Where'
+    Time: 'Time'
+    community: 'Community'
+    amenity: 'Amenity'
+    filter: 
+      by_month: 'Filter by month'
+  polls:
+    min_max: "minimun %{min}, maximum %{max}"
+    see_all: See all
+    ask_a_question: Ask a question...
+    new: New poll
+    duration: Duration (# days)
+    end_date: End date
+    create: Create
+    poll: poll
+  reviews:
+    tell_people: Tell people what you think
+    rate_experience: How would you rate this experience?
+    ranks: [Poor, Fair, Good, Very good, Excellent]
+    no_reviews: No reviews
+  classifieds:
+    add_short_name: Add a short name
+    tell_more: Tell people more
+    new: New classified
+    new_offer: New Offer
+    subject: Subject
+    price: Price (Optional)
+    description: Description
+  user_roles:
+    administrator:
+      title: Property Managers
+      description: Property management staff
+    resident:
+      title: Residents
+      description: Condo owners, tenants, and board members
+    supplier:
+      title: Local Business
+      description: Stores shops and nearby suppliers
+  payment_accounts:
+    statuses:
+      in_progress: IN PROGRESS
+      active: <i class="fa fa-check"></i>
+      nil: '-'
+    online_payments:
+      enabled: ENABLED
+      disabled: DISABLED
+  privacy_policy:
+    cm_inc: 'Condo Media Inc.'
+    p1: 'Condo Media Inc. is committed to protecting the security and privacy of your personal data and ensuring that we conduct our business in compliance with laws on privacy, data protection and data security. We hope that the policy information provided below will help you to understand what information Condo Media may collect and how we may use, protect and share it.'
+    p2: 'Please read this privacy policy carefully. By accessing or using our website and any associated software or mobile applications, you acknowledge that you have read, understand and agree to be bound by all the terms of this privacy policy and our terms of use.'
+    sub1:
+      name: 'What information does Condo Media collect?'
+      item1: 'Personally-identifiable Information'
+      p1: 'Personally-identifiable information is information that can identify you as a specific end user. This includes information such as your name, address, telephone number or email address (“Personal Information”). Condo Media only collects Personal Information that you choose to provide. In some cases, you provide this information to us directly. In other cases, you provide this information to us through our partners.'
+      item2: 'Non-personally-identifiable information'
+      p2: 'In addition to Personal Information, Condo Media may also collect information that is not personally-identifying (e.g., type of Internet browser and computer operating system used; domain name of the website from which you came; number of visits, average time spent, pages viewed). This information is used by us to improve our website content, customer experiences and business practices.'
+      item3: 'Cookies'
+      p3: 'When you visit our website, we may store some information on your computer that ensures we recognize you the next time you return to our site. If you prefer not to have this happen, you can choose to turn this feature off on your computer.'
+    sub2:
+      name: 'How do we protect the information we collect?'
+      p1: 'Condo Media takes precautions that are consistent with industry practices to ensure the security of your Personal information. We strive to protect your Personal Information from loss, destruction, falsification, manipulation and unauthorized access or disclosure.'
+    sub3:
+      name: 'Release of Personal Information'
+      p1: 'We will not share, sell, rent, or trade your Personal Information with other parties except as provided below:'
+      p2: 'We may share your information with third party service providers. We provide services and products through third parties. These third party service providers perform functions on our behalf, like sending out and distributing our administrative and promotional emails. We may share your Personal Information with such service providers to fulfill orders, deliver packages, send postal or email, remove repetitive information on customer lists, analyze data, provide marketing assistance, provide search results and links, process credit card payments, operate our website or apps, troubleshoot, and provide customer service. We may also collect personal information from individuals and companies (“Affiliates”) with whom we have business relationships and may share your information with service providers to accomplish our administrative tasks. For example, when you order a service, we release your credit card information to the card-issuing bank to confirm payment for the service and, if applicable, release your address to the delivery service to deliver the service. Likewise, we may release an Affiliate’s information to our bank to send out a payment. We encourage third party service providers to adopt and post privacy policies. However, the use of your Personal Information by such parties is governed by the privacy policies of such parties and is not subject to our control.'
+      p3:
+        name: 'Condo Media will only disclose your Personal Information, without your consent, if we are:'
+        item1: 'Required to by law; or'
+        item2: 'Must do so in support or protecting our own rights, such as to collect monies owed or to seek legal remedies.'
+      p4: 'In either case, Condo Media will only disclose the Personal Information to the extent required. We are not required to protect Personal Information that is publicly available.'
+    sub4:
+      name: 'Release of Non-Personally Identifiable Information'
+      p1: 'We may disclose or share non-personally identifiable information with our partners, Affiliates and advertisers. For example, we may share aggregated demographic information (which does not include any Personal Information) with third party advertisers or third party advertising companies and other parties as provided below:'
+      p2: 'We use third party advertising companies to serve ads when you visit our website. These companies may use non-personally identifiable information about your visits to this and other websites in order to provide, through the use of network tags, advertisements about goods and services that may be of interest to you.'
+      p3: 'We also use third party service providers to track and analyze usage and volume statistical information from our users to administer our website and constantly improve its quality. We may also publish this information for promotional purposes or as a representative audience for advertisers. Please note that we do not use Personal Information in this case, only general summaries of the activities of our users. Such data is collected on our behalf, and is owned and used by us.'
+    sub5:
+      name: 'How do we use the information we collect?'
+      p1: 'When you provide us with Personal Information, we use it to respond to your inquiries, process your transactions, provide you with access to certain information or to generally support our business relationship.  In some cases, Condo Media`s website contains links to other websites. Condo Media is not responsible for the privacy practices or the content of any websites other than its own.'
+    sub6:
+      name: 'How can I update my information?'
+      p1: 'It is import to Condo Media to ensure that the information we have is accurate and complete. To update your Personal Information, please update your user profile.'
+      p2: 'By using our site, you are agreeing to the practices we have described.'
+      p3: 'Any changes to this policy will be posted in a timely fashion. Check back often for any updates or changes.'
+  terms_of_service:
+    p1: 'Thanks for visiting Condo Media!'
+    p2: "Please read these Terms carefully. By using Condo Media and its associated products or signing up for an account, you're agreeing to these Terms. This is a legal agreement."
+    p3: "We’ll start with the basics, including a few definitions that should help you understand this agreement. Condo Media (“Condo Media” or the “Service”) is a web and app based platform offered through the URL www.condo-media.com (we’ll refer to it as the “Website”) that links residents, property managers and local businesses in a private virtual environment to simplify and promote exchanges between them. It creates a three way market place for users to offer and demand products and services within their local community. Condo Media is owned and operated by Condo Media Inc., a Quebec corporation (“Condo Media,” “we,” or “us”). Condo Media has employees, independent contractors, and representatives (“our Team”). As a customer of the Service or a representative of an entity that’s a customer of the Service, you're a “Member” according to this agreement (or “you”)."
+    p4: 'These Terms of Use (“Terms,” including our Privacy Policy) define the terms and conditions under which you’re allowed to use the Service and how we’ll treat your account while you’re a Member. If you have any questions about our terms, feel free to contact us.'
+    title1:
+      name: 'ACCOUNT'
+    art1:
+      name: '1. Eligibility'
+      p1:
+        name: 'In order to use Condo Media, you must:'
+        item1: 'be at least eighteen (18) years old and able to enter into contracts;'
+        item2: 'complete the registration process;'
+        item3: 'agree to the Terms; and'
+        item4: 'provide true, complete, and up to date contact information.'
+      p2: 'By using Condo Media, you represent and warrant that you meet all the requirements listed above, and that you won’t use Condo Media in a way that violates any laws or regulations. Condo Media may refuse service, close accounts of any users, and change eligibility requirements at any time.'
+    title2:
+      name: 'REPRESENT AND WARRANT'
+      p1: '“Representing and warranting” is like making a legally enforceable promise.'
+    art2:
+      name: '2. Term'
+      p1: 'The Term begins when you sign up for Condo Media and continues as long as you use the Service. Clicking the button and entering your username means that you’ve officially “signed” the Terms. If you sign up for Condo Media on behalf of a company or other entity, you represent and warrant that you have the authority to accept these Terms on their behalf.'
+    art3:
+      name: '3. Changes'
+      p1: 'We may change any of the Terms by posting revised Terms of Use on our Website and/or by sending an email to the last email address you gave us. Unless you terminate your account within ten (10) days, the new Terms will be effective immediately and apply to any continued or new use of Condo Media. We may change the Website, the Service, or any features of the Service at any time.'
+    art4:
+      name: '4. Account and Password'
+      p1: 'You’re responsible for keeping your account name and password confidential. You’re also responsible for any account that you have access to, whether or not you authorized the use. You’ll immediately notify us of any unauthorized use of your accounts. We’re not responsible for any losses due to stolen or hacked passwords. We don’t have access to your current password, and for security reasons, we may only reset your password.'
+    title3:
+      name: 'PAYMENT'
+    art5:
+      name: '5. Monthly Plans'
+      p1: 'Our charges for monthly plans are posted on our Website and may be changed from time to time. If any part of a month is included in the Term, then payment is due for the full month. Payments are due for any month on the same date, or the closest date in that month, to the day you signed up with us and made your first monthly payment (the "Pay Date").'
+    art6:
+      name: '6. Credit Cards'
+      p1: "As long as you’re a Member or have an outstanding balance with us, you'll provide us with valid credit card information and authorize us to deduct the monthly charges against that credit card. You’ll replace the information for any credit card that expires with information for a different valid credit card. Anyone using a credit card represents and warrants that he or she is authorized to use that credit card, and that any and all charges may be billed to that credit card and won’t be rejected. If, for some reason, we’re unable to process your credit card order, we’ll try to contact you by email and suspend your account until your payment can be processed."
+    art7:
+      name: '7. Refunds'
+      p1: "We’ll give you a refund for a prepaid month if we stop providing our Services to you for a reason that's not laid out in these Terms or our acceptable use policy. You won’t be entitled to a refund from us under any other circumstances. We may offer a refund if a Member applies for one based on the requirements posted on the Website."
+    art8:
+      name: '8. Changes'
+      p1: 'We may change our fees at any time by posting a new pricing structure to our Website and/or sending you a notification by email.'
+    title4:
+      name: 'RIGHTS'
+    art9:
+      name: '9. Proprietary Rights Owned by Us'
+      p1: 'You shall respect our proprietary rights in the Website and the software used to provide Condo Media (proprietary rights include patents, trademarks, service marks, and copyrights).'
+    art10:
+      name: '10. Privacy Policy'
+      p1: 'We may use and disclose your information according to our Privacy Policy. Our Privacy Policy will be treated as part of these Terms.'
+    title5:
+      name: 'RULES AND ABUSE'
+    art11:
+      name: '11. General Rules'
+      p1:
+        name: 'You promise to follow these rules:'
+        item1: 'Do not upload, post, forward or post a link to any abusive, obscene, discriminatory, harassing, derogatory or defamatory content.'
+        item2: 'Do not post, upload, forward or post a link to chain mail, junk mail, spam vouchers or gossip.'
+        item3: 'Never disclose commercially sensitive, anti-competitive, private or confidential information.'
+        item4: "Do not upload post or forward any content belonging to a third party unless you have that third party's consent."
+        item5: 'Before you include a link to a third party website, check that any terms and conditions of that website permit you to link to it.'
+        item6: "Avoid publishing your contact details where they can be accessed and used widely by people you did not intend to see them, and never publish anyone else's contact details."
+        item7: 'In particular uploading, posting forwarding or posting a link to any of the following types of material on a social media website, whether in a professional or personal capacity, will amount to gross misconduct (this list is not exhaustive): (a) pornographic material (that is, writing, pictures, films and video clips of a sexually explicit or arousing nature); (b) a false and defamatory statement about any person or organisation; (c) material which is offensive, obscene, criminal discriminatory, derogatory or may cause embarrassment to us, our clients or our staff; (d) confidential information about us or any of our staff or clients (which you do not have express authority to disseminate); (e) any other statement which is likely to create any liability (whether criminal or civil, and whether for you or us); or (f) material in breach of copyright or other intellectual property rights, or which invades the privacy of any person.'
+      p2: 'If you violate any of these rules, then we may suspend or terminate your account.'
+    art12:
+      name: '12. Reporting Abuse'
+      p1: 'If you think anyone is violating any of these Terms, please notify us immediately. Please report it to our team.'
+    art13:
+      name: '13. Compliance with Laws'
+      p1: 'You represent and warrant that your use of Condo Media will comply with all applicable laws and regulations. You’re responsible for determining whether our Services are suitable for you to use in light of any applicable regulations or laws.'
+    title6:
+      name: 'LIABILITY'
+    art14:
+      name: '14. Limitation of Liability'
+      p1:  'To the maximum extent permitted by law, you assume full responsibility for any loss that results from your use of the Website and the Services, including any downloads from the Website. We and our Team won’t be liable for any direct, indirect, punitive, special, or consequential damages under any circumstances, even if they’re based on negligence or we’ve been advised of the possibility of those damages. Our total liability for all claims made about the Service in any month will be no more than what you paid us for the Service the month before.'
+    art15:
+      name: '15. No Warranties'
+      p1: 'To the maximum extent permitted by law, we provide the material on the Website and the Service as is. That means we don’t provide warranties of any kind, either express or implied, including but not limited to warranties of merchantability and fitness for a particular purpose.'
+    title7:
+      name: 'WARRANTIES OF MERCHANTABILITY'
+      p1: 'Since people use Condo Media for a variety of reasons, we can’t guarantee that it will meet your specific needs.'
+    art16:
+      name: '16. Indemnity'
+      p1: 'You agree to indemnify and hold us and our Team harmless from any losses (including attorney fees) that result from any claims you make that aren’t allowed under these Terms due to a "Limitation of Liability" or other provision. You also agree to indemnify and hold us harmless from any losses (including attorney fees) that result from third-party claims that you or someone using your password did something that, if true, would violate any of these Terms.'
+    title8:
+      name: 'INDEMNITY'
+      p1: 'Indemnity is an agreement to compensate someone for a loss.'
+    art17:
+      name: '17. Attorney Fees'
+      p1: 'If we file an action against you claiming you breached these Terms and we prevail, we’re entitled to recover reasonable attorney fees and any damages or other relief we may be awarded.'
+    art18:
+      name: '18. Equitable Relief'
+      p1: 'If you violate these Terms then we may seek injunctive relief (meaning we may request a court order to stop you) or other equitable relief.'
+    art19:
+      name: '19. Disclaimers'
+      p1: 'We and our Team aren’t responsible for the behavior of any advertisers, linked websites, or other Members.'
+    title9:
+      name: 'FINE PRINT'
+    art20:
+      name: '20. Assignments'
+      p1: 'You may not assign any of your rights under this agreement to anyone else. We may assign our rights to any other individual or entity at our discretion.'
+    art21:
+      name: '21. Choice of Law'
+      p1: 'The laws of the province of Quebec, except for conflict of laws rules, will apply to any dispute related to these Terms or the Service.'
+    art22:
+      name: '22. Force Majeure'
+      p1: 'We won’t be held liable for any delays or failure in performance of any part of the Service, from any cause beyond our control. This includes, but is not limited to, acts of God, changes to law or regulations, embargoes, war, terrorist acts, riots, fires, earthquakes, nuclear accidents, zombie apocalypse, floods, strikes, power blackouts, volcanic action, unusually severe weather conditions, and acts of hackers or third-party internet service providers.'
+    art23:
+      name: '23. Survivability'
+      p1: 'Even if this Agreement is terminated, the following sections will continue to apply: Proprietary Rights Owned by Us, Compliance with Laws, Limitation of Liability, No Warranties, Indemnity, Choice of Law, Severability, and Entire Agreement.'
+    art24:
+      name: '24. Severability'
+      p1: 'If it turns out that a section of this Agreement isn’t enforceable, then that section will be removed or edited as little as necessary, and the rest of the Terms will still be valid.'
+    art25:
+      name: '25. Interpretation'
+      p1: 'The headers and sidebar text are provided only to make this agreement easier to read and understand. The fact that we wrote these Terms won’t affect the way this Agreement is interpreted.'
+    art26:
+      name: '26. Amendments and Waiver'
+      p1: 'Amendments or changes to these Terms won’t be effective until we post revised Terms on the Website. That aside, additional terms may apply to certain features of the Service (the "Additional Terms"). The Additional Terms will be considered incorporated into these Terms when you activate the feature. Where there’s a conflict between these Terms and the Additional Terms, the Additional Terms will control. If we don’t immediately take action on a violation of these Terms, we’re not giving up any rights under the Terms, and we may still take action at some point.'
+    art27:
+      name: '27. Notices'
+      p1: 'Any notice to you will be effective when we send it to the last email or physical address you gave us or posted on our Website. Any notice to us will be effective when delivered to us.'
+    art28:
+      name: '28. Entire Agreement'
+      p1: 'These Terms and our Privacy Policy (all of which are incorporated into these Terms by reference), and any Additional Terms you’ve agreed to make up the entire agreement and supersede all prior agreements, representations, and understandings.'
+  merchant_agreement:
+    name: 'Merchant Agreement'
+    title: ' MERCHANT TERMS AND CONDITIONS '
+    nps: 4
+    p1: 'Thank you for choosing to list your product or deal with Condo Media! We’re very excited to have you as our partner.'
+    p2: 'Please read these Merchant Terms carefully. By listing your product or deal with Condo Media, you’re agreeing to these Merchant Terms, in addition to our standard Terms. This is a legal agreement.'
+    p3: 'These Merchant terms shall be referred to herein as the “Merchant Agreement” or “Agreement” and is entered into by and between Condo Media Inc., a Quebec corporation and you, as Merchant. Collectively, Condo Media and the Merchant shall be referred to as the “Parties.”'
+    p4: 'Merchant wishes to offer its products or services for sale through vouchers which can be redeemed for Merchant’s selected goods and/or services at a discount (the “Voucher(s)”), which are offered for purchase to the users of the Condo Media platform at http://www.condo-media.com (the “Website”); and Condo Media wishes to sell Merchant’s Voucher to the purchasers at the Website, the Merchant being the seller of the goods and the services, and Condo Media being the seller of the intangible rights contained in the Merchant’s Voucher.'
+    nsubs: 7
+    sub1:
+      name: '1. Voucher Program.'
+      nps: 18
+      p1: '1.1. Voucher Information'
+      p2: 'Condo Media shall promote and display the Voucher on the Website. Merchant is the seller of the goods and services described in Voucher. The Voucher itself will be sent to the purchaser electronically. The purchaser will then redeem the Voucher from the Merchant.'
+      p3: "a. Delivery of deals: Condo Media may offer the Merchant's Voucher up to the maximum quantity selected in a variety of formats: through its feature deal-of the day, through its various side deals, through its marketplace, or through its affiliate network. All of these formats may be offered to part or all of Condo Media’s subscriber base, or the communities associated with Condo Media's affiliates."
+      p4: 'b. Each Voucher will be subject to no restrictions other than as provided herein. Each Voucher will expire on the Voucher Expiration Date. However, after the Voucher Expiration Date, Merchant shall, for the amount of time required by applicable law: (1) continue to allow unredeemed Vouchers to be redeemed for the product or service specified on the Voucher or (2) allow the Voucher to be redeemed to purchase goods or services from Merchant for up to the amount the purchaser paid for the Voucher.  Merchant is aware and acknowledges that the law may require Merchant to redeem Vouchers beyond their stated expiration dates, and Merchant agrees to do so (to the extent applicable law requires).'
+      p5: 'c. Partial redemptions: If a customer redeems a Voucher for less than its face value, the Merchant will be responsible for issuing a credit or cash equal to the difference between the face value and the amount redeemed if required by law.'
+      p6: 'd. Merchant agrees that in providing the goods/services that are the subject of the Voucher, it will not impose any extra or additional fees or charges that contradict the terms set forth on the face of the Voucher.'
+      p7: '1.2 Voucher Sale.'
+      p8: 'Merchant authorizes Condo Media to offer, sell and distribute Vouchers, in accordance with this Agreement. Merchant acknowledges that Condo Media may terminate the publication or promotion of the Voucher at any time.'
+      p9: '1.3 Voucher Publication and Delivery.'
+      p10: 'Vouchers shall be published on the Website. If there is a maximum number of Vouchers designated for sale, Condo Media will use reasonable efforts to cease publishing the Voucher once it has received offers to buy that number of Vouchers equal to the maximum number of Vouchers.'
+      p11: 'The Voucher shall be activated, which means capable of being used for purchases with the Merchant in accordance with the terms of the Voucher immediately upon purchase. Condo Media will deliver the Vouchers to the purchaser electronically. Once a Voucher is delivered to the purchaser, Merchant shall be solely responsible for all customer service in connection with the Voucher and for supplying all goods and services specified in the Voucher. Condo Media further reserves the continuing right, but shall not be obligated, to reject, revise, or discontinue publishing any Voucher and to require Merchant to edit or modify the same for any reason, including, without limitation, to conform the Voucher to Condo Media specifications or applicable Laws.'
+      p12: '1.4 Payment.'
+      p13: 'Condo Media shall remit payment to Merchant according to the schedule and terms set forth in this Section 1.4. Condo Media will pay Merchant eighty-five percent (85%) of the value of each Voucher properly activated for which a purchaser has fully paid through Condo Media’s Website.  Merchant is registered for sales and use tax collection purposes, and shall be responsible for paying all sales and use taxes related to the goods and services described in the offer. Condo Media shall forward the then-collected amount owed to Merchant at the end of each calendar month.  However, Merchant agrees and acknowledges that in the event Merchant is either unwilling or unable to perform its obligations under this Agreement, Merchant shall reimburse Condo Media and/or its customers any and all funds for any and all unredeemed Vouchers.  Amounts retained by Condo Media are compensation to Condo Media for the service of advertising and selling the Vouchers for Merchant.'
+      p14: 'Condo Media shall earn and be paid fifteen percent (15%) of the value of each Voucher purchased through the Website as an administration and processing fee.'
+      p15: '1.5 Deposit.'
+      p16: 'The Parties agree to the installment payment schedule described in Section 1.4 and acknowledge that the staggered payments will result in Merchant holding funds, which have been received from Condo Media in advance of Merchant’s performance.  In the event of a bankruptcy proceeding or other liquidation of Merchant before Merchant has fulfilled its obligation under this Agreement, the Parties agree that such funds will be deemed to have been held in trust by Merchant for Condo Media and Condo Media shall have uncontested title and ownership on all such funds.  Further, should the amount of the Deposit exceed $50,000 in the aggregate, Condo Media reserves the right to review Merchant’s credit history prior to advancing funds.'
+      p17: '1.6 License.'
+      p18: 'Merchant grants to Condo Media a non-exclusive worldwide license and right to use, reproduce, license, display, distribute and transmit the Merchant’s name, logo and any trademarks (“Merchant Marks”) and any photographs, graphics, artwork, text and other content provided or specified by Merchant (“Content”) in connection with the marketing, promotion, sale or distribution of Vouchers, in any and all media or formats in which such Vouchers are marketed, promoted, transmitted, sold, or distributed, including but not limited to, on the Condo Media Website.'
+    sub2:
+      name: '2. Term and Termination.'
+      nps: 1
+      p1: 'This Agreement shall continue in effect for the longer of one (1) year following the Effective Date or the last date when a user of Condo Media redeems a Voucher offered by Merchant through Condo Media.  Condo Media may terminate this Agreement at any time for any reason by giving the Merchant written notice of such termination.  The expiration of the Term shall not in any way affect the purchaser’s usage of the Voucher, or Merchant’s obligation for redemption of the Voucher. Sections 3, 4, 5, 6 and any claims for payments due to Condo Media, including but not limited to section 1.5 hereunder shall survive any expiration or termination of this Agreement.'
+    sub3:
+      name: '3. Merchant Representations and Warranties, and Indemnification.'
+      nps: 2
+      p1: '3.1 Merchant represents and warrants throughout the Term that: (a) Merchant has the right, power and authority to enter into this Agreement; (b) Merchant is registered for sales and use tax collection purposes in all provinces in which Merchant’s goods and services will be provided pursuant to the terms and presentation of the Voucher; (c) the Voucher, upon being activated and delivered by Condo Media shall be available immediately for redemption by the purchaser; (d) the terms and conditions of the Voucher, including any discounts or goods and services offered thereunder, comply with all, and do not and will not violate any, local, provincial or federal law, statute, rule, regulation, or order (“Laws”), including but not limited to, any law and/or regulation governing the use, sale, and/or distribution of alcohol, any Laws governing vouchers, gift cards, coupons, and/or gift certificates; (e) Merchant owns all right, title and interest in the Marks and Content and has the right to grant the licenses in the Marks and Content stated in this Agreement; (f) the Vouchers and any advertising or promotion of Merchant’s products and services relating thereto will not constitute false, deceptive or unfair advertising or disparagement under any applicable Laws; and (g) the Marks and the Content do not and will not violate any copyright, trademark, or other intellectual property right or right of privacy or publicity of any third party or any Laws.'
+      p2: '3.2 Merchant agrees to defend, indemnify and hold Condo Media, its affiliated and related entities, and any of their officers, directors, agents and employees, harmless from and against any claims, lawsuits, investigations, penalties, damages, losses or expenses (including but not limited to attorney’s fees and costs) arising out of or relating to any matters involving the Voucher or the offering and sale of the Voucher on the Website and any and all other claim arising out of this Agreement.'
+    sub4:
+      name: '4. Compliance with Gift Card and Gift Certificate:'
+      nps: 1
+      p1: 'Merchant agrees to comply with any and all local, provincial and federal laws regarding the sale and offering of the Vouchers as well as any and all other matters described in this Agreement.'
+    sub5:
+      name: '5. Intellectual Property Rights.'
+      nps: 1
+      p1: '5.1 Merchant agrees and acknowledges that Condo Media owns all right, title, and interest in the Condo Media Website, Condo Media trademarks, and any software, technology or tools used by Condo Media to promote, market, sell, generate, or distribute the Vouchers (collectively the “Condo Media IP”). Merchant shall not rent, lease, sublicense, distribute, transfer, copy, reproduce, download, display, modify or timeshare the Condo Media IP or any portion thereof, or use such Condo Media IP as a component of or a base for products or services prepared for commercial sale, sublicense, lease, access or distribution. Merchant shall not prepare any derivative work based on the Condo Media IP. Merchant shall not translate, reverse engineer, decompile or disassemble the Condo Media IP.'
+    sub6:
+      name: '6.Limitation of Liability.'
+      nps: 2
+      p1: 'EXCEPT FOR INDEMNIFICATION OBLIGATIONS HEREUNDER, IN NO EVENT SHALL EITHER PARTY BE LIABLE OR OBLIGATED TO THE OTHER PARTY OR ANY THIRD PARTY IN ANY MANNER FOR ANY SPECIAL, INCIDENTAL, EXEMPLARY, CONSEQUENTIAL, PUNITIVE, OR INDIRECT DAMAGES OF ANY KIND REGARDLESS OF THE FORM OF ACTION, WHETHER IN CONTRACT, TORT, NEGLIGENCE, STRICT PRODUCT LIABILITY, OR OTHERWISE, EVEN IF INFORMED OF THE POSSIBILITY OF ANY SUCH DAMAGES IN ADVANCE, CONDO MEDIA’S SOLE AND COMPLETE LIABILITY TO MERCHANT FOR ANY CLAIMS ARISING OUT OF RELATING TO THIS AGREEMENT OR ANY ERRORS, OMISSIONS OR MISPLACEMENTS OF THE VOUCHERS SHALL BE LIMITED TO THE AMOUNT OF OPPORTUNITY FEES PAID HEREUNDER. THIS LIMITATION OF LIABILITY SHALL APPLY TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW AND NOTWITHSTANDING THE FAILURE OF ANY LIMITED REMEDY.'
+      p2: 'Any claim arising out of or relating to any error or omission in a Voucher must be made within six (6) months of first publication of the Voucher. Otherwise, the claim shall be deemed waived by Merchant.'
+    sub7:
+      name: '7. Other.'
+      nps: 6
+      p1: 'The Parties are independent contractors. Nothing in this Agreement shall be construed to create a joint venture, partnership, franchise, or an agency relationship between the Parties. Neither Party has the authority, without the other Party’s prior written approval, to bind or commit the other Party in any way.'
+      p2: 'This agreement constitutes the entire agreement between the parties relating to its subject matter and supersedes all prior or contemporaneous oral or written agreements concerning such subject matter. This agreement may be amended or modified only by mutual agreement of authorized representatives of the Parties in writing.'
+      p3: 'Merchant may not assign or transfer its rights or obligations under this Agreement, whether by operation of law or otherwise, without Condo Media’s prior written consent.'
+      p4: 'EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, NEITHER PARTY MAKES ANY REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT. CONDO MEDIA DOES NOT WARRANT OR GUARANTEE THAT THE SERVICES OFFERED ON OR THROUGH THE WEBSITE SHALL BE UNINTERRUPTED OR ERROR-FREE, THAT THE VOUCHERS WILL BE ERROR-FREE OR THAT ANY ERRORS, OMISSIONS OR MISPLACEMENTS IN THE VOUCHER WILL BE CORRECTED, OR THAT VOUCHERS WILL RESULT IN ANY REVENUE OR PROFIT FOR MERCHANT.'
+      p5: 'This Agreement shall be governed by the laws of the Province of Quebec.'
+      p6: 'By agreeing to list a Voucher on the Website, you as Merchant agree and shall be bound by the terms of the present Agreement.'
+  images:
+    change_cover: Change cover photo
+    change_profile: Change profile photo
+    make_cover: Make cover
+  profiles:
+    my_profile: My profile
+    see_more: See more ...
+    timeline: Timeline
+    whats_new: What's new?
+    photos: Photos
+    calendar: Calendar
+    about: About
+    reviews: Reviews
+    settings: Settings
+    offers: Offers
+    leave_community:
+      title: Leave Community
+      message: Leave community means that you will exit your current community. Once you click here, all your contacts, posts, and information associated with your community will be erased, and you will not be able to recover it.
+      password: Please insert your password
+      confirm: Confirm
+    contact_information: Contact information
+    other_details: Other details
+    notifications:
+      title: Notifications
+      option1: Email me when someone replies to my private message?
+      option2: Email me when someone replies to my comments?
+      option3: Email me when someone writes on my prublic profile?
+      option4: Email me when a new poll is posted?
+      option5: Email me when a new event is posted?
+      option6: Email me when a new classified is posted?
+    public_profile: Profile
+    password: Password
+  settings:
+    users:
+      who_can_see_your_name: Who can see your name?
+      who_can_see_your_email: Who can see your email?
+      who_can_see_my_profile: Who can see your profile information?
+      who_can_see_my_posts: Who can see your posts?
+      who_can_post_timeline: Who can post on your Timeline?
+      who_can_see_others_posts: Who can see what others post on your Timeline?
+      email_when_message: Email me when someone sends me a messages?
+      email_when_reply_my_comment: Email me when someone replies to my comments?
+      email_when_write_on_profile: Email me when someone writes on my prublic profile?
+      email_when_new_poll: Email me when a new poll is posted?
+      email_when_new_event: Email me when a new event is posted?
+      email_when_new_classified: Email me when a new classified is posted?
+      email_when_new_service_request: Email me when a new service request is created?
+      email_when_new_reservation: Email me when a new amenity reservation request is created?
+      email_when_new_join_request: Email me when a new join request is posted?
+      notification_mail_signature: Set up your signature
+    communities:
+      who_can_see_contact_information: Who can see the contact information of the community?
+      who_can_post_timeline: Who can post on the community timeline?
+      who_can_see_others_posts: Who can see what others post on the community timeline?
+      who_can_comment_posts: Who can comment on the community posts?
+      who_can_create_events: Who can create events?
+      who_can_create_polls: Who can create polls?
+      who_can_send_messages: Who can send direct messages?
+      who_can_create_offers: Who can create offers?
+      who_can_review: Who can rate or review the community?
+      email_when_post_timeline: Email when someone posts on the community timeline?
+      email_when_post_timeline_reply: Email when someone replies to a comment on the community timeline?
+      email_when_review: Email when someone rates or reviews the community?
+      email_when_review_reply: Email when someone replies to a review?
+      admin_default_requests: Assign requests to?
+      admin_default_reservations: Assing reservations to?
+      append_message_to_outgoing_notifications: Append message to outgoing notifications
+    values:
+      public: Public
+      my_community: My community
+      management_only: Management only
+      community_members: Community members
+      'yes': 'Yes'
+      'no': 'No'
+  plans:
+    one: Plan
+    other: Plans
+    change: Change plan
+    storage_space: storage space
+    online_payments: Online Payments
+    overview: Overview
+  exceptions:
+    not_found: "Sorry! Page Not Found."
+    internal_error: "We're sorry, but something went grown."
+    error_404: "Error 404"
+    error_500: "Error 500"
+    not_found_suggestion: "We can't find the page you are looking for. Please go to"
+    internal_error_suggestion: "Please try again later. If the error persists, contact us at"
+  account_balances:
+    no_records: "No account balance to show"
+    new_record: "+ New"
+    account_balance: "Account Balance"
+    form:
+      subject: "Subject"
+      choose_file: "Choose file"
+      upload_date: "Date"
+      submit: "Submit"
+      upload_instruction: "Upload resident account balance information (.xls o .xlsx)"
+  user_balances:
+    co_ownership: "Coopropiedad"
+    apartment: "Bloque - Ap"
+    concept: "Concepto"
+    previous_balance: "Saldo anterior"
+    this_month: "Este mes"
+    total: "TOTAL"
+    total_to_pay: "TOTAL A PAGAR =====>"
+    billing_number: "No Doc. Cobro:"
+    previous_payment: "PAGO ANTERIOR:"
+    filters:
+      month: "Month"
+      year: "Year"
+
+# defaults for english
+  date:
+    abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    order: [year, month, day]
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_years:
+        one: 1 year
+        other: "%{count} years"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  time:
+    formats:
+      default: '%B %d, %Y'
+  will_paginate:
+    previous_label: "&#60;"
+    next_label: "&#62;"
+    page_gap: "&hellip;"
+
+    page_entries_info:
+      single_page:
+        zero:  "No %{model} found"
+        one:   "Displaying 1 %{model}"
+        other: "Displaying all %{count} %{model}"
+      single_page_html:
+        zero:  "No %{model} found"
+        one:   "Displaying <b>1</b> %{model}"
+        other: "Displaying <b>all&nbsp;%{count}</b> %{model}"
+
+      multi_page: "%{from} - %{to} of %{count}"
+      multi_page_html: "<b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b>"
+
+    # models:
+    #   entry:
+    #     zero:  entries
+    #     one:   entry
+    #     few:   entries
+    #     other: entries
+
+    # line_item:
+    #   page_entries_info:
+    #     single_page:
+    #       zero:  "Your shopping cart is empty"
+    #       one:   "Displaying one item in your cart"
+    #       other: "Displaying all %{count} items"
+    #     multi_page: "Displaying items %{from} - %{to} of %{count} in total"
+

@@ -1,0 +1,20 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Ruby / Rails
+**/log/*
+!**/log/.keep
+**/tmp/**
+!**/tmp/.keep
+**/storage/**
+!**/storage/.keep
+
+# Node
+**/node_modules/**
+
+# Misc
+*.swp
+*.iml
+*.rdb

@@ -1,0 +1,130 @@
+<% @submenu_title = t('general.submenu.communities'); @submenu_item = 'communities' %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 timeline-view about">
+
+  <%= render 'pages/header', model_object: @business %>
+
+  <div class="content-box divided">
+    <div class="header">
+      <%= t 'public_pages.about.title' %>
+    </div>
+    <div class="content clearfix">
+      <div class="col-sm-3 col-xs-12 left">
+        <div class="list-group filters">
+          <%= link_to 'Contact information', '#', class: 'list-group-item active', data: { table: '#contact-information' } %>
+        </div>
+      </div>
+      <div class="col-sm-9 col-xs-12 right">
+        <%= form_for @business do |f| %>
+          <%= render 'shared/model_errors', resource: @business %>
+          <table class="table" id="contact-information">
+            <thead class="hidden-xs">
+              <tr><th colspan="2">Contact information</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><label>Community</label></td>
+                <td><%= @business.name %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :namespace, 'URL' %></td>
+                <td>
+                  condo-media.com/companies/<%= @business.namespace %>
+                  <%= link_to t('general.edit'), '#', class: 'pull-right edit' %>
+                </td>
+                <td class="to-edit hidden">
+                  condo-media.com/companies/<%= f.text_field :namespace %>
+                </td>
+              </tr>
+              <tr>
+                <td><%= f.label :address %></td>
+                <td>
+                  <%= @business.address %><br/>
+                  <%= @business.city %><br/>
+                  <%= @business.zip %>
+                  <%= link_to t('general.edit'), '#', class: 'pull-right edit' %>
+                </td>
+                <td class="to-edit hidden multiple-inputs">
+                  <%= f.text_field :address %><br/>
+                  <%= f.text_field :city %><br/>
+                  <%= f.text_field :zip %>
+                </td>
+              </tr>
+              <tr>
+                <td><%= f.label :phone %></td>
+                <td>
+                  <%= number_to_phone @business.phone %>
+                  <%= link_to t('general.edit'), '#', class: 'pull-right edit' %>
+                </td>
+                <td class="to-edit hidden">
+                  <%= f.text_field :phone %>
+                </td>
+              </tr>
+              <tr>
+                <td><%= f.label :email %></td>
+                <td>
+                  <%= @business.email %>
+                  <%= link_to t('general.edit'), '#', class: 'pull-right edit' %>
+                </td>
+                <td class="to-edit hidden">
+                  <%= f.text_field :email %>
+                </td>
+              </tr>
+              <tr>
+                <td><%= f.label :website, 'Links' %></td>
+                <td>
+                  <%= link_to @business.website, url_with_protocol(@business.website), target: '_blank' %>
+                  <%= link_to t('general.edit'), '#', class: 'pull-right edit' %>
+                </td>
+                <td class="to-edit hidden">
+                  <%= f.text_field :website %>
+                </td>
+              </tr>
+              <tr>
+                <td><%= f.label :opening_hours, 'Hours' %></td>
+                <td>
+                  <%= @business.opening_hours %>
+                  <%= link_to t('general.edit'), '#', class: 'pull-right edit' %>
+                </td>
+                <td class="to-edit hidden">
+                  <%= f.text_field :opening_hours %>
+                </td>
+              </tr>
+              <tr>
+                <td><%= f.label :description %></td>
+                <td>
+                  <%= @business.description %>
+                  <%= link_to t('general.edit'), '#', class: 'pull-right edit' %>
+                </td>
+                <td class="to-edit hidden">
+                  <%= f.text_area :description, class: 'js-auto-size' %>
+                </td>
+              </tr>
+              <tr>
+                <td><label>Maps</label></td>
+                <td>
+                  <div class="google-map" data-longitude="<%= @business.longitude %>" data-latitude="<%= @business.latitude %>"
+                    data-drop-main="<%= asset_url 'drop_blue.png' %>">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><%= f.label :code, 'Page ID' %></td>
+                <td>
+                  <%= @business.code %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <% if can?(:manage, @business) %>
+            <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+            <%= link_to t('general.cancel'), '#', class: 'btn btn-default', id: 'cancel-changes' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+</script>

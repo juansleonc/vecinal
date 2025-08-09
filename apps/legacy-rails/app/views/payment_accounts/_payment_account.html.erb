@@ -1,0 +1,22 @@
+<% building = payment_account %>
+<li class="list-group-item clearfix building" id="building-<%= building.id %>">
+  <div class="col-xs-4">
+    <%= render 'shared/logo_left', logoable: building %>
+    <%= building.name %>
+  </div>
+  <div class="col-xs-3">
+    <span class="<%= building.payments_enabled_color %>"><%= building.payments_enabled_label %></span>
+  </div>
+  <div class="col-xs-3">
+    <span class="<%= building.payments_status_color %>"><%= t("payment_accounts.statuses.#{building.payments_status}").html_safe %></span>
+  </div>
+  <div class="col-xs-2">
+    <% if account = building.payment_account %>
+      <%= link_to t('general.edit'), '#', class: 'modal-or-remote',
+        data: { target: "#edit-payment-account-modal-#{account.id}", path: edit_payment_account_path(account) } %>
+    <% else %>
+      <%= link_to t('payments.enable'), '#', class: 'modal-or-remote',
+        data: { target: "#new-payment-account-modal-#{building.id}", path: new_payment_account_path(building.subdomain) } %>
+    <% end %>
+  </div>
+</li>

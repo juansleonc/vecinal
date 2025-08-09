@@ -1,0 +1,74 @@
+<% @submenu_title = Coupon.model_name.human.capitalize
+  @submenu_item = 'coupons'
+  @navbar_style = 'green' if current_user && current_user.accountable_type == 'Building'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix promotion-detail">
+    <div class="col-sm-12 title">
+      <h3 class="italic">
+        <i class="fa fa-scissors"></i>
+        <%= @coupon.title %>
+      </h3>
+      <div class="pull-right">
+        <%= link_to t('general.report'), coupon_redemptions_path(@coupon.id) if can? :manage, CouponRedemption %>
+        <%= link_to " - #{t('general.edit')}", edit_business_coupon_path(@business, @coupon) if can? :update, @coupon %>
+      </div>
+    </div>
+    <div class="col-sm-12 no-padding">
+      <div class="col-sm-4 promotion-buy">
+        <%= link_to t('coupons.print'), coupon_redemption_print_path(@coupon.id), target: '_blank',
+        class: 'btn btn-primary btn-block btn-lg' if @coupon.active? %>
+        <br/>
+        <hr/>
+        <div class="countdown-container">
+          <%= t('coupons.limited_time_only').upcase %><br/>
+          <h5>
+            <i class="fa fa-clock-o">&nbsp;</i>
+            <span class="countdown" data-until="<%= @coupon.finish_at.strftime '%Y/%m/%d %H:%M:%S' %>"
+              data-ftime="%-D <%= t 'general.days' %> %H:%M:%S"></span>
+          </h5>
+          <%= (Coupon.human_attribute_name :number).upcase %>: <%= @coupon.number %>
+          <hr/>
+          <div class="acquisitions">
+            <i class="fa fa-users"></i>
+            <%= @coupon.acquisitions %> <%= t 'coupons.printed' %>
+          </div>
+          <hr/>
+          <div class="back_to">
+            <i class="fa fa-caret-left "></i>
+            <%= link_to t('general.back_to', destiny: Coupon.model_name.human(count: 2).capitalize),
+              back_to_coupons(@business)
+            %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <%= render 'shared/images_carousel', model_object: @coupon %>
+      </div>
+    </div>
+
+    <div class="col-lg-5 col-lg-pull-1 col-lg-offset-1 col-sm-6 description-list">
+      <h3><%= t 'coupons.promotion' %></h3>
+      <ul>
+        <% @coupon.split_description.each do |description| %>
+          <li><span><%= description %></span></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-lg-5 col-lg-pull-1 col-lg-offset-1 col-sm-6 description-list">
+      <h3><%= t 'coupons.the_fine_print' %></h3>
+      <ul>
+        <% @coupon.split_fine_print.each do |fine_print| %>
+          <li><span><%= fine_print %></span></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-sm-12 description-list">
+		  <h3><%= t 'general.about', name: @business.name %></h3>
+		  <p><%= @business.description %></p>
+		</div>
+    <%= render 'businesses/contact_details', business: @business %>
+  </div>
+</div>

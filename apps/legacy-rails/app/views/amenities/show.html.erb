@@ -1,0 +1,85 @@
+<% @submenu_title = Amenity.model_name.human(count: 2).capitalize
+  @submenu_item = 'amenities'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 show-amenity timeline-view">
+  <%= render 'show_menu' %>
+
+  <%= link_to t('amenities.reserve'), '#', data: { toggle: 'modal', target: "#new-reservation-modal-amenity-#{@amenity.id}" },
+  disabled: @amenity.availability_type == 'no_available', class: 'btn btn-primary visible-xs btn-reserve' %>
+
+  <div class="row content-boxes">
+    <div class="col-sm-7 col-xs-12 content-box-container">
+      <div class="content-box">
+        <div class="header">
+          <%= t 'general.details' %>
+        </div>
+        <div class="content">
+          <%= content_with_emoji simple_format(@amenity.description) %>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-5 col-xs-12 content-box-container">
+      <div class="content-box reviews">
+        <div class="header">
+          <%= link_to reviews_amenity_path do %>
+            <%= Review.model_name.human(count: 2).capitalize %>
+            <i class="fa fa-chevron-right pull-right"></i>
+          <% end %>
+        </div>
+        <div class="content">
+          <span class="blue"><%= @amenity.average_rank.round 1 %> <%= review_avg_stars @amenity %></span>
+          <span class="info">(<%= @amenity.reviews.count %> <%= Review.model_name.human(count: 2).capitalize %>)</span>
+        </div>
+      </div>
+
+      <div class="highlights content-box">
+        <div class="header">
+          <%= t 'general.highlights' %>
+        </div>
+        <div class="content clearfix">
+          <div class="data">
+            <%= number_to_currency(@amenity.rental_value) || '$0' %>
+            <span class="name"><%= t 'amenities.fee' %></span>
+          </div>
+          <div class="data">
+            <%= number_to_currency(@amenity.deposit_value) || '$0' %>
+            <span class="name"><%= t 'amenities.deposit' %></span>
+          </div>
+          <div class="data bigger">
+            <%= @amenity.availability_hours %>
+            <span class="name"><%= Availability.model_name.human.capitalize %></span>
+          </div>
+        </div>
+      </div>
+
+      <% if @amenity.images.present? %>
+        <div class="photos content-box">
+          <div class="header">
+            <%= link_to photos_amenity_path(@amenity) do %>
+              <%= t 'public_pages.photos.title' %>
+              <i class="fa fa-chevron-right pull-right"></i>
+            <% end %>
+          </div>
+          <div class="content clearfix">
+            <% @amenity.images.first(Image::MAX_IN_TIMELINE).each do |image| %>
+              <div class="col-xs-6 image">
+                <%= link_to image.image.url(:original), data: { lightbox: true } do %>
+                  <%= image_tag image.image.url(:thumb) %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<%= render 'reservations/new_form_modal', amenity: @amenity %>
+<script>
+  var edit = '<%= params[:edit] %>';
+  
+</script>

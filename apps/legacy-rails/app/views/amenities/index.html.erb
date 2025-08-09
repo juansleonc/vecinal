@@ -1,0 +1,44 @@
+<% @submenu_title, @submenu_item = Amenity.model_name.human(count: 2).capitalize, 'amenities'; @action_for_search = search_amenities_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 amenities-index">
+
+  <div class="cm-nav-links">
+    <%= link_to t('stats.amenities').capitalize, amenities_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: 'active' %>
+    <%= link_to Reservation.model_name.human(count: 2).capitalize, reservations_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+    <% if can? :create, Amenity %>
+      <%= link_to '+ ' + t('general.create_record_f', record_name: Amenity.model_name.human), '#', class: 'btn btn-primary compact-text',
+        data: { toggle: 'modal', target: '#new-amenity-modal' } %>
+    <% end %>
+  </div>
+
+  <div class="under-tabs compactable">
+    <% if current_user.admin? || current_user.collaborator? %>
+      <%= render 'shared/communities_filter_new',
+        items: '#amenities .amenity',
+        width_company: true,
+        class_objects: 'users',
+        with_filter_options: true,
+        to_controller: 'amenities',
+        data_by_community: @contacts_by_accountable %>
+        <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+    <% end %>
+  </div>
+
+  <div class="cm-gallery-grid load-more-at-bottom" id="amenities" data-next-path="<%= @next_path %>">
+    <%= render @amenities %>
+    
+  </div>
+  <div class='content-pagination'>
+    <%= page_entries_info @amenities %>
+    <%= will_paginate @amenities, :renderer => 'LinkRenderer' %>
+  </div>
+  <%= render 'shared/empty_items', icon: 'fa-building-o', objects: Amenity.model_name.human(count: 2) if @amenities.blank? %>
+</div>
+
+<%= render 'new' %>
+
+<script>
+  var edit = '';
+  
+</script>

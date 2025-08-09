@@ -1,0 +1,35 @@
+<div class="classified cols-divided-banner post" id="classified-<%= classified.id %>">
+
+  <%= render 'shared/post_dropdown_actions', model_object: classified %>
+
+  <%= render 'shared/info_reported_icon', object_name: classified.class.name.downcase, status: classified.is_reported(current_user) %>
+
+  <%= render 'marks/toggle_save_link', markable: classified, toggle_link: toggle_save_classified_path(classified) %>
+
+  <% publisher = classified.publisher %>
+  <div class="publisher">
+    <%= render 'shared/logo_left', logoable: publisher %>
+    <span class="username">
+      <%= with_profile_banner_link publisher %>
+      <br/>
+      <span class="info"><%= classified.created_at.strftime '%B %d, %Y' %></span>
+      <%= shareable_recipient_link(classified) %>
+    </span>
+  </div>
+
+  <div><strong><%= classified.title %></strong></div>
+  <div class="green"><%= number_to_currency(classified.price) || '&nbsp;'.html_safe %></div>
+  <p class="description"><%= content_with_emoji classified.description %></p>
+  <%= render 'attachments/attachments', attachmentable: classified %>
+
+  <%= render 'comments/replies_and_likes', likeable: classified %>
+  
+  <% options = {
+    commentable: classified,
+    attachments_enabled: true,
+    disable_new: !can?(:comment_posts, Comment)
+  } %>
+
+  <%= render partial: 'comments/commentable_comments', locals: options %>
+
+</div>

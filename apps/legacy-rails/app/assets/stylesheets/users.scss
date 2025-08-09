@@ -1,0 +1,58 @@
+div.terms_sign_up {
+  margin-top: 10px;
+}
+#user_role_text{
+  width: 90%;
+}
+span.input-group-addon.first-name-icon {
+  padding: 8px 13px;
+}
+span.input-group-addon.last-name-icon {
+  padding: 8px 11.5px;
+}
+span.input-group-addon.email-icon {
+  padding: 7px 12px;
+}
+span.input-group-addon.lock-icon {
+  padding: 7px 15px;
+}
+.lupa{
+  width: 700px;
+  position: absolute;
+  top: 119px;
+  right: -260px;
+}
+.content-center{
+  text-align: center;
+  padding: 10% 30%;
+}
+.content-center img{
+  margin: 25% 0px 0px 0px;
+}
+.content-center .btn-primary {
+  margin-top:15px;
+}
+.last_h3{
+  padding-bottom: 40px;
+}
+
+
+@media (max-width: 768px)
+{
+  .content-center{
+    text-align: center;
+    padding: 10%;
+  }
+}
+@media (max-width: 425px)
+{
+  .lupa {
+    display: none;
+  }
+  
+}
+
+.form-group.row.error{
+  color: #ff4141;
+  display: none;
+}

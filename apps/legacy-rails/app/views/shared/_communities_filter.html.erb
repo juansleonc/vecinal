@@ -1,0 +1,93 @@
+<div class="dropdown dropdown-filter" data-items="<%= items %>" id="communities-filter">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+    <span class="text">
+      <i class="fa fa-circle-o with-background"></i>
+      <%= t('general.all_communities') %> (<span class="all-items-count"></span>)
+    </span>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <% class_objects ||= 'Items' %>
+    <% with_filter_options ||= false %>
+    <li>
+      <%= link_to '#', class: "with-logo", data: { class: 'display-all' } do %>
+        <i class="fa fa-circle-o with-background"></i> <%= t 'general.all_communities' %> (<span class="all-items-count"></span>)
+      <% end %>
+    </li>
+
+    <% if local_assigns[:width_public] %>
+      <li>
+        <%= link_to '#', class: 'with-logo', data: { class: 'Public-0' } do %>
+          <i class="fa fa-globe with-background"></i> <%= t 'general.public' %> (<span class="items-count"></span>)
+        <% end %>
+      </li>
+    <% end %>
+
+    <% if current_user.admin? %>
+      <% if local_assigns[:width_company] && company = current_user.my_company %>
+        <li>
+          <%= link_to '#', class: 'with-logo', data: { class: "#{company.class.name}-#{company.id}" } do %>
+            <%= render 'shared/logo_left', logoable: company, left: '' %>
+            <%= company.name %> (<span class="items-count"></span>)
+          <% end %>
+        </li>
+      <% end %>
+
+      <% current_user.buildings.each do |building| %>
+        <li>
+          <%= link_to '#', class: 'with-logo', data: { class: "#{building.class.name}-#{building.id}" } do %>
+            <%= render 'shared/logo_left', logoable: building, left: '' %>
+            <%= building.name %> (<span class="items-count"></span>)
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+
+    <% if current_user.resident? && local_assigns[:has_building_and_company] %>
+      
+      <% user_building = current_user.accountable %>
+      <% user_company = user_building.company %>
+
+      <li>
+        <a class="with-logo" data-class="Company-<%= user_building.company.id %>">
+          <%= render 'shared/logo_left', logoable: user_company, left: '' %>
+          <%= user_company.name %> (<span class="items-count"></span>)
+        </a>
+      </li>
+      
+      <li>
+        <a class="with-logo" data-class="Building-<%= user_building.id %>">
+           <%= render 'shared/logo_left', logoable: user_building, left: '' %>
+           <%= user_building.name %> (<span class="items-count"></span>)
+        </a>
+      </li>
+
+    <% end %>
+
+    <% if with_filter_options %>
+      <% gender_es = {'events' => 'm', 'users' => 'm', 'items' => 'm'} %>
+
+      <% if local_assigns[:has_saved] || local_assigns[:has_saved].nil?  %>
+        <li>
+          <%= link_to '#', class: "with-logo", data: { class: 'Saved' } do %>
+            <i class="fa fa-bookmark-o with-background"></i> <%= t("general.saved_record_#{gender_es[class_objects]}", record_name: t("general.#{class_objects}").capitalize) %>
+          <% end %>
+        </li>
+      <% end %>
+      
+      <% if local_assigns[:has_hidden] || local_assigns[:has_hidden].nil? %>
+        <li>
+          <%= link_to '#', class: "with-logo", data: { class: 'Hidden' } do %>
+            <i class="fa fa-eye-slash with-background"></i> <%= t("general.hidden_record_#{gender_es[class_objects]}", record_name: t("general.#{class_objects}").capitalize) %>
+          <% end %>
+        </li>
+      <% end %>
+
+      <li>
+        <%= link_to '#', class: "with-logo", data: { class: 'Reported' } do %>
+          <i class="fa fa-ban with-background"></i> <%= t("general.reported_record_#{gender_es[class_objects]}", record_name: t("general.#{class_objects}").capitalize) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,103 @@
+<% content_for :meta_tags do %>
+  <meta name="application-name" content="Condo Media "/>
+  <meta name="author" content="Condo Media"/>
+  <meta name="description" content='<%= "Create an account or log into #{@model_object.name}. #{@model_object.description}" %>'/>
+  <meta name="keywords" content="<%= @model_object.name %>"/>
+<% end %>
+
+<%
+  @page_title = @model_object.name + ' | Condo Media'
+  @menu_items_mobile_visible = if @model_object.class == Building
+    {
+      t('public_pages.home.title') => building_root_path,
+      t('public_pages.about.title') => building_about_path,
+      t('public_pages.apartments.title') => building_apartments_path
+    }
+  elsif @model_object.class == Company
+    {
+      t('public_pages.home.title') => company_root_path,
+      t('public_pages.about.title') => company_public_about_path,
+      t('public_pages.apartments.title') => company_public_apartments_path
+    }
+  elsif @model_object.class == Business
+    {
+      t('public_pages.home.title') => business_root_path,
+      t('public_pages.about.title') => business_public_about_path
+    }
+  end
+
+  @menu_items_mobile_hidden = if @model_object.class == Building
+    {
+      t('public_pages.nearby.title') => building_nearby_path,
+      t('public_pages.photos.title') => building_photos_path,
+      t('public_pages.contact.title') => building_contact_path
+    }
+  elsif @model_object.class == Company
+    {
+      t('public_pages.buildings.title') => company_buildings_path,
+      t('public_pages.photos.title') => company_public_photos_path,
+      t('public_pages.contact.title') => company_public_contact_path
+    }
+  elsif @model_object.class == Business
+    {
+      t('public_pages.coupons_deals.title') => business_public_coupons_deals_path,
+      t('public_pages.photos.title') => business_public_photos_path,
+      t('public_pages.contact.title') => business_public_contact_path
+    }
+  end
+  @menu_items = @menu_items_mobile_visible.merge @menu_items_mobile_hidden
+%>
+
+<div class="col-lg-8 col-lg-offset-2 no-padding public-header">
+  <div class="public-main-image">
+    <% if @business && can?(:manage, @business) %>
+      <%= link_to edit_business_path(@business.namespace), class: 'camera-icon' do %>
+        <i class="fa fa-camera"></i>
+      <% end %>
+    <% end %>
+
+    <% if current_user && @model_object == current_building && can?(:manage, current_building) %>
+      <%= link_to root_url(subdomain: 'www').chomp('/') + edit_company_building_path(@company, current_building),
+         class: 'camera-icon' do %>
+        <i class="fa fa-camera"></i>
+      <% end %>
+    <% end %>
+
+    <% if current_user && @model_object == @company && can?(:manage, @company) %>
+      <%= link_to edit_company_url(@company, subdomain: 'www'),
+         class: 'camera-icon' do %>
+        <i class="fa fa-camera"></i>
+      <% end %>
+    <% end %>
+
+    <center>
+      <%= image_tag @model_object.home_image.image.url(:public), class: 'home-image' %>
+    </center>
+    <%= image_tag @model_object.logo.url(:standard), class: 'public-logo' %>
+  </div>
+
+  <div class="public-submenu clearfix">
+    <span class="model-object-name">
+      <%= @model_object.name %>
+    </span>
+
+    <%= link_to t('general.more').upcase, '', class: 'toggle-public-submenu' %>
+
+    <ul class="desktop">
+      <% @menu_items.each do |link_text, path| %>
+        <li><%= link_to link_text, path, class: "#{'active' if request.original_fullpath == path}" %></li>
+      <% end %>
+    </ul>
+    <ul class="mobile-visible">
+      <% @menu_items_mobile_visible.each do |link_text, path| %>
+        <li><%= link_to link_text, path, class: "#{'active' if request.original_fullpath == path}" %></li>
+      <% end %>
+    </ul>
+    <ul class="mobile-hidden">
+      <% @menu_items_mobile_hidden.each do |link_text, path| %>
+        <li><%= link_to link_text, path, class: "#{'active' if request.original_fullpath == path}" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%= render 'shared/public_highlights' %>

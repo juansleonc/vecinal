@@ -1,0 +1,14 @@
+<ul class="dropdown-menu">
+  <% objects.order(:name).each do |object| %>
+    <li>
+      <%= link_to '#', data: { id: object.id } do %>
+        <div class="logo-wrapper">
+          <%= mi.business %>
+          <%#= image_tag object.logo.url(:square) %>
+          <span class="no-logo-letter"><%= object.first_name_letter %></span>
+        </div>
+        <%= object.name %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

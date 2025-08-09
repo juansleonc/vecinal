@@ -1,0 +1,6 @@
+<% if @attachment.destroyed? %>
+  $('.attachments-container #attachment-<%= @attachment.id %>').remove();
+  hide_action_buttons();
+<% else %>
+  toastr.error('<%= @attachment.errors.full_messages.join(', ') %>');
+<% end %>

@@ -1,0 +1,13 @@
+<% if @accountables.present? %>
+  <ul class="dropdown-menu accountable-code-selector-list">
+    <% @accountables.each do |accountable| %>
+      <li>
+        <%= link_to '#', data: { code: accountable.code, name: accountable.name } do %>
+          <%= image_tag accountable.logo.url(:square) %>
+          <strong><%= accountable.name %></strong>
+          <span><%= "#{accountable.address}, #{accountable.zip}, ID #{accountable.code}" %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

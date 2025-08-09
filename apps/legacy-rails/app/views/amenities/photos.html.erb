@@ -1,0 +1,7 @@
+<% @submenu_title = Amenity.model_name.human(count: 2).capitalize; @submenu_item = 'amenities' %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 show-amenity timeline-view">
+  <%= render 'show_menu' %>
+  <%= render 'images/photos_gallery', imageable: @amenity %>
+</div>
+<%= render 'reservations/new_form_modal', amenity: @amenity %>

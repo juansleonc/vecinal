@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  building_id: 
+  apartment_number: MyString
+  category: MyString
+  available_at: 2015-02-09
+  show_price: false
+  price: 1
+  size_ft2: 1
+  bedrooms: 1
+  bathrooms: 1
+  furnished: false
+  pets: false
+  show_contact: false
+  secondary_phone_number: MyString
+  secondary_email: MyString
+  title: MyString
+  description: MyText
+
+two:
+  building_id: 
+  apartment_number: MyString
+  category: MyString
+  available_at: 2015-02-09
+  show_price: false
+  price: 1
+  size_ft2: 1
+  bedrooms: 1
+  bathrooms: 1
+  furnished: false
+  pets: false
+  show_contact: false
+  secondary_phone_number: MyString
+  secondary_email: MyString
+  title: MyString
+  description: MyText

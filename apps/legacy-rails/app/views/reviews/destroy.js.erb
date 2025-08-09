@@ -1,0 +1,8 @@
+<% if @review.destroyed? %>
+  $('#reviews #review-<%= @review.id %>').remove();
+  update_reviews_counters("<%= @review.reviewable.average_rank.round 1 %>", "<%= @review.reviewable.reviews.count %>");
+  $('#reviews .reviews-average #stars-bars').replaceWith("<%= j render('reviews/star_bars', reviewable: @review.reviewable) %>");
+  update_star_bars();
+<% else %>
+  toastr.error('<%= @review.errors.full_messages.join(", ") %>');
+<% end %>

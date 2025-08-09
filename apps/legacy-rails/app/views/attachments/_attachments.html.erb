@@ -1,0 +1,26 @@
+<%# hidden = false unless local_assigns[:hidden] %>
+
+<% if attachmentable.attachments.count > 0 %>
+  <div class="attachments clearfix <%#= 'hidden' if hidden %>">
+    <% attachmentable.attachments.each_with_index do |attachment, i| %>
+      <div class="<%= attachmentable.attachment_col_size %> <%= attachmentable.attachment_visibility(i) %> attachment">
+        <% if attachment.image? %>
+        
+          <%= link_to attachment.file_attachment.url(:original), class: 'fancybox',
+            data: { lightbox: "#{attachmentable.class.to_s.underscore}-#{attachmentable.id}-images" } do %>
+            <div class="image-holder">
+              <%= image_tag attachment.file_attachment.url(:medium_thumb) %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= link_to "https://docs.google.com/gview?url=#{attachment.file_attachment.url}&embedded=true", download: attachment.file_attachment_file_name, class: 'fancybox' do %>
+            <div class="image-holder <%= attachment.file_extension %>">
+              <%= image_tag Attachment::IMAGES_NAMES_MAP[attachment.file_extension.to_sym] %>
+              <span class="filename"><%= attachment.file_attachment_file_name %></span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

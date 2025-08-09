@@ -1,0 +1,53 @@
+<% stripe_customer = customer.retrieve_stripe_customer if customer %>
+
+<%= hidden_field_tag :stripe_card_token %>
+
+<% if stripe_customer %>
+  <% last4card = stripe_customer.sources.first ? stripe_customer.sources.first.last4 : t('general.payment_options.no_card') %>
+  <div class="form-group col-sm-12" id="stripe-payment-option">
+    <%= label_tag :payment_option, t('general.payment_options.select') %>
+    <%=
+      select_tag :payment_option,
+      options_for_select([
+        [t('general.payment_options.card_on_file', last4card: last4card), 'card_on_file'],
+        [t('general.payment_options.another_card'), 'another_card']
+      ]),
+      { class: 'form-control' }
+    %>
+  </div>
+<% else %>
+  <%= hidden_field_tag :payment_option, 'another_card' %>
+<% end %>
+
+<div hidden id="stripe-card-fields">
+  <div class="col-sm-12">
+    <div id="stripe_error">
+      <noscript><%= t 'general.no_javascript_error' %></noscript>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-6">
+    <%= label_tag :card_number, t('deal_purchases.card_number') %>
+    <%= text_field_tag :card_number, nil, autocomplete: :off, class: 'form-control', 'data-stripe' => 'number' %>
+  </div>
+
+  <div class="form-group col-sm-6">
+    <%= label_tag :card_code, t('deal_purchases.security_code') %>
+    <%= text_field_tag :card_code, nil, autocomplete: :off, class: 'form-control', 'data-stripe' => 'cvc' %>
+  </div>
+
+  <div class="col-sm-12">
+    <%= label_tag nil, t('deal_purchases.card_expiration') %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= select_month Time.zone.now, {add_month_numbers: false},
+        {class: 'form-control', name: 'card_month', id: 'card_month', 'data-stripe' => 'exp-month'} %>
+  </div>
+
+  <div class="form-group col-sm-6">
+    <%= select_year Time.zone.now,
+        {start_year: Date.today.year, end_year: Date.today.year + 15},
+        {class: 'form-control', name: 'card_year', id: 'card_year', 'data-stripe' => 'exp-year'}
+    %>
+  </div>
+</div>

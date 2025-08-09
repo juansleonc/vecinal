@@ -1,0 +1,21 @@
+<% selected = 'selected' if current_user.accountable.present? && current_user.accountable == community;
+  disabled = 'disabled' if current_user.accountable.present? || params[:role] == 'supplier'
+%>
+<div class="col-sm-4 col-lg-3 cm-gallery-grid-item community <%= selected %>" id="<%= community.class.name %>-<%= community.id %>">
+  <div class="cm-gallery-grid-item-content">
+    <%= link_to url_to_profile(community) do %>
+      <%= image_tag community.home_image.image.url(:medium_thumb) %>
+    <% end %>
+    <div class="details">
+      <div class="header">
+        <span class="name overflow-e"><%= community.name %></span>
+      </div>
+      <span class="overflow-e"><%= community.full_address %></span>
+      <% if selected %>
+        <%= link_to t('finish_registration.cancel_join_request'), finish_registration_cancel_path, class: 'green btn', remote: true %>
+      <% else %>
+        <%= link_to t('finish_registration.ask_to_join'), '#', class: "green ask-to-join btn #{disabled}", data: { code: community.code } %>
+      <% end %>
+    </div>
+  </div>
+</div>

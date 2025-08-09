@@ -1,0 +1,275 @@
+<div class="modal fade form-new-object edit-amenity" id="edit-amenity-modal-<%= @amenity.id %>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title"><%= t('general.edit_record', record_name: Amenity.model_name.human.capitalize) %></h4>
+        </div>
+        <div class="modal-body">
+          <%= form_for @amenity, remote: true do |f| %>
+            <div class="form-errors-container"></div>
+            <%= f.hidden_field :building_id %>
+            <div class="form-group">
+              <div class="dropdown as-select" data-target="#amenity_building_id">
+                <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                  <span>
+                    <div class="logo-wrapper">
+                      <%= image_tag @amenity.building.logo.url(:square) %>
+                      <span class="no-logo-letter"><%= @amenity.building.first_name_letter %></span>
+                    </div>
+                    <%= @amenity.building.name %>
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-up"></i>
+                </button>
+               <%= render 'shared/dropdown_as_select_list', objects: current_user.buildings %>
+              </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+              <%= f.text_field :name, class: 'form-control' %>
+            </div>
+            <hr/>
+            <div class="form-group check-with-text">
+              <label class="switch">
+                <%= f.check_box :rental_fee %>
+                <span class="slider round"></span>
+              </label>
+              <%= f.number_field :rental_value, skip_autolabel: true, placeholder: t('activerecord.attributes.amenity.rental_fee'),
+                disabled: !@amenity.rental_fee, step: 0.01, min: 0, class: 'form-control'
+              %>
+            </div>
+
+            <div class="form-group check-with-text">
+              <label class="switch">
+                <%= f.check_box :deposit %>
+                <span class="slider round"></span>
+              </label>
+              <%= f.number_field :deposit_value, skip_autolabel: true, placeholder: t('activerecord.attributes.amenity.deposit'),
+                disabled: !@amenity.deposit, step: 0.01, min: 0, class: 'form-control'
+              %>
+            </div>
+            <hr/>
+            <div class="form-group emoji-picker-container">
+              <%= f.text_area :description, class: 'form-control', data: { emojiable: true } %>
+            </div>
+            <hr/>
+            <div class="form-group availability-types">
+              <% Amenity::AVAILABILITY_TYPES.each do |at| %>
+                <div class="radio">
+                  <label><%= f.radio_button :availability_type, at %><%= t "amenities.availability_types.#{at}" %></label>
+                </div>
+              <% end %>
+            </div>
+            <hr/>
+
+            <div class="row avalilabilities-container <%= 'hidden' unless @amenity.availability_type == 'selected_hours' %>">
+              <% @amenity.availabilities.ordered.each do |availability| %>
+                <%= f.fields_for :availabilities, availability do |fa| %>
+                  <div class="col-xs-12 availavility">
+                    <div class="col-sm-3 col-xs-12 no-padding">
+                      <label class="checkbox-inline">
+                        <%= fa.check_box :active %>
+                        <strong><%= t('date.day_names')[availability.day] %></strong>
+                      </label>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-xs-6 display-flex">
+                      <!--select-timepicker-->
+                      
+                      <%#= fa.time_select :time_from, {ampm: true, minute_step: 30} , { class: 'form-control select-timepicker' }%>
+                      <%= fa.select :time_from, {}, {},{ class: 'form-control select-timepicker', data: { selected_time: availability.time_from.strftime('%H:%M')} }   %>
+                    </div>
+                    
+                    <div class="col-lg-4 col-sm-4 col-xs-6  display-flex">
+                      <%#= fa.time_select :time_from, {ampm: true, minute_step: 30} , { class: 'form-control select-timepicker' }%>
+                      <%= fa.select :time_to, {}, {},{ class: 'form-control select-timepicker', data: { selected_time: availability.time_to.strftime('%H:%M')} }   %>
+                    </div>
+                    <div class="col-sm-1 no-padding">
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+              <div class="col-xs-12"><hr/></div>
+
+            </div>
+
+
+            <h4 class="subtitle"><%= t('amenities.interval') %></h4>
+            <div class="form-group content-flex-conf">
+              <%= f.hidden_field :reservation_interval %>
+              
+              <div class="dropdown as-select" data-target="#amenity_reservation_interval">
+                <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                  <span>
+                      <%=  @amenity.reservation_interval >= 1 ? @amenity.reservation_interval.to_i : @amenity.reservation_interval  %>
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-up"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <% Amenity::INTERVAL.each do |object| %>
+                    <li>
+                      <%= link_to '#', data: { type:object, id: object} do %>
+                        <%=  object %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+
+              <div class="dropdown as-select" >
+                <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                  <span>
+                      <%=  t 'amenities.hours' %>
+                  </span>
+                
+                </button>
+                <ul class="dropdown-menu">
+                  <% Amenity::RESERVATION_LENGTH_TYPE.each do |object| %>
+                    <li>
+                      <%= link_to '#', data: { type:object, id: object} do %>
+                        <%=  t 'amenities.' + object %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+            <hr/>
+
+
+
+
+
+
+            <h4 class="subtitle"><%= t('amenities.subtitle_length') %></h4>
+            <div class="form-group content-flex-conf">
+              <%= f.hidden_field :reservation_length %>
+              
+              <div class="dropdown as-select length_hours" data-target="#amenity_reservation_length">
+                <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                  <span>
+                      <%=  @amenity.reservation_length >= 1 ? @amenity.reservation_length.to_i : @amenity.reservation_length  %>
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-up"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <% Amenity::MAX_RESERVATION_LENGTH_HOURS.each do |object| %>
+                    <li>
+                      <%= link_to '#', data: { type:object, id: object} do %>
+                        <%=  object %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              
+              <div class="dropdown as-select length_days" data-target="#amenity_reservation_length">
+                <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                  <span>
+                      <%=  @amenity.reservation_length >= 1 ? @amenity.reservation_length.to_i : @amenity.reservation_length  %>
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-up"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <% Amenity::MAX_RESERVATION_LENGTH_DAYS.each do |object| %>
+                    <li>
+                      <%= link_to '#', data: { type:object, id: object} do %>
+                        <%=  object %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+
+
+              <%= f.hidden_field :reservation_length_type %>
+              <div class="dropdown as-select" data-target="#amenity_reservation_length_type" id="amenity_reservation_length_type_selector">
+                <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                  <span>
+                      <%=  t 'amenities.' + @amenity.reservation_length_type %>
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-up"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <% Amenity::RESERVATION_LENGTH_TYPE.each do |object| %>
+                    <li>
+                      <%= link_to '#', data: { type:object, id: object} do %>
+                        <%=  t 'amenities.' + object %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+            <hr/>
+            <h4 class="subtitle"><%= t('amenities.subtitle_max') %></h4>
+            <div class="form-group content-flex-conf">
+              <%= f.hidden_field :max_reservations_per_user %>
+              <div class="dropdown as-select" data-target="#amenity_max_reservations_per_user">
+                <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                  <span>
+                      <%=  @amenity.max_reservations_per_user >= 1 ? @amenity.max_reservations_per_user.to_i : @amenity.max_reservations_per_user  %>
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-up"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <% Amenity::MAX_RESERVATION_PER_USER.each do |object| %>
+                    <li>
+                      <%= link_to '#', data: { type:object, id: object} do %>
+                        <%=  object %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              
+              
+
+              <%= f.hidden_field :max_reservations_per_user_type %>
+              <div class="dropdown as-select" data-target="#amenity_max_reservations_per_user_type">
+                <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                  <span>
+                    <%=  t 'amenities.' + @amenity.max_reservations_per_user_type %>
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-up"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <% Amenity::MAX_RESERVATION_PER_USER_TYPE.each do |object| %>
+                    <li>
+                      <%= link_to '#', data: { type:object, id: object} do %>
+                        <%=  t 'amenities.' + object %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              <hr>
+            </div>
+
+            <hr/>
+            
+            <div class="form-group check-with-text">
+              <label class="switch">
+                <%= f.check_box :auto_approval %>
+                <span class="slider round"></span>
+              </label>
+              <span><%= t('amenities.subtitle_approval') %></span>
+            </div>
+            <div class="clearfix">
+              <%= f.submit t('general.save'), class: 'btn btn-primary pull-right' %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<%= render 'amenities/js'%>

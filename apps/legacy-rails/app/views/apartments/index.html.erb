@@ -1,0 +1,33 @@
+<% @submenu_title = Apartment.model_name.human(count: 2).capitalize %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <div class="col-xs-12 no-padding">
+      <h1 class="with-right-button">
+        <i class="fa fa-bed"></i>
+        <%= Apartment.model_name.human(count: 2).capitalize %>
+      </h1>
+      <%= link_to '+ ' + t('general.create_record', record_name: Apartment.model_name.human),
+          new_company_apartment_path(@company), class: 'pull-right'
+      %>
+    </div>
+    <span class="italic page-descriptor"><%= t 'apartments.create_and_showcase' %></span>
+
+    <div class="finder pull-right col-sm-5 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-apartments-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <div class="col-xs-12 no-padding">
+      <div class="row image-gallery-grid" id="apartments">
+        <% @apartments.each do |apartment| %>
+          <div class="col-sm-3 img-gallery-column single-apartment">
+            <%= render 'apartments/apartment', apartment: apartment, company: @company %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+

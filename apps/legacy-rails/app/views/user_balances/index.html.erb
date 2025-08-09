@@ -1,0 +1,63 @@
+<% @submenu_item = 'payments' %>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 user-balances">
+  <div class="cm-nav-links">
+    <%= render 'shared/payments_nav_links', balances: 'active' %>
+    
+    <!-- Trigger modal -->
+    <% if can?(:create, AccountBalance) %>
+      <%= link_to t("account_balances.new_record"), '#', class: "btn btn-primary active hidden-xs", data: { toggle: 'modal', target: '#new-account-balance-modal' } %>
+    <% end %>
+  </div>
+
+  
+  <% if can?(:create, AccountBalance) %>
+    <div class="create-button visible-xs">
+      <div class="create-button-content">
+        <%= link_to t("account_balances.new_record"), '#', class: "btn btn-primary active", data: { toggle: 'modal', target: '#new-account-balance-modal' } %>
+      </div>
+    </div>
+  <% end %>
+  
+  
+  <%= render 'user_balances/filter' %>
+  
+  <!-- User balances -->
+  <ul class="list-group cm-list load-more-at-bottom" id="user-balances" data-next-path="<%= @next_path %>">
+    <% if @user_balances.present? %>
+      <%= render partial: 'user_balances/user_balance', collection: @user_balances %>
+    <% end %>
+
+    <div class="no-records <%= 'hidden' if @user_balances.present? %>">
+      <%= fa_icon 'credit-card', class: "fa-4x orange" %>
+      <p class="has-black-text"><%= t 'account_balances.no_records' %></p>
+    </div>
+
+    <div class='content-pagination'>
+      <%= page_entries_info @user_balances %>
+      <%= will_paginate @user_balances, :renderer => 'LinkRenderer' %>
+    </div>
+  </ul>
+
+  <!-- Modal for new record -->
+  <% if can? :create, AccountBalance %>
+    <div class="modal fade form-new-object" id="new-account-balance-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            <h4 class="modal-title">
+              <%= t 'general.create_record', record_name: t('account_balances.account_balance') %>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <%= render 'account_balances/form' %>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <% end %>
+</div>
+<%= render 'shared/modal_spinner' %>

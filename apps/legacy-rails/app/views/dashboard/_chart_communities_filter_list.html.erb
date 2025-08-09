@@ -1,0 +1,28 @@
+<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="stats-filter", id= "filter-communities-list">
+  <% options = { 
+    since: @start, 
+    model: @model,
+    step: @step_a.join('.'), 
+    until: @final,
+    backward: @backward_a.join('.'),
+    skip: true } %>
+
+  <li>
+    <%= link_to full_update_chart_path(options), class: 'with-icon-option element-filter', id: "all-users", remote: true, data: { class: "all" }  do %>
+      <i class="fa fa-circle-o with-background"></i>
+      <span><%= t 'general.all_communities' %></span>
+    <% end %>
+  </li>
+  
+  <% current_user.buildings.each do |building| %>
+    <% options[:community] = building.class.name %>
+    <% options[:id] = building.id %>
+    <li>
+      <%= link_to full_update_chart_path(options), id: anchor_id(building), remote: true,class: 'element-filter' , data: { class: "#{building.class.name}-#{building.id}" } do %>
+        <%= mi.business %>
+        <%#= render 'shared/logo_left', logoable: building %>
+        <span class="community-name"><%= building.name %></span>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

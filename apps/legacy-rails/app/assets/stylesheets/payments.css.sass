@@ -1,0 +1,36 @@
+@import utilities
+
+.inner-section.payments
+  div.list-group-item-content
+    padding: 10px
+    .contact-header
+      display: inline-block
+      line-height: 1em
+      img.logo
+        width: 50px
+      .username
+        padding: 0
+        .name
+          color: #000
+    .close-item-content
+      color: $gray
+    span.payment-date
+      margin-right: 10px
+    table
+      margin: 0
+      tr.totals td strong
+        display: inline-block
+        width: 50%
+      td.description
+        max-width: 270px
+  .panel.panel-default .panel-body.get-started
+    text-align: center
+    color: #000
+    padding: 30px
+    .icon
+      margin: 18px 0px
+    .info
+      line-height: 2em
+      color: $gray_text
+    @media (max-width: $sc_xxs)
+      padding: 20px 5px

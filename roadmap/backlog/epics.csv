@@ -1,0 +1,13 @@
+key,title,description,priority
+EPIC-001,Autenticación y Acceso,"OIDC, roles, perfiles, settings básicos. Base para todo el sistema.",P0
+EPIC-002,Social Básico (Mensajes/Comentarios),"Comunicación 1:N con inbox simple y comentarios en comunidad.",P0
+EPIC-003,Amenities y Reservas (MVP),"CRUD de amenities, disponibilidad simple, creación/cancelación de reservas con validaciones y auto‑aprobación opcional.",P0
+EPIC-004,ServiceDesk Básico,"Tickets (crear/asignar/cerrar), comentarios, filtros básicos.",P0
+EPIC-005,Documentos y Multimedia,"Carpetas raíz por rol/comunidad, subida/descarga de adjuntos, políticas básicas.",P1
+EPIC-006,Observabilidad y SLOs,"Dashboards RED/KPIs, trazas/logs, alertas SLO y runbooks mínimos.",P1
+EPIC-007,Seguridad Mínima y Cumplimiento,"MFA admin, CSP/headers, secretos seguros, backups DB, respuesta a incidentes.",P1
+EPIC-008,Búsqueda y Mejora de UX,"Búsquedas unificadas y mejoras de accesibilidad/i18n.",P2
+EPIC-009,Encuestas y Clasificados (Social+),"Reincorporar polls y clasificados con visibilidad y moderación básica.",P2
+EPIC-010,Pagos y Promociones,"Stripe Connect, deals/coupons, compras/canje y métricas.",P2
+EPIC-011,Ventas de Inmuebles,"Listados de propiedades, filtros, leads y programación de visitas.",P2
+EPIC-012,Analytics Avanzadas,"KPIs extendidos, cohortes, funnels y exportaciones.",P3

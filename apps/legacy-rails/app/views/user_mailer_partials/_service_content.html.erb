@@ -1,0 +1,31 @@
+<div>
+<b><%= t('general.number_request') + service_request.id.to_s + ' - ' + service_request.title %></b>
+</div>
+<br>
+<%= service_request.content %>
+
+<div style="background: #f4f7fa;padding: 1px 10px 10px 10px;">
+    <div class="header">
+        <h3><%= t 'general.details' %></h3>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <%= image_tag 'icons/error_outline.png', style: "float: left;margin-right: 10px;width: 18px;" %>
+        <div style="color:#acacae;"><%= t 'service_requests.case' %></div>
+        <div>#<%= service_request.id %></div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <%= image_tag 'icons/turned_in_not.png', style: "float: left;margin-right: 10px;width: 18px;" %>
+        <div style="color:#acacae;"><%= t 'general.category' %></div>
+        <div><%= service_request.category_translation %></div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <%= image_tag 'icons/event.png', style: "float: left;margin-right: 10px;width: 18px;" %>
+        <div style="color:#acacae;"><%= t 'general.when' %></div>
+        <p><%= service_request.created_at.strftime('%l:%M %P %b %e, %Y') %></p>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <%= image_tag 'icons/domain.png', style: "float: left;margin-right: 10px;width: 18px;" %>
+        <div style="color:#acacae;"><%= t 'general.community' %></div>
+        <%= service_request.user.accountable.name %>
+    </div>
+</div>

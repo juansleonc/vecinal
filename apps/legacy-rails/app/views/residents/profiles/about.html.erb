@@ -1,0 +1,127 @@
+<% @submenu_title = t('profiles.about'); @submenu_item = 'profile' if @user == current_user; can_update = can?(:update, @user) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 timeline-view">
+
+  <%= render 'residents/profiles/header' %>
+
+  <div class="cm-tabs merge-with-content switcher-content">
+    <ul class="nav nav-tabs">
+      <li class="active black">
+        <%= link_to '#', data: { target: '#contact-information' } do %>
+          <i class="fa fa-address-card"></i> <%= t('profiles.contact_information') %>
+        <% end %>
+      </li>
+      <li class="black">
+        <%= link_to '#', data: { target: '#other-details' } do %>
+          <i class="fa fa-birthday-cake"></i> <%= t('profiles.other_details') %>
+        <% end %>
+      </li>
+    </ul>
+    <div class="white-bar"></div>
+  </div>
+
+  <div class="panel panel-default merge-with-tabs profile-about">
+    <div class="panel-body">
+      <%= form_for @user do |f| %>
+        <%= render 'shared/model_errors', resource: @user %>
+        <%= f.fields_for :contact_details do |cd| %>
+          <% c_details = @user.contact_details %>
+          <table class="table switchable visible" id="contact-information">
+            <tbody>
+              <%= profile_about_input_row f, :first_name, @user.first_name, can_update if current_user.check_settings(current_user, "who_can_see_your_name", @user)%>
+              <%= profile_about_input_row f, :last_name, @user.last_name, can_update if current_user.check_settings(current_user, "who_can_see_your_name", @user)%>
+              <%= profile_about_input_row f, :accountable, link_to(@user.accountable.name, link_to_my_community(@user)), false %>
+              <% if current_user.check_settings(current_user,"who_can_see_my_profile", @user) %>
+                <%= profile_about_input_row cd, :apartment_numbers_string,
+                  c_details.apartment_numbers_joined,
+                  can?(:update_apartment_numbers, @user.contact_details),
+                  label: t('general.apartment_number') do %>
+                  <% cd.text_field(:apartment_numbers_string, value: c_details.apartment_numbers_joined) %>
+                <% end %>
+              
+                <% role = @user.role? ? t("roles.#{@user.role}") : '' %>
+              
+                <tr>
+                  <td>
+                    <%= f.label(local_assigns[:label] || :role) %>                   
+                  </td>
+                  <td>
+                    <%= t("roles.#{@user.role}") %>
+                    <% if !@user.confirmed_at.present? %>
+                      <span class="unconfirmed">(<%= t "contacts.unconfirmed" %>)</span>
+                    <% end %>
+                    <% 
+                    if @user.id != current_user.id
+                      if can_update %>
+                        <%= render 'residents/profiles/dropdown' %>
+                      <% end 
+                    end
+                    %>
+                  </td>
+                  <% if can_update %>
+                    <td class="to-edit hidden">
+                      <%= f.hidden_field :accountable_type,  value: @user.accountable_type %>
+                      <%= f.hidden_field :role,  value: @user.role, readonly:'true' %>
+                      <%= f.text_field 'role_text',  value: @user.role, readonly:'true' %>
+                      <% if can_update %>
+                        <%= render 'residents/profiles/dropdown' %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tr>
+
+                <%= profile_about_input_row cd, :move_in_date, c_details.move_in_date.try(:strftime, '%B %e, %Y'), can_update  do %>
+                  <% cd.text_field :move_in_date, value: c_details.move_in_date.try(:strftime, '%B %e, %Y'), class: 'trigger-datepicker' %>
+                <% end %>
+                
+                <%= profile_about_input_row f, :email, @user.email, false %>
+                <%= profile_about_input_row cd, :phone, c_details.phone, can_update %>
+                <%= profile_about_input_row cd, :mobile_phone, c_details.mobile_phone, can_update %>
+                <%= profile_about_input_row cd, :garage, c_details.garage, can_update %>
+                <%= profile_about_input_row cd, :locker, c_details.locker, can_update %>
+                <%= profile_about_input_row cd, :links, c_details.links, can_update %>
+                <%= profile_about_input_row cd, :emergency_contact_name, c_details.emergency_contact_name, can_update %>
+                <%= profile_about_input_row cd, :emergency_contact_phone, c_details.emergency_contact_phone, can_update %>
+              <% end %>
+            </tbody>
+          </table>
+
+          <table class="table switchable" id="other-details">
+            <tbody>
+              <% if current_user.check_settings(current_user, "who_can_see_my_profile", @user) %>
+                <%= profile_about_input_row f, :locale, t("general.locales.#{@user.locale}"), can_update do %>
+                  <% f.select :locale, CM_LOCALES.map{ |locale| [t("general.locales.#{locale}"), locale] } %>
+                <% end %>
+                <%= profile_about_input_row cd, :birth_day, c_details.birth_day.try(:strftime, '%B %d'), can_update do %>
+                  <% text_field_tag :birth_day, '', class: 'trigger-datepicker-birthday',
+                    data: { target: '#user_contact_details_attributes_birth_day' }
+                  %>
+                <% end %>
+                <%= profile_about_input_row cd, :birth_year, c_details.birth_year, can_update do %>
+                  <% cd.select :birth_year, ((Time.zone.now.year - 100)..(Time.zone.now.year - 10)), { include_blank: true } %>
+                <% end %>
+                <% sex = c_details.sex? ? t("general.sexes.#{c_details.sex}") : ''  %>
+                <%= profile_about_input_row cd, :sex, sex, can_update do %>
+                  <% cd.select :sex, SEXES.map{ |s| [t("general.sexes.#{s}"), s] } %>
+                <% end %>
+                <%= profile_about_input_row cd, :work, c_details.work, can_update %>
+                <%= profile_about_input_row cd, :education, c_details.education, can_update %>
+
+                <% relationship = c_details.relationship? ? t("general.relationships.#{c_details.relationship}") : '' %>
+                <%= profile_about_input_row cd, :relationship, relationship, can_update do %>
+                  <% cd.select :relationship, RELATIONSHIPS.map{ |r| [t("general.relationships.#{r}"), r] } %>
+                <% end %>
+                <%= profile_about_input_row cd, :hometown, c_details.hometown, can_update %>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+        <br/>
+        <% if can?(:manage, @user) %>
+          <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+          <%= link_to t('general.cancel'), '#', class: 'btn btn-default', id: 'cancel-changes' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

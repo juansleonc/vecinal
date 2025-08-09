@@ -1,0 +1,17 @@
+$('#new-message-select-recipients').prop('disabled', false).empty().val(null).change();
+<% if current_user.admin? %>
+  <% @buildings.each do |building|%>
+    name = '<%= building.name %>'; details = "<%= building.address + ', ' + building.code %>";
+    $('#new-message-select-recipients').append(
+      $('<option>',
+        { value: '<%= building.id %>', 'data-logo': '<%= asset_url building.logo.url(:square) %>',
+          'data-name': name, 'data-details': details
+        }
+      ).text(name  + ' ' + details)
+    );
+  <% end %>
+<% elsif current_user.resident? %>
+  <% building = current_user.accountable %>
+  $('#new-message-select-recipients').append($('<option>', { value : '<%= building.id %>', 'data-name': '<%= building.name %>' }));
+  $('#new-message-select-recipients').val(["<%= building.id %>"]).change().prop('disabled', true);
+<% end %>

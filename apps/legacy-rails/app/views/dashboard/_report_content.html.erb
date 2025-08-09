@@ -1,0 +1,33 @@
+<% line_length = @component == 'report_comp' ? 30 : 12 %>
+<div class="panel-content" id="<%= table_name(model) %>-table" data-model = "<%= table_name(model) %>">
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= t('general.community') %></th>
+        <th><%= truncate t("stats.#{col1}"), length: line_length %></th>
+        <th><%= truncate t("stats.#{col2}"), length: line_length %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cols_params = @company if model.method("#{col1}_count").arity == 4 %>
+      
+      <% 
+      buildings = params[:building] ? [Building.find(params[:building])] : current_user.buildings
+      
+      buildings.each do |building| %>
+        <% cols_params = @company if model.method("#{col1}_count").arity == 4 %>
+        <tr class='<%= "#{building.class.name}-#{building.id} " %>'>
+          <td><%= building.name %></td>
+          <td class="col1"><%= model.send("#{col1}_count", start, finish, building.all_users, *cols_params) %></td>
+          <td class="col2"><%= model.send("#{col2}_count", start, finish, building.all_users) %></td>
+        </tr>  
+      <% end %>
+      <tr class="total">
+        <td><%= t 'general.total' %></td>
+        <td class="total1"></td>
+        <td class="total2"></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="between-date"><%= between_date finish.to_time, start.to_time %></p>
+</div>

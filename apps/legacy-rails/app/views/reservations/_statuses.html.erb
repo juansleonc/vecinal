@@ -1,0 +1,128 @@
+<% 
+responsible = reservation.responsible 
+unless responsible
+  responsible = reservation.amenity.building.get_admin_default_reservations
+end
+%>
+<div class="dropdown">
+  <span class="dropdown-toggle" data-toggle="<%= 'dropdown' if can? :change_responsible, reservation %>">
+    <% responsible_name = responsible.is_a?(Company) ? 'Unassigned' : responsible.full_name %>
+    <div class="logo-wrapper left">
+      <%= image_tag responsible.logo.url(:square), data: { toggle: 'popover', content: responsible_name,
+        trigger: 'hover', placement: 'top' } %>
+      <span class="no-logo-letter"><%= responsible.first_name_letter %></span>
+    </div>
+  </span>
+  <ul class="dropdown-menu">
+    <% current_user.company_contacts.each do |admin| %>
+      <li>
+        <!--change_responsible_reservation_path(reservation, responsible_id: admin.id)-->
+        <%= link_to change_responsible_reservation_path(reservation, responsible_id: admin.id) do %>
+          <div class="logo-wrapper">
+            <%= image_tag admin.logo.url(:square) %>
+            <span class="no-logo-letter"><%= admin.first_name_letter %></span>
+          </div>
+          <%= admin.full_name %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<% 
+if only_status
+  %>
+    <span class="badge status-<%= reservation.status %>">
+      <%= t("reservations.statuses.#{reservation.status}") %>
+    </span>
+  <%
+else
+  if current_user.admin?
+ %>
+ <div class="dropdown" id="reservation-status-selector">
+    <button class="badge status-<%= reservation.status %>" data-toggle="dropdown">
+      <span>
+        <%= t("reservations.statuses.#{reservation.status}") %>
+      </span>
+    </button>
+    
+    <ul class="dropdown-menu">
+      <li class="dropdown-title">
+        <div>Status</div>
+      </li>
+      <li><hr></li>
+      
+      <% Reservation::STATUSES.each do |status| %>
+          <li>
+            <a class="status-<%= status %>" data-remote="true" rel="nofollow" data-method="PUT" href="<%= reservation_change_status_path(reservation, status) %>">
+              <%= t("reservations.mark_statuses.#{status}") %>
+              <% if reservation.status == status %>
+                <i class="fa fa-check" aria-hidden="true"></i>
+              <% end %>
+            </a>
+          </li>
+        <% end %>
+        <% if can? :delete, reservation %>
+          <li>
+            <%= confirm_destroy reservation, remote: true do %>
+              <%= t('general.delete', object_name: '').upcase %>
+            <% end %>
+          </li>
+        <% end %>
+    
+  </ul>
+</div> 
+ <%
+ else
+  %>
+    <span class="badge status-<%= reservation.status %>">
+      <%= t("reservations.statuses.#{reservation.status}") %>
+    </span>
+  <%
+ end
+end
+
+=begin
+if @only_status == true %>
+  <span class="badge status-<%= reservation.status %>">
+         <%= t("reservations.statuses.#{reservation.status}") %>
+      </span>
+<% elsif %>
+<div class="dropdown" id="reservation-status-selector">
+    <button class="badge status-<%= reservation.status %>" data-toggle="dropdown">
+      <span>
+        <%= t("reservations.statuses.#{reservation.status}") %>
+      </span>
+    </button>
+    
+    <ul class="dropdown-menu">
+      <li class="dropdown-title">
+        <div>Status</div>
+      </li>
+      <li><hr></li>
+      
+      <% Reservation::STATUSES.each do |status| %>
+          <li>
+            <a class="status-<%= status %>" data-remote="true" rel="nofollow" data-method="PUT" href="<%= reservation_change_status_path(reservation, status) %>">
+              <%= t("reservations.mark_statuses.#{status}") %>
+              <% if reservation.status == status %>
+                <i class="fa fa-check" aria-hidden="true"></i>
+              <% end %>
+            </a>
+          </li>
+        <% end %>
+        <% if can? :delete, reservation %>
+          <li>
+            <%= confirm_destroy reservation, remote: true do %>
+              <%= t('general.delete', object_name: '').upcase %>
+            <% end %>
+          </li>
+        <% end %>
+    
+  </ul>
+</div>
+
+<%end
+
+=end
+%>

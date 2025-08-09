@@ -1,0 +1,29 @@
+<div class="logo-container">
+  <%= link_to imageable.logo.url, data: { lightbox: true } do %>
+    <%= image_tag imageable.logo.url(:standard) %>
+    <span class="no-logo-letter"><%= imageable.first_name_letter %></span>
+  <% end %>
+
+  <% if can? :edit, imageable %>
+    <div class="dropdown change-image-icon">
+      <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+        <i class="fa fa-camera"></i> <span><%= t 'images.change_profile' %></span>
+      <% end %>
+      <ul class="dropdown-menu">
+        <li><%= link_to 'Change image', '#', class: 'change-image', data: { form_target: 'form#new-logo' } %></li>
+        <% if imageable.logo? %>
+          <li>
+            <%= confirm_destroy imageable.path_for_destroy_logo, method: 'patch' do %>
+              <%= t 'general.delete', object_name: '' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <%= form_for imageable, url: imageable.path_for_update_logo, method: 'patch', html: { class: 'hidden', id: 'new-logo' } do |f| %>
+      <%= f.file_field :logo, accept: Image.allowed_extensions %>
+    <% end %>
+  <% end %>
+
+</div>
+

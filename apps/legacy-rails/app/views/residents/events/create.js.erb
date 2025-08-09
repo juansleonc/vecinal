@@ -1,0 +1,8 @@
+<% if @event.persisted? %>
+  window.location.href = "<%= events_path %>";
+<% else %>
+  
+  $('input[type=submit]').prop("disabled", false);
+  $("#new-event-modal .form-errors-container").html("<%= j render('shared/model_errors', resource: @event) %>");
+  $(".modal#new-event-modal .attachments-container").empty();
+<% end %>

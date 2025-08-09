@@ -1,0 +1,57 @@
+<li class="list-group-item contact <%= contact.accountable.class.name %>-<%= contact.accountable.id %>" id="contact-<%= contact.id %>">
+  <div class="header">
+    <%= image_tag(contact.logo.url(:standard), class: 'logo') %>
+    <%= link_to user_profile_path(contact.id), class: 'username' do %>
+      <span class="name with-profile-banner" data-user-id="<%= contact.id %>"><%= contact.full_name %></span>
+      <br/>
+      <span class="info"><i class="fa fa-building-o"></i> <%= contact.accountable.name %></span>
+      <% if contact.admin? || ( current_user.admin? && contact.resident? ) %>
+        <span class="info">, <%= t('contacts.unit') %> <%= contact.contact_details.apartment_number %></span>
+        <br/>
+        <span class="info"><i class="fa fa-mobile"></i> <%= number_to_phone contact.accesible_phone %></span>
+        <% if contact.contact_details.links.present? %>
+          <br/>
+          <span class="info"><i class="fa fa-share"></i> <%= contact.contact_details.links %></span>
+        <% end %>
+        <br/>
+        <span class="info"><i class="fa fa-share"></i> <%= contact.email %></span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= link_to '#', class: 'modal-or-remote', data: { target: "#new-message-modal-contact-#{contact.id}",
+      path: new_message_path(to_contact: contact.id) } do %>
+      <i class="fa fa-envelope-o"></i>
+    <% end %>
+    <%= link_to user_profile_path(contact.id) do %>
+      <i class="fa fa-user-circle-o"></i>
+    <% end %>
+
+    <div class="dropdown">
+      <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, id: "dropdown-options-contact-#{contact.id}" do %>
+        <i class="fa fa-ellipsis-v"></i>
+      <% end %>
+      <ul class="dropdown-menu" role="menu">
+        <li role="presentation">
+          <%= link_to '#', class: 'modal-or-remote', data: { target: "#new-message-modal-contact-#{contact.id}",
+            path: new_message_path(to_contact: contact.id) } do %>
+            <i class="fa fa-envelope-o"></i> <%= Message.model_name.human.capitalize %>
+          <% end %>
+        </li>
+        <li role="presentation">
+          <%= link_to user_profile_path(contact.id) do %>
+            <i class="fa fa-user-circle-o"></i> <%= t('profiles.timeline') %>
+          <% end %>
+        </li>
+        <% if can? :expel, contact %>
+          <li role="presentation">
+            <%= confirm_destroy contact.reject_path(current_user.accountable), method: :post, remote: true do %>
+              <i class="fa fa-trash-o"></i> Remove user
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</li>

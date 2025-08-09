@@ -1,0 +1,32 @@
+<div>
+<b><%= reservation.amenity.name %></b>
+</div>
+<br>
+<%= reservation.message if content.blank? %>
+<%= content %>
+
+<div style="background: #f4f7fa;padding: 1px 10px 10px 10px;">
+    <div class="header">
+        <h3><%= t 'general.details' %></h3>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <%= image_tag 'icons/event.png', style: "float: left;margin-right: 10px;" %>
+        <div style="color:#acacae;"><%= t 'general.when' %></div>
+        <div><%= I18n.localize reservation.date , format: '%a %d %b, %Y' %></div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <%= image_tag 'icons/schedule.png', style: "float: left;margin-right: 10px;" %>
+        <div style="color:#acacae;"><%= t 'general.time' %></div>
+        <div><%= reservation.time_from.strftime '%H:%M' %> - <%= reservation.time_to.strftime '%H:%M' %></div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <%= image_tag 'icons/domain.png', style: "float: left;margin-right: 10px;" %>
+        <div style="color:#acacae;"><%= t 'general.community' %></div>
+        <%= reservation.amenity.building.name %>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <%= image_tag 'icons/crop_original.png', style: "float: left;margin-right: 10px;" %>
+        <div style="color:#acacae;"><%= t 'general.amenity' %></div>
+        <%= reservation.amenity.name %>
+    </div>
+</div>

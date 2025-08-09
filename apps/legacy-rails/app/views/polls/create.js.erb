@@ -1,0 +1,15 @@
+<% if @poll.persisted? %>
+  $('.modal#new-poll-modal').modal('hide');
+  <% if remotipart_submitted? %>
+    $('#polls').prepend('<%= j render(@poll) %>');
+  <% else %>
+    $('#polls').prepend('<%= j render(@poll) %>');
+  <% end %>
+  clean_form($('.modal#new-poll-modal form#new_poll'));
+  launch_date_picker();
+  update_communities_filter_counters();
+  $('.empty-items-container').remove();
+<% else %>
+  $("#new-poll-modal .errors-container").html("<%= j render('shared/model_errors', resource: @poll) %>");
+  $(".modal#new-poll-modal .attachments-container").empty();
+<% end %>

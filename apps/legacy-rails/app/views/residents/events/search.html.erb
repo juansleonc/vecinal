@@ -1,0 +1,15 @@
+<% @submenu_title = 'Search'; @action_for_search = search_events_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 events-index">
+
+  <%= render 'shared/search_results_headers', current_model: Event.model_name.human(count: 2).capitalize %>
+
+  <% if @events.present? %>
+    <div class="cols-divided-sm-2 load-more-at-bottom" id="events" data-next-path="<%= @next_path %>">
+      <%= render partial: 'residents/events/event', collection: @events %>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-calendar', objects: Event.model_name.human(count: 2) %>
+  <% end %>
+
+</div>

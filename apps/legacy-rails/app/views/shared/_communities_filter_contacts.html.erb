@@ -1,0 +1,63 @@
+<div class="dropdown " data-items="<%= items %>" id="communities-filter-new">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+    <span class="text">
+      <i class="fa fa-circle-o with-background"></i>
+      <%= t('general.all_communities') %> (<span class="all-items-count-new"><%= @total_invites %></span>)
+    </span>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <% 
+    class_objects ||= 'Items'
+    with_filter_options ||= false 
+    %>
+    <li>
+      <%= link_to contacts_url, class: "with-logo", data: { class: 'display-all' } do %>
+        <i class="fa fa-circle-o with-background"></i> <%= t 'general.all_communities' %> (<span class="all-items-count-new"><%= @total_invites %></span>)
+      <% end %>
+    </li>
+
+    <% if local_assigns[:width_public] %>
+      <li>
+        <%= link_to '#', class: 'with-logo', data: { class: 'Public-0' } do %>
+          <i class="fa fa-globe with-background"></i> <%= t 'general.public' %> (<span class="items-count"></span>)
+        <% end %>
+      </li>
+    <% end %>
+    <%
+    html = '';
+    param_query = "&query=#{params[:query]}" if param_query.present?
+    company = current_user.my_company
+    @contacts_by_accountable.each do |contact|
+        
+      contact.each do |type, qty|
+        if type == company.class.name + '-' +company.id.to_s
+          %>
+            <li>
+              <%= link_to "/contacts?c=" + company.id.to_s, class: 'with-logo' do %>
+                <%= render 'shared/logo_left', logoable: company, left: '' %>
+                <%= company.name %> (<span class="items-count"><%= qty %></span>)
+              <% end %>
+            </li>
+          <%
+        end 
+
+        current_user.buildings.each do |building| 
+        if type == building.class.name + '-' + building.id.to_s
+          %>
+          <li>
+            <%= link_to "/contacts?b=" + building.id.to_s, class: 'with-logo' do %>
+              <%= render 'shared/logo_left', logoable: building, left: '' %>
+              <%= building.name %> (<span class="items-count"><%= qty %></span>)
+            <% end %>
+          </li>
+          <% 
+          end
+        end 
+        
+      
+      end
+    end
+    %>
+  </ul>
+</div>

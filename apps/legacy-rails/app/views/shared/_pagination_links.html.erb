@@ -1,0 +1,15 @@
+<% if @total > 0 %>
+  <div class="cm-pagination hidden-xs">
+  <% until_count = [@offset + @limit, @total].min %>
+    <span class="counters"><%= @offset + 1 %> - <%= until_count %> of <%= @total %></span>
+    <div class="btn-group">
+      <% query = "&query=#{params[:query]}" if params[:query].present? %>
+      <%= link_to "#{request.path}?page=#{@page - 1}&order=#@order#{query}", class: 'btn btn-default', disabled: @offset == 0 do %>
+        <i class="fa fa-chevron-left"></i>
+      <% end %>
+      <%= link_to "#{request.path}?page=#{@page + 1}&order=#@order#{query}", class: 'btn btn-default', disabled: until_count == @total do %>
+        <i class="fa fa-chevron-right"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>

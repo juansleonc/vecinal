@@ -1,0 +1,25 @@
+<div class="cols-divided-banner new-review">
+  <%= render 'shared/logo_left', logoable: current_user %>
+  <div><%= t 'reviews.tell_people' %></div>
+  <% Review::MAX_RANK.times do |i| %>
+    <%= link_to '#', data: { toggle: 'modal', target: '#new-review-modal', rank: i + 1 } do %>
+      <i class="fa fa-star"></i>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="modal fade form-new-object" id="new-review-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"><%= Review.model_name.human.capitalize %></h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'reviews/form', reviewable: reviewable %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<% if @account.persisted? %>
+  <% if request.referrer == payment_accounts_url %>
+    $('.modal#new-payment-account-modal-<%= @account.building.id %>').modal('hide');
+    $('#buildings #building-<%= @account.building.id %>').replaceWith(
+      "<%= j render('payment_accounts/payment_account', payment_account: @account.building) %>"
+    );
+    toastr.success('<%= t "payments.account_created" %>');
+  <% else %>
+    <% flash[:notice] = t 'payments.account_created' %>
+    window.location.replace('<%= payment_accounts_url %>');
+  <% end %>
+<% else %>
+  $(".modal#new-payment-account-modal-<%= @account.building.id %> .form-errors-container").html(
+    "<%= j render('shared/model_errors', resource: @account) %>"
+  );
+<% end %>

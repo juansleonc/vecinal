@@ -1,0 +1,55 @@
+<% commentable ||= current_user %>
+<div class="cols-divided-banner new-timeline-comment-button">
+  <%= link_to '#', data: { toggle: 'modal', target: '#new-timeline-comment-modal' }, class: 'create-new' do %>
+    <% add_filter = if request.path == news_feed_path then true else false end %>
+    <% class_filter = 'filter' if add_filter %>
+    <div class="clearfix <%= class_filter %>">
+      <%= render 'shared/logo_left', logoable: current_user %>
+      <%= t 'profiles.whats_new' %>
+      <i class="fa fa-camera pull-right"></i>
+    </div>
+    <% if add_filter %>
+      <%= render 'comments/timeline_comments_filter', objects_name: 'comments' %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="modal fade form-new-object new-timeline-comment" id="new-timeline-comment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"><%= t('general.create_timeline_comment') %></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for Comment.new, remote: true do |f| %>
+          <div class="form-errors-container"></div>
+          <%= f.hidden_field :commentable_type, value: commentable.class.name %>
+          <%= f.hidden_field :commentable_id, value: commentable.id %>
+
+          <div class="user clearfix">
+            <%= render 'shared/logo_left', logoable: current_user %>
+            <strong><%= current_user.full_name %></strong>
+          </div>
+          <br/>
+
+          <div class="form-group with-icon emoji-picker-container">
+            <%= f.text_area :content, class: 'form-control', placeholder: t('comments.placeholder'), data: { emojiable: true } %>
+            <%= link_to_add_attachment f %>
+          </div>
+
+          <div class="form-group no-margin">
+            <div class="row attachments-container"></div>
+          </div>
+
+          <div class="buttons-right">
+            <%= render 'shared/dropdown_as_select_for_shareable', f: f if local_assigns[:allow_shareable] %>
+            <%= f.submit t('general.post'), class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

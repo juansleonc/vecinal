@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  markable_id: 1
+  markable_type: MyString
+  user_id: 
+  label: MyString
+
+two:
+  markable_id: 1
+  markable_type: MyString
+  user_id: 
+  label: MyString

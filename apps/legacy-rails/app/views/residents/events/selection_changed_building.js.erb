@@ -1,0 +1,11 @@
+$('#new-event-select-recipients').prop('disabled', false).empty().val(null).change();
+<% @buildings.each do |building|%>
+  name = '<%= building.name %>'; details = "<%= building.address + ', ' + building.code %>";
+  $('#new-event-select-recipients').append(
+    $('<option>',
+      { value: '<%= building.id %>', 'data-logo': '<%= asset_url building.logo.url(:square) %>',
+        'data-name': name, 'data-details': details
+      }
+    ).text(name  + ' ' + details)
+  );
+<% end %>

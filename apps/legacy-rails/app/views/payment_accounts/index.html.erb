@@ -1,0 +1,26 @@
+<% @submenu_title = t('payments.name')
+  @submenu_item = 'payments'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 payment-accounts">
+
+  <div class="cm-nav-links"><%= render 'shared/payments_nav_links', activations: 'active' %></div>
+
+  <% if @payment_accounts.present? %>
+    <ul class="list-group cm-list as-table load-more-at-bottom" id="buildings" data-next-path="<%= @next_path %>">
+      <li class="list-group-item clearfix header gray-bg">
+        <div class="col-xs-4"><%= t 'users.community' %></div>
+        <div class="col-xs-3"><%= t 'users.status' %></div>
+        <div class="col-xs-3"><%= t 'general.verification' %></div>
+        <div class="col-xs-2"><%= t 'general.action' %></div>
+      </li>
+      <%= render partial: 'payment_account', collection: @payment_accounts %>
+    </ul>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-building', objects: Building.model_name.human(count: 2) %>
+  <% end %>
+  <div class='content-pagination'>
+      <%= page_entries_info @payment_accounts %>
+      <%= will_paginate @payment_accounts, :renderer => 'LinkRenderer' %>
+    </div>
+</div>
+

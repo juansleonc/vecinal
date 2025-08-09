@@ -1,0 +1,133 @@
+@import 'utilities'
+body 
+  .content-box 
+    .content 
+      #calendar
+        .fc-view-container
+          table 
+            margin: 0px
+            tr
+              td
+                padding: 0px
+              .fc-row.fc-week.fc-widget-content
+                height: 0px !important
+
+#amenities
+  .header
+    .name
+      color: black
+      font-size: 12px
+      font-weight: 600
+  .amenity-panel-content 
+    font-size: 0.8em
+    color: #999999
+    padding: 10px 5px
+    box-shadow: 1px 1px 4px 0px #8a8a8a
+    text-align: center
+    background-color: white
+    margin-bottom: 15px
+    .actions 
+      a
+        color: gray
+    a
+      .logo-wrapper
+        img
+          width: 90px
+  .details
+    background-color: white
+    padding: 7px 10px
+    font-size: 12px 
+    .review-avg-stars 
+      padding-bottom: 30px
+      i.fa
+        color: gold
+        font-size: 1.2em
+    .footer
+      height: 31px
+      display: flex
+      a
+        margin: auto
+
+
+
+.amenity.cm-gallery-grid-item .cm-gallery-grid-item-content
+  i.fa.no-available
+    font-size: 30px
+    color: red
+    position: absolute
+    top: 5px
+    right: 5px
+.inner-section.show-amenity.timeline-view
+  .content-reservations
+    width: 100%
+    display: flex
+    justify-content: flex-end
+  .name-and-options
+    padding: 10px
+  .dropdown.pull-right.options
+    bottom: 15px
+  .row.content-boxes
+    margin: 0 -5px
+    .content-box-container
+      padding: 0 5px
+  .home-image .image-container i.fa.no-available
+    position: absolute
+    font-size: 40px
+    color: red
+    top: 10px
+    right: 10px
+
+.modal.form-new-object.edit-amenity
+  .subtitle
+    font-family: "Varela Round", sans-serif
+    margin-top: 0
+    color: black
+    font-weight: 600
+    font-size: 16px
+    margin-bottom: 15px
+  .content-flex-conf
+    display: flex
+    #amenity_reservation_length, #amenity_max_reservations_per_user
+      margin-right: 5px
+      width: 50%
+    .dropdown.as-select
+      margin-left: 5px
+      width: 50%
+    .avalilabilities-container
+    .availavility
+      margin-bottom: 10px
+      input.form-control
+        height: 35px
+        background-color: $blue_gray_backgrond
+      span.hours-separator
+        float: left
+        line-height: 30px
+
+
+.dropdown.availabily.pull-left.open
+  ul
+    width: 255px
+    padding: 16px
+.edit_amenity
+  .display-flex
+    .selector-picker
+      padding: 8px 
+
+#content_filter_month
+  width: 160px
+  .input-group-addon
+    border: none
+    i.material-icons
+      font-size: 15px
+  #filter_month
+    border: none
+    background-color: #ececec
+    box-shadow: none
+
+@media (max-width: $sc_xs)
+  a.btn-reserve
+    width: 20%
+    text-align: center
+    margin-bottom: 10px
+    margin-left: 80%
+    padding: 4px 6px

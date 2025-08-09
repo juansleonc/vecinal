@@ -1,0 +1,4 @@
+$('#coupon-redemption-<%= @coupon_redemption.id %> a[data-toggle="popover"]').popover('destroy');
+$('#coupon-redemption-<%= @coupon_redemption.id %>').replaceWith('<%= j render("coupon_redemptions/update_coupon_redemption", redemption: @coupon_redemption) %>');
+$('#coupon-redemption-<%= @coupon_redemption.id %> a[data-toggle="popover"]').popover();
+count_redemptions_redeemed();

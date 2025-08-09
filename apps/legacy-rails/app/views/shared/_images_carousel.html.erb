@@ -1,0 +1,20 @@
+<div id="carousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <% model_object.images.each_index do |i| %>
+      <li data-target="#carousel" data-slide-to="<%= i %>" class="<%= 'active' if i == 0 %>"></li>
+    <% end %>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <% model_object.images.each do |image| %>
+      <div class="item <%= 'active' if image == model_object.main_image %>" >
+        <%= image_tag image.image.url(:medium_thumb), width: '100%' %>
+      </div>
+    <% end %>
+  </div>
+  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+    <span class="fa fa-chevron-circle-left" aria-hidden="true"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+    <span class="fa fa-chevron-circle-right" aria-hidden="true"></span>
+  </a>
+</div>

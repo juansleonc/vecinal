@@ -1,0 +1,9 @@
+$('#new-event-select-recipients').empty().val(null).change();
+<% if current_user.role == "administrator"%>
+  $('#new-event-select-recipients').append(
+    $('<option>',
+      { value : '<%= @company.id %>', 'data-name': '<%= @company.name %>' }
+    ).text('<%= @company.name %> , <%= @company.address%>')
+  );
+  $('#new-event-select-recipients').val(["<%= @company.id %>"]).change().prop('disabled', true);
+<% end %>

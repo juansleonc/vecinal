@@ -1,0 +1,86 @@
+<%= form_for account, remote: true do |f| %>
+  <div class="form-errors-container"></div>
+  <table class="table <%= account.building.try :country_code %>">
+    <tbody>
+      <%= f.hidden_field :building_id %>
+      <% unless account.building_id? %>
+        <%= f.hidden_field :country %>
+        <% buildings = current_user.buildings %>
+        <tr>
+          <td><label><%= Building.model_name.human.capitalize %></label></td>
+          <td>
+            <div class="dropdown buildings as-select" data-target="#payment_account_building_id">
+              <button class="dropdown-toggle" data-toggle="dropdown" id="building-dropdown">
+                <span>Select building</span>
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <ul class="dropdown-menu" aria-labelled-by="building-dropdown">
+                <% buildings.each do |building| %>
+                  <li>
+                    <%= link_to '#', data: { id: building.id, country: building.country, cc: building.country_code } do %>
+                      <%= render 'shared/logo_left', logoable: building %>
+                      <%= building.name %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Country</label></td>
+          <td><label id="country"></label></td>
+        </tr>
+      <% end %>
+      <tr class="no-bordered">
+        <td><label>Country</label></td>
+        <td>
+          <%= f.select :country, [['Canada', 'CA'], ['USA', 'US'], ['Colombia', 'CO']], {selected: account.building.try(:country_code) },
+            { class: 'form-control' }
+          %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= f.label :bank_name %></td>
+        <td><%= f.text_field :bank_name, class: 'form-control' %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :account_name %></td>
+        <td><%= f.text_field :account_name, class: 'form-control' %></td>
+      </tr>
+      <tr class="variable co">
+        <td><%= f.label :account_type %></td>
+        <td><%= f.text_field :account_type, class: 'form-control' %></td>
+      </tr>
+      <tr class="variable ca">
+        <td><%= f.label :transit_number %></td>
+        <td><%= f.number_field :transit_number, class: 'form-control' %></td>
+      </tr>
+      <tr class="variable ca">
+        <td><%= f.label :institution_number %></td>
+        <td><%= f.number_field :institution_number, class: 'form-control' %></td>
+      </tr>
+      <tr class="variable us">
+        <td><%= f.label :routing_number %></td>
+        <td><%= f.number_field :routing_number, class: 'form-control' %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :account_number %></td>
+        <td><%= f.number_field :account_number, class: 'form-control' %></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="check-with-text">
+          <label class="switch">
+            <%= f.check_box :enable_payments, checked: true %>
+            <span class="slider round"></span>
+          </label>
+          <label>Enable payments</label>
+        </td>
+      </tr>
+      <tr><td colspan="2"></td></tr>
+    </tbody>
+  </table>
+  <div class="clearfix">
+    <%= f.submit t('general.save'), class: 'btn btn-primary pull-right' %>
+  </div>
+<% end %>

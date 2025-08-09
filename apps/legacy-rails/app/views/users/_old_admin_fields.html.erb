@@ -1,0 +1,34 @@
+<div class="form-group col-sm-12">
+  <%= f.email_field :email, disabled: true, class: 'form-control' %>
+</div>
+
+<%= f.fields_for :admin_details do |d| %>
+  <div class="form-group col-sm-6">
+    <%= d.number_field :phone, class: 'form-control' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= d.number_field :extension, class: 'form-control' %>
+  </div>
+
+  <div class="col-xs-12"><hr/></div>
+  <div class="col-sm-12"><h4 class="blue"><%= t 'devise.community_details' %></h4></div>
+
+  <div class="form-group col-sm-6">
+    <%= label_tag Company.model_name.human.capitalize %>
+    <%= text_field_tag :accountable_name, @company.name, disabled: true, class: 'form-control' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= f.select :locale,
+      CM_LOCALES.map{ |locale| [t("general.locales.#{locale}"), locale] },
+      {},
+      {class: 'form-control'}
+    %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= d.text_field :title_position, class: 'form-control' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= d.text_field :department, class: 'form-control' %>
+  </div>
+<% end %>
+

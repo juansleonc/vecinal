@@ -1,0 +1,72 @@
+<% @submenu_title = t 'general.privacy_policy'
+  @submenu_item = 'privacy_terms'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+
+  <div class="cm-nav-links">
+    <%= link_to 'Privacy Policy', send("privacy_#{I18n.locale.to_s}_path"), class: 'active' %>
+    <%= link_to 'Terms of service', send("terms_#{I18n.locale.to_s}_path") %>
+  </div>
+
+  <div class="well clearfix politics">
+    <div class="col-md-10 col-md-offset-1 col-xs-12">
+      <h3>
+        <%= t('privacy_policy.cm_inc').upcase %>
+        <br/>
+        <%= t('general.privacy_policy').upcase %>
+      </h3>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1 col-xs-12">
+      <p><%= t 'privacy_policy.p1' %></p>
+      <p><%= t 'privacy_policy.p2' %></p>
+      <br/>
+      <p><strong><%= t 'privacy_policy.sub1.name' %></strong></p>
+      <ul>
+        <li>
+          <strong><%= t 'privacy_policy.sub1.item1' %></strong>
+          <p><%= t 'privacy_policy.sub1.p1' %></p>
+        </li>
+        <li>
+          <strong><%= t 'privacy_policy.sub1.item2' %></strong>
+          <p><%= t 'privacy_policy.sub1.p2' %></p>
+        </li>
+        <li>
+          <strong><%= t 'privacy_policy.sub1.item3' %></strong>
+          <p><%= t 'privacy_policy.sub1.p3' %></p>
+        </li>
+      </ul>
+      <br/>
+
+      <p><strong><%= t 'privacy_policy.sub2.name' %></strong></p>
+      <p><%= t 'privacy_policy.sub2.p1' %></p>
+      <br/>
+
+      <p><strong><%= t 'privacy_policy.sub3.name' %></strong></p>
+      <p><%= t 'privacy_policy.sub3.p1' %></p>
+      <p><%= t 'privacy_policy.sub3.p2' %></p>
+      <p><%= t 'privacy_policy.sub3.p3.name' %></p>
+      <ul>
+        <li><%= t 'privacy_policy.sub3.p3.item1' %></li>
+        <li><%= t 'privacy_policy.sub3.p3.item2' %></li>
+      </ul>
+      <p><%= t 'privacy_policy.sub3.p4' %></p>
+      <br/>
+
+      <p><strong><%= t 'privacy_policy.sub4.name' %></strong></p>
+      <p><%= t 'privacy_policy.sub4.p1' %></p>
+      <p><%= t 'privacy_policy.sub4.p2' %></p>
+      <p><%= t 'privacy_policy.sub4.p3' %></p>
+      <br/>
+
+      <p><strong><%= t 'privacy_policy.sub5.name' %></strong></p>
+      <p><%= t 'privacy_policy.sub5.p1' %></p>
+      <br/>
+
+      <p><strong><%= t 'privacy_policy.sub6.name' %></strong></p>
+      <p><%= t 'privacy_policy.sub6.p1' %></p>
+      <p><%= t 'privacy_policy.sub6.p2' %></p>
+      <p><%= t 'privacy_policy.sub6.p3' %></p>
+    </div>
+  </div>
+</div>

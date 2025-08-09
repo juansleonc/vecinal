@@ -1,0 +1,16 @@
+<div class="dropdown as-select pull-right" data-target-type="#user_role_text" data-target="#user_role">
+    <a class="dropdown-toggle black" data-toggle="dropdown">
+        </span> <%= mi.more_vert %>
+    </a>
+    <ul class="dropdown-menu">
+        <% if @user.accountable_type == 'Company' %>
+            <li><%= link_to t('roles.administrator'), '#', data: {type:t('roles.administrator') , id: 'administrator', accountable_type: 'Company' },class: 'edit change-role'  %></li>
+            <li><%= link_to t('roles.collaborator'), '#', data: {type:t('roles.collaborator') , id: 'collaborator', accountable_type: 'Company' },class: 'edit change-role'  %></li>
+        <% else %>  
+            <li><%= link_to t('roles.board_member'), '#', data: {type:t('roles.board_member') , id: 'board_member', accountable_type: 'Building' } ,class: 'edit change-role' %></li>
+            <li><%= link_to t('roles.tenant'), '#', data: {type:t('roles.tenant') , id: 'tenant', accountable_type: 'Building' } ,class: 'edit change-role' %></li>
+            <li><%= link_to t('roles.agent'), '#', data: {type:t('roles.agent') , id: 'agent', accountable_type: 'Building' } ,class: 'edit change-role' %></li>
+            <li><%= link_to t('roles.resident'), '#', data: {type:t('roles.resident') , id: 'resident', accountable_type: 'Building' } ,class: 'edit change-role' %></li>
+        <% end %>
+    </ul>
+</div>

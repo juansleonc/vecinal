@@ -1,0 +1,29 @@
+<div class="col-sm-4 col-lg-3 cm-gallery-grid-item building" id="building-<%= building.id %>">
+  <div class="cm-gallery-grid-item-content">
+    <%= link_to building_root_url(subdomain: building) do %>
+      <%= image_tag building.home_image.image.url(:medium_thumb) %>
+    <% end %>
+    <div class="details">
+      <div class="header">
+        <span class="name overflow-e"><%= building.name %></span>
+      </div>
+      <span class="overflow-e"><%= building.full_address %></span>
+
+      <% if can? :manage, building %>
+        <div class="dropdown actions">
+          <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+            <%= mi.more_vert %>
+          <% end %>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to t('general.edit'), building_about_url(subdomain: building.subdomain) %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+      <div class="review-avg-stars">
+        <%= review_avg_stars building %>
+      </div>
+    </div>
+  </div>
+</div>

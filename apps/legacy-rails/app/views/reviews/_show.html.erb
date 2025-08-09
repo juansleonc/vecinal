@@ -1,0 +1,26 @@
+<% reviewer = review.user %>
+<div class="review" id="review-<%= review.id %>">
+  <div class="reviewer clearfix">
+    <%= render 'shared/logo_left', logoable: reviewer %>
+    <% if can? :destroy, review %>
+      <%= confirm_destroy review, remote: true %>
+    <% end %>
+    <span class="username">
+      <span class="name"><%= reviewer.full_name %></span> <span>&bull;</span>
+      <span class="info"><%= reviewer.accountable.name %></span>
+      <br/>
+      <span class="info"><%= review.created_at.strftime '%B %d, %Y' %></span> <span>&bull;</span>
+      <span class="stars">
+        <%= review.rank %>
+        <i class="fa fa-star"></i>
+      </span>
+    </span>
+  </div>
+
+  <p class="comment">
+    <%= review.comment %>
+  </p>
+
+  <%= render 'comments/commentable_comments', commentable: review, attachments_enabled: true %>
+
+</div>

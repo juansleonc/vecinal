@@ -1,0 +1,20 @@
+<tr class="purchase" id="deal-purchase-<%= purchase.id %>" data-redeemed="<%= purchase.redeemed %>">
+  <td><%= purchase.printable_id %></td>
+  <td class="hidden-xs"><%= purchase.user.email %></td>
+  <td class="hidden-xs"><%= purchase.user.accountable.zip %></td>
+  <td class="hidden-xs"><%= purchase.created_at.strftime '%B %d, %Y' %></td>
+  <td class="<%= purchase.redeemed ? 'green' : 'red' %>"><%= purchase.redeemed %></td>
+  <td>
+    <% if purchase.redeemed %>
+      <a href="<%= deal_purchase_unredeem_path(purchase.id) %>" data-remote="true"
+        <%= cm_popover '', t('promotions.mark_not_redeemed'), container: 'body' %> >
+        <i class="fa fa-times-circle-o"></i>
+      </a>
+    <% else %>
+      <a href="<%= deal_purchase_redeem_path(purchase.id) %>" data-remote="true"
+        <%= cm_popover '', t('promotions.mark_redeemed'), container: 'body' %> >
+        <i class="fa fa-check-circle"></i>
+      </a>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,20 @@
+<button class="btn btn-default faqs-toggle" type="button">
+  <i class="fa fa-caret-down pull-right"></i>
+  <span><%= t 'general.got_questions' %></span>
+</button>
+
+<div class="col-xs-12 faqs-container hidden">
+
+  <strong><%= t 'faqs.plans.q1' %></strong>
+  <p><%= t 'faqs.plans.a1' %> <%= link_to t('general.privacy_policy'), send("privacy_#{I18n.locale.to_s}_path"), target: '_blank' %>.</p>
+
+  <strong><%= t 'faqs.plans.q2' %></strong>
+  <p><%= t 'faqs.plans.a2' %></p>
+
+  <strong><%= t 'faqs.plans.q3' %></strong>
+  <p><%= t 'faqs.plans.a3' %> <%#= link_to t('faqs.plans.complete_policy_here'), REFUND_POLICY_URL, target: '_blank' %></p>
+
+  <strong><%= t 'faqs.plans.q4' %></strong>
+  <p><%= t 'faqs.plans.q4' %> <%= mail_to CM_INFO_MAIL %>.</p>
+
+</div>

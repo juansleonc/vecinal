@@ -1,0 +1,78 @@
+<% @submenu_title = t('general.submenu.communities'); @submenu_item = 'communities' %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 timeline-view">
+
+  <%= render 'pages/header', model_object: @business %>
+
+  <div class="cols-divided-sm-2">
+    <%= render 'comments/new_timeline_comment', commentable: @business if user_signed_in? %>
+
+    <div class="content-box with-table">
+      <div class="header">intro</div>
+      <div class="content">
+        <table>
+          <tr>
+            <td><i class="fa fa-building-o"></i> <%= Business.human_attribute_name :name1 %></td>
+            <td><%= @business.name%></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-map-marker"></i> <%= Business.human_attribute_name :address %></td>
+            <td><%= @business.full_address %></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-mobile"></i> <%= Business.human_attribute_name :phone %></td>
+            <td><%= number_to_phone @business.phone %></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-share"></i> <%= Business.human_attribute_name :email %></td>
+            <td><%= @business.email %></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-link"></i> <%= Business.human_attribute_name :website %></td>
+            <td><%= @business.website %></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-clock-o"></i> <%= Business.human_attribute_name :opening_hours %></td>
+            <td><%= @business.opening_hours %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="photos content-box">
+      <div class="header">
+        <%= link_to business_public_photos_path(@business) do %>
+          <%= t 'public_pages.photos.title' %>
+          <i class="fa fa-chevron-right pull-right"></i>
+        <% end %>
+      </div>
+      <div class="content clearfix">
+        <% @business.images.first(Image::MAX_IN_TIMELINE).each do |image| %>
+          <div class="col-xs-6 image">
+            <%= link_to image.image.url(:original), data: { lightbox: true } do %>
+              <%= image_tag image.image.url(:thumb) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="content-box reviews">
+      <div class="header">
+        <%= link_to business_public_reviews_path(@business) do %>
+          <%= Review.model_name.human(count: 2).capitalize %>
+          <i class="fa fa-chevron-right pull-right"></i>
+        <% end %>
+      </div>
+      <div class="content">
+        <span class="blue"><%= @business.average_rank.round 1 %> <%= review_avg_stars @business %></span>
+        <span class="info">(<%= @business.reviews.count %> <%= Review.model_name.human(count: 2).capitalize %>)</span>
+      </div>
+    </div>
+
+    <div class="load-more-at-bottom" data-next-path="<%= @next_path %>" id="comments">
+      <%= render partial: 'comments/timeline_comment', collection: @comments %>
+    </div>
+  </div>
+
+</div>

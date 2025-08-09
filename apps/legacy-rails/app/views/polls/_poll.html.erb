@@ -1,0 +1,62 @@
+<div class="poll cols-divided-banner post <%= recipient_class_id(poll) %> <%= 'unread' if poll.unread?(current_user) %>"
+  id="poll-<%= poll.id %>">
+
+  <%= render 'shared/post_dropdown_actions', model_object: poll %>
+
+  <%= render 'shared/info_reported_icon', object_name: poll.class.name.downcase, status: poll.is_reported(current_user) %>
+
+  <%= render 'marks/toggle_save_link', markable: poll, toggle_link: toggle_save_poll_path(poll) %>
+
+  <% publisher = poll.publisher %>
+  <div class="publisher">
+    <%= render 'shared/logo_left', logoable: publisher %>
+    <span class="username">
+      <%= with_profile_banner_link publisher %>
+      <br/>
+      <span class="info"><%= poll.created_at.strftime '%B %d, %Y' %></span>
+      <%= shareable_recipient_link(poll) %>
+    </span>
+  </div>
+
+  <p><%= content_with_emoji poll.question %></p>
+  <%= render 'attachments/attachments', attachmentable: poll %>
+  <% poll_vote = PollVote.find_or_initialize_by user: current_user, poll: poll %>
+  <% if poll.closed? %>
+    <%= render 'poll_votes/closed_vote', poll_vote: poll_vote, poll: poll %>
+  <% else %>
+    <% if poll_vote.new_record? && %>
+      <%= render 'poll_votes/new_vote_form', poll_vote: poll_vote, poll: poll %>
+    <% else %>
+      <%= render 'poll_votes/update_vote_form', poll_vote: poll_vote %>
+    <% end %>
+  <% end %>
+
+  <div class="votes">
+    <% votes = PollVote.filtered_by_poll poll %>
+    <%= link_to '#', data: { toggle: 'modal', target: "#poll-votes-modal-#{poll.id}" } do %>
+      <span class="count"><%= votes.count %></span> <%= PollVote.model_name.human count: 2 %>
+    <% end %>
+    <span>&bull;</span>
+    <%= time_countdown_in_words poll.end_date %>
+  </div>
+</div>
+
+<div class="modal fade poll-votes form-new-object" id="poll-votes-modal-<%= poll.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Results</h4>
+      </div>
+      <div class="modal-body">
+        <% poll.poll_votes.each do |vote| %>
+          <%= render 'polls/vote', vote: vote %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% poll.mark_as_read! for: current_user %>

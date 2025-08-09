@@ -1,0 +1,104 @@
+<%= form_for Reservation.new, remote: true, html: { autocomplete: "off" }  do |f| %>
+  <div class="errors-container"></div>
+  <%= f.hidden_field :amenity_id, value: amenity.id %>
+  <%= f.hidden_field :reservation_interval, value: amenity.reservation_interval %>
+  <div class="user clearfix flex-centered-container">
+
+    <%= render 'shared/logo_left', logoable: current_user %>
+    <div>
+      <div class="user-name"><%= current_user.full_name %></div>
+      <%#= link_to 'Edit', user_about_path(current_user) %>
+      <!-- Init - falta el permioso de solo administrador -->
+      <% if current_user.admin? %>
+        <a class="open-as-button"><%= t 'service_requests.open_with' %></a>
+        <div class="input-group hidden publisher-selector">
+          <span class="input-group-addon"><%= fa_icon 'user' %></span>
+          <%= f.select :reserver_id, [], {},
+            { 
+              class: 'select2-with-format-ajax',
+              id: 'service-request-publisher',
+              data: { 
+                placeholder: t('service_requests.publisher'), 
+                lang: I18n.locale, 
+                path: selectable_publishers_service_requests_path
+              }
+            }
+          %>
+        </div>
+
+        <button type="button" class="close-publisher-selector btn btn-default hidden">
+          <%= t 'general.cancel' %>
+        </button>
+      <!-- End -->
+      <% end %>
+    </div>
+  </div>
+  <br/>
+  <div class="form-group row">
+    <div class="with-icon col-sm-4 col-xs-12">
+      <%= f.text_field :date, placeholder: t('reservations.date'), class: 'form-control trigger-datepicker' %>
+      <i class="fa fa-calendar-o on-input"></i>
+      <input type="hidden" class="hidden-selected-date" value="">
+      <input type="hidden" class="hidden-amenity-id" value="">
+    </div>
+    <div class="with-icon col-sm-4 col-xs-12">
+      <%= f.select :time_from, {}, {},{ class: 'form-control select-timepicker2 time_from' }   %>
+      <%#= f.text_field :time_from, class: 'form-control trigger-timepicker' %>
+      <i class="fa fa-clock-o on-input"></i>
+    </div>
+    <div class="with-icon col-sm-4 col-xs-12">
+      <%= f.select :time_to, {}, {},{ class: 'form-control select-timepicker2' }   %>
+      <%#= f.text_field :time_to, placeholder: t('reservations.end_time').truncate(19), class: 'form-control trigger-timepicker' %>
+      <i class="fa fa-clock-o on-input"></i>
+    </div>
+  </div>
+  <div class="form-group emoji-picker-container">
+    <%= f.text_area :message, 
+      placeholder: t('reservations.write_message_or_request'),
+      class: 'form-control',
+      data: { emojiable: true } 
+    %>
+  </div>
+  <div class="clearfix">
+    <%= f.submit 'Reserve', class: 'btn btn-primary pull-right' %>
+    <div class="dropdown availabily pull-left">
+      <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+        <%= fa_icon 'info-circle', text: t('reservations.view_hours') %>
+      <% end %>
+
+      <ul class="dropdown-menu">
+        <li><strong><%= Availability.model_name.human.capitalize %></strong></li>
+        <% if amenity.availability_type == 'selected_hours' %>
+          <% amenity.availabilities.active.ordered.each do |av| %>
+            <li>
+              <%= t('date.day_names')[av.day] %>
+              <span class="pull-right"><%= "#{av.time_from.strftime('%k:%M')} - #{av.time_to.strftime('%k:%M')}" %></span>
+            </li>
+          <% end %>
+        <% else %>
+          <li><%= t "amenities.availability_types.#{amenity.availability_type}" %></li>
+        <% end %>
+        <li><strong><%= t('amenities.subtitle_length') %></strong></li>
+        <li><%= amenity.reservation_length %> <%=  t 'amenities.' + amenity.reservation_length_type.downcase %> </li>
+
+        <li><strong><%= t('amenities.subtitle_max') %></strong></li>
+        <li><%= amenity.max_reservations_per_user %> <%= t('amenities.per') + " " + t('amenities.' + amenity.max_reservations_per_user_type.downcase) %> </li>
+
+        <li><strong><%= t('amenities.auto_approval') %></strong></li>
+        <li><%= t('amenities.approval.is' + amenity.auto_approval.to_s) %></li>
+
+
+<!--
+        
+        
+        
+        
+        
+-->
+
+
+      </ul>
+    </div>
+  </div>
+
+<% end %>

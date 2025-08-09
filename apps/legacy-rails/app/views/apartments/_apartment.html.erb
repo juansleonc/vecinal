@@ -1,0 +1,16 @@
+<%= image_tag apartment.main_image.image.url(:medium_thumb) %>
+<div class="img-description">
+  <div class="description-header">
+    <span class="header-name italic"><%= apartment.category_translation %></span>
+    <span class="header-name-right italic green"><%= apartment.final_price %></span>
+  </div>
+  <i class="fa fa-map-marker"></i> <%= apartment.building.address %><br/>
+  <span class="indented"><%= apartment.building.city %></span><br/>
+  <div class="apartment-properties">
+    <%= t('apartments.bedrooms') + ': ' + apartment.bedrooms_translation %><br/>
+    <%= t('apartments.bathrooms') + ': ' + apartment.bathrooms_translation %><br/>
+    <%= t('apartments.available') + ': ' + apartment.safe_available_at %>
+    <br/>
+  </div>
+  <%= link_to t('general.edit'), edit_company_apartment_path(company, apartment) if can?(:edit, apartment) %>
+</div>

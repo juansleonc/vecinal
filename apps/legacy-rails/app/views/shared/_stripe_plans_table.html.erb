@@ -1,0 +1,34 @@
+<div class="well clearfix table-container">
+  <% plans = object.plans %>
+  <% if plans.count > 0 %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th><%= t 'plans.other' %></th>
+          <th><%= t 'plans.amount' %></th>
+          <th><%= t 'plans.interval' %></th>
+          <th><%= t 'plans.currency' %></th>
+          <th><%= t 'plans.trial_period_days' %></th>
+          <th><%= t 'plans.description' %></th>
+          <th><%= t 'plans.suscribe' %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% plans.each do |plan| %>
+          <tr>
+            <td><%= plan.name %></td>
+            <td><%= number_to_currency plan.amount.to_f/100 %></td>
+            <td><%= plan.interval %></td>
+            <td><%= plan.currency %></td>
+            <td><%= plan.trial_period_days %></td>
+            <td><%= plan.statement_descriptor %></td>
+            <td><%= radio_button_tag :plan_id, plan.id, checked = plan.id == object.stripe_subscription_plan %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p><%= t 'general.empty' %></p>
+  <% end %>
+</div>

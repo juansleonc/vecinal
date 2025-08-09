@@ -1,0 +1,11 @@
+$('#new-event-select-recipients').prop('disabled', false).empty().val(null).change();
+<% current_user.contacts.each do |contact|%>
+  name = '<%= contact.full_name %>'; details = '<%= contact.display_details_in_select(current_user) %>';
+  $('#new-event-select-recipients').append(
+    $('<option>',
+      { value: '<%= contact.id %>', 'data-logo': '<%= asset_url contact.logo.url(:square) %>',
+        'data-name': name, 'data-details': details
+      }
+    ).text(name + ' ' + details)
+  );
+<% end %>

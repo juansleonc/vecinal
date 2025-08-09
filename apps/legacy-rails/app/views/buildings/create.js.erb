@@ -1,0 +1,5 @@
+<% if @building.persisted? %>
+  window.location.href = "<%= building_root_url subdomain: @building.subdomain %>";
+<% else %>
+  $('#new-building-modal .form-errors-container').html('<%= j render("shared/model_errors", resource: @building) %>');
+<% end %>

@@ -1,0 +1,6 @@
+<% if @amenity.persisted? %>
+  window.location.href = "<%= amenity_url @amenity %>?edit=true";
+<% else %>
+  $('#new_amenity').find('input[type=submit]').prop('disabled',false);
+  $('#new-amenity-modal .new-amenity-errors-container').html('<%= j render("shared/model_errors", resource: @amenity) %>');
+<% end %>

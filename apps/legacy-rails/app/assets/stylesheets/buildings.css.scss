@@ -1,0 +1,21 @@
+// Place all the styles related to the buildings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#remove-current-building-logo, #cancel-new-building-logo{
+  margin-top: 5px;
+}
+
+#new_building {
+  .new-building {
+    display: inline-block;
+    float: right;
+    position: relative;
+    top: 3px;
+  }
+  p.notice {
+    display: inline-block;
+    margin: 0;
+    max-width: 75%;
+  }
+}

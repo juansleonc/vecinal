@@ -1,0 +1,11 @@
+<%= link_to t('general.account_balances'),
+  user_balances_path,
+  class: local_assigns[:balances] %>
+
+<%= link_to t('general.transactions'), 
+  payments_path,
+  class: "#{local_assigns[:transactions]} hidden-xs" %>
+
+<% if current_user.admin? %>
+  <%= link_to t('general.activations'), payment_accounts_path, class: "#{local_assigns[:activations]} hidden-xs" %>
+<% end %>

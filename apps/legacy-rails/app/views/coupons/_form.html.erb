@@ -1,0 +1,115 @@
+<%= condomedia_form_for [@business, @coupon], auto_placeholder: @coupon.new_record?, html: {class: 'stripe-card-form'} do |f| %>
+
+  <%= render 'shared/model_errors', resource: @coupon %>
+
+  <div class="col-sm-12"><h4 class="blue"><%= t 'general.details' %></h4></div>
+
+  <div class="form-group col-sm-6">
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= f.select :category,
+      Coupon::CATEGORIES.map{ |category| [t("general.promotion_categories.#{category}"), category] },
+      {},
+      { class: 'form-control' }
+    %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= f.text_field :available_at, class: 'form-control trigger-datetimepicker' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= f.text_field :finish_at, class: 'form-control trigger-datetimepicker' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= f.number_field :number, class: 'form-control' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= f.text_field :last_day_to_claim, class: 'form-control trigger-datetimepicker' %>
+  </div>
+
+  <%= f.hidden_field :show_contact, value: 'business_details' %>
+
+  <div class="col-xs-12"><hr/></div>
+  <div class="col-sm-12"><h4 class="blue"><%= t 'general.description' %></h4></div>
+
+  <div class="form-group col-sm-12">
+    <%= f.text_area :description, class: 'form-control js-auto-size' %>
+  </div>
+  <div class="form-group col-sm-12">
+    <%= f.text_area :fine_print, class: 'form-control js-auto-size' %>
+  </div>
+
+  <div class="col-xs-12"><hr/></div>
+  <div class="col-sm-12"><h4 class="blue"><%= t 'general.media' %></h4></div>
+
+  <div class="form-group col-sm-12">
+    <%= render 'images/images_section', f: f, model_object: @coupon %>
+  </div>
+
+  <div class="col-xs-12"><hr/></div>
+  <div class="col-sm-12"><h4 class="blue"><%= t 'coupons.promote_coupon' %></h4></div>
+
+  <div class="col-xs-12 no-padding">
+    <div class="promote-voucher-container">
+      <div class="promote-voucher">
+        <%= condomedia_checkbox f, :show_highlight, Coupon.human_attribute_name(:show_highlight) %>
+        <div hidden class="form-group" id="div_coupon_highlight_days">
+          <%=
+            f.select :highlight_days,
+            Coupon::HIGHLIGHT_PRICES_MAP.map{ |days, price| [t('general.days_for_price', days: days, price: price), days, data: {price: price }] },
+            { skip_prompt: true },
+            { class: 'form-control condomedia-input-sm' }
+          %>
+        </div>
+      </div>
+      <div class="promote-voucher">
+        <%= condomedia_checkbox f, :show_top, Coupon.human_attribute_name(:show_top) %>
+        <div hidden class="form-group" id="div_coupon_top_days">
+          <%=
+            f.select :top_days,
+            Coupon::TOP_PRICES_MAP.map{ |days, price| [t('general.days_for_price', days: days, price: price), days, data: {price: price }] },
+            { skip_prompt: true },
+            { class: 'form-control condomedia-input-sm' }
+          %>
+        </div>
+      </div>
+    </div>
+    <div class="amount_to_pay hidden" id="div_coupon_amount_to_pay">
+      <%= t'general.total' %> = $<span id="coupon_amount_to_pay"/>
+    </div>
+  </div>
+
+
+  <div hidden id="coupon_stripe_card">
+    <div class="col-xs-12"><hr/></div>
+    <div class="col-xs-12">
+      <h4 class="blue payment-information">
+        <%= t 'deal_purchases.payment_information' %>
+        <i class="fa fa-cc-visa"></i>
+        <i class="fa fa-cc-mastercard"></i>
+      </h4>
+    </div>
+    <div class="col-lg-8 col-md-10 col-xs-12 no-padding">
+      <%= render 'shared/stripe_card_fields', customer: @business %>
+    </div>
+  </div>
+
+  <div class="col-xs-12"><hr/></div>
+
+  <% if @coupon.new_record? %>
+    <div class="col-xs-12">
+      <%= condomedia_checkbox f, :sign_agreement,
+        "#{t 'general.certify_adult_and_agree'}
+        #{link_to t('merchant_agreement.name'), merchant_agreement_path, target: '_blank'},
+        #{link_to t('general.privacy_policy'), send("privacy_#{I18n.locale.to_s}_path"), target: '_blank'} #{t 'general.and'}
+        #{link_to t('general.terms_of_service'), send("terms_#{I18n.locale.to_s}_path"), target: '_blank'}."
+      %>
+    </div>
+  <% end %>
+
+  <div class="col-xs-12 action-buttons">
+    <%= f.submit t('general.continue'), class: 'btn btn-primary' %>
+    <%= link_to t('general.cancel'), business_coupons_path(@coupon.business), class: 'cancel' %>
+  </div>
+
+<% end %>

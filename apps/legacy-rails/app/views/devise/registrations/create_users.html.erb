@@ -1,0 +1,186 @@
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 contacts-index">
+  <div class="cm-nav-links">
+    <%= link_to t('general.i_received'), company_invites_received_path(current_user.accountable) %>
+    <%= link_to t('general.i_sent'), create_users_url , class: 'active' %>
+
+    <%= link_to '+ ' + t('general.add_record', record_name: t('contacts.title').downcase), '#', class: 'btn btn-primary capitalize',
+      data: { toggle: 'modal', target: '#new-user-modal' }
+    %>
+  </div>
+  <div class="under-tabs">
+    <%= render 'shared/communities_filter_new',
+      items: '#contacts .contact-panel',
+      width_company: true,
+      class_objects: 'users',
+      with_filter_options: true,
+      to_controller: 'users/create_users',
+      data_by_community: @contacts_by_accountable %>
+    <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+  </div>
+  <% if @contacts.present? %>
+    <div class="contacts-panels row load-more-at-bottom" id="contacts" data-next-path="<%= @next_path %>">
+      <%#= render partial: 'residents/contacts/contact', collection: @contacts %>
+      <%= render partial: 'devise/registrations/contact', collection: @contacts %>
+    </div>
+    <div class='content-pagination'>
+      <%= page_entries_info @contacts %>
+      <%= will_paginate @contacts, :renderer => 'LinkRenderer' %>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-address-book-o', objects: User.model_name.human(count: 2) %>
+  <% end %>
+</div>
+
+
+
+
+
+
+<div class="modal fade form-new-object" id="new-user-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"> <%= t('general.add_record', record_name: t('contacts.title').downcase) %> </h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= hidden_field_tag :import_type, 'single-invitation' %>
+          <%= f.hidden_field :password, value: 'a2ds45f**q23c78hn54h' %>
+          <%= f.hidden_field :locale, value: I18n.locale %>
+          <%= f.hidden_field :accepted, value: true %>
+          <input type="hidden" name="is_admin" value="true">
+          <div class="form-errors-container"></div>
+
+          <div class="form-group links-for-select-mode">
+            <%= link_to '#', class: 'active single-invitation', data: { class: 'single-invitation' } do %>
+              <i class="fa fa-user-circle"></i> <%= t('invites.single') %>
+            <% end %>
+            <%= link_to '#',class: 'bulk-import-a' , data: { class: 'bulk-import' } do %>
+              <i class="fa fa-users"></i> <%= t('invites.bulk') %>
+            <% end %>
+          </div>
+
+          <div id="single-invitation">
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <%= f.text_field :first_name, class: 'form-control', placeholder: t('activerecord.attributes.user.first_name') , required: true%>
+              </div>
+              <div class="col-sm-6">
+                <%= f.text_field :last_name, class: 'form-control', placeholder: t('activerecord.attributes.user.last_name') , required: true%>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <%= f.email_field :email, class: 'form-control', placeholder: t('activerecord.attributes.user.email') , required: true%>
+              </div>
+              <div class="col-sm-6">
+                <%= text_field_tag :apartment_numbers,nil, placeholder: t('general.apartment_number'), class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+          <div id="bulk-import">
+            <p class="black"><strong><small><%= t('invites.message_bulk') %></small></strong></p>
+            <div class="form-group">
+              <%= text_area_tag :bulk_import, '', placeholder: t('invites.fields_for_bulk'),
+                class: 'form-control js-auto-size', rows: 4, autocomplete: 'off' %>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.hidden_field :accountable_id %>
+            <%= f.hidden_field :accountable_type %>
+            <%= f.hidden_field :role %>
+            <div class="dropdown col-sm-6 col-xs-12 as-select" data-target="#user_accountable_id" data-target-type="#user_accountable_type"
+              id="community-selector">
+              <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                <span>
+                  <i class="fa fa-circle-o with-background"></i>
+                  <%= t 'general.choose_community' %>
+                  <sup class="red">*</sup>
+                </span>
+                <i class="fa fa-caret-down"></i>
+                <i class="fa fa-caret-up"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <% current_user.communities.sort_by(&:name).each do |community| %>
+                  <li>
+                    <%= link_to '#', data: { id: community.id, type: community.class.name, role: role_by_community(community.class.name) } do %>
+                      <%= mi.business %>
+                      <%#= render 'shared/logo_left', logoable: community %>
+                      <%= community.name %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+
+            <!--<div class="col-sm-6 col-xs-12 user_role_content with-icon left">
+              <%= text_field_tag :user_role, '', placeholder: t('general.choose_role'), class: 'form-control not-disabled', readonly: true %>
+              <i class="fa fa-user-o on-input left with-background black"></i>
+            </div>-->
+
+            <div class="dropdown col-sm-6 col-xs-12 as-select" data-target-type="#user_role" id="member-role-selector">
+              <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                <span>
+                  <i class="fa fa-circle-o with-background"></i>
+                  <%= t 'general.choose_role' %>
+                  <sup class="red">*</sup>
+                </span>
+                <i class="fa fa-caret-down"></i>
+                <i class="fa fa-caret-up"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <% @members_roles.each do |role| %>
+                <li>
+                  <%= link_to '#', data: {  type: role[:id] } do %>
+                  <div class="logo-wrapper left ">
+                    <i class="fa fa-user-o"></i>
+                  </div>
+                    <%= role[:name] %>
+                  <% end %>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+
+            <div class="dropdown col-sm-6 col-xs-12 as-select" data-target-type="#user_role" id="administrative-role-selector">
+              <button class="dropdown-toggle form-control" data-toggle="dropdown">
+                <span>
+                  <i class="fa fa-circle-o with-background"></i>
+                  <%= t 'general.choose_role' %>
+                  <sup class="red">*</sup>
+                </span>
+                <i class="fa fa-caret-down"></i>
+                <i class="fa fa-caret-up"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <% @administrative_roles.each do |role| %>
+                <li>
+                  <%= link_to '#', data: {  type: role[:id] } do %>
+                  <div class="logo-wrapper left ">
+                    <i class="fa fa-user-o"></i>
+                  </div>
+                    <%= role[:name] %>
+                  <% end %>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+            
+          </div>
+
+          
+          <div class="buttons-right">
+            <%= f.submit t('general.send'), class: 'btn btn-primary' %>
+          </div>
+
+          
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

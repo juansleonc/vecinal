@@ -1,0 +1,25 @@
+<div class="col-md-3 col-sm-6 col-xs-12 contact-panel <%= invite_sent.accountable.class.name %>-<%= invite_sent.accountable.id %>"
+  id="invite-<%= invite_sent.id %>">
+  <div class="contact-panel-content">
+    <div class="logo-wrapper">
+      <%= image_tag "logos/default_#{invite_sent.id % 11}_standard.png" %>
+      <span class="no-logo-letter"><%= invite_sent.first_name.to_s.chr %></span>
+    </div>
+    <br>
+    <span class="name"><%= invite_sent.full_name %></span>
+    <br>
+    <%= invite_sent.accountable.name %>
+    <br>
+    <%= invite_sent.email %>
+    <br>
+    <i class="fa fa-user-circle-o"></i> <%= t "roles.#{invite_sent.role}" %>
+    <br>
+    <%= invite_sent.updated_at.strftime '%b %d, %Y' %>
+    <br>
+    <%= link_to t('general.re_send'), resend_confirmation_mail_url(:user => invite_sent.email) , remote: true, class: 'btn btn-primary', data: { method: :get } %>
+    <%= link_to '', invite_path(invite_sent), method: :delete, data: { remote: true }, class: 'hidden confirmed-destroy' %>
+    <%= link_to t('general.remove'), '', data: { swal_confirm: t('general.confirm'), swal_confirm_yes: t('general.yes_word'),
+      swal_confirm_no: t('general.no_word') }, class: 'confirm-destroy btn btn-default'
+    %>
+  </div>
+</div>

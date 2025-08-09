@@ -1,0 +1,41 @@
+openapi: 3.1.0
+info:
+  title: Real Estate Listings API
+  version: 1.0.0
+paths:
+  /listings:
+    get:
+      summary: Buscar listados
+      parameters:
+        - in: query
+          name: q
+          schema: { type: string }
+        - in: query
+          name: minPrice
+          schema: { type: number }
+        - in: query
+          name: maxPrice
+          schema: { type: number }
+        - in: query
+          name: bedrooms
+          schema: { type: integer }
+      responses:
+        '200': { description: OK }
+    post:
+      summary: Crear listing
+      responses:
+        '201': { description: Creado }
+  /listings/{id}:
+    get:
+      summary: Detalle listing
+      responses:
+        '200': { description: OK }
+    patch:
+      summary: Actualizar listing
+      responses:
+        '200': { description: OK }
+  /leads:
+    post:
+      summary: Crear lead de interés
+      responses:
+        '201': { description: Creado }

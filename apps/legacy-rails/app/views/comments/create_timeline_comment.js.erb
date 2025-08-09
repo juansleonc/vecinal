@@ -1,0 +1,15 @@
+<% if @comment.persisted? %>
+  $('.modal#new-timeline-comment-modal').modal('hide');
+  <% if remotipart_submitted? %>
+    <%# Workaround for remotipart issue when rendering html partials :( please replace if you find another solution %>
+    $('#comments').prepend('<%= j render("comments/timeline_comment", comment: @comment) %>');
+  <% else %>
+    $('#comments').prepend('<%= j render("comments/timeline_comment", comment: @comment) %>');
+  <% end %>
+  clean_form($('.modal#new-timeline-comment-modal'));
+  $('.empty-items-container').remove();
+  window.emojiPicker.discover();
+<% else %>
+  $(".modal#new-timeline-comment-modal .form-errors-container").html("<%= j render('shared/model_errors', resource: @comment) %>");
+  $(".modal#new-timeline-comment-modal .attachments-container").empty();
+<% end %>

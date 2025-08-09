@@ -1,0 +1,83 @@
+@import 'utilities'
+
+.cm-navbar.navbar.navbar-default.public
+  @include button_public
+  .navbar-header.public
+    > a img
+      padding: 10px
+      width: 180px
+    button.navbar-toggle
+      margin: 0
+      padding: 22px
+      height: 65px
+      background-color: #fff
+      &.collapsed
+        background-color: transparent
+        span.icon-bar
+          background-color: #fff
+      span.icon-bar
+        background-color: #000
+  .navbar-collapse.public
+    li a
+      padding: 0
+      margin: 12px 30px
+      margin-left: 15px
+      font-size: 17px
+      &:hover
+        font-weight: bold
+        border-bottom: 2px solid $crumina_green
+        background-color: transparent
+    &.nav.navbar-nav.navbar-right
+      margin-top: 0
+      padding: 12px
+  .external-pages
+    > a
+      color: #000
+      font-size: 22px
+      padding: 14px 0
+      margin-right: 40px
+      background-color: transparent !important
+      .fa.fa-th
+        font-size: smaller
+    .collapse, .collapsing
+      background-color: $gray_background
+      padding: 10px 5px
+      position: absolute
+      width: 330px
+      right: 0
+      top: 55px
+      .middle
+        width: 50%
+        float: left
+        padding: 0 6px
+        > a
+          text-align: center
+          display: inline-block
+          background-color: #fff
+          box-shadow: 0 0 1px $gray
+          line-height: 1.1em
+          padding: 10px
+          img
+            width: 100%
+          .title
+            color: #000
+            font-weight: 600
+          .description
+            color: $gray_text
+            font-size: 0.9em
+          i.fa
+            font-size: 0.9em
+
+@media (max-width: $sc_xs)
+  .cm-navbar.navbar.navbar-default.public
+    .navbar-collapse.public
+      &.collapse.in, &.collapsing
+        background-color: #fff
+        border-color: #fff
+        border-bottom: 1px solid
+        min-height: 100vh
+        position: relative
+        li > a
+          margin: 15px
+          box-shadow: none
+          color: #000

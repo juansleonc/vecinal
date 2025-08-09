@@ -1,0 +1,44 @@
+<div class="form-group col-sm-6">
+  <%= f.email_field :email, disabled: true, class: 'form-control' %>
+</div>
+
+<%= f.fields_for :contact_details do |d| %>
+  <div class="form-group col-sm-6">
+    <%= d.number_field :phone, class: 'form-control' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= d.text_field :emergency_contact_name, class: 'form-control' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= d.text_field :emergency_contact_phone, class: 'form-control' %>
+  </div>
+
+  <div class="col-xs-12"><hr/></div>
+  <div class="col-sm-12"><h4 class="blue"><%= t 'devise.community_details' %></h4></div>
+
+  <div class="form-group col-sm-6">
+    <%= f.label Building.model_name.human.capitalize %>
+    <%=
+      f.select :accountable_id,
+        @company.buildings.map{ |building| [building.name, building.id] }, {},
+        { class: 'form-control', skip_autolabel: true}
+    %>
+  </div>
+
+  <div class="form-group col-sm-6">
+    <%= d.number_field :apartment_number, class: 'form-control' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= d.text_field :move_in_date, class: 'form-control trigger-datetimepicker' %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= f.select :locale,
+      CM_LOCALES.map{ |locale| [t("general.locales.#{locale}"), locale] },
+      {},
+      {class: 'form-control'}
+    %>
+  </div>
+  <div class="form-group col-sm-6">
+    <%= d.select :user_type, ContactDetails::USER_TYPES.map { |ut| [t("contact_details.#{ut}"), ut] }, {}, class: 'form-control' %>
+  </div>
+<% end %>

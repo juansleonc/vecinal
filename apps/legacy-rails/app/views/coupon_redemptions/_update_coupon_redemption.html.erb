@@ -1,0 +1,21 @@
+<tr class="redemption" id="coupon-redemption-<%= redemption.id %>" data-redeemed="<%= redemption.redeemed %>">
+  <td><%= redemption.printable_id %></td>
+  <td class="hidden-xs"><%= redemption.user.email %></td>
+  <td class="hidden-xs"><%= redemption.user.accountable.zip %></td>
+  <td class="hidden-xs"><%= redemption.created_at.strftime '%B %d, %Y' %></td>
+  <td class="<%= redemption.redeemed ? 'green' : 'red' %>"><%= redemption.redeemed %></td>
+  <td>
+    <%= link_to raw('<i class="fa fa-check-circle"></i>'), redeem_coupon_redemption_path(redemption),
+      data: {
+        remote: true, toggle: 'popover', content: t('promotions.mark_redeemed'), trigger: 'hover', placement: 'top',
+        container: 'body'
+      } unless redemption.redeemed
+    %>
+    <%= link_to raw('<i class="fa fa-times-circle-o"></i>'), unredeem_coupon_redemption_path(redemption),
+      data: {
+        remote: true, toggle: 'popover', content: t('promotions.mark_not_redeemed'), trigger: 'hover', placement: 'top',
+        container: 'body'
+      } if redemption.redeemed
+    %>
+  </td>
+</tr>

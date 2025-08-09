@@ -1,0 +1,31 @@
+<%
+query = "&query=#{params[:query]}" if params[:query].present? 
+building = "&b=#{params[:b]}" if params[:b].present?
+company = "&c=#{params[:c]}" if params[:c].present?
+status = "&status=#{params[:status]}" if params[:status].present?
+order = "&order=#{params[:order]}" if params[:order].present?
+# t('date.month_names')[@date.month] 
+# t('date.month_names').index(month)
+%>
+ <div class="month-filter dropdown" id="month-filter">
+    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <i class="material-icons">date_range</i>
+        <span>
+            <%= t 'reservations.filter.by_month' %>
+        </span>
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="<%= "#{request.path}?#{order}#{query}#{building}#{company}#{status}" %>"><%= t 'reservations.all_month_filter' %></a>
+        </li>
+        <%  t('date.month_names').each_with_index do |month, index| 
+            if index > 0 %>
+            <li>
+                <a href="<%= "#{request.path}?month=#{index}#{order}#{query}#{building}#{company}#{status}" %>"><%= month %></a>
+            </li>
+        <%  end
+        end %>
+    </ul>
+  </div>
+

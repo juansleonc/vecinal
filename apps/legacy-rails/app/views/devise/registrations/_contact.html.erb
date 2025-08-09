@@ -1,0 +1,29 @@
+<div class="col-md-3 col-sm-6 col-xs-12 contact-panel <%= contact.accountable.class.name %>-<%= contact.accountable.id %>"
+  id="invite-<%= contact.id %>">
+  <div class="contact-panel-content">
+    <div class="logo-wrapper">
+      <%= image_tag "logos/default_#{contact.id % 11}_standard.png" %>
+      <span class="no-logo-letter"><%= contact.first_name.to_s.chr %></span>
+    </div>
+    <br>
+    <span class="name"><%= contact.full_name %></span>
+    <br>
+    <%= contact.accountable.name %>
+    <br>
+    <%= contact.email %>
+    <br>
+    <i class="fa fa-user-circle-o"></i> <%= t "roles.#{contact.role}" %>
+    <br>
+    <%= contact.updated_at.strftime '%b %d, %Y' %>
+    <br>
+    <%= link_to t('general.re_send'), resend_confirmation_mail_url(:user => contact.email) , remote: true, class: 'btn btn-primary resend', data: { method: :get } %>
+    <%= link_to '', invite_path(contact), method: :delete, data: { remote: true }, class: 'hidden confirmed-destroy *' %>
+    <%= link_to t('general.remove'), '', data: { swal_confirm: t('general.confirm'), swal_confirm_yes: t('general.yes_word'),
+      swal_confirm_no: t('general.no_word') }, class: 'confirm-destroy btn btn-default'
+    %>
+  </div>
+</div>
+
+<script>
+var resend = '<%= t ('users.resend')%>';
+</script>

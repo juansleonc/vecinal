@@ -1,0 +1,167 @@
+  <% receiver_data = MessageReceiverData.new(message, current_user)
+  read = message.users_marked_with('email_read') if current_user.admin?
+  message_users = message.users
+if receiver_data.receivers.count > 0
+%>
+<div class="message <%= 'unread' if message.unread?(current_user) %> <%=  'hidden' if !message.unread?(current_user) and params[:status] == 'unread' %>" id="message-<%= message.id %>"
+  data-mark-as-read-path="<%= messages_mark_as_read_path message %>">
+  <li class="list-group-item clearfix with-content"
+    data-read-path="<%= messages_mark_as_read_path(message) %>" data-target="#content-message-<%= message.id %>">
+    <div class="col-xs-12 no-padding overflow-e hidden-xs">
+      <div class="logo-wrapper left">
+        <%= image_tag receiver_data.logo %>
+        <span class="no-logo-letter"><%= receiver_data.letter %></span>
+      </div>
+      <p class="username"><%= receiver_data.parties.html_safe %></p>
+    
+    
+      <p class="title">
+        <% if message.urgent %>
+          <i class="fa fa-exclamation" aria-hidden="true"></i>
+        <% end %>
+        <%= message.title %>
+        <% if message.warning %><i class="material-icons hidden-xs warning" <%= cm_popover '', t('messages.warning'), container: 'body' %>>warning</i> <%end%>
+      </p>
+      <p class="gray-text"><%= content_with_emoji message.content[0,120] + '...'  %>  </p>
+      
+        
+      
+    </div>
+    <div class="visible-xs">
+      
+      <div class="logo-wrapper left">
+        <%= image_tag receiver_data.logo %> <span class="no-logo-letter"><%= receiver_data.letter %></span>
+      </div>
+      <div>
+        <% if message.warning %><i class="material-icons warning"  <%= cm_popover '', t('messages.warning'), container: 'body' %>>warning</i> <%end%>
+        <div class="username overflow-e"><%= receiver_data.parties.html_safe %></div>
+        <div class="title overflow-e">
+          <% if message.urgent %>
+            <i class="fa fa-exclamation " aria-hidden="true"></i>
+          <% end %>
+          <%= message.title %>
+        </div>
+        <div class="info overflow-e gray-text"><%= content_with_emoji message.content %></div>
+      </div>
+    </div>
+  </li>
+
+  <div class="list-group-item-content" id="content-message-<%= message.id %>">
+    <div class="title hidden-xs">
+      <span class="black"><% if message.warning %><i class="material-icons hidden-xs warning" <%= cm_popover '', t('messages.warning'), container: 'body' %>>warning</i> <%end%><%= message.title %></span>
+      <div class="actions">
+        <%= render 'residents/messages/actions', message: message %>
+        <%= link_to '#', class: 'close-item-content' do %>
+          <i class="fa fa-times"></i>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="title visible-xs">
+      <div class="actions-mobile">
+        <%= render 'residents/messages/actions', message: message, mobile: true %>
+        <%= link_to '#', class: 'close-item-content' do %> <i class="fa fa-times"></i> <% end %>
+      </div>
+      <div class="title-text black"><%= message.title %></div>
+    </div>
+
+    <div class="recipients">
+      <span class="<%= 'timeago' if message.sent_same_day? %> item-date pull-right hidden-xs"
+        title="<%= message.created_at.getutc.iso8601 %>">
+        <%= message.created_at.strftime('%l:%M %P %b %e, %Y') %>
+      </span>
+      <span class="visible-xs pull-right"><%= message.created_at.strftime('%b %e') %></span>
+      <div class="username clearfix">
+        <div class="logo-wrapper left">
+          <%= image_tag receiver_data.logo %> <span class="no-logo-letter"><%= receiver_data.letter %></span>
+        </div>
+        <span class="parties"><%= receiver_data.full_parties.html_safe %></span>
+        <i class="fa fa-chevron-down show-recipients-lits toggle-chevron"></i>
+        <% if current_user.admin? || message.sender == current_user %>
+          <%= link_to '#', class: 'recipients-read', data: { toggle: 'modal', target: "#message-receivers-#{message.id}" } do %>
+            <span class="info"><%= t 'contacts.title' %> (<%= message_users.count %>)</span>
+            <% if current_user.admin? %>
+              &nbsp; <span class="info"><%= t 'messages.read' %> (<%= read.count %>)</span>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <p class="recipients-list">
+        <span class="to">To:</span>
+        <% message_users.each do |user| %>
+          <%= with_profile_banner_link user do %>
+            <% "#{user.full_name} <#{user.email}>" %>
+          <% end %>
+          <% if message.marked? user, 'email_read' %>
+            <i class="fa fa-check green"></i>
+          <% end %>
+          <%= ', ' unless user == message_users.last %>
+        <% end %>
+      </p>
+    </div>
+
+    <div class="content">
+      <div class="paragraph">
+        <%= content_with_emoji message.content %>
+        <%= render 'attachments/attachments', attachmentable: message %>
+      </div>
+    </div>
+
+    <div class="comments-replies" data_comment="<%= message.class.to_s.underscore + '-' + message.id.to_s + '-comments' %>">Reply (<%= message.comments.count %>)</div>
+    <%= render 'comments/commentable_comments', commentable: message, attachments_enabled: true, hidden: true %>
+
+  </div>
+</div>
+<% end %>
+<% if current_user.admin? || message.sender == current_user %>
+  <div class="modal fade form-new-object receivers-list-modal" id="message-receivers-<%= message.id %>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Recipients</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="list-inline">
+            <li class="active">
+              <%= link_to '#', data: { target: "#people-#{message.id}" } do %>
+                People <span class="gray">(<%= message_users.count %>)</span>
+              <% end %>
+            </li>
+            <% if current_user.admin? %>
+              <li>
+                <%= link_to '#', data: { target: "#read-#{message.id}" } do %>
+                  <%= t 'messages.read' %> <span class="gray">(<%= read.count %>)</span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+          <div class="active" id="people-<%= message.id %>">
+            <% message_users.each do |user| %>
+              <div class="clearfix">
+                <%#= render 'shared/logo_left', logoable: user %>
+                <%= link_to user_profile_path(user) do %>
+                  <span class="username"><strong><%= user.full_name %></strong></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <% if current_user.admin? %>
+            <div id="read-<%= message.id %>">
+              <% read.each do |reader| %>
+                <div class="clearfix">
+                  <%#= render 'shared/logo_left', logoable: reader %>
+                  <%= link_to user_profile_path(reader) do %>
+                    <span class="username"><strong><%= reader.full_name %></strong></span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

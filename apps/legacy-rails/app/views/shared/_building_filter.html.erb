@@ -1,0 +1,32 @@
+<div class="dropdown dropdown-filter building-filter" data-community="<%= params[:building] %>">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+    <div class="toggle-content">
+      <% if params.has_key?(:building) %>
+        <% building = buildings.find(params[:building].to_i) %>
+        
+        <%= render 'shared/logo_left', logoable: building, left: '' %>
+        <span><%= building.name %></span>
+      <% else %>
+        <%= fa_icon "circle-o", class: "with-background" %>
+        <span class="hidden-xs"><%= t 'general.filters.all_communities' %></span>
+        <span class="visible-xs"><%= t 'general.filters.all' %></span>
+      <% end %>
+    </div>
+    <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu">
+    <%= link_to user_balances_path(filter: params[:filter]), class: "with-logo", data: { community: "all" } do %>
+      <%= fa_icon "circle-o", class: "with-background" %>
+      <span class="hidden-xs"><%= t 'general.filters.all_communities' %></span>
+      <span class="visible-xs"><%= t 'general.filters.all' %></span>
+    <% end %>
+
+    <% buildings.each do |building| %>
+      <%= link_to user_balances_path(filter: params[:filter], building: building.id), class: "with-logo", data: { community: building.id } do %>
+        <%= render 'shared/logo_left', logoable: building %>
+        <span><%= building.name %></span>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

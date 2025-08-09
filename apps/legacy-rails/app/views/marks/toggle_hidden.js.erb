@@ -1,0 +1,5 @@
+<% class_name = @markable.class.name %>
+$('#<%= class_name.downcase %>-<%= @markable.id %>').hide();
+$('#<%= @markable.class.name.downcase %>-<%= @markable.id %>').toggleClass('Hidden')
+<% status = @markable.marked?(current_user, 'hidden') ? 'hidden' : 'unhidden' %>
+toastr.success('<%= class_name %> has been <%= status %>');

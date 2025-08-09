@@ -1,0 +1,31 @@
+# Cursor Rules
+
+language: English
+
+code_style:
+  principles: [SOLID, Clean Code]
+  naming:
+    - Prefer descriptive, full-word names
+    - Functions: verbs/verb-phrases; variables: nouns
+  tests:
+    - Required for new code and bugfixes
+    - Follow pyramid: unit > integration > e2e
+  quality_gates:
+    - Lint must pass
+    - CI must be green
+  comments:
+    - Explain WHY, not obvious WHAT
+  formatting:
+    - Match project formatter config
+
+branching:
+  pattern: ["feature/<slug>", "fix/<slug>", "chore/<slug>"]
+  require_issue: true
+
+reviews:
+  pr_title_style: Conventional Commits
+  require_approvals: 1
+
+security:
+  secrets: forbid-in-repo
+  review: threat-model for new external integrations

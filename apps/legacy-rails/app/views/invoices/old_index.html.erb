@@ -1,0 +1,92 @@
+<% @submenu_title = t 'general.submenu.billing'
+  @submenu_item = 'plan'
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <div class="col-xs-12 no-padding">
+      <h1>
+        <i class="fa fa-file-text-o"></i>
+        <span class="black"><%= t 'general.submenu.billing' %></span>
+      </h1>
+      <%= link_to t('invoices.view_plan'), @model_object.link_to_subscriptions, class: 'pull-right link-right' %>
+    </div>
+
+    <div class="finder pull-right header col-sm-5 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-invoices-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <% if @invoices[:upcoming] %>
+      <h4 class="col-xs-12 no-padding bold"><%= t 'invoices.next_invoice' %></h4>
+      <table class="table rounded-header centered">
+        <thead>
+          <tr class="italic">
+            <th><%= t 'invoices.due_date' %></th>
+            <th class="hidden-xs"><%= t 'invoices.description' %></th>
+            <th><%= t 'invoices.amount' %></th>
+            <th class="hidden-xs"><%= t 'invoices.period' %></th>
+            <th class="hidden-xs"><%= t 'invoices.payment_interval' %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% invoice = @invoices[:upcoming]; last = invoice.lines.data.last %>
+          <tr class="no-border">
+            <td><%= Time.at(invoice.date).strftime '%b %d, %Y' %></td>
+            <td class="hidden-xs"><%= last.plan.name %> <%= t('invoices.plan').downcase %></td>
+            <td><%= number_to_currency invoice.total.to_f/100 %> <%= invoice.currency.upcase %></td>
+            <td class="hidden-xs">
+              <%= Time.at(last.period.start).strftime('%b %d, %Y') %> -
+              <%= Time.at(last.period.end).strftime('%b %d, %Y') %>
+            </td>
+            <td class="hidden-xs"><%= last.plan.interval.capitalize %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-xs-12 no-padding"><hr/></div>
+    <% end %>
+
+    <div class="col-xs-12 no-padding">
+    <h4 class="col-xs-12 no-padding bold"><%= t 'invoices.history' %></h4>
+      <div class="date-filter hidden-xs">
+        <%= t('general.from') %>:
+        <input type="text" class="form-control trigger-datepicker" id="filter-invoices-from-date-input">
+      </div>
+      <div class="date-filter hidden-xs">
+        <%= t('general.to')%>:
+        <input type="text" class="form-control trigger-datepicker" id="filter-invoices-to-date-input">
+      </div>
+    </div>
+
+    <table class="table rounded-header centered" id="invoices">
+      <thead>
+        <tr class="italic">
+          <th><%= t 'invoices.date' %></th>
+          <th class="hidden-xs"><%= t 'invoices.description' %></th>
+          <th><%= t 'invoices.amount' %></th>
+          <th class="hidden-xs"><%= t 'invoices.period' %></th>
+          <th class="hidden-xs"><%= t 'invoices.status' %></th>
+          <th class="hidden-xs"><%= t 'invoices.reference' %> #</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @invoices[:past].each do |invoice| %>
+          <% line = invoice.lines.data.last %>
+          <tr class="invoice no-border" data-date="<%= Time.at(invoice.date).strftime '%Y-%m-%d' %>">
+            <td><%= Time.at(invoice.date).strftime '%b %d, %Y' %></td>
+            <td class="hidden-xs"><%= line.plan.name %> <%= t('invoices.plan').downcase %></td>
+            <td><%= number_to_currency invoice.total.to_f/100 %> <%= invoice.currency.upcase %></td>
+            <td class="hidden-xs">
+              <%= Time.at(line.period.start).strftime('%b %d, %Y') %> - <%= Time.at(line.period.end).strftime('%b %d, %Y') %>
+            </td>
+            <td class="<%= invoice.paid ? 'green' : 'red' %> hidden-xs">
+              <%= invoice.paid ? t('invoices.paid') : t('invoices.not_paid') %>
+            </td>
+            <td class="hidden-xs"><%= invoice.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

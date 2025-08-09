@@ -1,0 +1,18 @@
+<div id="menu_bottom" class="navbar">
+  <!--<li class="<%= ('active' if @submenu_item == 'news_feed') %>"></li>-->
+    <%= link_to news_feed_path, class: ('active' if @submenu_item == 'news_feed') do %>
+        <%= mi.dashboard %>
+    <% end %>
+    <%= link_to service_requests_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'requests') do %>
+        <%= mi.build %>
+    <% end %>
+    <%= link_to messages_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'messages') do %>
+        <%= mi.chat %>
+    <% end %>
+    <%= link_to amenities_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'amenities') do %>
+        <i class="material-icons">event_available</i>
+    <% end %>
+    <%= link_to user_balances_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+        <%= mi.credit_card %>
+    <% end %>
+</div>

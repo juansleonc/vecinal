@@ -1,0 +1,46 @@
+<% @submenu_title = t 'general.news_feed'; @submenu_item = 'news_feed'; @action_for_search = search_news_feed_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+<div class=" col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 ">
+  <div class="col-lg-6 news_feed_header_left">
+    <%= render('comments/new_timeline_comment', allow_shareable: true) if can?(:post_for_community, Comment) %>
+  </div>
+  <div class="col-lg-6 news_feed_header_right">
+    <div class="under-tabs compactable">
+
+      <div class="order-by-button dropdown" id="order_by">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span>
+            <i class="material-icons">filter_list</i>
+            <%= t 'general.post_' + params[:filter].to_s  %>
+          </span>
+          <i class="fa fa-caret-down"></i>
+          <!--<i class="fa fa-caret-up"></i>-->
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="<%= "#{request.path}" %>"><%= t 'general.post_all' %></a></li>
+          <li><a href="<%= "#{request.path}?filter=hidden" %>"><%= t 'general.post_hidden' %></a></li>
+          <li><a href="<%= "#{request.path}?filter=reported" %>"><%= t 'general.post_reported' %></a></li>
+          
+        </ul>
+      </div>
+
+      <% if current_user.admin? || current_user.collaborator? %>
+        <%= render 'shared/communities_filter_new',
+          items: '#amenities .amenity',
+          width_company: true,
+          class_objects: 'users',
+          with_filter_options: true,
+          to_controller: 'amenities',
+          data_by_community: @contacts_by_accountable %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 dashboard">
+  <div class="cols-divided-sm-2">
+    <div class="load-more-at-bottom" data-next-path="<%= @next_path %>" id="comments">
+      <%= render partial: 'comments/timeline_comment', collection: @comments %>
+    </div>
+  </div>
+  <%= render 'shared/empty_items', icon: 'fa-newspaper-o', objects: 'news' if @comments.blank? %>
+</div>
+<%#= render 'residents/events/calendar' %>

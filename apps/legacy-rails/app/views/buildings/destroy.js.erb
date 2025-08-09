@@ -1,0 +1,6 @@
+<% if @building.errors.any? %>
+  $('#destroy-building-modal .form-errors-container').html('<%= j render("shared/model_errors", resource: @building) %>');
+<% elsif @building.destroyed? %>
+  $('#destroy-building-modal').modal('hide');
+  window.location.href = "<%= company_buildings_url(@building.company, subdomain: 'www') %>";
+<% end %>

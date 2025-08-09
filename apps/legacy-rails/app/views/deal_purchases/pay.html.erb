@@ -1,0 +1,107 @@
+<% @navbar_style = 'green' if current_user.accountable_type == 'Building'
+  @submenu_title = DealPurchase.model_name.human(count: 2).capitalize
+  @submenu_item = 'deals'
+%>
+
+<% business = @deal_purchase.deal.business %>
+<% deal = @deal_purchase.deal %>
+<% content_for :head do %>
+  <%= javascript_include_tag 'https://js.stripe.com/v2/' %>
+  <%= javascript_tag "Stripe.publishableKey = '#{business.stripe_publishable_key}';" %>
+<% end %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 deal-purchase-buy">
+  <div class="well clearfix">
+    <h2>
+      <i class="fa fa-cart-arrow-down"></i>
+      <%= DealPurchase.model_name.human(count: 2).capitalize %>
+    </h2>
+
+    <div class="blue-borders">
+      <%= condomedia_form_for @deal_purchase, auto_placeholder: false, html: {class: 'stripe-card-form'} do |d| %>
+        <%= render 'shared/model_errors', resource: @deal_purchase %>
+
+        <div class="col-md-6 col-xs-12 no-padding deal-info">
+          <div class="col-xs-12"><%= t 'deal_purchases.item_description' %></div>
+
+          <div class="col-xs-12 no-padding header-separator"><hr/></div>
+
+          <div class="col-xs-5"><%= image_tag(deal.main_image.image.url :medium_thumb) %></div>
+          <div class="col-xs-7 deal-name"><%= deal.title %></div>
+        </div>
+
+        <div class="col-md-6 col-xs-12 no-padding price">
+          <div class="col-xs-4"><%= t 'deal_purchases.unit_price' %></div>
+          <div class="col-xs-4"><%= DealPurchase.human_attribute_name :quantity %></div>
+          <div class="col-xs-4"><%= t 'deal_purchases.total' %></div>
+
+          <div class="col-md-12 no-padding header-separator"><hr/></div>
+
+          <div class="col-xs-4 order"><%= number_to_currency deal.payable_price %></div>
+          <div class="col-xs-4 order">
+            <%= d.number_field :quantity, value: 1, skip_autolabel: true, class: 'form-control quantity' %>
+          </div>
+          <div class="col-xs-4 order" id="deal-purchase-total"><%= number_to_currency deal.payable_price %></div>
+        </div>
+
+        <div class="col-xs-12 no-padding"><hr/></div>
+
+        <%= d.hidden_field :price, value: deal.payable_price %>
+        <%= d.hidden_field :user_id %>
+        <%= d.hidden_field :deal_id %>
+
+        <div class="col-xs-12 no-padding">
+          <div class="col-md-7 no-padding">
+            <h2 class="payment-order">
+              <%= t 'deal_purchases.payment_information' %>
+              <i class="fa fa-cc-visa"></i>
+              <i class="fa fa-cc-mastercard"></i>
+            </h2>
+            <%= render 'shared/stripe_card_fields', customer: nil %>
+
+            <% if false && @deal_purchase.requires_shipping? %>
+              <!-- temporarily disabled, is reserved for future requirements -->
+              <%= d.hidden_field :country %>
+              <div class="form-group col-sm-12">
+                <%= d.text_field :address, class: 'form-control' %>
+              </div>
+              <div class="form-group col-sm-6">
+                <%= d.text_field :city, class: 'form-control' %>
+              </div>
+              <div class="form-group col-sm-6">
+                <%= d.text_field :region, class: 'form-control' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-xs-12 no-padding"><hr/></div>
+
+        <div class="col-xs-12 no-padding">
+          <h2 class="payment-order"><%= t 'deal_purchases.complete_order' %></h2>
+          <div class="col-xs-12">
+            <%= condomedia_checkbox d, :sign_agreement,
+              "#{t 'general.certify_adult_and_agree'}
+              #{link_to t('general.privacy_policy'), send("privacy_#{I18n.locale.to_s}_path"), target: '_blank'} #{t 'general.and'}
+              #{link_to t('general.terms_of_service'), send("terms_#{I18n.locale.to_s}_path"), target: '_blank'}."
+              # Commented by future implementation
+              #{link_to t('general.refund_policy'), REFUND_POLICY_URL, target: '_blank'}."
+            %>
+          </div>
+        </div>
+
+        <div class="col-xs-12 action-buttons">
+          <%= submit_tag t('deal_purchases.complete_order'), class: 'btn btn-primary', id: 'buy-btn' %>
+          <%= link_to t('general.cancel'), business_deal_path(business.namespace, params[:deal_id]), class: 'cancel-link' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12 no-padding"><hr/></div>
+
+    <div class="col-xs-12 no-padding">
+      <%= render 'shared/faqs_deals' %>
+    </div>
+
+  </div>
+</div>

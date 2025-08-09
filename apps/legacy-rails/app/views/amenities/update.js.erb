@@ -1,0 +1,5 @@
+<% if @amenity.valid? %>
+  window.location.href = "<%= amenity_url @amenity %>";
+<% else %>
+  $('#edit-amenity-modal-<%= @amenity.id %> .form-errors-container').html('<%= j render("shared/model_errors", resource: @amenity) %>');
+<% end %>

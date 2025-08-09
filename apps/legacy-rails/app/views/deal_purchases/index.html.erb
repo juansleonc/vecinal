@@ -1,0 +1,56 @@
+<% @submenu_title = t 'promotions.view_reports'
+  @submenu_item = 'reports'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 reports">
+  <div class="well clearfix">
+    <div class="col-xs-12 no-padding">
+      <h1 class="promo-title">
+        <i class="fa fa-tag"></i>
+        <%= link_to @deal.title, business_deal_path(@deal.business, @deal) %>
+      </h1>
+      <%= link_to t('general.back_to', destiny: t('businesses.reports')),
+        business_reports_path(current_user.accountable),
+        class: 'pull-right right-spaced hidden-xs'
+      %>
+    </div>
+
+    <div class="col-xs-12 no-padding available hidden-xs">
+      <strong><%= Deal.human_attribute_name(:available_at) %>: </strong><%= @deal.available_at.strftime '%b %d, %Y' %>&nbsp;
+      <strong><%= t 'general.to' %>: </strong><%= @deal.finish_at.strftime '%b %d, %Y' %>&nbsp;
+      <strong><%= t 'promotions.last_day_to_claim' %>: </strong><%= @deal.last_day_to_claim.strftime '%b %d, %Y' if @deal.last_day_to_claim %>
+    </div>
+    <div class="col-md-8 col-sm-9 col-xs-12 no-padding counters-container">
+      <div class="statistic status">
+        <i class="fa fa-circle <%= @deal.status %>"></i> <%= t "promotions.#{@deal.status}" %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span><%= @deal.impressions %></span><br/>
+        <%= t 'promotions.views' %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span><%= @deal.clicks %></span><br/>
+        <%= Deal.human_attribute_name(:clicks) %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span><%= @deal.acquisitions %></span><br/>
+        <%= t('promotions.acquisitions') %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span id="purchases-redeemed"></span><br/>
+        <%= t('general.deal_purchase_statuses.redeemed') %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span><%= number_to_currency @deal.revenue %></span><br/>
+        <%= t('businesses.revenue') %>
+      </div>
+    </div>
+
+    <div class="finder pull-right header col-md-4 col-sm-3 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-purchases-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <%= render 'list_purchases' %>
+
+  </div>
+</div>

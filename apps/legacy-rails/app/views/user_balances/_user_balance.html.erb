@@ -1,0 +1,147 @@
+<div class="user-balance filterable" id="user-balance-<%= user_balance.id %>">
+  
+  <!-- Minimalist view -->
+  <li class="list-group-item clearfix with-content user-balance-min" data-target="#content-user-balance-<%= user_balance.id %>" >
+    
+    <!-- User info -->
+    <div class="col-xs-5 col-sm-4 overflow-e">
+      <%= render('shared/logo_left', logoable: user_balance.community, extra_class: "hidden-xs") %>
+      <span>
+        <%= capitalize_every_word user_balance.resident_name %>
+      </span>
+    </div>
+
+    <!-- Mobile -->
+    <div class="col-xs-4 overflow-e visible-xs">
+      <span>
+        <%= number_to_currency(user_balance.total) %>
+      </span>
+    </div>
+
+    <div class="col-xs-4 overflow-e visible-xs">
+      <span>
+        <%= l user_balance.publication_date, format: '%b %d, %Y' %>
+      </span>
+    </div>
+    <!-- End Mobile -->
+
+    <!-- Apartment number -->
+    <div class="col-xs-3 hidden-xs">
+      <%= user_balance.apartment_number %>
+    </div>
+
+    <!-- Total to pay -->
+    <div class="col-xs-3 overflow-e hidden-xs">
+      <%= number_to_currency(user_balance.total) %>
+    </div>
+
+    <!-- Publication date -->
+    <div class="col-xs-2 overflow-e hidden-xs">
+      <%= l user_balance.publication_date, format: '%b %d, %Y' %>
+    </div>
+
+    <!-- Options -->
+    <div class="dropdown hidden-xs">
+      <a class="dropdown-toggle" data-toggle="dropdown">
+        <%= material_icon.more_vert.css_class('options')  %>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to print_user_balance_path(user_balance), class: "menu-item", target: :_blank do %>
+            <%= material_icon.print.css_class('option') %>
+            <span><%= t('general.print') %></span>
+          <% end %>
+        </li>
+          
+        <li>
+          <% if can? :destroy, user_balance %>
+            <%= confirm_destroy(user_balance_path(user_balance), remote: true) do %>
+              <%= material_icon.delete.css_class('option') %>
+              <span><%= t('general.to_delete') %></span>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+  </li>
+
+  <!-- Full view -->
+  <div class="list-group-item-content user-balance-full" id="content-user-balance-<%= user_balance.id %>">
+    <header class="title">
+      <%= render('shared/logo_left', logoable: user_balance.community, left: '') %>
+      <span><%= user_balance.account_balance.subject %></span>
+
+      <div class="actions">
+        <%= link_to print_user_balance_path(user_balance), target: :_blank do %>
+          <%= material_icon.print.css_class('icon-option') %>
+        <% end %>
+
+        <a class="close-item-content"><%= fa_icon 'times' %></a>
+      </div>
+    </header>
+
+    <div class="user-balance-content">
+      
+      <!-- Info -->
+      <div class="user-balance-info">
+        <div class="resident-info">
+          <% if user_balance.users.first %>
+            <%= render('shared/logo_left', logoable: user_balance.users.first, left: '') %>  
+          <% else %>
+            <%= render('shared/random_logo', letter: user_balance.resident_name[0]) %>
+          <% end %>
+          
+          <div class="info-secondary">
+            <div class="has-bold-text has-black-text" >
+              <%= capitalize_every_word user_balance.resident_name %>
+            </div>
+            <span class="apartment-number"><%= user_balance.apartment_number %></span>
+          </div>
+        </div>
+        <span>
+          <%= l user_balance.account_balance.publication_date, format: '%b %d, %Y' %>
+        </span>
+      </div>
+
+      <!-- Description -->
+      <table class="table">
+        <tbody>
+          <tr class="header">
+            <td><%= t 'user_balances.co_ownership' %></td>
+            <td><%= t 'user_balances.apartment' %></td>
+            <td></td>
+            <td><%= t 'user_balances.concept' %></td>
+            <td><%= t 'user_balances.previous_balance' %></td>
+            <td><%= t 'user_balances.this_month' %></td>
+            <td><%= t 'user_balances.total' %></td>
+          </tr>
+          
+          <tr>
+            <td><%= user_balance.apartment_number %></td>
+            <td><%= user_balance.resident_name %></td>
+            <td></td>
+            <td></td>
+            <td><%= t 'user_balances.billing_number' %></td>
+            <td><%= user_balance.billing_number %></td>
+            <td></td>
+          </tr>
+
+          <!-- User balance items -->
+          <%= render partial: 'user_balance_items/user_balance_item', collection: user_balance.user_balance_items %>
+
+          <tr class="has-bold-text">
+            <td></td>
+            <td></td>
+            <td><%= t 'user_balances.previous_payment' %></td>
+            <td><%= number_to_currency(user_balance.previous_payment) %></td>
+            <td><%= t 'user_balances.total_to_pay' %></td>
+            <td></td>
+            <td><%= number_to_currency(user_balance.total) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

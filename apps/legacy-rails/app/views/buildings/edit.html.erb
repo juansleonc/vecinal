@@ -1,0 +1,20 @@
+<% @submenu_title = Building.model_name.human(count: 2).capitalize
+  @submenu_item = 'home'
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <h1>
+      <i class="fa fa-building-o"></i>
+      <span class="black"><%= t('general.edit_record', record_name: Building.model_name.human) %></span>
+    </h1>
+
+    <%= link_to company_building_confirm_destroy_path(@company, @building) do %>
+      <h1 class="pull-right"><i class="fa fa-trash"></i></h1>
+    <% end %>
+
+    <div class="blue-borders">
+      <%= render 'form' %>
+    </div>
+
+</div>

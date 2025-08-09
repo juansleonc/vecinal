@@ -1,0 +1,10 @@
+<% if @reservation.valid? %>
+  $('#service-request-<%= @reservation.id %>').replaceWith(
+    '<%= j render("reservations/reservation", reservation: @reservation) %>'
+  );
+  $("span.timeago").timeago();
+  $('.popover').remove();
+  $('[data-toggle="popover"]').popover();
+<% else %>
+  toastr.error('<%= @reservation.errors.full_messages.join(", ") %>');
+<% end %>

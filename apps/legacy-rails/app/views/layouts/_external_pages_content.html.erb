@@ -1,0 +1,23 @@
+<%= link_to '#', data: { toggle: 'collapse', target: "##{menu_id}" }, class: 'collapsed' do %>
+  <i class="fa fa-th"></i>
+<% end %>
+<div class="collapse" id="<%= menu_id %>">
+  <div class="middle">
+    <%= link_to 'http://immersive.condo-media.com', target: '_blank' do %>
+      <%= image_tag 'logo_immersive_fondo_blanco.png' %>
+      <br/>
+      <span class="title">Immersive</span>
+      <br/>
+      <span class="description">Software development</span>
+    <% end %>
+  </div>
+  <div class="middle">
+    <%= link_to 'http://domains.condo-media.com', target: '_blank' do %>
+      <%= image_tag 'logo_domains_fondo_blanco.png' %>
+      <br/>
+      <span class="title">Domains</span>
+      <br/>
+      <span class="description">Cloud services</span>
+    <% end %>
+  </div>
+</div>

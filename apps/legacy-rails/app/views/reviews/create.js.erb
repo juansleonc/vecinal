@@ -1,0 +1,16 @@
+<% if @review.persisted? %>
+  $('.modal#new-review-modal').modal('hide');
+  $('#reviews .reviews-average #stars-bars').replaceWith("<%= j render('reviews/star_bars', reviewable: @review.reviewable) %>");
+  update_reviews_counters("<%= @review.reviewable.average_rank.round 1 %>", "<%= @review.reviewable.reviews.count %>")
+  update_star_bars();
+  <% if remotipart_submitted? %>
+    <%# Workaround for remotipart issue when rendering html partials :( please replace if you find another solution %>
+    $('#reviews .reviews-average').after('<%= j render(@review) %>');
+  <% else %>
+    $('#reviews .reviews-average').after('<%= j render(@review) %>');
+  <% end %>
+  clean_form($('.modal#new-review-modal form#new_review'));
+<% else %>
+  $('#new-review-modal .new-review-errors-container').html("<%= j render('shared/model_errors', resource: @review) %>");
+  $(".modal#new-review-modal form#new_review .attachments-container").empty();
+<% end %>

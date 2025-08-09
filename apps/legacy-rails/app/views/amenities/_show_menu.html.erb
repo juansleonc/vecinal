@@ -1,0 +1,45 @@
+<div class="home-image">
+  <div class="image-container">
+    <%= render 'images/profile_cover', imageable: @amenity %>
+    <% if @amenity.availability_type == 'no_available' %>
+      <i class="fa fa-ban no-available"></i>
+    <% end %>
+  </div>
+  <div class="name-and-options">
+    <strong class="name"><%= @amenity.name %></strong><br>
+    <span><%= @amenity.building.name %></span>
+    <% if can? :manage, @amenity %>
+      <div class="dropdown pull-right options">
+        <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+          <%= mi.more_vert %>
+        <% end %>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to t('general.edit'), '#', class: 'modal-or-remote',
+              data: { target: "#edit-amenity-modal-#{@amenity.id}", path: edit_amenity_path(@amenity) } %>
+          </li>
+          <li>
+            <%= confirm_destroy @amenity do %>
+              <%= t 'general.delete', object_name: '' %>
+            <% end %>
+          </li>
+          <% if request.path == reviews_amenity_path %>
+            <%= render 'shared/toggle_filter_options', controller: 'amenities', action: 'reviews', class_objects: 'reviews' %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="cm-nav-links">
+  <%= link_to t('profiles.about'), @amenity, class: @about_btn %>
+  <%= link_to t('profiles.reviews'), reviews_amenity_path(@amenity), class: @reviews_btn %>
+  <%= link_to t('profiles.photos'), photos_amenity_path(@amenity), class: @photos_btn %>
+  <%= link_to t('profiles.calendar'), calendar_amenity_path(@amenity), class: @calendar_btn %>
+
+  <%= link_to t('amenities.reserve'), '#', data: { toggle: 'modal', target: "#new-reservation-modal-amenity-#{@amenity.id}" },
+    disabled: @amenity.availability_type == 'no_available', class: 'btn btn-primary hidden-xs'
+  %>
+</div>
+

@@ -1,0 +1,31 @@
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 contacts-index">
+
+  <%= render 'invites/tabs' %>
+
+  <div class="under-tabs hidden-xs">
+    <%= render 'shared/communities_filter_new',
+      items: '#contacts .contact-panel',
+      width_company: true,
+      class_objects: 'users',
+      with_filter_options: true,
+      data_by_community: current_user.contacts_by_accountable %>
+      
+    
+    <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+    
+    
+  </div>
+  <% if @invites_received.present? %>
+    <div class="contacts-panels row load-more-at-bottom" id="contacts" data-next-path="<%= @next_path %>">
+      <%= render partial: 'invites/invite_received', collection: @invites_received %>
+    </div>
+    
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-user-plus', objects: Invite.model_name.human(count: 2) %>
+  <% end %>
+  <div class='content-pagination'>
+      <%= page_entries_info @invites_received %>
+      <%= will_paginate @invites_received, :renderer => 'LinkRenderer' %>
+    </div>
+</div>
+

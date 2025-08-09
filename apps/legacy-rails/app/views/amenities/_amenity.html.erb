@@ -1,0 +1,44 @@
+<div class="col-sm-4 col-lg-3 cm-gallery-grid-item amenity Building-<%= amenity.building.id %>"  id="amenity-<%= amenity.id %>">
+  <div class="amenity-panel-content">
+    <% if can? :manage, amenity %>
+      <div class="dropdown actions text-right">
+        <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, id: "amenity-#{amenity.id}-dropdown" do %>
+          <%= mi.more_vert %>
+        <% end %>
+        <ul class="dropdown-menu" aria-labelledby="amenity-<%= amenity.id %>-dropdown">
+          <li>
+            <%= link_to t('general.edit'), '#', class: 'modal-or-remote',
+              data: { target: "#edit-amenity-modal-#{amenity.id}", path: edit_amenity_path(amenity) } %>
+          </li>
+          <li>
+            <%= confirm_destroy amenity, remote: true do %>
+              <%= t 'general.delete', object_name: '' %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+    <%= link_to amenity do %>
+      <div class="logo-wrapper">
+        <%= image_tag(amenity.mylogo.url(:standard)) %>
+        <span class="no-logo-letter"><%= amenity.first_name_letter %></span>
+      </div>
+    <% end %>
+    <div class="details">
+      
+      <div class="header">
+        <span class="name overflow-e"><%= amenity.name %></span>
+      </div>
+      <span class="overflow-e"><%= amenity.building.name %></span>
+      <div class="review-avg-stars">
+        <%= review_avg_stars amenity %>
+      </div>
+      <div class="footer">
+        <%= link_to 'View calendar', calendar_amenity_path(amenity) %>
+        <%= link_to t('amenities.reserve'), '#', data: { toggle: 'modal', target: "#new-reservation-modal-amenity-#{amenity.id}" },
+          disabled: amenity.availability_type == 'no_available', class: 'btn btn-primary pull-right btn-xs' %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'reservations/new_form_modal', amenity: amenity %>

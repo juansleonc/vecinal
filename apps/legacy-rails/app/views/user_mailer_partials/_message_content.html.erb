@@ -1,0 +1,6 @@
+<div>
+<b><%= message.title %></b>
+</div>
+<br>
+<%= message.content %>
+<%= image_tag messages_notify_email_read_url(subdomain: 'www', user_id: receiver.id, message_id: message.id), alt: '', height: 1, width: 1 %>

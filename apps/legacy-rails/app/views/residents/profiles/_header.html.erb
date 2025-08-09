@@ -1,0 +1,82 @@
+<% @action_for_search = search_contacts_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="home-image with-logo">
+  <%= render 'images/profile_cover', imageable: @user %>
+  <%= render 'images/profile_logo', imageable: @user %>
+
+  <div class="name-and-options">
+    <strong class="name">
+      <%= current_user.check_settings(current_user, "who_can_see_your_email", @user) ? @user.full_name : t('users.privated') %>
+    </strong>
+
+    <% if can? :manage, @user %>
+      <div class="dropdown pull-right options">
+        <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+          <%= mi.more_vert %>
+        <% end %>
+        <ul class="dropdown-menu">
+          <li><%= link_to t('profiles.timeline'), user_profile_path(@user) %></li>
+          <li><%= link_to t('profiles.about'), user_about_path(@user) %></li>
+          <li><%= link_to t('profiles.photos'), user_photos_path(@user) %></li>
+          <li><%= link_to t('profiles.settings'), user_settings_path(@user) %></li>
+          <%= render 'shared/toggle_filter_options', controller: 'users', action: 'profile' %>
+          <% if current_user == @user && can?(:leave_community, current_user) %>
+            <li><%= link_to t('profiles.leave_community.title'), '#', data: {toggle: 'modal', target: '#leave-community-modal'} %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="cm-nav-links">
+  <%= link_to t('profiles.timeline'), user_profile_path(@user), class: @profile_btn %>
+  <%= link_to t('profiles.about'), user_about_path(@user), class: @about_btn if can?(:about, @user) %>
+  <%= link_to t('profiles.photos'), user_photos_path(@user), class: "#@photos_btn hidden-xs" if can?(:photos, @user) %>
+  <%= link_to t('profiles.settings'), user_settings_path(@user), class: "#@settings_btn hidden-xs" if can?(:settings, @user) %>
+
+  <% if can?(:create, Message) && current_user_contacts.include?(@user) %>
+    <%= link_to Message.model_name.human.capitalize,
+      '#',
+      class: 'modal-or-remote btn btn-primary',
+      data: {
+        target: "#new-message-modal-contact-#{@user.id}",
+        path: new_message_path(to_contact: @user.id)
+      }
+    %>
+  <% end %>
+</div>
+
+<% if current_user == @user && can?(:leave_community, current_user) %>
+  <div class="modal fade form-new-object" id="leave-community-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title"> <%= t('profiles.leave_community.title') %> </h4>
+        </div>
+        <div class="modal-body">
+          <%= form_tag user_leave_community_path(current_user), remote: true, autocomplete: "off", method: 'patch' do %>
+            <div class="form-errors-container"></div>
+            <div class="panel panel-default information">
+              <div class="panel-body red-bg">
+                <i class="fa fa-exclamation-triangle red"></i>
+                <p class="black">
+                  <%= t('profiles.leave_community.message') %>
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= password_field_tag :password, nil, class: 'form-control', placeholder: t('profiles.leave_community.password') %>
+            </div>
+            <div class="buttons-right">
+              <%= submit_tag t('profiles.leave_community.confirm').upcase, class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

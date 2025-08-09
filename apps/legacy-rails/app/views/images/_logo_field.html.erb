@@ -1,0 +1,34 @@
+<%= f.label :logo %> <%= t 'general.images.formats', size: '160 x 160' %>
+<% if model_object.logo.present? %>
+  <div id='current-logo'>
+    <div class="image-wrapper">
+      <%= image_tag model_object.logo.url(:standard) %>
+      <%= link_to t('general.remove'), '#', class: 'btn btn-danger btn-xs btn-block', id: 'remove-current-logo' %>
+    </div>
+  </div>
+<% end %>
+<div id='new-logo' class="image-container row <%= 'hidden-div' if model_object.logo.present? %>">
+
+  <div class="col-md-3 col-sm-4 col-xs-6">
+    <div class="add-image-link-container">
+      <%= link_to '#', class: 'choose-image-button' do %>
+        <i class="fa fa-plus"></i> <%= t 'general.add_record', record_name: t('general.logo') %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-sm-4 col-xs-6 image-div hidden-div">
+    <div class="image-holder">
+      <%= image_tag model_object.logo.url(:standard) %>
+      <%= link_to t('general.remove'), '#', class: 'remove-image btn btn-danger btn-block btn-xs' %>
+    </div>
+
+    <div class="hidden-div">
+      <%= f.file_field :logo, accept: ".gif,.png,.jpeg,.jpg", class: 'image-field', id: 'logo' %>
+    </div>
+  </div>
+
+  <div class="hidden-div">
+    <%= f.check_box :remove_logo, class: 'form-control', value: '0', id: 'remove_logo' %>
+  </div>
+</div>

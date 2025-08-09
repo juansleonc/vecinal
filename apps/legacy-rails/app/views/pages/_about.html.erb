@@ -1,0 +1,126 @@
+<% can_update = can?(:update, model_object); form_url ||= nil %>
+
+<div class="cm-tabs merge-with-content">
+    <ul class="nav nav-tabs">
+      <li class="active black">
+        <%= link_to '#' do %>
+          <i class="fa fa-address-card"></i> <%= t('profiles.contact_information') %>
+        <% end %>
+      </li>
+    </ul>
+    <div class="white-bar"></div>
+  </div>
+
+<div class="panel panel-default merge-with-tabs profile-about">
+  <div class="panel-body">
+    <%= form_for model_object, url: form_url do |f| %>
+      <%= render 'shared/model_errors', resource: model_object %>
+      <table class="table" id="contact-information">
+         <tbody>
+          <%= profile_about_input_row f, :name, model_object.name, can_update %>
+
+          <% if model_object.class.name == 'Company' %>
+            <%= profile_about_input_row f, :namespace, "condo-media.com/companies/#{@company.namespace}", false %>
+          <% elsif model_object.class.name == 'Building' %>
+            <%= profile_about_input_row f, :subdomain, "#{model_object.subdomain}.condo-media.com", false %>
+          <% end %>
+
+          <tr>
+            <td><%= f.label :address %></td>
+            <td class="address-about-row">
+              <div>
+                <% %i(address city region country zip).each do |attribute| %>
+                  <% if model_object.send(attribute) %>
+                    <div><%= model_object.send(attribute) %></div>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <% if can_update %>
+                <div class="pull-right dropdown">
+                  <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+                    <%= mi.more_vert.css_class('blue-light') %>
+                  <% end %>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to t('general.edit'), '#', class: 'edit' %></li>
+                  </ul>
+                </div>
+              <% end %>
+            </td>
+
+            <% if can_update %>
+              <td class="to-edit hidden multiple-inputs address">
+                <% %i(address city region country zip).each do |attribute| %>
+                  <%= f.text_field attribute, placeholder: true %>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+          <%= profile_about_input_row f, :phone, model_object.phone, can_update %>
+          <%= profile_about_input_row f, :email, model_object.email, can_update %>
+          <%= profile_about_input_row f, :website, model_object.website, can_update %>
+          <%= profile_about_input_row f, :opening_hours, model_object.opening_hours, can_update %>
+          <%= profile_about_input_row f, :description, model_object.description, can_update do %>
+            <% f.text_area :description, class: 'js-auto-size' %>
+          <% end %>
+          <tr>
+            <td>
+              <label>
+                <%= t 'general.maps' %>
+              </label>
+            </td>
+
+            <td>
+              <div class="google-map" data-longitude="<%= model_object.longitude %>" data-latitude="<%= model_object.latitude %>"
+                data-drop-main="<%= asset_url 'drop_blue.png' %>">
+              </div>
+            </td>
+          </tr>
+          <% if model_object.is_a? Building %>
+            <%= profile_about_input_row f, :community_id, model_object.community_id, can_update %>
+          <% end %>
+          <%= profile_about_input_row f, :managed_by, model_object.managed_by, can_update %>
+          <% if model_object.is_a? Building %>
+            
+            <tr>
+              <td><label for="building_billing_information"><%= f.label :billing_information %></label></td>
+              <td>
+                <%= model_object.billing_information %>
+                <% if can?(:manage, model_object) %>
+                  <div class="pull-right dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="material-icons blue-light">more_vert</i>
+            </a>        <ul class="dropdown-menu">
+                      <li><%= link_to t('general.edit'), '#', class: 'edit'  %></li>
+                    </ul>
+                  </div>
+                  <% end %>
+              </td>
+                <td class="to-edit hidden">
+                  <%= f.text_area :billing_information %>
+                </td>
+            </tr>
+
+
+     
+
+            <%#= profile_about_input_row f, :billing_information, model_object.billing_information, can_update %>
+          <% end %>
+
+          <%= profile_about_input_row f, :code, model_object.code, false %>
+          <% if can? :destroy, model_object %>
+            <tr>
+              <td><label><%= t 'activerecord.attributes.building.remove_page' %></label></td>
+              <td><%= link_to 'Delete Page', '#', data: { toggle: 'modal', target: modal_destroy_target } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br/>
+      <% if can_update %>
+        <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+        <%= link_to t('general.cancel'), '#', class: 'btn btn-default', id: 'cancel-changes' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

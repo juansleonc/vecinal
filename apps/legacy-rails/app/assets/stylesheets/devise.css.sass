@@ -1,0 +1,188 @@
+@import 'utilities'
+@import 'https://fonts.googleapis.com/css?family=Varela+Round'
+
+body.devise
+  background-color: $cm_blue
+  text-align: center
+  padding-top: 0
+  font-family: 'Varela Round', sans-serif
+  color: #FFFFFF
+  h1, h2, h3, h4, h5, h6
+    font-family: 'Varela Round', sans-serif
+    margin-top: 50px
+  div.terms_sign_up
+    font-size: 11px
+    a
+      color: #4CC2C0
+      &:hover
+        color: #071226
+  div
+    .reset-form
+      margin-top: 0
+    .top-content
+      margin-top: calc(30vh - 110px)
+  div.container
+    min-height: calc(100vh - 70px)
+  .devise
+    background-color: transparent
+    margin-top: 15vh
+    padding: 40px
+    margin-bottom: 0px
+    padding: 0px
+    //box-shadow: 5px 5px 8px #a0a0a0
+    margin-top: calc(30vh - 110px)
+    img.cm-home-logo
+      margin-bottom: 30px
+    form
+      margin-top: 15px
+      .row
+        margin: 0 -5px
+      div.input-group
+        border-radius: 5px
+      input
+        &.btn
+          width: 100%
+          height: 50px
+          margin-top: 2vh
+          background-color: #4CC2C0
+          color: #FFFFFF
+          border-radius: 5px
+          font-weight: normal
+        &.form-control
+          height: 50px
+      .input-group.space-top
+        margin-top: 15px
+      span.input-group-addon
+        background-color: $crumina_gray
+        &.email-icon
+          padding: 7px 12px
+        &.lock-icon
+          padding: 7px 15px
+        &.first-name-icon
+          padding: 8px 13px
+        &.last-name-icon
+          padding: 8px 11.5px
+        i.fa
+          font-size: 20px
+          margin: 0px
+    &.need-help
+      form
+        text-align: left
+        label
+          font-size: 12px
+        label.title
+          color: #FFFFFF
+          font-weight: bold
+        .input-group
+          padding: 0
+          label
+            line-height: 1.9em
+    i.fa
+      margin-top: -20px
+      margin-bottom: 20px
+  .welcome
+    h3
+      margin-bottom: 40px
+      margin-top: 80px
+    p
+      font-size: 17px
+      line-height: 35px
+
+  .bottom-links
+    text-align: right
+    padding: 0
+    margin: 15px 0
+    a
+      color: #FFFFFF
+      margin-left: 20px
+    &.log-options
+      margin-top: 15px
+    .keep-left
+      float: left
+      margin: 0
+  // p:last-child
+  //   font-size: 12px
+  //   color: #fff
+  //   a
+  //     color: #fff
+  .omniauth-links
+    text-align: left
+    a
+      display: block
+      color: #000
+      background-color: #fff
+      border-radius: 5px
+      padding: 15px 15%
+      margin: 10px auto
+      font-size: 17px
+      img, i
+        margin: 0 10px
+      i
+        color: #676767
+        font-size: 30px
+      span
+        letter-spacing: -0.3px
+        font-weight: 800
+        position: relative
+        top: 2px
+        &.email-way
+          top: -4px
+
+  .other-options
+    font-size: 16px
+    font-weight: 500
+    margin: 20px auto
+    a
+      color: #fff
+      font-weight: 700
+
+  @media (max-width: $sc_xs)
+    .container
+      min-height: calc(100vh - 110px)
+      .row
+        margin: 0
+      .omniauth-links a
+        padding: 15px 0
+        font-size: 16px
+
+    .devise
+      margin-top: calc(30vh - 110px)
+    footer.copyright-footer
+      margin: 0
+      p.terms
+        line-height: 1.5em
+    .bottom-links div .log-options
+      padding: 0
+      margin-top: 0
+
+
+footer.copyright-footer
+  width: 100%
+  padding: 10px 0
+  text-align: center
+  margin: 0
+  > div > strong
+    font-size: 16px
+    color: #FFFFFF
+  ul.social-icons
+    margin-top: 10px
+    padding: 0
+    li
+      margin-right: 20px
+      margin-left: 0
+      display: inline-block
+      a
+        color: #a0a0a0
+        font-size: 20px
+  &.black_text
+    p.terms, p.terms > a
+      color: #000
+  p.terms
+    word-spacing: 2px
+    color: #FFFFFF
+    font-size: 12px
+    margin: 0
+    a
+      color: #FFFFFF
+      &.blue
+        color: $cm_blue

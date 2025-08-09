@@ -1,0 +1,34 @@
+<% if nested_objects == :business %>
+  <div class="map-pop-over">
+    <%= link_to business_root_path(object), target: '_blank' do %>
+      <table>
+        <tr>
+          <td><%= image_tag object.logo.url(:square), size: '60x60' %></td>
+          <td class="text">
+            <span class="title"><%= object.name %></span>
+            <br/>
+            <span class="subtitle"><%= object.description %></span>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+<% else %>
+  <% promotions = object.valid_promos %>
+  <div class="map-pop-over">
+    <% promotions.each do |promotion| %>
+      <%= link_to url_for([object, promotion]), target: '_blank' do %>
+        <table>
+          <tr>
+            <td><%= image_tag promotion.main_image.image.url, size: '60x60' %></td>
+            <td class="text">
+              <span class="title"><%= promotion.title %></span>
+              <br/>
+              <span class="subtitle"><%= object.name %></span>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

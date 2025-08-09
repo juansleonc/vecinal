@@ -1,0 +1,67 @@
+<% @submenu_title = Deal.model_name.human(count: 2).capitalize
+  @submenu_item = 'deals'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix promotion-header">
+    <div class="col-xs-12 no-padding">
+      <h1>
+        <i class="fa fa-tag"></i>
+        <span class="black"><%= Deal.model_name.human(count: 2).capitalize %></span>
+      </h1>
+      <%= link_to raw('<i class="fa fa-question-circle blue"></i>'), '#' %>
+
+      <% if @business.stripe_user_id.blank? %>
+        <span class="medium-info italic hidden-xs">
+          <%= t 'general.connect_with' %> <%= link_to t('general.stripe'), connect_to_stripe(@business) %>
+        </span>
+      <% else %>
+        <span class="medium-info italic hidden-xs"><%= t 'general.connected_with' %> <%= t('general.stripe') %></span>
+        <i class="fa fa-check-circle green hidden-xs"></i>
+      <% end %>
+
+      <%= link_to '+ ' + t('deals.new'), new_business_deal_path(@business), class: 'pull-right' %>
+    </div>
+    <span class="page-descriptor"><%= t 'deals.sell_your_vouchers' %></span>
+
+    <div class="finder pull-right col-sm-5 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-deals-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <div class="col-xs-12 no-padding">
+      <div class="row image-gallery-grid" id="deals">
+        <% @deals.each do |deal| %>
+          <div class="col-sm-4 col-lg-3 img-gallery-column deal">
+            <%= image_tag 'star_icon.png', class: 'highlight' if deal.highlight? %>
+            <%= link_to image_tag(deal.main_image.image.url :medium_thumb), business_deal_path(@business, deal) %>
+            <div class="img-description">
+              <div class="description-header">
+                <%= deal.title %>
+              </div>
+              <span class="medium-soft"><%= @business.name %></span><br/>
+              <strong><i class="fa fa-map-marker"></i> <%= @business.city %></strong>
+              <%= @business.distance_rounded request.location %>
+              <div class="price-offer">
+                <span class="old-amount <%= 'hidden' if deal.discount == 0 %>"><%= number_to_currency deal.price %></span>
+                <span class="new-amount active"><%= number_to_currency deal.payable_price %></span>
+              </div>
+              <p class="footer">
+                <%= link_to t('general.edit'), edit_business_deal_path(@business, deal) %>
+                <span class="pull-right <%= deal.status %>">
+                  <i class="fa fa-circle"></i> <%= t "promotions.#{deal.status}" %>
+                </span>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if @deals.blank? %>
+    <div class="empty-items-container">
+      <%= t 'general.you_have_no', objects: Deal.model_name.human(count: 2) %>
+    </div>
+  <% end %>
+
+</div>

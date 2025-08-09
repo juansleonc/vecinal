@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Condo Media</title>
+    <link rel="icon" type="image/png" href="<%= asset_url 'favicon.png' %>">
+    <%= stylesheet_link_tag "application", media: "all" %>
+  </head>
+  <body class="coupon-redemption">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-xs-12 voucher-print">
+          <div class="col-xs-12 logo">
+            <%= image_tag 'condomedia.png' %>
+            <div class="pull-right barcode">
+              <span class="black"><%= t 'general.voucher' %></span>
+              <%= image_tag 'barcode.png' %>
+            </div>
+          </div>
+          <div class="col-xs-12 voucher-title">
+            <div class="col-md-6 no-padding"><%= image_tag promo.main_image.image.url(:medium_thumb) %></div>
+            <div class="col-md-6 no-padding">
+              <p class="italic black"><%= promo.title %></p>
+              <% if promo.class == Deal %>
+                <p>
+                  <%= t 'deals.value' %>:
+                  <span class="black"><%= number_to_currency promo.payable_price %></span>
+                  <%= "x #{voucher.quantity}" if voucher.respond_to? :quantity %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-xs-12"><hr/></div>
+          <div class="col-xs-12 voucher-description">
+            <table>
+              <tr>
+                <td><%= promo.class == Deal ? t('promotions.purchase_date') : t('coupons.print_date') %></td>
+                <td><%= voucher.created_at.strftime '%d/%m/%y' %></td>
+              </tr>
+              <tr>
+                <td><%= t 'general.code' %></td>
+                <td class="id"><%= voucher.id %></td>
+              </tr>
+              <tr>
+                <td><%= t 'coupons.valid_from' %></td>
+                <td>
+                  <%= promo.available_at.strftime '%d/%m/%y' %>
+                  <span class="to"><%= Deal.human_attribute_name(:finish_at).downcase %></span>
+                  <%= promo.last_day_to_claim.strftime '%d/%m/%y' %>
+                </td>
+              </tr>
+            </table>
+            <span class="warning italic"><%= t 'promotions.voucher_must_present' %>.</span>
+          </div>
+          <div class="col-xs-12"><hr/></div>
+          <div class="col-xs-12">
+            <div class="business-details">
+              <% business = promo.business %>
+              <div class="col-md-6 no-padding"><%= image_tag business.home_image.image.url(:medium_thumb) %></div>
+              <div class="col-md-6 no-padding">
+                <h3><%= t 'general.deal_contact_options.business_details' %></h3>
+                <table>
+                  <tr>
+                    <td><%= Business.human_attribute_name :name %></td>
+                    <td><%= business.name %></td>
+                  </tr>
+                  <tr>
+                    <td><%= Business.human_attribute_name :phone %></td>
+                    <td><%= phone_full business.phone, business.extension %></td>
+                  </tr>
+                  <tr>
+                    <td><%= Business.human_attribute_name :email %></td>
+                    <td><%= business.email %></td>
+                  </tr>
+                  <tr>
+                    <td><%= Business.human_attribute_name :address %></td>
+                    <td><%= business.address %></td>
+                  </tr>
+                  <tr>
+                    <td><%= Business.human_attribute_name :opening_hours %></td>
+                    <td><%= business.opening_hours %></td>
+                  </tr>
+                  <tr>
+                    <td><%= Business.human_attribute_name :website %></td>
+                    <td><%= link_to business.website, url_with_protocol(business.website), target: '_blank' %></td>
+                  </tr>
+                  <tr>
+                    <td><%= t 'general.cm_url' %></td>
+                    <td>
+                      <%= link_to clean_url(business_root_url business.namespace, subdomain: 'www'),
+                        business_root_url(business.namespace, subdomain: 'www'), target: '_blank'
+                      %>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12"><hr/></div>
+          <div class="col-xs-12 how-to-use">
+            <p><strong class="blue"><%= t 'coupon_redemptions.how_to_use' %></strong></p>
+            <div class="col-sm-6 no-padding">
+              <span class="notifications-badge">1</span>
+              <span class="all-indented"><%= t 'coupon_redemptions.print_voucher' %></span>
+            </div>
+            <div class="col-sm-6 no-padding">
+              <span class="notifications-badge">2</span>
+              <span class="all-indented"><%= t 'coupon_redemptions.scheduled_reservation' %></span>
+            </div>
+            <div class="col-sm-6 no-padding">
+              <span class="notifications-badge">3</span>
+              <span class="all-indented"><%= t 'coupon_redemptions.present_voucher' %></span>
+            </div>
+            <div class="col-sm-6 no-padding">
+              <span class="notifications-badge">4</span>
+              <strong class="all-indented blue"><%= t 'coupon_redemptions.enjoy' %>!</strong>
+            </div>
+          </div>
+
+          <div class="col-xs-12"><hr/></div>
+          <div class="col-xs-12 support">
+            <strong><%= t 'coupon_redemptions.customer_support' %></strong>: <%= CUSTOMER_SUPPORT %>
+            <br/>
+            <strong><%= t 'coupon_redemptions.contact_us' %></strong>: <%= CM_SUPPORT_MAIL %>
+            <br/><br/>
+            <strong><%= t 'coupon_redemptions.right_to_cancel' %></strong><br/>
+            <%= t 'coupon_redemptions.see' %>
+            <%= link_to 'condo-media.com', url_with_protocol('www.condo-media.com'), target: '_blank' %>
+            <%= t 'coupon_redemptions.full_terms' %>.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

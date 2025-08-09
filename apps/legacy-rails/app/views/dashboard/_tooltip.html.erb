@@ -1,0 +1,21 @@
+<div class="tooltip-chart">
+  <p class="vs-dates"><%= opts[:present] %> vs <%= opts[:past] %></p>
+  <p class="information">
+    <span class="model"><%= t "stats.#{table_name(opts[:model])}_class" %></span>
+    <span class="amount"><%= opts[:present_amount] %></span>
+    
+    <% increase = opts[:model].calc_increase(opts[:present_amount], opts[:past_amount]) %>
+    <% growth = type_growth(increase) %>
+
+    <span class="increase <%= growth %>">
+
+      <% if growth == "up" %>
+        <i class="material-icons">arrow_upward</i>
+      <% elsif growth == 'down' %>
+        <i class="material-icons">arrow_downward</i>
+      <% end %>
+
+      <%= number_to_percentage(increase, precision: 1) %>
+    </span>
+  </p>
+</div>

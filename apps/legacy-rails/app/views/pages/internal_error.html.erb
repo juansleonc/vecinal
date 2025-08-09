@@ -1,0 +1,17 @@
+<div class="exception-container">
+  <div class="exception">
+    <h5 clas="exception-type"><%= t 'exceptions.error_500' %></h5>
+    <h3 class="exception-title"><%= t 'exceptions.internal_error' %></h3>
+    <p class="exception-suggestion">
+      <%= t 'exceptions.internal_error_suggestion' %>
+      <a href="mailto:<%= CM_INFO_MAIL %>">
+        <%= CM_INFO_MAIL %>
+      </a>
+    </p>
+
+    <%= link_to '', class: 'modal-or-remote report_software_problem',
+      data: { target: '#report-software-problem', path: users_report_software_problem_path } do %>
+      <i class="fa fa-exclamation-triangle yellow-bg"></i> <%= t 'general.report_software_problem' %>
+    <% end %>
+  </div>
+</div>

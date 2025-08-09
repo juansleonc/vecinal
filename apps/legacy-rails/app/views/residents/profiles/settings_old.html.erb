@@ -1,0 +1,103 @@
+<% @submenu_title = t('profiles.settings'); @submenu_item = 'profile' if @user == current_user %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 timeline-view profile-settings">
+  <%= render 'residents/profiles/header' %>
+
+  <div class="content-box divided">
+    <div class="header">
+      <%= t 'profiles.settings' %>
+    </div>
+    <div class="content clearfix">
+      <div class="col-xs-3 left">
+        <div class="list-group filters">
+          <%= link_to t('profiles.notifications.title'), '#', class: 'list-group-item active', data: { table: '#notifications' } %>
+          <%= link_to t('profiles.public_profile'), '#', class: 'list-group-item', data: { table: '#public-profile'} %>
+          <%= link_to t('profiles.password'), '#', class: 'list-group-item', data: { table: '#password'} %>
+        </div>
+      </div>
+      <div class="col-xs-9 right">
+        <%= form_for :setting, url: user_update_settings_path(@user) do |f|  %>
+          <table class="table" id="notifications">
+            <thead>
+              <tr><th colspan="2"><%= t('profiles.notifications.title').upcase %></th></tr>
+            </thead>
+            <tbody>
+              <% @user.settings_notifications.each do |setting| %>
+                <% current_setting = @user.setting_for setting %>
+                <tr>
+                  <td>
+                    <%= f.label setting, t("settings.users.#{setting}") %>
+                    <div class="pull-right">
+                      <% @user.setting_values_for(setting).each do |value| %>
+                        <label class="radio-inline">
+                          <%= f.radio_button setting, value, checked: current_setting == value %>
+                          <%= t "settings.values.#{value}" %>
+                        </label>
+                      <% end %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <table class="table" id="public-profile">
+            <thead>
+              <tr><th colspan="2">PUBLIC PROFILE</th></tr>
+            </thead>
+            <tbody>
+              <% @user.settings_profile.each do |setting| %>
+                <% current_setting = @user.setting_for setting %>
+                <tr>
+                  <td>
+                    <%= f.label setting, t("settings.users.#{setting}") %>
+                    <%= f.select setting, @user.setting_values_for(setting).map{ |value| [t("settings.values.#{value}"), value] },
+                      { selected: current_setting }, class: 'pull-right'
+                    %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <br/>
+          <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+          <%= link_to t('general.cancel'), '#', class: 'btn btn-default', id: 'cancel-changes' %>
+        <% end %>
+
+        <%= form_for @user, url: user_update_password_path(@user), remote: true do |f| %>
+          <table class="table" id="password">
+            <thead>
+              <tr><th colspan="2"><%= (User.human_attribute_name :password).upcase %></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="form-errors-container"></td>
+              </tr>
+              <tr>
+                <td class="form-group">
+                  <%= f.label :current_password %>
+                  <%= f.password_field :current_password, class: 'form-control', autocomplete: 'off' %>
+                </td>
+              </tr>
+              <tr>
+                <td class="form-group">
+                  <%= f.label :password %>
+                  <%= f.password_field :password, class: 'form-control', autocomplete: 'off' %>
+                </td>
+              </tr>
+              <tr>
+                <td class="form-group">
+                  <%= f.label :password_confirmation %>
+                  <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off' %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br/>
+          <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+          <%= link_to t('general.cancel'), '#', class: 'btn btn-default', id: 'cancel-changes' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="col-sm-4 col-xs-6 image-div <%= 'hidden-div' if f.object.image.blank? %>">
+  <div class="image-holder">
+    <%= image_tag f.object.image.url(:standard) %>
+  </div>
+  <%=
+    f.check_box :home,
+      class: 'awesome-checkbox act_as_radio_button',
+      :data => {
+        'icon-checked' => 'fa fa-check-circle-o',
+        'icon-unchecked' => 'fa fa-circle-o',
+        'label-content-checked' => t('general.images.home_picture'),
+        'label-content-unchecked' => t('general.images.select_home_picture'),
+        'label-class-unchecked' => 'btn btn-success btn-block btn-xs',
+        'label-class-checked' => 'btn btn-primary btn-block btn-xs',
+        'radio-group' => 'home_image_checkbox'
+      }
+  %>
+  <%= link_to t('general.remove'), '#', class: 'remove-image btn btn-danger btn-block btn-xs' %>
+
+  <div class="hidden-div">
+    <% if f.object.image.present? %>
+      <%= f.hidden_field :id %>
+    <% else %>
+      <%= f.file_field :image, class: 'image-field', accept: ".gif,.png,.jpeg,.jpg" %>
+    <% end %>
+    <%= f.hidden_field :_destroy, class: 'destroy-image', value: f.object.image.present? ? '0' : '1' %>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<% @submenu_title = t('general.submenu.communities'); @submenu_item = 'communities'; @action_for_search = finish_registration_search_buildings_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 finish-registration-communities">
+  <%= render 'finish_registration/communities_header', modal_target: '#new-building-modal',
+    new_button_name: '+ ' + t('buildings.new')
+  %>
+
+  <div class="under-tabs clearfix <%= 'requested' if current_user.accountable.present? %>">
+    <div class="col-xs-12 colored-banner red-bg">
+      <i class="fa fa-exclamation-triangle"></i> <%= t('finish_registration.pending_access_request') %>
+    </div>
+    <div class="col-xs-12 colored-banner white-bg">
+      <i class="fa fa-exclamation-triangle"></i> <%= t('finish_registration.building_join_banner1') %>
+      <%= link_to t('finish_registration.click_here'), '#', data: { toggle: 'modal', target: "#new-building-modal" } %>
+      <%= t('finish_registration.building_join_banner2') %>
+    </div>
+  </div>
+
+  <% if @buildings.present? %>
+    <%= form_for current_user, url: finish_registration_set_role_path, method: :put, remote: true do |f| %>
+      <%= f.hidden_field :accountable_type, value: 'Building' %>
+      <%= f.hidden_field :accountable_code %>
+      <div class="cm-gallery-grid clearfix load-more-at-bottom" id="communities" data-next-path="<%= @next_path %>">
+        <%= render partial: 'finish_registration/community', collection: @buildings %>
+      </div>
+    <% end %>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-circle-o', objects: t('general.submenu.communities').downcase %>
+  <% end %>
+
+</div>
+
+<div class="modal fade form-new-object" id="new-building-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"> <%= t('finish_registration.notification') %> </h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-default information">
+          <div class="panel-body">
+            <i class="fa fa-exclamation-triangle yellow"></i>
+            <p>
+              <strong class="black">
+                <%= t('finish_registration.building_warning_title') %>
+              </strong>
+            </p>
+            <p>
+              <%= t('finish_registration.building_warning_banner2') %>
+              <%= link_to t('finish_registration.get_started'), finish_registration_communities_path('administrator') %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

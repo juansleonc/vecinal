@@ -1,0 +1,14 @@
+<% @submenu_title = 'Search'; @action_for_search = search_messages_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 messages-index">
+
+  <%= render 'shared/search_results_headers', current_model: Message.model_name.human(count: 2).capitalize %>
+
+  <% if @messages.present? %>
+    <ul class="list-group cm-list load-more-at-bottom" id="messages" data-next-path="<%= @next_path %>">
+      <%= render partial: 'residents/messages/message', collection: @messages %>
+    </ul>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-inbox', objects: Message.model_name.human(count: 2) %>
+  <% end %>
+</div>

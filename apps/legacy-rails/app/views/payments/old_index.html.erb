@@ -1,0 +1,203 @@
+<% @submenu_title = t('payments.name')
+  @submenu_item = 'payments'
+  has_payments = current_user.has_payment_accounts? && @payments.count > 0
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 payments">
+  <div class="clearfix well">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="pull-right filters">
+          <% if has_payments %>
+            <div class="payments-pagination">
+              <% offset = @page * Payment::PER_PAGE
+                count = current_user.payments_associated.count
+              %>
+              <span class="counters"><%= offset + 1 %> - <%= offset + @payments.count %> of <%= count %></span>
+              <div class="btn-group">
+                <%= link_to payments_path(page: @page - 1, order: @order ), class: 'btn btn-default', disabled: @page <= 0 do %>
+                  <i class="fa fa-caret-left"></i>
+                <% end %>
+                <%= link_to payments_path(page: @page + 1, order: @order ), class: 'btn btn-default',
+                  disabled: (@page + 1) * Payment::PER_PAGE >= count do %>
+                  <i class="fa fa-caret-right"></i>
+                <% end %>
+              </div>
+            </div>
+            <div class="autohide-finder">
+              <input type="text" class="form-control" id="filter-payments-input">
+              <%= link_to '#' do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            </div>
+          <% end %>
+          <% if current_user.resident? && current_user.payments_enabled? %>
+            <%= link_to 'Make a payment', '#', data: { toggle: 'modal', target: '#new-payment-modal' }, class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <%= link_to '#' do %>
+              <i class=" fa fa-credit-card"></i> Payments
+            <% end %>
+          </li>
+          <% if current_user.admin? %>
+            <li>
+              <%= link_to payment_accounts_path do %>
+                <i class=" fa fa-users"></i> Communities
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+        <% if has_payments %>
+          <div class="pull-right filters-order">
+            <% if current_user.admin? %>
+              <div class="dropdown building-filter">
+                <button class="dropdown-toggle btn btn-default" data-toggle="dropdown" id="payments-list-dropdown">
+                  <span class="name">All communities</span>
+                  <i class="fa fa-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="payments-list-dropdown">
+                  <li><%= link_to 'All communities', '#', data: { building: 'all' } %></li>
+                  <% current_user.buildings.each do |building| %>
+                    <li><%= link_to building.name, '#', data: { building: building.subdomain } %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <% order = @order == :desc ? 'asc' : 'desc'
+              dir = @order == :desc ? 'down' : 'up'
+            %>
+            <%= link_to payments_path(page: @page, order: order ) do %>
+              <button type="button" class="btn btn-default">Date <i class="fa fa-arrow-<%= dir %>"></i></button>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-xs-12">
+        <% if current_user.has_payment_accounts? %>
+          <table class="table" id="payments">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Card</th>
+                <th>Name</th>
+                <th>Community</th>
+                <th>Status</th>
+                <th>Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @payments.each do |p| %>
+                <tr class="payment <%= p.payment_account.building.subdomain %>">
+                  <td><%= p.transaction_date.strftime '%b %d, %Y' %></td>
+                  <td><%= number_to_currency p.amount %> <%= p.currency_code %></td>
+                  <td><%= p.cardnumber[8..-1] %></td>
+                  <td><%= p.payer_full_name %></td>
+                  <td><%= p.payment_account.building.name %></td>
+                  <td><%= t('payments.statuses')[p.cod_response] %></td>
+                  <td><%= p.transaction_id %></td>
+                </tr>
+                <tr class="details">
+                  <td colspan="7">
+                    <div>
+                      <%= render 'residents/contacts/contact_header', contact: p.user %>
+                      <%= link_to '#', class: 'close-payment pull-right' do %>
+                        <i class="fa fa-times"></i>
+                      <% end %>
+                      <span class="pull-right payment-date"><%= p.transaction_date.strftime '%b %d, %Y, %l:%M %p' %></span>
+                      <table class="table">
+                        <thead>
+                          <th>Description</th>
+                          <th>Card</th>
+                          <th>Ref #</th>
+                          <th>Status</th>
+                          <th>Total</th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="description"><%= p.description %></td>
+                            <td><%= p.cardnumber[8..-1] %></td>
+                            <td><%= p.transaction_id %></td>
+                            <td><%= t('payments.statuses')[p.cod_response] %></td>
+                            <td></td>
+                          </tr>
+                          <tr class="totals">
+                            <td colspan="4"></td>
+                            <td><strong>Sub total</strong> <%= number_to_currency(p.amount - p.service_fee) %> <%= p.currency_code %></td>
+                          </tr>
+                          <tr class="totals">
+                            <td colspan="4"></td>
+                            <td><strong>Service fee</strong> <%= number_to_currency p.service_fee %> <%= p.currency_code %></td>
+                          </tr>
+                          <tr class="totals">
+                            <td colspan="4"></td>
+                            <td><strong>Total</strong> <%= number_to_currency p.amount %> <%= p.currency_code %></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% elsif current_user.admin? %>
+          <h3>
+            Accept payments online<br/>
+            <small>Get paid instantly by enabling online payments</small>
+          </h3>
+          <ul>
+            <li>Condo fees, rent, amenity reservation and more</li>
+            <li>No setup fees, no monthly fees and no hidden costs</li>
+            <li>Get set up in seconds</li>
+            <li>Simple pricing</li>
+            <li>
+              Accept
+              <i class="fa fa-cc-visa fa-2x"></i>
+              <i class="fa fa-cc-mastercard fa-2x"></i>
+              <i class="fa fa-cc-amex fa-2x"></i>
+              and more!
+            </li>
+          </ul>
+          <%= link_to '#', data: { toggle: 'modal', target: '#new-payment-account-modal' } do %>
+            GET STARTED <i class="fa fa-arrow-right"></i>
+          <% end %>
+          <br/>
+          <br/>
+          <button data-toggle="collapse" data-target="#read-more" type="button" class="btn btn-default btn-block">
+            Read more <i class="fa fa-arrow-right"></i>
+            <i class="fa fa-chevron-down pull-right"></i>
+          </button>
+          <div id="read-more" class="collapse">
+            <p>
+              Este es el texto que activa el read more con una explicación muy laga de lo cómo funciona esta vaina. Este es el texto que activa el read more con una explicación muy laga de lo cómo funciona esta vaina. Este es el texto que activa el read more con una explicación muy laga de lo cómo funciona esta vaina.
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'payment_accounts/new' if current_user.admin? && !current_user.payments_enabled? %>
+
+<% if current_user.resident? && current_user.payments_enabled? %>
+  <div class="modal fade form-new-object" id="new-payment-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Payment</h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+

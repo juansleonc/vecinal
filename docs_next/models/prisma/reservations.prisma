@@ -1,0 +1,25 @@
+// [ARCHIVADO] Prisma schema (fragmento) para Reservations
+// Nota: El backend objetivo es Rails API-only con ActiveRecord.
+// Este esquema Prisma queda como referencia histórica de modelado.
+model Reservation {
+  id             String   @id @default(uuid())
+  amenityId      String
+  reserverId     String
+  responsibleId  String?
+  date           DateTime @db.Date
+  timeFrom       String   // 'HH:mm'
+  timeTo         String   // 'HH:mm'
+  status         ReservationStatus @default(pending)
+  message        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([amenityId, date])
+}
+
+enum ReservationStatus {
+  pending
+  pre_approved
+  approved
+  cancelled
+}

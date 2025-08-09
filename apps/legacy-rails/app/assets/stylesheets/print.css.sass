@@ -1,0 +1,59 @@
+@import bootstrap-yeti
+@import font-awesome
+@import style
+@import chartist
+@import chartist-plugin-tooltip
+@import material_icons
+
+@media print
+  .print-page .line_chart
+    padding-top: 0 !important
+  .line-chart
+    padding-right: 20px
+  .chart-content-printable
+    &:nth-of-type(even)
+      page-break-after: always
+      margin-top: 40px 
+  .increase
+    &.up
+      color: $highlight !important
+      i
+        color: $highlight !important 
+    &.down
+      color: $red !important
+      i
+        color: $red !important 
+    i.material-icons
+      font-size: 12px
+      position: relative
+      top: -1px
+      left: 3px
+
+  .report
+    margin: 0
+    width: 100%
+    border-radius: 3px !important
+    .panel-heading
+      text-transform: capitalize
+      padding: 15px 20px !important
+    table 
+      th
+        border-bottom-width: 1px !important
+        text-transform: capitalize !important
+        &:not(:first-child)
+          text-align: center !important
+      td
+        &:not(:first-child)
+          text-align: center !important
+      td:first-child, th:first-child
+        padding-left: 0 !important
+      td:last-child, tf:last-child
+        padding-right: 0 !important
+    .panel-content
+      padding: 10px 20px !important
+
+  .no-logo-letter
+    color: #ffffff !important
+  
+  body.print-page
+    padding-top: 15px !important

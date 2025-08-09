@@ -1,0 +1,91 @@
+<% @submenu_title = t('general.submenu.communities'); @submenu_item = 'communities' %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 timeline-view">
+
+  <%= render 'pages/header', model_object: @company, with_filter: true, class_objects: 'comments', controller: 'pages', action: 'company' %>
+
+  <div class="cols-divided-sm-2">
+    <%= render 'comments/new_timeline_comment', commentable: @company if can?(:post_for_community, Comment) %>
+
+    <div class="content-box with-table">
+      <div class="header">
+        <% if can?(:see_contact_information, @company) %>
+          <%= link_to company_public_about_path(@company) do %>
+            <%= t 'general.intro' %>
+            <i class="fa fa-chevron-right pull-right"></i>
+          <% end %>
+        <% else %>
+          <%= t 'general.intro' %>
+        <% end %>
+      </div>
+      <div class="content">
+        <table>
+          <tr>
+            <td><%= Company.human_attribute_name :name1 %></td>
+            <td><%= @company.name%></td>
+          </tr>
+          <% if can? :see_contact_information, @company %>
+            <tr>
+              <td><%= Company.human_attribute_name :address %></td>
+              <td><%= @company.full_address %></td>
+            </tr>
+            <tr>
+              <td></i> <%= Company.human_attribute_name :phone %></td>
+              <td><%= number_to_phone @company.phone %></td>
+            </tr>
+            <tr>
+              <td><%= Company.human_attribute_name :email %></td>
+              <td><%= @company.email %></td>
+            </tr>
+            <tr>
+              <td><%= Company.human_attribute_name :website %></td>
+              <td><%= @company.website %></td>
+            </tr>
+            <tr>
+              <td><%= Company.human_attribute_name :opening_hours %></td>
+              <td><%= @company.opening_hours %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+    <div class="photos content-box">
+      <div class="header">
+        <%= link_to company_public_photos_path(@company) do %>
+          <%= t 'public_pages.photos.title' %>
+          <i class="fa fa-chevron-right pull-right"></i>
+        <% end %>
+      </div>
+      <div class="content clearfix">
+        <% @company.images.first(Image::MAX_IN_TIMELINE).each do |image| %>
+          <div class="col-xs-6 image">
+            <%= link_to image.image.url(:original), data: { lightbox: true } do %>
+              <%= image_tag image.image.url(:thumb) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="content-box reviews">
+      <div class="header">
+        <%= link_to company_public_reviews_path(@company) do %>
+          <%= Review.model_name.human(count: 2).capitalize %>
+          <i class="fa fa-chevron-right pull-right"></i>
+        <% end %>
+      </div>
+      <div class="content">
+        <span class="blue"><%= @company.average_rank.round 1 %> <%= review_avg_stars @company %></span>
+        <span class="info">(<%= @company.reviews.count %> <%= Review.model_name.human(count: 2).capitalize %>)</span>
+      </div>
+    </div>
+
+    <% if  can? :see_timeline_posts, @company %>
+      <div class="load-more-at-bottom" data-next-path="<%= @next_path %>" id="comments">
+        <%= render partial: 'comments/timeline_comment', collection: @comments %>
+      </div>
+    <% end %>
+  </div>
+
+</div>

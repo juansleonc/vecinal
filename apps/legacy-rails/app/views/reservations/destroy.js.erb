@@ -1,0 +1,5 @@
+<% if @reservation.destroyed? %>
+  $('#reservation-<%= @reservation.id %>').remove();
+<% else %>
+  toastr.error('<%= @reservation.errors.full_messages.join(", ") %>');
+<% end %>

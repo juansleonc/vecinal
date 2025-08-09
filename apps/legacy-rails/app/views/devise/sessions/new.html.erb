@@ -1,0 +1,41 @@
+<% @page_title = 'Sign in | Condo Media' %>
+<% content_for :meta_tags do %>
+    <meta name="description" content="Log into Condo Media to start sharing and connecting with your community." >
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="devise col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1  ">
+
+      <%= link_to root_path do %>
+        <%= image_tag 'condomedia_white.png', width: 200, class: 'cm-home-logo' %>
+      <% end %>
+
+      <%= condomedia_form_for(resource, as: resource_name, url: session_path(resource_name), auto_placeholder: true) do |f| %>
+        <%= render 'shared/model_errors', resource: resource %>
+        <%= hidden_field_tag :invite, params[:invite] if params[:invite] %>
+
+        <div class="row">
+          <% resource.email = params[:email] %>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+            <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+          </div>
+
+          <div class="input-group space-top">
+            <span class="input-group-addon lock-icon"><i class="fa fa-lock"></i></span>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+          </div>
+          <%= f.submit t('devise.sign_in').upcase, class: 'btn btn-primary btn-sm' %>
+        </div>
+      <% end %>
+
+      <p class="bottom-links">
+        <%= link_to t('general.back').upcase, social_login_path, class: 'keep-left' %>
+        <%#= link_to t('devise.sign_up').upcase, new_registration_url(:user, subdomain: 'www') %>
+        <%= link_to t('devise.need_help').upcase, need_help_url(subdomain: 'www') %>
+      </p>
+
+    </div>
+  </div>
+</div>

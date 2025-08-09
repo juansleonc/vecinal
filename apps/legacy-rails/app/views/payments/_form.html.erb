@@ -1,0 +1,65 @@
+<% account = current_user.accountable.payment_account
+  pf = account.payment_fee
+%>
+<%= form_tag 'https://secure.payco.co/checkout.php',
+  data: { bank_percent: pf.bank_discount_percent, cm_fee: pf.cm_fee, platform_fee: pf.platform_fee } do %>
+  <%= hidden_field_tag :p_cust_id_cliente, account.cust_id_cliente %>
+  <%= hidden_field_tag :p_key, account.public_key %>
+  <%= hidden_field_tag :p_id_invoice %>
+  <%= hidden_field_tag :p_amount %>
+  <%= hidden_field_tag :p_amount_base %>
+  <%= hidden_field_tag :p_tax, 0 %>
+  <%= hidden_field_tag :p_email, current_user.email %>
+  <%= hidden_field_tag :p_currency_code, PaymentAccount::CURRENCIES[account.building.country_code.to_sym] %>
+  <%= hidden_field_tag :p_signature %>
+  <%= hidden_field_tag :p_test_request, true %>
+  <%= hidden_field_tag :p_url_response, payments_url %>
+  <%= hidden_field_tag :p_billing_name, current_user.first_name %>
+  <%= hidden_field_tag :p_billing_lastname, current_user.last_name %>
+  <%= hidden_field_tag :p_billing_email, current_user.email %>
+  <%= hidden_field_tag :p_billing_phone, current_user.contact_details.phone %>
+  <%= hidden_field_tag :p_billing_address, current_user.accountable.address %>
+  <%= hidden_field_tag :p_extra1, account.id %>
+   <!-- For service fee -->
+  <%= hidden_field_tag :p_extra2 %>
+
+  <table class="table">
+    <tbody>
+      <tr class="no-border">
+        <td><%= label_tag :amount %></td>
+        <td><%= number_field_tag :amount_base, nil, placeholder: '$', class: 'form-control' %></td>
+      </tr>
+      <tr>
+        <td><%= label_tag :description %></td>
+        <td><%= text_area_tag :p_description, nil, class: 'form-control js-auto-size' %></td>
+      </tr>
+      <tr>
+        <td><%= label_tag :method %></td>
+        <td>
+          <div class="radio">
+            <label><%= radio_button_tag :method, 'debit', checked: true %>Debit</label>
+          </div>
+          <div class="radio">
+            <label><%= radio_button_tag :method, 'credit' %>Credit</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button id="c-total" type="button", class="btn btn-default">Calculate total</button>
+        </td>
+      </tr>
+      <tr class="total">
+        <td>Service Fee</td>
+        <td id="service-fee"></td>
+      </tr>
+      <tr class="total">
+        <td>Net total</td>
+        <td id="net-total"></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary submit">next</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'general.cancel' %></button>
+<% end %>
+

@@ -1,0 +1,45 @@
+<% @submenu_title = t('general.submenu.communities'); @submenu_item = 'communities' %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 timeline-view">
+
+  <%= render 'pages/header', model_object: @business %>
+
+  <div class="cm-gallery-grid" id="offers">
+    <% @business.valid_promos.each do |offer| %>
+      <% offer_link = offer.type == 'Coupon' ? business_coupon_path(@business, offer) : business_deal_path(@business, offer) %>
+      <% edit_link = offer.type == 'Coupon' ? edit_business_coupon_path(@business, offer) : edit_business_deal_path(@business, offer) %>
+      <div class="col-sm-4 col-lg-3 cm-gallery-grid-item offer" id="offer-<%= offer.id %>">
+        <div class="cm-gallery-grid-item-content">
+          <%= link_to offer_link do %>
+            <%= image_tag offer.main_image.image.url(:medium_thumb) %>
+          <% end %>
+          <div class="details">
+            <div class="header">
+              <span class="name overflow-e"><%= offer.title %></span>
+            </div>
+            <span class="overflow-e"><%= @business.opening_hours %></span>
+            <span class="overflow-e">
+              <i class="fa fa-map-marker black"></i>
+              <%= @business.distance_rounded request.location %>
+            </span>
+            <span class="overflow-e">Expires at <%= offer.finish_at.strftime '%b %d, %Y' %></span>
+
+            <% if can? :manage, offer %>
+              <div class="dropdown actions">
+                <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+                  <i class="fa fa-ellipsis-v"></i>
+                <% end %>
+                <ul class="dropdown-menu">
+                  <li>
+                    <%= link_to t('general.edit'), edit_link %>
+                  </li>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

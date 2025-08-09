@@ -1,0 +1,5 @@
+<% if @amenity.destroyed? %>
+  $('#amenity-<%= @amenity.id %>').remove();
+<% else %>
+  toastr.error('<%= @amenity.errors.full_messages.join(", ") %>');
+<% end %>

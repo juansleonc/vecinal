@@ -1,0 +1,12 @@
+<div id="stars-bars">
+  <% Review::MAX_RANK.times do |i| %>
+    <% rank = Review::MAX_RANK - i %>
+    <div>
+      <span class="star-number"><%= "#{rank} #{t 'general.stars'}" %></span>
+      <div class="star-bar">
+        <span class="bar" data-width="<%= reviewable.percent_reviews_by_rank rank %>"></span>
+        <span class="votes-count"><%= reviewable.reviews_by_rank(rank).count %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

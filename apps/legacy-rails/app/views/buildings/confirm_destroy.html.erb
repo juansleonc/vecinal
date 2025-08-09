@@ -1,0 +1,35 @@
+<% @submenu_title = t 'general.delete', object_name: @building.name
+  @submenu_item = 'home'
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <h1>
+      <i class="fa fa-trash"></i>
+      <span class="black"><%= t('general.delete', object_name: @building.name) %></span>
+    </h1>
+
+    <hr/>
+
+    <%= condomedia_form_for([@company, @building], method: :delete) do |f| %>
+
+      <div class="alert alert-danger">
+        <%= t 'general.delete_warning' %>
+      </div>
+
+      <div class="form-group col-sm-12">
+        <%= email_field :user, :email, placeholder: User.human_attribute_name(:email).capitalize, class: 'form-control' %>
+      </div>
+      <div class="form-group col-sm-12">
+        <%= password_field :user, :password, placeholder: User.human_attribute_name(:password).capitalize, class: 'form-control' %>
+      </div>
+      <div class="col-sm-12">
+        <%= submit_tag t('general.delete', object_name: Building.model_name.human.capitalize), class: 'btn btn-primary' %>
+        <%= link_to t('general.back'), edit_company_building_path(@company, @building),
+            class: 'btn btn-default pull-right'
+        %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

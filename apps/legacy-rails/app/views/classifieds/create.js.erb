@@ -1,0 +1,17 @@
+<% if @classified.persisted? %>
+  $('.modal#new-classified-modal').modal('hide');
+  <% if remotipart_submitted? %>
+    $('#classifieds').prepend('<%= j render(@classified) %>');
+  <% else %>
+    $('#classifieds').prepend('<%= j render(@classified) %>');
+  <% end %>
+  clean_form($('.modal#new-classified-modal form#new_classified'));
+  update_communities_filter_counters();
+  $('.empty-items-container').remove();
+  window.emojiPicker.discover();
+<% else %>
+  $("#new-classified-modal .form-errors-container").html("<%= j render('shared/model_errors', resource: @classified) %>");
+  $(".modal#new-classified-modal .attachments-container").empty();
+<% end %>
+$('.modal#modal-spinner').modal('hide');
+$('#new_classified input[type=submit]').prop("disabled", false)

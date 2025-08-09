@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title><%= @page_title || 'Print Page' %></title>
+	  <link rel="icon" type="image/png" href="<%= asset_url 'favicon.png' %>">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <%= csrf_meta_tags %>
+	  <%= stylesheet_link_tag "application" %>
+	  <%= stylesheet_link_tag 'print', media: 'print' %>
+	</head>
+	<body class="print-page">
+		<div class="row">
+			<div class="print-content <%= @component %> col-md-8 col-md-offset-2 col-xs-12">
+				<% community = @community ? @community.name : t('stats.all_communities') %>
+				<% if @component == 'line_chart' %>
+					<h3 class="title"><%= community %></h3>
+					<%= render 'shared/logo_left', logoable: @community if @community %>
+				<% end %>
+	  		<%= yield %>
+			</div>
+		</div>
+	  <%= javascript_include_tag "application" %>
+	</body>
+</html>	

@@ -1,0 +1,64 @@
+<%= image_tag 'logo-condomedia-negro.png', width: '150' %>
+<hr style="border-top: 1px solid #B3B4B6;"/>
+<p style="margin-bottom: 5px;">
+  <% if @record.accountable.managed_by.blank? %>
+    <%= link_to @admin.full_name, user_profile_url(@admin), style: 'text-decoration: none', target: '_blank' %>
+  <% else %>
+    <%= @record.accountable.managed_by %>
+  <% end %>
+
+  <%= t('mailer.new_invite.header') %>
+</p>
+<br/>
+<div style="border: 1px solid #e5e5e5; padding: 10px 25px 20px;">
+  <div style="line-height: 20px">
+    <div style="position: relative; float: left; margin-right: 10px">
+      <%= image_tag @admin.logo.url(:square), width: '45' %>
+      <span style="position: absolute; left: 0; top: 0; color: white; width: 100%; height: 95%; text-align: center; display: flex; justify-content: center; flex-direction: column; font-size: 12px">
+        <%= @admin.first_name_letter %>
+      </span>
+    </div>
+    <span style="color: black; font-weight: 600"><%= @admin.full_name %></span>
+    <br/>
+    <span style="color: gray; font-size: 90%"><%= Time.zone.now.strftime('%B %d, %Y') %></span>
+  </div>
+  <br/>
+  <div>
+    <%= @content.html_safe %>
+    <br><br>
+    <%= @content_extra2.html_safe %>
+    <br/><br/>
+    
+    <button style="background-color: #2978f6; padding: 10px 12px; font-size: 13px; border: none; border-radius: 3px; color: white">
+      <%= link_to t('devise.mailer.confirmation_instructions.button_text2'), confirmation_url(@resource, confirmation_token: @token),
+        style: 'text-decoration: none; color: white;', target: '_blank'
+      %>
+    </button>
+    <br><br>
+    <%= @content_extra.html_safe %>
+    <br><br>
+    <div>
+      <% 
+      if @admin.accountable.class.name == 'Company'
+        if @admin.accountable.setting_for('append_message_to_outgoing_notifications') != 'yes' %>
+        <%= @admin.accountable.setting_for('append_message_to_outgoing_notifications').html_safe  %>
+      <% end 
+      else
+        if @admin.accountable.company.setting_for('append_message_to_outgoing_notifications') != 'yes'
+          @admin.accountable.company.setting_for('append_message_to_outgoing_notifications')
+        end
+      end
+      %>
+    </div>
+    <br><br>
+    <div>
+      <% if @admin.setting_for('notification_mail_signature') != 'yes' %>
+        <%= @admin.setting_for('notification_mail_signature').html_safe  %>
+      <% end %>
+    </div>
+  </div>
+  <p>
+    <%= t 'mailer.above_link' %> 
+    <%= link_to nil, confirmation_url(@resource, confirmation_token: @token), target: '_blank' %>
+  </p>
+</div>

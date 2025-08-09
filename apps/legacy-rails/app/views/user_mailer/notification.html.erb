@@ -1,0 +1,55 @@
+<%= image_tag 'logo-condomedia-negro.png', width: '150' %>
+<hr style="border-top: 1px solid #B3B4B6;"/>
+<p style="margin-bottom: 5px;">
+  <%= link_to @user.full_name, user_profile_url(@user), style: 'text-decoration: none', target: '_blank' if @user %>
+  <%= @header.html_safe %>
+</p>
+<br/>
+<div style="border: 1px solid #e5e5e5; padding: 10px 25px 20px;">
+  <% if @user %>
+    <div style="line-height: 20px">
+      <div style="position: relative; float: left; margin-right: 10px">
+      <%= image_tag @user.logo.url(:square), width: '45' %>
+      
+      <span style="color: white;text-align: center;font-size: 12px;position: relative;top: -18px;left: -29px;">
+        <%= @user.first_name_letter %>
+      </span>
+    </div>
+      <span style="color: black; font-weight: 600"><%= @user.full_name %></span>
+      <br/>
+      <span style="color: gray; font-size: 90%"><%= Time.zone.now.strftime('%B %d, %Y') %></span>
+    </div>
+    <br/>    
+  <% end %>
+  <div>
+    <%= @content.html_safe %>
+  </div>
+  <br><br>
+  <div>
+    <% 
+    if @user.accountable.class.name == 'Company'
+      if @user.accountable.setting_for('append_message_to_outgoing_notifications') != 'yes' %>
+      <%= @user.accountable.setting_for('append_message_to_outgoing_notifications').html_safe  %>
+    <% end 
+    else
+      if @user.accountable.company.setting_for('append_message_to_outgoing_notifications') != 'yes'
+        @user.accountable.company.setting_for('append_message_to_outgoing_notifications')
+      end
+    end
+    %>
+  </div>
+  <br><br>
+  <div>
+    <% if @user.setting_for('notification_mail_signature') != 'yes' %>
+      <%= @user.setting_for('notification_mail_signature').html_safe  %>
+    <% end %>
+  </div>
+</div>
+<div style="padding: 20px; background-color: #f6f6f6; border: 1px solid #e5e5e5; border-top: none;"></div>
+<br/>
+<button style="background-color: #2978f6; padding: 10px 12px; font-size: 13px; border: none; border-radius: 3px; color: white">
+  <%= link_to t('mailer.view_on_condomedia'), @comment_url, style: 'text-decoration: none; color: white;', target: '_blank' %>
+</button>
+<p>
+  <%= t 'mailer.above_link' %> <%= link_to nil, @comment_url, target: '_blank' %>
+</p>

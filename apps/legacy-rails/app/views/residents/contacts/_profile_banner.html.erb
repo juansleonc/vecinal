@@ -1,0 +1,39 @@
+<% can_see_details = can?(:see_profile_details, contact) %>
+<div class="profile-banner" id="<%= @user.id %>">
+  <div class="contact-header">
+    <i class="material-icons">account_circle</i>
+    <span class="name"><%= contact.full_name %></span>
+  </div>
+  <div class="contact-info">
+    <div>
+      
+      <span class="info"><%= contact.accountable.name %></span>
+    </div>
+    
+    <% if can_see_details %>
+      <div>
+        
+        <span class="info"><%= contact.contact_details.apartment_numbers_joined %></span>
+      </div>
+      
+      <div>
+        
+        <span class="info"><%= contact.email %></span>
+      </div>
+      <% if contact.role %>
+        <div>
+          
+          <span class="info"> <%= t "roles.#{contact.role}" %></span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="bottom-actions">
+    <%= link_to 'View profile', user_profile_path(contact.id), class: 'btn btn-default' %>
+    <%= link_to Message.model_name.human.capitalize, '#', class: 'modal-or-remote btn btn-default',
+      data: {
+        target: "#new-message-modal-contact-#{contact.id}", path: new_message_path(to_contact: contact.id)
+      } if current_user_contacts.ids.include?(contact.id)
+    %>
+  </div>
+</div>

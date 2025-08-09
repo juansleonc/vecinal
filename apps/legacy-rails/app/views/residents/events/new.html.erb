@@ -1,0 +1,134 @@
+<% @submenu_title = t 'general.create_record', record_name: Event.model_name.human
+  @submenu_item = 'events'
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <h1>
+      <i class="fa fa-calendar"></i>
+      <span class="black"><%= t 'general.create_record', record_name: Event.model_name.human %></span>
+    </h1>
+
+    <div class="new-event clearfix blue-borders">
+      <%= form_for @event, html: { multipart: true } do |f| %>
+        <%= render 'shared/model_errors', resource: @event %>
+
+        <div class="row">
+          <!-- logo -->
+          <div class="col-xs-12 event-logo">
+            <div id='new-logo' class="image-container">
+              <div id="event-image-default">
+                <%= image_tag @event.logo.url(:medium) %>
+                <%= link_to raw('<i class="fa fa-camera"></i>'),'#', class: 'choose-image-button' %>
+              </div>
+
+              <div class="image-div hidden-div">
+                <div class="image-holder">
+                  <%= image_tag @event.logo.url(:medium) %>
+                  <%= link_to t('general.remove'), '#', class: 'remove-image btn btn-danger btn-block btn-xs' %>
+                </div>
+
+                <div class="hidden-div">
+                  <%= f.file_field :logo, accept: ".gif,.png,.jpeg,.jpg", class: 'image-field', id: 'logo' %>
+                </div>
+              </div>
+
+              <div class="hidden-div">
+                <%= f.check_box :remove_logo, class: 'form-control', value: '0', id: 'remove_logo' %>
+              </div>
+            </div>
+          </div>
+          <!-- end logo -->
+
+          <div class="form-group col-xs-12">
+            <%= f.text_field :title, class: 'form-control', placeholder: Event.human_attribute_name('title') %>
+          </div>
+          <div class="form-group col-xs-12">
+            <%= f.text_field :location, class: 'form-control' , placeholder: Event.human_attribute_name('location') %>
+          </div>
+          <div class="form-group col-xs-12 col-sm-6">
+            <%= f.text_field :date, class: 'form-control', placeholder: Event.human_attribute_name('date') %>
+          </div>
+          <div class="form-group col-xs-12 col-sm-6">
+            <%= f.text_field :end_time, class: 'form-control', placeholder: Event.human_attribute_name(:end_time) %>
+          </div>
+
+          <% if current_user.role == "administrator" %>
+            <div class="form-group col-xs-12 col-sm-6">
+              <%=
+                f.select :repeat_frequency,
+                  Event::REPEAT_OPTIONS.map{ |repeat| [t("general.event_repeat_options.#{repeat}"), repeat] },
+                  { prompt: t('events.select_repeat_frequency') },
+                  { class: 'form-control' }
+              %>
+            </div>
+            <div class="form-group col-xs-12 col-sm-6">
+              <%= f.text_field :expires_at, class: 'form-control', placeholder: Event.human_attribute_name('expires_at'),
+                disabled: !@event.repeats?
+              %>
+            </div>
+          <% end %>
+
+          <div class="form-group col-xs-12">
+            <%= f.text_area :details, class: 'form-control js-auto-size' , placeholder: Event.human_attribute_name('details'), rows: 6 %>
+          </div>
+
+          <%= f.hidden_field :receiver_type, value: Event.receiver_types_for(current_user).first %>
+
+          <div class="form-group col-xs-12 col-xs-12">
+            <div class="input-group receivers-selector">
+              <div class="input-group-btn">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                  <i class="fa fa-users" id="receivers-selector-icon"></i> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <% Event.receiver_types_for(current_user).each_with_index do |type, index| %>
+                    <% icon = Event.receiver_types_icon(type) %>
+                    <li>
+                      <%= link_to '#', data: { type: type, icon: icon } do %>
+                        <i class="fa <%= icon %>"></i> <%= t("events.receiver_types.#{type}") %>
+                        <i class="fa fa-check green <%= 'hidden' unless index == 0 %>"></i>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              <%= f.select :receivers, [],
+                { include_blank: false },
+                { multiple: true, class: 'form-control select2-multiple-with-format',
+                  id: "new-event-select-recipients", data: { prompt: t('events.select_receivers') }
+                }
+              %>
+            </div>
+          </div>
+
+          <% if false %>
+            <%# Commented out because this won't be necessary temporarily %>
+            <div class="form-group col-xs-12 col-md-6">
+              <%=
+                f.select :category,
+                  options_for_select(
+                    Event::CATEGORIES.each_with_index.map {
+                      |category, index| [t("general.event_categories.#{Event::CATEGORIES[index]}"), Event::CATEGORIES[index]]
+                    },
+                    @event.category
+                  ),
+                  { prompt: t('events.select_category') },
+                  { class: 'form-control' }
+              %>
+            </div>
+          <% end %>
+
+          <div class="form-group col-xs-12">
+            <%= condomedia_checkbox f, :rsvp, Event.human_attribute_name(:rsvp).upcase %>
+            <%= condomedia_checkbox f, :notify_user, Event.human_attribute_name(:notify_user) %>
+          </div>
+        </div>
+        <div class="action-buttons">
+          <%= f.submit t('general.create'), class: 'btn btn-primary event-send', 'disable-with' => t('general.please_wait') %>
+          <%= link_to t('general.cancel'), events_path, class: "cancel" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

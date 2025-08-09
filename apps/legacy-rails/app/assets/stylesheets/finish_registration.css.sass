@@ -1,0 +1,93 @@
+@import 'utilities'
+
+.finish-registration
+  text-align: center
+  .header
+    margin-bottom: 40px
+  .finish-registration-role
+    padding: 20px 0
+    background-color: #f7f7f7
+    box-shadow: 0 0 4px $gray
+    height: 310px
+    border: 2px solid transparent
+    margin-bottom: 15px
+    i.fa
+      width: 130px
+      height: 130px
+      line-height: 130px
+      border-radius: 50%
+      background-color: $gray_background
+      color: #fff
+    p.title
+      color: black
+      font-size: 1.3em
+      margin-top: 10px
+    p.description
+      font-size: 0.9em
+      height: 40px
+    .btn.btn-primary
+      display: none
+      width: 70%
+    &.selected
+      border-color: $cm_blue
+      background-color: #fff
+      .btn.btn-primary
+        display: inline-block
+      i.fa
+        background-color: $gray
+
+.finish-registration-communities
+  .under-tabs
+    .colored-banner
+      text-align: left
+      color: #000
+      padding: 13px 15px
+      margin-left: 0
+      > a
+        color: #000
+        font-weight: 600
+      i.fa
+        padding: 4px
+        font-size: 18px
+        float: left
+        line-height: 8px
+        margin-right: 5px
+      &.red-bg
+        display: none
+        i.fa
+          color: #f2192e
+      &.white-bg
+        display: block
+        i.fa
+          color: #ffc746
+    &.requested .colored-banner
+      &.red-bg
+        display: block
+      &.white-bg
+        display: none
+  .cm-gallery-grid#communities
+    margin-bottom: 10px
+    .community .details a.btn
+      font-weight: 600
+      margin-top: 5px
+      text-transform: uppercase
+      padding: 0
+      border: none
+      font-size: 12px
+      &:hover
+        color: $cm_green
+      &.disabled
+        color: $gray
+        font-weight: 100
+
+@media (max-width: $sc_xxs)
+  .finish-registration
+    div[class^="col-"]
+      padding: 0
+    .header
+      margin-bottom: 10px
+
+@media (max-width: $sc_xs)
+  .inner-section.finish-registration-communities .under-tabs
+    position: static
+

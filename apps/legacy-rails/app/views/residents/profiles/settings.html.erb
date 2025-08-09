@@ -1,0 +1,146 @@
+<% @submenu_title = t('profiles.settings'); @submenu_item = 'profile' if @user == current_user %>
+
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 inner-section timeline-view">
+  <%= render 'residents/profiles/header' %>
+
+   <div class="cm-tabs merge-with-content switcher-content">
+    <ul class="nav nav-tabs">
+      <li class="active black">
+        <%= link_to '#', data: { target: '#notifications, #profile-and-notifications' } do %>
+          <i class="fa fa-envelope-o"></i> <%= t('profiles.notifications.title') %>
+        <% end %>
+      </li>
+      <li class="black">
+        <%= link_to '#', data: { target: '#public-profile, #profile-and-notifications'} do %>
+          <i class="fa fa-user-circle-o"></i> <%= t('profiles.public_profile') %>
+        <% end %>
+      </li>
+      <li class="black">
+        <%= link_to '#', data: { target: '#password, #form_password' } do %>
+          <i class="fa fa-lock"></i> <%= t('profiles.password') %>
+        <% end %>
+      </li>
+    </ul>
+    <div class="white-bar"></div>
+  </div>
+
+  <div class="panel panel-default merge-with-tabs profile-settings">
+    <div class="panel-body">
+      <%= form_for :setting, url: user_update_settings_path(@user), html: { id: 'profile-and-notifications', class: 'switchable visible' } do |f|  %>
+        <div class="table switchable visible" id="notifications">
+          <% 
+          @user.settings_notifications.each do |setting| 
+            current_setting = @user.setting_for setting
+          %>
+            <div class="row border-b">
+              
+              
+              <% if setting != 'notification_mail_signature' %>
+                <div class="col-xs-9">
+                  <%= f.label setting, t("settings.users.#{setting}") %>
+                </div>
+                <div class="col-xs-3">
+                  <label class="switch pull-right">
+                    <% values = @user.setting_values_for(setting) %>
+                    <%= f.check_box setting, {checked: current_setting == values[0]}, checked_value = values[0], unchecked_value = values[1] %>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="col-xs-12">
+                  <hr>
+                </div>
+              <% else %>
+                <div class="col-xs-9 col-md-3">
+                  <%= f.label setting, t("settings.users.#{setting}") %>
+                </div>
+                <div class="col-xs-12 col-md-9">
+                <div class="content-options">
+                  <div class="dropdown pull-right options">
+                    <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+                      <%= mi.more_vert %>
+                    <% end %>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <%= link_to t("events.edit"), '#',id: setting,class: 'edit' %>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="to-edit hidden">
+                  <div>
+                    <%= f.hidden_field setting, id: :signed_area, value: (current_setting == 'yes' ? '' : current_setting) %>
+                    <trix-editor input="signed_area"></trix-editor>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+              <!-- col-md-offset-2  -->
+              
+            </div>
+          <% end %>
+        </div>
+        
+        <table class="table switchable" id="public-profile">
+          <tbody>
+            <% @user.settings_profile.each do |setting| %>
+              <% current_setting = @user.setting_for setting %>
+              <tr>
+                <td><%= f.label setting, t("settings.users.#{setting}") %></td>
+                <td>
+                  <%= f.hidden_field setting, value: current_setting %>
+                  <div class="dropdown as-select pull-right" data-target="#setting_<%= setting %>">
+                    <a class="dropdown-toggle black" data-toggle="dropdown">
+                      <span><%= t "settings.values.#{current_setting}" %></span> <%= mi.more_vert %>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <% @user.setting_values_for(setting).each do |value| %>
+                        <li>
+                          <%= link_to t("settings.values.#{value}"), '#', data: { id: value } %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <br/>
+        <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+        <%= link_to t('general.cancel'), '#', class: 'btn btn-default', id: 'cancel-changes' %>
+      <% end %>
+
+      <%= form_for @user, url: user_update_password_path(@user), html: { class: 'switchable', id: 'form_password' }, remote: true do |f| %>
+        <%= f.hidden_field :change_password, value: false %>
+        <table class="table switchable" id="password">
+          <tbody>
+            <div class="form-errors-container"></div>
+            <%unless current_user.change_password %>
+              <tr>
+                <td class="form-group">
+                  <%= f.label :current_password %>
+                  <%= f.password_field :current_password, class: 'form-control', autocomplete: 'off' %>
+                </td>
+              </tr>
+            <% end %>
+            <tr>
+              <td class="form-group">
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'form-control', autocomplete: 'off' %>
+              </td>
+            </tr>
+            <tr>
+              <td class="form-group">
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+        <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+        <%= link_to t('general.cancel'), '#', class: 'btn btn-default', id: 'cancel-changes' %>
+      <% end %>
+    </div>
+  </div>
+</div>

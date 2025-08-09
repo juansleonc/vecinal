@@ -1,0 +1,50 @@
+@import 'utilities'
+
+.event.cols-divided-banner
+  .event-well
+    color: #000
+    font-size: 12px
+    background-color: #F6F7F8
+    padding: 10px 5px
+    margin-bottom: 10px
+    big.day, i.fa, .month
+      display: inline-block
+      width: 30px
+      text-align: center
+    .month
+      font-weight: 600
+    big
+      font-size: 1.5em
+    i.fa
+      font-size: 17px
+      line-height: 30px
+    .whith-icon-left
+      display: inline-block
+  a.rsvp
+    display: block
+    margin-bottom: 10px
+    font-size: 80%
+    color: $gray_light
+    &:focus
+      outline: none
+    .informed, .going, .not_going
+      margin-right: 5px
+  .btn-group
+    margin-bottom: 10px
+    .btn.btn-default.btn-sm
+      padding: 5px 12px
+      &, &:active, &:hover, &:focus, &:active
+        background-color: #fff
+        color: #000
+        margin-left: 0
+      &.disabled
+        color: #fff
+        background-color: #0f9d58
+        opacity: 1
+  span.informed
+    text-transform: capitalize
+
+@media (max-width: $sc_xxs)
+  .event-actions .btn-group
+    position: static
+    margin: 15px 0 5px

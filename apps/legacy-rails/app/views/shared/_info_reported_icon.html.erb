@@ -1,0 +1,6 @@
+<% if status %>
+  <% hover_message =  "This #{object_name} has been reported!" %>
+  <span class="reported-icon pull-right" title="<%= hover_message %>" data-toggle="<%= local_assigns[:toggle] %>" data-target="<%= local_assigns[:target] %>">
+    <i class="material-icons">info_outline</i>
+  </span>
+<% end %>

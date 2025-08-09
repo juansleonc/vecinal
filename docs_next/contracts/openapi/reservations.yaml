@@ -1,0 +1,95 @@
+openapi: 3.1.0
+authors:
+  - name: Vecinal Team
+info:
+  title: Reservations API
+  version: 1.0.0
+  description: CRUD de reservas de amenities con validaciones de disponibilidad y aprobación.
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /reservations:
+    get:
+      summary: Listar reservas
+      parameters:
+        - in: query
+          name: amenityId
+          schema: { type: string, format: uuid }
+        - in: query
+          name: from
+          schema: { type: string, format: date }
+        - in: query
+          name: to
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Reservation' }
+    post:
+      summary: Crear reserva
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ReservationCreate' }
+      responses:
+        '201': { description: Creada, content: { application/json: { schema: { $ref: '#/components/schemas/Reservation' } } } }
+        '409': { description: Colisión/No disponible }
+  /reservations/{id}:
+    get:
+      summary: Obtener reserva
+      parameters: [ { in: path, name: id, required: true, schema: { type: string, format: uuid } } ]
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/Reservation' } } } }
+        '404': { description: No encontrada }
+    patch:
+      summary: Actualizar estado o responsable
+      parameters: [ { in: path, name: id, required: true, schema: { type: string, format: uuid } } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ReservationUpdate' }
+      responses:
+        '200': { description: OK }
+        '409': { description: Reglas no satisfechas }
+    delete:
+      summary: Cancelar reserva
+      parameters: [ { in: path, name: id, required: true, schema: { type: string, format: uuid } } ]
+      responses:
+        '204': { description: Eliminada }
+components:
+  schemas:
+    Reservation:
+      type: object
+      required: [ id, amenityId, reserverId, date, timeFrom, timeTo, status ]
+      properties:
+        id: { type: string, format: uuid }
+        amenityId: { type: string, format: uuid }
+        reserverId: { type: string, format: uuid }
+        responsibleId: { type: string, format: uuid, nullable: true }
+        date: { type: string, format: date }
+        timeFrom: { type: string, pattern: '^[0-2][0-9]:[0-5][0-9]$' }
+        timeTo: { type: string, pattern: '^[0-2][0-9]:[0-5][0-9]$' }
+        status: { type: string, enum: [pending, pre-approved, approved, cancelled] }
+        message: { type: string }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    ReservationCreate:
+      type: object
+      required: [ amenityId, date, timeFrom, timeTo, message ]
+      properties:
+        amenityId: { type: string, format: uuid }
+        date: { type: string, format: date }
+        timeFrom: { type: string }
+        timeTo: { type: string }
+        message: { type: string, minLength: 1 }
+    ReservationUpdate:
+      type: object
+      properties:
+        status: { type: string, enum: [pre-approved, approved, cancelled] }
+        responsibleId: { type: string, format: uuid }

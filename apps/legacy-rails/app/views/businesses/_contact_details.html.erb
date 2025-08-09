@@ -1,0 +1,50 @@
+<div class="col-sm-12 no-padding">
+  <div class="row contact-details">
+    <div class="col-sm-6">
+      <h4><%= t 'businesses.contact_details' %></h4>
+      <table>
+        <tr>
+          <td><%= Business.human_attribute_name :name %></td>
+          <td><%= business.name %></td>
+        </tr>
+        <tr>
+          <td><%= Business.human_attribute_name :phone %></td>
+          <td><%= phone_full business.phone, business.extension %></td>
+        </tr>
+        <tr>
+          <td><%= Business.human_attribute_name :email %></td>
+          <td><%= business.email %></td>
+        </tr>
+        <tr>
+          <td><%= Business.human_attribute_name :address %></td>
+          <td><%= business.full_address %></td>
+        </tr>
+        <tr>
+          <td><%= Business.human_attribute_name :opening_hours %></td>
+          <td><%= business.opening_hours %></td>
+        </tr>
+        <tr>
+          <td><%= Business.human_attribute_name :website %></td>
+          <td><%= link_to business.website, url_with_protocol(business.website), target: '_blank' %></td>
+        </tr>
+        <tr>
+          <td><%= t 'general.cm_url' %></td>
+          <td>
+            <%= link_to clean_url(business_root_url business.namespace), business_root_path(business.namespace),
+              target: '_blank'
+            %>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-sm-6 white-box">
+      <div>
+        <div class="google-map small" data-longitude="<%= business.longitude %>"
+          data-latitude="<%= business.latitude %>" data-drop-main="<%= asset_url 'drop_blue.png' %>">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

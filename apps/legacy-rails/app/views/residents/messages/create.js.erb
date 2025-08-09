@@ -1,0 +1,21 @@
+<% message_id = params[:to_contact].present? ? "new-message-modal-contact-#{params[:to_contact]}" : "new-message-modal" %>
+<% if @message.persisted? %>
+  $('.modal#<%= message_id %>').modal('hide');
+  <% if request.referrer == messages_url %>
+    <% if remotipart_submitted? %>
+      $('#messages').prepend('<%= j render("residents/messages/message", message: @message) %>');
+    <% else %>
+      $('#messages').prepend('<%= j render("residents/messages/message", message: @message) %>');
+    <% end %>
+  <% end %>
+  clean_form($('.modal#<%= message_id %> form#new_message'));
+  $('#new-message-select-recipients').empty().val(null).change();
+  toastr.success('Message sent');
+  $('.empty-items-container').remove();
+  window.emojiPicker.discover();
+  $('#new_message').find('input[type=submit]').prop('disabled',false);
+<% else %>
+  $('#new_message').find('input[type=submit]').prop('disabled',false);
+  $("#<%= message_id %> .form-errors-container").html("<%= j render('shared/model_errors', resource: @message) %>");
+  $(".modal#<%= message_id %> .attachments-container").empty();
+<% end %>

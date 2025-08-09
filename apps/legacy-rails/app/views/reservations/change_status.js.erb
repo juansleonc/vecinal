@@ -1,0 +1,6 @@
+<% if @reservation.valid? %>
+  $('#reservation-<%= @reservation.id %>').replaceWith("<%= j render('reservation', reservation: @reservation) %>");
+  $('span.timeago').timeago();
+<% else %>
+  toastr.error('<%= @reservation.errors.full_messages.join(", ") %>');
+<% end %>

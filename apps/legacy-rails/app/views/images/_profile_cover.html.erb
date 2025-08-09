@@ -1,0 +1,37 @@
+<% cover = imageable.home_image %>
+<div class="image-container">
+  <% if cover.persisted? %>
+    <%= link_to cover.image.url, data: { lightbox: true } do %>
+      <%= image_tag cover.image.url(:public) %>
+    <% end %>
+  <% else %>
+    <%= image_tag cover.image.url(:public) %>
+  <% end %>
+
+  <% if can? :update, imageable %>
+    <div class="dropdown change-image-icon">
+      <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+        <i class="fa fa-camera"></i> <span><%= t 'images.change_cover' %></span>
+      <% end %>
+      <ul class="dropdown-menu">
+        <li><%= link_to 'Change image', '#', class: 'change-image', data: { form_target: 'form#new-home-image' } %></li>
+        <% if cover.persisted? %>
+          <li>
+            <%= confirm_destroy cover, remote: true do %>
+              <%= t 'general.delete', object_name: '' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <%= form_for Image.new, html: { multipart: true, remote: true, class: 'hidden', id: 'new-home-image' } do |f| %>
+      <%= f.hidden_field :imageable_id, value: imageable.id %>
+      <%= f.hidden_field :imageable_type, value: imageable.class.name %>
+      <%= f.hidden_field :home, value: true %>
+      <%= f.file_field :image, accept: Image.allowed_extensions %>
+    <% end %>
+  <% end %>
+
+</div>
+

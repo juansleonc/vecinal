@@ -1,0 +1,5 @@
+<% if @poll.destroyed? %>
+  $("#polls #poll-<%= @poll.id %>").remove();
+<% else %>
+  toastr.error('<%= @poll.errors.full_messages.join(", ") %>');
+<% end %>

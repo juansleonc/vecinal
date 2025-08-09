@@ -1,0 +1,10 @@
+<%= form_for poll_vote, remote: true do |f| %>
+  <%= f.hidden_field :poll_id, value: poll.id %>
+  <% poll.poll_answers.each do |pa| %>
+    <hr class="pa-separator"/>
+    <div class="answer">
+      <%= pa.name %>
+      <span class="pull-right"><%= f.radio_button :poll_answer_id, pa.id %></span>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,6 @@
+$('#line-chart').replaceWith('<%= j render("dashboard/chart", data: @data) %>');
+set_nav_option($('.nav-chart'), "#<%= @model.downcase %>-option");
+create_line_chart({
+  labels: $('#line-chart').data('labels'),
+  series: $('#line-chart').data('series')
+});

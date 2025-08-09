@@ -1,0 +1,8 @@
+<% if @folder.persisted? %>
+  $('.documents-container .folders-container').append("<%= j render(@folder) %>");
+  $('.modal#new-folder-modal').modal('hide');
+  $('.modal#new-folder-modal form#new_folder input#folder_name').val('');
+  $('.emoji-wysiwyg-editor').empty();
+<% else %>
+  $('#new-folder-modal .new-folder-errors-container').html('<%= j render("shared/model_errors", resource: @folder) %>');
+<% end %>

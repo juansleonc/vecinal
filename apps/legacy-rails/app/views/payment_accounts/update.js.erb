@@ -1,0 +1,10 @@
+<% b_id = @account.building.id %>
+<% if @account.valid? %>
+  $('.modal#edit-payment-account-modal-<%= b_id %>').modal('hide');
+  $status = $('#buildings #building-<%= b_id %> .img-description > span.status');
+  $status.text('<%= @account.status.upcase %>');
+  $status.removeClass().addClass('<%= PaymentAccount::STATUS_COLORS[@account.status.to_sym] %> status');
+  toastr.success('Payment Account updated');
+<% else %>
+  $("#edit-payment-account-modal-<%= b_id %> .form-errors-container").html("<%= j render('shared/model_errors', resource: @account) %>");
+<% end %>

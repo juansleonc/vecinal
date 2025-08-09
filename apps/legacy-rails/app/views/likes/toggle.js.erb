@@ -1,0 +1,4 @@
+$likes_container = $('#replies-and-likes-for-<%= @like.likeable_id %>');
+$likes_container.find('a.likes').text('<%= @like.likeable.likes.count %> Likes');
+$likes_container.find('a.like-action').toggleClass('blue');
+$('.modal#likes-for-<%= @like.likeable_id %>').replaceWith('<%= j render("likes/list_modal", likeable: @like.likeable) %>');

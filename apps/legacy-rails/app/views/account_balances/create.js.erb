@@ -1,0 +1,8 @@
+<% if @account_balance.persisted? %>
+  window.location.replace('balances')
+<% else %>
+  $("#new-account-balance-modal .errors-container").html(
+    "<%= j render('shared/model_errors', resource: @account_balance) %>"
+  );
+  $(".modal#new-service-request-modal .attachments-container").empty();
+<% end %>

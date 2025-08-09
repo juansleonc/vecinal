@@ -1,0 +1,12 @@
+<% blocking_message_type = flash[:blocking_notice].present? ? 'success' : (flash[:blocking_error].present? ? 'error' : '') %>
+<div id="blocking_message" data-type="<%= blocking_message_type %>">
+  <%= flash[:blocking_notice] || flash[:blocking_error] %>
+</div>
+
+<div class="toastr-messages" data-type="success">
+  <%= flash[:notice] %>
+</div>
+
+<div class="toastr-messages" data-type="error">
+  <%= flash[:error] || flash[:warning] || flash[:alert] %>
+</div>

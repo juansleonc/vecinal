@@ -1,0 +1,67 @@
+<% @submenu_title = Coupon.model_name.human(count: 2).capitalize
+  @submenu_item = 'coupons'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix promotion-header">
+    <div class="col-xs-12 no-padding">
+      <h1>
+        <i class="fa fa-scissors"></i>
+        <span class="black"><%= Coupon.model_name.human(count: 2).capitalize %></span>
+      </h1>
+      <%= link_to raw('<i class="fa fa-question-circle blue"></i>'), '#' %>
+      <%= link_to '+ ' + t('general.create_record', record_name: Coupon.model_name.human.capitalize),
+          new_business_coupon_path(@business),
+          class: 'pull-right'
+      %>
+    </div>
+
+    <span class="page-descriptor"><%= t 'coupons.offer_discount_vouchers' %></span>
+
+    <div class="finder pull-right col-sm-5 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-coupons-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <div class="col-xs-12 no-padding">
+      <div class="row image-gallery-grid" id="coupons">
+        <% @coupons.each do |coupon| %>
+          <div class="col-sm-4 col-lg-3 img-gallery-col-container">
+            <div class="img-gallery-column coupon">
+              <%= image_tag 'star_icon.png', class: 'highlight' if coupon.highlight? %>
+              <%= link_to image_tag(coupon.main_image.image.url :medium_thumb), business_coupon_path(@business, coupon) %>
+              <div class="img-description">
+                <div class="description-header">
+                  <%= coupon.title %>
+                </div>
+                <span class="medium-soft"><%= @business.name %></span><br/>
+                <strong><i class="fa fa-map-marker"></i> <%= @business.city %></strong>
+                <%= @business.distance_rounded request.location %>
+                <% if coupon.active? %>
+                  <%= link_to t('general.print'), coupon_redemption_print_path(coupon.id), target: '_blank',
+                    class: 'print active'
+                  %>
+                <% else %>
+                  <p class="blank-space">&nbsp;</p>
+                <% end %>
+                <p class="footer">
+                  <%= link_to t('general.edit'), edit_business_coupon_path(@business, coupon) %>
+                  <span class="pull-right <%= coupon.status %>">
+                    <i class="fa fa-circle"></i> <%= t "promotions.#{coupon.status}" %>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <% if @coupons.blank? %>
+    <div class="empty-items-container">
+      <%= t 'general.you_have_no', objects: Coupon.model_name.human(count: 2) %>
+    </div>
+  <% end %>
+
+</div>

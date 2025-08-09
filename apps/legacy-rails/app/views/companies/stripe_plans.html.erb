@@ -1,0 +1,41 @@
+<% @submenu_title = t 'plans.other'
+  @submenu_item = 'plan'
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 subscriptions">
+  <%= render 'companies/subscription_tabs' %>
+
+  <div class="content-box plans">
+    <div class="header">
+      <%= t 'plans.overview' %>
+    </div>
+    <div class="content clearfix">
+      <% Company::PLANS.each do |plan| %>
+        <div class="col-md-3 col-xs-6 plan">
+          <div class="plan-container">
+            <strong><%= t 'companies.plans.' + plan[:name] + '.name' %></strong>
+            <br/><br/><br/>
+            <span class="big"><%= plan[:space] %></span>
+            <br/>
+            <%= t 'plans.storage_space' %>
+            <br/>
+            <% if plan[:online_payments] %>
+              + <br/>
+              <strong><%= t 'plans.online_payments' %></strong>
+            <% else %>
+              <br/>
+            <% end %>
+            <br/><br/>
+            <% if plan[:price] == 0 %>
+              <%= link_to t('companies.plans.' + plan[:name] + '.price').upcase, company_stripe_subscription_path(@company), class: 'btn btn-primary' %>
+            <% elsif plan[:price] == 100 %>
+              <%= link_to t('companies.plans.' + plan[:name] + '.price').upcase, 'mailto:info@condo-media.com', target: "_blank", class: 'btn btn-primary' %>
+            <% else %>
+            <%= link_to t('companies.plans.' + plan[:name] + '.price').upcase, company_stripe_subscription_path(@company), class: 'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

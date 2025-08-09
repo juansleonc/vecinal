@@ -1,0 +1,29 @@
+<ul class="nav nav-pills nav-chart" data-option="<%= local_assigns[:model_option] || @model %>">
+  <% Countable::MODELS_CHART.each do |model_chart| %>
+    <li>
+
+      <% opts_adapt = @options %>
+      <% opts_adapt[:model] = model_chart %>
+      
+      <%= link_to full_update_chart_path(opts_adapt), id: "#{model_chart.name.downcase}-option", remote: true do %>
+        <span class="model-name"><%= truncate t("stats.#{table_name(model_chart)}_class"), length: 11 %></span>
+        <span class="count"><%= model_chart.presents_beetwen(@start, @final, @users).count %></span>
+
+        <% increase = model_chart.increase_beetwen(@start, @final, @users) %>
+        <% growth = type_growth(increase) %>
+
+        <span class="increase <%= growth %>">
+
+          <% if growth == "up" %>
+            <i class="material-icons">arrow_upward</i>
+          <% elsif growth == 'down' %>
+            <i class="material-icons">arrow_downward</i>
+          <% end %>
+
+          <%= number_to_percentage(increase, precision: 1) %>
+        </span>
+
+      <% end %>
+    </li>
+  <% end %>
+</ul>

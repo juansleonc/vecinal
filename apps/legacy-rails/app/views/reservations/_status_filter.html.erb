@@ -1,0 +1,35 @@
+<% 
+query = "&query=#{params[:query]}" if params[:query].present? 
+building = "&b=#{params[:b]}" if params[:b].present?
+company = "&c=#{params[:c]}" if params[:c].present?
+month = "&c=#{params[:month]}" if params[:month].present?
+order = "&c=#{params[:order]}" if params[:order].present?
+responsible = "&responsible=#{params[:responsible]}" if params[:responsible].present?
+%>
+<div class="dropdown " id="status_filter">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="text"><i class="material-icons">schedule</i> 
+            <% if params[:status].nil? %>
+                <%= t 'reservations.all_status_reservation' %> 
+            <% else %>
+                <%= t("reservations.statuses.#{params[:status]}") %>
+            <% end %>
+        </span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="<%= "#{request.path}?all#{query}#{building}#{company}#{month}#{order}" %>" >
+                <%= t 'reservations.all_status_reservation' %>
+            </a>
+        </li>
+        <% Reservation::STATUSES.each do |status| %>
+            <li>
+                <a href='<%= "#{request.path}?status=#{status}#{query}#{building}#{company}#{month}#{order}" %>' data-class="status-<%= status %>">
+                    <%= t("reservations.statuses.#{status}") %>
+                </a>
+            </li>
+        <% end %>
+
+    </ul>
+</div>

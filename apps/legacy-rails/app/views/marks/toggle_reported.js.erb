@@ -1,0 +1,9 @@
+<% class_name = @markable.class.name %>
+$('#<%= class_name.downcase %>-<%= @markable.id %>').hide();
+<% if @markable.marked?(current_user, 'reported') and class_name != 'User' %>
+  $('#<%= @markable.class.name.downcase %>-<%= @markable.id %>').addClass('Reported');
+<% else %>
+  $('#<%= @markable.class.name.downcase %>-<%= @markable.id %>').removeClass('Reported');
+<% end %>
+<% status = @markable.marked?(current_user, 'reported') ? 'reported' : 'unreported' %>
+toastr.success("<%= class_name %> has been <%= status %>");

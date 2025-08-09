@@ -1,0 +1,8 @@
+<div class="dropdown pull-right options filter">
+  <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+    <%= mi.more_vert %>
+  <% end %>
+  <ul class="dropdown-menu">
+    <%= render 'shared/toggle_filter_options',  controller: 'residents', action: 'news_feed' %>
+  </ul>
+</div>

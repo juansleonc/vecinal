@@ -1,0 +1,61 @@
+<%= form_for Event.new, remote: true do |f| %>
+  <div class="form-errors-container"></div>
+
+  <div class="user clearfix">
+    <%= render 'shared/logo_left', logoable: current_user %>
+    <strong><%= current_user.full_name %></strong>
+    <br/>
+    <%= link_to (t('events.edit')), user_about_path(current_user) %>
+  </div>
+
+  <br/>
+
+  <div class="form-group">
+    <%= f.text_field :title, placeholder: (t('events.name')), class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :location, placeholder: (t('events.location')), class: 'form-control' %>
+  </div>
+  <div class="form-group row">
+    <div class="with-icon col-sm-4 col-xs-12">
+      <%= f.text_field :date, placeholder: (t('events.date')), class: 'form-control trigger-datepicker' %>
+      <i class="fa fa-calendar-o on-input"></i>
+    </div>
+    <div class="with-icon col-sm-4 col-xs-12">
+      <%= f.text_field :time_from, placeholder: (t('events.start_time')), class: 'form-control trigger-timepicker-from' %>
+      <i class="fa fa-clock-o on-input"></i>
+    </div>
+    <div class="with-icon col-sm-4 col-xs-12">
+      <%= f.text_field :time_to, placeholder: (t('events.end_time')), class: 'form-control trigger-timepicker-to' %>
+      <i class="fa fa-clock-o on-input"></i>
+    </div>
+  </div>
+
+  <div class="form-group with-icon emoji-picker-container">
+    <%= f.text_area :details, class: 'form-control', placeholder: (t('events.write_comment')), data: { emojiable: true } %>
+    <%= link_to_add_attachment f %>
+  </div>
+
+  <div class="form-group no-margin">
+    <div class="row attachments-container"></div>
+  </div>
+
+  <div class="input-group form-group">
+    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+    <%= f.select :receivers, [], {},
+      { multiple: true, class: 'select2-with-format-ajax', id: "new-event-select-recipients",
+        data: { placeholder: (t('events.share_with')), path: receivers_events_path, lang: I18n.locale }, style: 'width: 100%'
+      }
+    %>
+  </div>
+
+  <div class="form-group check-with-text">
+    <label class="switch">
+      <%= f.check_box :rsvp %>
+      <span class="slider round"></span>
+    </label>
+    <span><%= Event.human_attribute_name(:rsvp).upcase %></span>
+    <%= f.submit t('general.save'), class: 'btn btn-primary pull-right' %>
+  </div>
+
+<% end %>

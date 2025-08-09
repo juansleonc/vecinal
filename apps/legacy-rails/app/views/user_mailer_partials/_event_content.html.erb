@@ -1,0 +1,7 @@
+<strong><%= event.title %></strong>
+<br/><br/>
+<%= event.details %>
+<br><br/>
+<%= event.date.strftime '%A, %B %d' %> at <%= event.time_from.strftime '%l:%M %p' %> - <%= event.time_to.strftime '%l:%M %p' %>
+<br/><br/>
+</i> <%= event.location %>

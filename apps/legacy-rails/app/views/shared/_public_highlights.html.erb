@@ -1,0 +1,74 @@
+<div class="col-lg-2 hidden-xs hidden-sm hidden-md public-highlights">
+  <div class="header"><stong><%= t 'general.highlights' %></stong></div>
+  <% if @model_object.class == Building %>
+    <div class="counter">
+      <%= @model_object.users.count %><br/>
+      <small><%= User.model_name.human(count: 2).capitalize %></small>
+    </div>
+    <div class="counter">
+      <%= @model_object.apartments.count %><br/>
+      <small><%= Apartment.model_name.human(count: 2).capitalize  + ' ' + t('apartments.available').downcase %></small>
+    </div>
+    <% if current_user && current_user.accountable_type == 'Company' %>
+      <hr/>
+      <%= link_to "+ #{t 'general.create_record', record_name: Apartment.model_name.human.capitalize}",
+        new_company_apartment_url(@company, subdomain: 'www'), class: 'btn btn-default'
+      %>
+    <% end %>
+
+  <% elsif @model_object.class == Business %>
+    <div class="counter">
+      <%= @model_object.coupons.count %><br/>
+      <small><%= Coupon.model_name.human(count: 2).capitalize %></small>
+    </div>
+    <div class="counter">
+      <%= @model_object.deals.count %><br/>
+      <small><%= Deal.model_name.human(count: 2).capitalize %></small>
+    </div>
+    <div class="counter">
+      <%= @model_object.promotions.count %><br/>
+      <small><%= t 'businesses.vouchers_available' %></small>
+    </div>
+
+    <% if current_user && current_user.accountable == @model_object %>
+      <hr/>
+      <%= link_to "+ #{t 'general.create_record', record_name: Coupon.model_name.human.capitalize}",
+        new_business_coupon_url(@model_object, subdomain: 'www'), class: 'btn btn-default'
+      %>
+      <%= link_to "+ #{t 'general.create_record', record_name: Deal.model_name.human.capitalize}",
+        new_business_deal_url(@model_object, subdomain: 'www'), class: 'btn btn-default'
+      %>
+      <% if @model_object.stripe_user_id.blank? %>
+        <span class="medium-info italic">
+          <%= t 'general.connect_with' %> <%= link_to t('general.stripe'), connect_to_stripe(@model_object) %>
+        </span>
+      <% else %>
+        <span class="medium-info italic"><%= t 'general.connected_with' %> <%= t('general.stripe') %></span>
+        <i class="fa fa-check-circle green"></i>
+      <% end %>
+    <% end %>
+
+  <% elsif @model_object.class == Company %>
+    <div class="counter">
+      <%= @model_object.users.count %><br/>
+      <small><%= User.model_name.human(count: 2).capitalize %></small>
+    </div>
+    <div class="counter">
+      <%= @model_object.buildings.count %><br/>
+      <small><%= t('general.managed') + ' ' + Building.model_name.human(count: 2) %></small>
+    </div>
+    <div class="counter">
+      <%= @model_object.apartments.count %><br/>
+      <small><%= Apartment.model_name.human(count: 2).capitalize + ' ' + t('apartments.available').downcase %></small>
+    </div>
+    <% if current_user && current_user.accountable_type == 'Company' %>
+      <hr/>
+      <%= link_to "+ #{t 'general.create_record', record_name: Building.model_name.human.capitalize}",
+        new_company_building_url(@model_object, subdomain: 'www'), class: 'btn btn-default'
+      %>
+      <%= link_to "+ #{t 'general.create_record', record_name: Apartment.model_name.human.capitalize}",
+        new_company_apartment_url(@model_object, subdomain: 'www'), class: 'btn btn-default'
+      %>
+    <% end %>
+  <% end %>
+</div>

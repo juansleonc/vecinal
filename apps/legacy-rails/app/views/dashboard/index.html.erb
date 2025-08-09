@@ -1,0 +1,49 @@
+<% @submenu_title = t 'general.insights'; @submenu_item = 'insights' %>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 col-xs-12 stats-dashboard">
+  <div class="dd-communities">
+    <div class="dropdown">
+      <button class="btn dropdown-toggle" type="button" id="stats-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class="option">
+
+          <% if @community %>
+            <%= mi.business %>
+            <%#= render 'shared/logo_left', logoable: @community %>
+            <span class="community-name"><%= @community.name %></span>
+          <% else %>
+            <i class="fa fa-circle-o with-background"></i>
+            <span><%= t 'general.all_communities' %></span>
+          <% end %>
+
+        </span>
+        <span class="caret"></span>
+      </button>
+      <%= render 'chart_communities_filter_list', model: @model %>
+    </div>
+  </div>
+
+  <!-- Chart Section -->
+  <div class="chart-section shadow">
+
+    <%= render 'chart_content' %>
+
+    <div class="dd-footer date-filter">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="chart-date-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="date-option"><%= t('stats.last_months', n: 12) %></span>
+          <span class="caret"></span>
+        </button>
+        <%= render 'chart_dates_filter_list', model: @model %>
+      </div>
+      <% @options[:model] = @model %>
+      <%= link_to print_chart_path(@options), class: 'print-report', target: '_blank' do %>
+        <%= t('stats.print_report') %>
+        <i class="fa fa-angle-right"></i>
+      <% end %>
+
+    </div>
+  </div>
+  
+  <div class="reports">
+    <%= render partial: 'report', collection: Countable::MODELS_REPORT, as: :item %>
+  </div>
+</div>

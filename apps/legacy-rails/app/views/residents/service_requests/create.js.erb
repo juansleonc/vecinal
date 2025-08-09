@@ -1,0 +1,23 @@
+console.log('start');
+<% if @service_request.persisted? %>
+  $('.modal#new-service-request-modal').modal('hide');
+  console.log('line 4');
+  
+  <% if remotipart_submitted? %>
+    $('#service-requests').prepend(
+      '<%= j render("residents/service_requests/service_request", service_request: @service_request) %>'
+    );
+  <% else %>
+    $('#service-requests').prepend('<%= j render("residents/service_requests/service_request", service_request: @service_request) %>');
+  <% end %>
+  
+  clean_form($('.modal#new-service-request-modal form#new_service_request'));
+  toastr.success('Request sent');
+  $('.empty-items-container').remove();
+  $('#new-service-request-modal').find('input[type=submit]').prop('disabled',false);
+  window.emojiPicker.discover();
+<% else %>
+  $('#new-service-request-modal').find('input[type=submit]').prop('disabled',false);
+  $("#new-service-request-modal .errors-container").html("<%= j render('shared/model_errors', resource: @service_request) %>");
+  $(".modal#new-service-request-modal .attachment-container").empty();
+<% end %>

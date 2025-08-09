@@ -1,0 +1,87 @@
+<div class="user-balance" style="margin-bottom: 5em; padding: 1.5em; border: 1px solid black;">
+
+  <!-- Full view -->
+  <div class="list-group-item-content user-balance-full">
+
+    <div class="user-balance-content">
+      
+      <!-- Community Info -->
+      <div class="community-info">
+        <%= render('shared/logo_left', logoable: user_balance.community) %>
+        <div style="display: inline-block; margin-left: 15px">
+          <div style="font-weight: bold;"><%= user_balance.community.name %></div>
+          <div><%= user_balance.community.address %></div>
+          <div><%= 'ID: ' + user_balance.community.community_id %></div>  
+        </div>
+      </div>
+
+      <hr style="border-color: black;">
+      
+      <!-- Info -->
+      <div style="margin-bottom: 2em; display: flex; justify-content: space-between;">
+        <div class="resident-info">
+          <% if user_balance.users.first %>
+            <%= render('shared/logo_left', logoable: user_balance.users.first, left: '') %>  
+          <% else %>
+            <%= render('shared/random_logo', letter: user_balance.resident_name[0]) %>
+          <% end %>
+          
+          <div style="display: inline-block; margin-left: 10px;">
+            <div style="font-weight: bold;"><%= user_balance.resident_name %></div>
+            <div class="apartment-number"><%= user_balance.apartment_number %></div>
+          </div>
+          
+        </div>
+        <span><%= l user_balance.publication_date, format: '%b %d, %Y' %></span>
+      </div>
+
+      <!-- Description -->
+      <table class="table">
+        <tbody>
+          
+          <tr class="header">
+            <td><%= t 'user_balances.co_ownership' %></td>
+            <td><%= t 'user_balances.apartment' %></td>
+            <td></td>
+            <td><%= t 'user_balances.concept' %></td>
+            <td><%= t 'user_balances.previous_balance' %></td>
+            <td><%= t 'user_balances.this_month' %></td>
+            <td><%= t 'user_balances.total' %></td>
+          </tr>
+          
+          <tr>
+            <td><%= user_balance.apartment_number %></td>
+            <td><%= user_balance.resident_name %></td>
+            <td></td>
+            <td></td>
+            <td><%= t 'user_balances.billing_number' %></td>
+            <td><%= user_balance.billing_number %></td>
+            <td></td>
+          </tr>
+
+          <!-- User balance items -->
+          <%= render partial: 'user_balance_items/user_balance_item', collection: user_balance.user_balance_items %>
+
+          <tr style="font-weight: bold;">
+            <td></td>
+            <td></td>
+            <td><%= t 'user_balances.previous_payment' %></td>
+            <td><%= '$' + user_balance.previous_payment %></td>
+            <td><%= t 'user_balances.total_to_pay' %></td>
+            <td></td>
+            <td><%= '$' + user_balance.total %></td>
+          </tr>
+      </table>
+
+      <% if user_balance.community.billing_information.present? %>
+        <hr style="border-color: black;">
+        <div class="billing-information">
+          <%= user_balance.community.billing_information %>
+        </div>
+      <% end %>
+      
+    </tbody>
+    </div>
+  </div>
+
+</div>

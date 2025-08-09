@@ -1,0 +1,5 @@
+<% if !@user.errors.any? %>
+  window.location.href = "<%= finish_registration_communities_path %>";
+<% else %>
+  $('#leave-community-modal .form-errors-container').html('<%= j render("shared/model_errors", resource: @user) %>');
+<% end %>

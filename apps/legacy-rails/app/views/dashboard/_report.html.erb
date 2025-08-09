@@ -1,0 +1,37 @@
+<% item[:class] = item[:class].constantize if item[:class].is_a? String %>
+<div class="panel panel-default report shadow <%= local_assigns[:add] %>">
+  <div class="panel-heading"><%= t "stats.#{table_name(item[:class])}_class" %></div>
+
+  <% options = { 
+    model: item[:class],
+    col1: item[:col1], 
+    col2: item[:col2], 
+    start: params[:since] || 12.months.ago,
+    finish: params[:until] || Time.now
+  }%>
+
+  <%= render partial: 'report_content', locals: options %>
+
+  <div class="panel-footer date-filter <%= 'hidden' if local_assigns[:footer] == false %>">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="<%= table_name(item[:class]) %>-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class="date-option"><%= t('stats.last_months', n: 12) %></span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="<%= table_name(item[:class]) %>-filter">
+        <% Countable::FILTER_DATES.each do |date| %>
+          <li>
+            <%= link_to update_report_path(since: date[:time], item: item, until: date[:until]), remote: true do %>
+              <%= t "stats.#{date[:t_type]}", n: date[:n] %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <%= link_to print_report_path(item: item, since: options[:start], until: options[:final]), class: 'print-report', target: "_blank" do %>
+      <%= t('stats.print_report') %>
+      <i class="fa fa-angle-right"></i>
+    <% end %>
+
+  </div>
+</div>

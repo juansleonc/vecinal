@@ -1,0 +1,40 @@
+<% @submenu_title = 'Search'; @action_for_search = search_folders_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 folders <%= 'list-mode' if cookies[:list_mode] %>">
+
+  <%= render 'shared/search_results_headers', current_model: Folder.model_name.human(count: 2).capitalize %>
+
+  <div class="under-tabs path-container hidden-xs">
+    <%= render 'shared/communities_filter_new',
+      items: '#service-requests .service-request',
+      width_company: true,
+      class_objects: 'service_requests',
+      with_filter_options: true,
+      to_controller: 'service_requests',
+      data_by_community: @contacts_by_accountable %>
+      
+    <div class="actions">
+      <%= link_to '#', class: 'change-folder-mode' do %>
+        <i class="fa fa-bars" <%= cm_popover '', t('folders.link_description.list') %>></i>
+        <i class="fa fa-th-large" <%= cm_popover '', t('folders.link_description.icons') %>></i>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @folders.present? || @attachments.present? %>
+    <div class="col-xs-12 documents-container">
+      <div class="row">
+        <%= render 'list_header' %>
+        <div class="folders-container clearfix" id="documents">
+          <%= render @folders %>
+        </div>
+        <div class="attachments-container load-more-at-bottom" data-next-path="<%= @next_path %>">
+          <%= render partial: 'attachment', collection: @attachments %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-folder-o', objects: Folder.model_name.human(count: 2) %>
+  <% end %>
+
+</ul>

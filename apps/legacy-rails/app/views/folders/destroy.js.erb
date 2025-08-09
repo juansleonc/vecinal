@@ -1,0 +1,6 @@
+<% if @folder.destroyed? %>
+  $('.folders-container #folder-<%= @folder.id %>').remove();
+  hide_action_buttons();
+<% else %>
+  toastr.error('<%= @folder.errors.full_messages.join(', ') %>');
+<% end %>

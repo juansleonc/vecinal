@@ -1,0 +1,37 @@
+<% if current_user %>
+  <div
+    id="shepherd-tour"
+    data-next="<%= t("tours.next") %>"
+    data-finish="<%= t("tours.finish") %>"
+    data-exit="<%= t("tours.exit") %>"
+    data-back="<%= t("tours.back") %>"
+    data-autoplay="<%= current_user.tour_taken ? 'no' : 'yes' %>"
+  >
+
+    <%
+      if current_user.role == "administrator"
+        tour_length = 11
+        tour_name = "property_managers"
+      elsif current_user.role == "resident"
+        tour_length = 7
+        tour_name = "residents"
+      elsif current_user.role == "supplier"
+        tour_length = 5
+        tour_name = "suppliers"
+      end
+    %>
+
+    <% (1..tour_length).to_a.each do |index| %>
+      <div
+        class="shepherd-tour-step"
+        data-step="1"
+        data-attach="<%= t("tours.#{tour_name}.step_#{index}.attach") %>"
+        data-title="<%= t("tours.#{tour_name}.step_#{index}.title") %>"
+        data-description="<%= t("tours.#{tour_name}.step_#{index}.description") %>"
+      >
+      </div>
+    <% end %>
+
+    <div id="shepherd-tour-overlay"></div>
+  </div>
+<% end %>

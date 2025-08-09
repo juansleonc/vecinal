@@ -1,0 +1,100 @@
+body.coupon-redemption{
+  background-color: #FFF;
+  padding-top: 20px;
+  color: #808281;
+  .voucher-print{
+    border: 2px solid #EFE7E4;
+    padding: 20px 25px 30px;
+    border-radius: 0 0 30px 30px;
+    div.logo{
+      margin-bottom: 25px;
+      img{
+        width: 200px;
+      }
+    }
+    .barcode{
+      span{
+        font-size: 20px;
+        margin-right: 10px;
+      }
+    }
+    div.voucher-title{
+      p{
+        font-size: 20px;
+        margin-top: 10px;
+        @media(min-width: 970px){
+          margin-left: 20px;
+        }
+      }
+      img{
+        max-height: 250px;
+      }
+    }
+    div.voucher-description{
+      table tr{
+        color: #666;
+      }
+    }
+    hr{
+      border-top: 2px solid #B3B4B6;
+    }
+    table tr{
+      font-size: 12px;
+      word-break: break-all;
+      td:first-child{
+        font-style: italic;
+        font-weight: bold;
+        padding-right: 10px;
+      }
+      td.id, td span.to{
+        font-weight: bold;
+      }
+    }
+    .warning{
+      color: #F12336;
+    }
+    div.business-details{
+      background-color: #F6F7F8;
+      border-radius: 20px;
+      padding: 25px;
+      min-height: 300px;
+      h3{
+        margin-top: 10px;
+      }
+      img{
+        @media(min-width: 970px){
+          width: 95%;
+        }
+        max-height: 250px;
+      }
+      tr td:first-child{
+        min-width: 112px;
+      }
+    }
+    .voucher-title, .business-details{
+      img{
+        border-radius: 20px;
+        margin-right: 20px;
+        width: 100%;
+      }
+    }
+    div.how-to-use{
+      font-size: 22px;
+      .notifications-badge{
+        margin-left: 0;
+        background-color: #2279C9;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        font-size: 12px;
+        line-height: 15px;
+        vertical-align: top;
+        margin-top: 6px;
+      }
+      .all-indented{
+        display: inline-block;
+        width: calc(100% - 30px);
+      }
+    }
+  }
+}

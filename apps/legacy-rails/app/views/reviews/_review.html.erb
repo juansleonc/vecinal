@@ -1,0 +1,27 @@
+<div class="review cols-divided-banner post" id="review-<%= review.id %>">
+
+  <%= render 'shared/post_dropdown_actions', model_object: review, controller: 'reviews' %>
+
+  <%= render 'shared/info_reported_icon', object_name: review.class.name.downcase, status: review.is_reported(current_user) %>
+
+  <% user = review.user %>
+  <div class="publisher">
+    <%= render 'shared/logo_left', logoable: user %>
+    <span class="username">
+      <%= with_profile_banner_link user %>
+      <br/>
+      <span class="info"><%= review.created_at.strftime '%B %d, %Y' %></span>
+      <span>&bull;</span>
+      <span class="average-star"><%= review.rank %> <i class="fa fa-star"></i></span>
+    </span>
+  </div>
+
+  <p class="description"><%= review.comment %></p>
+  <%= render 'attachments/attachments', attachmentable: review %>
+
+  <% if can? :create, Comment %>
+    <%= render 'comments/replies_and_likes', likeable: review %>
+    <%= render 'comments/commentable_comments', commentable: review, attachments_enabled: true %>
+  <% end %>
+
+</div>

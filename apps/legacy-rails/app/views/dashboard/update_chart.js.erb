@@ -1,0 +1,15 @@
+$('.nav-chart').replaceWith('<%= j render("dashboard/chart_navigation") %>');
+$('#line-chart').replaceWith('<%= j render("dashboard/chart", data: @data) %>');
+$('#filter-dates-list').replaceWith('<%= j render("dashboard/chart_dates_filter_list", model: @model) %>');
+
+<% unless params[:skip] %>
+  $('#filter-communities-list').replaceWith('<%= j render("dashboard/chart_communities_filter_list", model: @model) %>');
+<% end %>
+
+<% @options[:model] = @model %>
+$('.print-report').closest('.chart-section').find('.print-report').attr('href', '<%= print_chart_path(@options) %>');
+create_line_chart({
+  labels: $('#line-chart').data('labels'),
+  series: $('#line-chart').data('series')  
+});
+set_nav_option($('.nav-chart'), "#<%= @model.downcase %>-option");

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  apartment_number: MyString
+  phone: MyString
+  emergency_contact_name: MyString
+  emergency_contact_phone: MyString
+  tenant: false
+  owner: false
+
+two:
+  user_id: 1
+  apartment_number: MyString
+  phone: MyString
+  emergency_contact_name: MyString
+  emergency_contact_phone: MyString
+  tenant: false
+  owner: false

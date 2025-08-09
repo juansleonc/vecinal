@@ -1,0 +1,86 @@
+<% 
+responsible = service_request.responsible 
+unless responsible
+  responsible = service_request.user.accountable.get_admin_default_requests
+end
+%>
+
+<% if local_assigns[:mobile] && mobile %>
+
+  <% if can?(:change_status, service_request) %>
+    <div class="dropdown">
+      <span class="dropdown-toggle" data-toggle="<%= 'dropdown' if can? :change_responsible, service_request %>">
+        <%= render 'shared/logo_left', logoable: responsible, left: left %>
+      </span>
+
+      <ul class="dropdown-menu">
+        <% current_user.company_contacts.order(:first_name).each do |admin| %>
+          <li>
+            <%= link_to change_responsible_service_request_path(service_request, responsible_id: admin.id), remote: true do %>
+              <%= render 'shared/logo_left', logoable: admin %> <%= admin.full_name %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+
+    </div>
+    <%= render 'residents/service_requests/dropdown_menu', service_request: service_request %>
+    
+  
+  <% end %>
+
+  <%#= confirm_destroy service_request if can? :destroy, service_request %>
+
+<% else %>
+
+  <% if can? :change_status, service_request %>
+  <div class="dropdown">
+      <span class="dropdown-toggle" data-toggle="<%= 'dropdown' if can? :change_responsible, service_request %>">
+        <% responsible_name = responsible.is_a?(Company) ? 'Unassigned' : responsible.full_name %>
+        <div class="logo-wrapper left">
+          <%= image_tag responsible.logo.url(:square), data: { toggle: 'popover', content: responsible_name,
+            trigger: 'hover', placement: 'top' } %>
+          <span class="no-logo-letter"><%= responsible.first_name_letter %></span>
+        </div>
+      </span>
+      <ul class="dropdown-menu">
+        <% current_user.company_contacts.order(:first_name).each do |admin| %>
+          <li>
+            <%= link_to change_responsible_service_request_path(service_request, responsible_id: admin.id), remote: true do %>
+              <div class="logo-wrapper">
+                <%= image_tag admin.logo.url(:square) %>
+                <span class="no-logo-letter"><%= admin.first_name_letter %></span>
+              </div>
+              <%= admin.full_name %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <% if service_request.status == 'closed' %>
+      <a href="<%= change_status_service_request_path service_request, status: 'pending' %>" data-remote="true"
+        <%= cm_popover '', t('general.re_open'), container: 'body' %>>
+        <%= material_icon.reply %>
+      </a>
+    <% else %>
+      <%= render 'residents/service_requests/dropdown_menu', service_request: service_request %>
+    <% end %>
+
+    
+
+  <% elsif can?(:read, service_request) && responsible.is_a?(User) %>
+    &nbsp;
+    <div class="logo-wrapper left">
+      <%= image_tag responsible.logo.url(:square), data: { toggle: 'popover', content: responsible.full_name,
+        trigger: 'hover', placement: 'top' } %>
+      <span class="no-logo-letter"><%= responsible.first_name_letter %></span>
+    </div>
+  <% end %>
+
+  <a class="close-item-content" href="#">
+      <i class="fa fa-times ***"></i>
+    </a>
+
+<% end %>
+

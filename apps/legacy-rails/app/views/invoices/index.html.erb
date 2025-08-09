@@ -1,0 +1,111 @@
+<% @submenu_title = t 'general.submenu.billing'
+  @submenu_item = 'plan'
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 subscriptions">
+  <div class="nav-filter-pagination">
+  </div>
+
+  <%= render 'companies/subscription_tabs' %>
+
+  <!-- Unactive until invoices will come reimplemented -->
+  <% if false %>
+    <div class="content-box">
+      <div class="header">
+        Billing Overview
+      </div>
+      <div class="content clearfix">
+        <!-- <div class="col-xs-2">Card</div>
+        <div class="col-xs-10">
+          <i class="fa fa-credit-card"></i> Visa ****9200 Expiration 8/2017 - <%#= link_to_if false, 'Update', '#' %>
+        </div>
+        <br/>
+        <hr/> -->
+        <%= link_to '#', class: 'btn btn-default' do %>
+          <i class="fa fa-credit-card"></i> Add card
+        <% end %>
+      </div>
+    </div>
+
+    <ul class="list-group cm-list" id="invoices">
+      <li class="list-group-item clearfix header gray-bg">
+        <div class="col-xs-12 no-padding"><%= t 'payments.history' %></div>
+      </li>
+      <li class="list-group-item clearfix header text-centered">
+        <div class="col-xs-3"><%= t 'users.date' %></div>
+        <div class="col-xs-3"><%= t 'invoices.amount' %></div>
+        <div class="col-xs-3"><%= t 'users.community' %></div>
+        <div class="col-xs-3"><%= t 'invoices.reference' %></div>
+      </li>
+      <div class="invoice">
+        <li class="list-group-item clearfix text-centered">
+          <br>
+        </li>
+      </div>
+
+      <!-- Unactive until invoices will come reimplemented -->
+      <% if false %>
+        <% @invoices[:past].each do |invoice| %>
+          <div class="invoice">
+            <li class="list-group-item clearfix with-content text-centered" data-target="#content-invoice-<%= invoice.id %>">
+              <div class="col-xs-3">
+                <% if invoice.paid %><i class="fa fa-check green"></i><% end %>
+                <%= Time.at(invoice.date).strftime '%b %d, %Y' %>
+              </div>
+              <div class="col-xs-3"><%= number_to_currency invoice.total.to_f/100 %> <%= invoice.currency.upcase %></div>
+              <div class="col-xs-3">Building 1</div>
+              <div class="col-xs-3"><%= invoice.id %></div>
+            </li>
+            <div class="list-group-item-content" id="content-invoice-<%= invoice.id %>">
+              <div class="title">
+                <div class="username">
+                  <% building = @company.buildings.take %>
+                  <%= community.name %>
+                  <%= render 'shared/logo_left', logoable: building %>
+                  <%= image_tag building.logo.url(:square), class: 'logo' %>
+                  <span class="name"><%= building.name %></span>
+                  <br/>
+                  <span class="info"><%= building.address %></span>
+                </div>
+                <div class="actions">
+                  <% line = invoice.lines.data.last %>
+                  <%= Time.at(invoice.date).strftime '%b %e, %Y %l:%M %P' %>
+                  <%= link_to '#', class: 'close-item-content' do %><i class="fa fa-times"></i><% end %>
+                </div>
+              </div>
+              <div class="content">
+                <table class="table plan-details">
+                  <thead>
+                    <tr>
+                      <th>Description</th>
+                      <th>Amount</th>
+                      <th>Period</th>
+                      <th>Card</th>
+                      <th>Reference #</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Premium plan</td>
+                      <td><%= number_to_currency invoice.total.to_f/100 %> <%= invoice.currency.upcase %></td>
+                      <td><%= Time.at(line.period.start).strftime('%b %d, %Y') %> - <%= Time.at(line.period.end).strftime('%b %d, %Y') %></td>
+                      <td>Debit ****0940</td>
+                      <td><%= invoice.id %></td>
+                      <td class="<%= invoice.paid ? 'green' : 'red' %>">
+                        <%= invoice.paid ? t('invoices.paid') : t('invoices.not_paid') %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-money', objects: t('payments.name').downcase %>
+  <% end %>
+
+</div>

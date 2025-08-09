@@ -1,0 +1,235 @@
+@import 'utilities'
+
+@mixin dropdown_item
+  a
+    color: $gray
+    font-size: 12px
+    font-weight: normal
+    i.fa
+      font-size: 15px
+      width: 20px
+    &:hover
+      border-left: 3px solid $gray
+      padding-left: 13px
+
+.inner-section.folders
+  .nav-filter-pagination .dropdown
+    display: inline-block
+    margin: 0
+    .dropdown-menu
+      left: initial
+      right: 0
+      @include dropdown_item
+      a:hover
+        padding-left: 12px
+  .path-container.under-tabs
+    margin-bottom: 20px
+    .path
+      font-size: 15px
+      padding-top: 5px
+      display: inline-block
+      width: calc(100% - 310px)
+      float: left
+      text-align: left
+      color: #000
+      a
+        color: #000
+        &:hover
+          color: #000
+      i.fa
+        color: $gray_light
+        font-weight: bold
+      a, div
+        display: inline-block
+        @include line-ellipsis
+        vertical-align: bottom
+        max-width: calc(50% - 47px)
+      > div
+        font-weight: 600
+    .actions
+      font-size: 25px
+      margin-right: 10px
+      vertical-align: middle
+      #dynamic-actions
+        display: none
+        > a
+          color: #000
+      a
+        margin: 0 5px
+        i.fa.fa-list, i.fa.fa-th-large
+          color: #000
+        i.fa.fa-file-o
+          color: $gray_light
+        i.fa.fa-folder-o
+          color: $link_blue
+        i.fa.fa-th-large
+          display: none
+      .popover
+        .arrow
+          top: initial !important
+        .popover-content
+          padding: 2px
+          text-align: center
+          min-width: 80px
+  .documents-container
+    min-height: 500px
+    padding-bottom: 15px
+    .list-header
+      display: none
+    .folders-container
+      margin: 0px -5px 10px
+      .folder-container
+        padding: 0 5px
+        cursor: pointer
+        div.link-dblclick
+          display: block
+          color: #000
+          background-color: #fff
+          box-shadow: 0px 0px 5px #888888
+          margin-bottom: 10px
+          i.fa
+            font-size: 18px
+          a.link-dblclick-target
+            display: none
+          > i.fa
+            padding: 10px
+            background-color: $gray_background
+          &.active, &.active i.fa
+            background-color: $cm_blue
+            color: #fff
+          .name
+            display: inline-block
+            width: calc(100% - 45px)
+            vertical-align: middle
+            @include line-ellipsis
+            vertical-align: text-bottom
+    .attachments-container
+      .attachment-container
+        height: 250px
+        padding: 0 5px
+        .link-dblclick
+          box-shadow: 0px 0px 5px #888888
+          background-color: #fff
+          .image-holder
+            height: 200px
+            overflow: hidden
+            > img
+              width: 100%
+            &.file
+              text-align: center
+              img
+                width: 50%
+                height: 100%
+          .file-name
+            @include line-ellipsis
+            padding: 5px
+            color: #000
+          &.active
+            .file-name
+              background-color: $cm_blue
+              color: #fff
+    .folders-container .folder-container, .attachments-container .attachment-container
+      div.link-dblclick .document-details, div.contextual-menu
+        display: none
+      div.contextual-menu
+        position: absolute
+        z-index: 1000
+        box-shadow: 0 0 10px $gray
+        min-width: 160px
+        @include dropdown_item
+.inner-section.folders.list-mode
+  .path-container.under-tabs
+    .actions a.change-folder-mode
+      i.fa.fa-th-large
+        display: inline-block
+      i.fa.fa-list
+        display: none
+  .documents-container
+    .list-header
+      color: #000
+      display: block
+      background-color: #fafafa
+      padding: 15px
+      padding-right: 0
+      border: 1px solid $gray_border
+      margin-bottom: -1px
+      line-height: 1em
+    .document-details
+      width: 50%
+      float: right
+      display: block
+      div
+        display: inline-block
+        width: 32%
+        @include line-ellipsis
+        text-align: center
+    .folders-container
+      margin: 0
+      .folder-container
+        width: 100%
+        padding: 0
+        div.link-dblclick
+          margin-bottom: -1px
+          box-shadow: none
+          border: 1px solid $gray_border
+          i.fa
+            background-color: transparent
+          .name
+            width: calc(50% - 45px)
+
+    .attachments-container
+      .attachment-container
+        width: 100%
+        height: inherit
+        div.link-dblclick
+          border: 1px solid $gray_border
+          margin-bottom: -1px
+          color: #000
+          background-color: #fff
+          box-shadow: none
+          .image-holder
+            display: inline-block
+            padding: 5px
+            height: inherit
+            img
+              width: 25px
+          .file-name
+            display: inline-block
+            width: calc(50% - 45px)
+          &.active
+            box-shadow: none
+            background-color: $cm_blue
+            color: #fff
+            .file-name
+              background-color: none
+    .folders-container .folder-container, .attachments-container .attachment-container
+      div.link-dblclick .document-details
+        display: inline-block
+        padding-top: 8px
+
+@media (max-width: $sc_xs)
+  .inner-section.folders .documents-container
+    .folder-container, .attachment-container
+      .link-dblclick
+        cursor: pointer
+      .dropdown.actions
+        position: absolute
+        right: 5px
+        left: initial
+        bottom: 6px
+        a.dropdown-toggle i.fa
+          padding: 12px 15px
+          color: $gray
+        ul.dropdown-menu
+          left: initial
+          right: 0
+    .attachments-container .attachment-container
+      height: 200px
+      .link-dblclick
+        .image-holder
+          height: 150px
+        .file-name
+          padding: 12px 5px
+      .dropdown.actions a.dropdown-toggle i.fa
+        background-color: $body_background
+

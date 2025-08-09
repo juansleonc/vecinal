@@ -1,0 +1,11 @@
+<%= link_to user_profile_path(user) do %>
+
+  <div class="logo-wrapper">
+    <%= image_tag user.logo.url(:standard) %>
+    <span class="no-logo-letter"><%= user.first_name_letter %></span>
+  </div>
+  <br>
+  <span class="name">
+    <%= current_user.check_settings(current_user, "who_can_see_your_name", user) ? user.full_name : t('users.privated') %>
+  </span>
+<% end %>

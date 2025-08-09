@@ -1,0 +1,7 @@
+<% if @reservation.persisted? %>
+  window.location.href = "<%= reservations_path %>";
+<% else %>
+  $('.modal#new-reservation-modal-amenity-<%= @reservation.amenity_id %> .errors-container').html(
+    '<%= j render("shared/model_errors", resource: @reservation) %>'
+  );
+<% end %>

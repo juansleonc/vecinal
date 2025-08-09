@@ -1,0 +1,18 @@
+<div class="img-container">
+  <%= link_to image_tag(business.home_image.image.url :medium_thumb), business_root_url(business, subdomain: 'www') %>
+  <%= image_tag business.logo.url(:standard), class: 'logo' %>
+</div>
+<div class="img-description">
+  <div class="description-header">
+    <%= link_to business.name, business_root_path(business) %>
+  </div>
+  <i class="fa fa-map-marker"></i>
+  <strong><%= business.address %></strong><br/>
+  <span class="indented">
+    <%= business.city %>, <%= business.distance_rounded request.location %>
+  </span><br/>
+  <i class="fa fa-phone"></i> <%= phone_full business.phone, business.extension %><br/>
+  <i class="fa fa-clock-o"></i> <%= business.opening_hours %><br/>
+  <i class="fa fa-globe"></i>
+  <%= link_to business.website, url_with_protocol(business.website), target: '_blank' %>
+</div>

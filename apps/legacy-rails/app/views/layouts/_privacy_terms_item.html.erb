@@ -1,0 +1,7 @@
+<li class="divider"></li>
+<li class="privacy-terms <%= 'active' if @submenu_item == 'privacy_terms' %>">
+  <%= link_to 'Privacy policy', send("privacy_#{I18n.locale.to_s}_path"), target: '_blank' %> -
+  <%= link_to 'Terms of service', send("terms_#{I18n.locale.to_s}_path"), target: '_blank' %>
+  <br/>
+  <span>© Condo Media Inc</span>
+</li>

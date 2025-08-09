@@ -1,0 +1,22 @@
+<% user_decorator = UserDecorator.new(user) %>
+<div class="col-md-3 col-sm-6 col-xs-12 user contact-panel" id="user-<%= user.id %>">
+  <div class="contact-panel-content">
+    <%= render 'shared/user_logo_on_panel', user: user %>
+    <br>
+    <%= user.email %>
+    <br>
+    <%= user_decorator.mobile_phone %>
+    <br>
+    <i class="fa fa-user-circle-o"></i> <%= t "roles.#{user.role}" %>
+    <br>
+    <%= link_to t('general.edit'), user_about_path(user), class: 'btn btn-primary' if can? :edit, user %>
+    <% if can? :expel, user %>
+      <%= link_to '', user.reject_path(current_user.accountable), method: :post, data: { remote: true },
+        class: 'hidden confirmed-destroy'
+      %>
+      <%= link_to t('general.remove'), '', class: 'confirm-destroy btn btn-default', data: { swal_confirm: t('general.confirm'),
+        swal_confirm_yes: t('general.yes_word'), swal_confirm_no: t('general.no_word') }
+      %>
+    <% end %>
+  </div>
+</div>

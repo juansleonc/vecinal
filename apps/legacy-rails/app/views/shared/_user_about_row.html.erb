@@ -1,0 +1,21 @@
+<tr>
+  <td><%= f.label(local_assigns[:label] || field) %></td>
+  <td>
+    <%= value %>
+    <% if can_update %>
+      <div class="pull-right dropdown">
+        <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+          <%= mi.more_vert.css_class('blue-light') %>
+        <% end %>
+        <ul class="dropdown-menu">
+          <li><%= link_to t('general.edit'), '#', class: 'edit' %></li>
+        </ul>
+      </div>
+    <% end %>
+  </td>
+  <% if can_update %>
+    <td class="to-edit hidden">
+      <%= input_given || f.text_field(field) %>
+    </td>
+  <% end %>
+</tr>

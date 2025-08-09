@@ -1,0 +1,8 @@
+<% if @folder.valid? %>
+  $('.folders-container #folder-<%= @folder.id %> .name').text('<%= @folder.name %>');
+  $('.modal#update-folder-modal-<%= @folder.id %>').modal('hide');
+<% else %>
+  $('.folders-container #folder-<%= @folder.id %> .folder-errors-container').html(
+    '<%= j render("shared/model_errors", resource: @folder) %>'
+  );
+<% end %>

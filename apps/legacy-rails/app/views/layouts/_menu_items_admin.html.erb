@@ -1,0 +1,34 @@
+<% company = current_user.accountable %>
+<li class="<%= 'active' if @submenu_item == 'insights' %>">
+  <%= link_to dashboard_path do %>
+    <%= mi.view_compact %>
+    <%= t 'general.insights' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'profile' %>">
+  <%= link_to user_profile_url(current_user, subdomain: 'www', query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <%= mi.account_circle %>
+    <%= t 'general.submenu.profile' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'communities' %>">
+  <%= link_to company_buildings_url(company, subdomain: 'www', query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <%= mi.group_work %>
+    <%= t 'general.submenu.communities' %>
+  <% end %>
+</li>
+
+<%= render 'layouts/building_items', subdomain: 'www' %>
+
+<li class="<%= 'active' if @submenu_item == 'invites' %>">
+  <%= link_to create_users_url(nil, subdomain: 'www', query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <%= mi.person_add %>
+    <%= t 'invites.invites' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'plan' %> hidden-xs">
+  <%= link_to company_stripe_plans_url(company, subdomain: 'www', query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <%= mi.cloud %>
+    <%= t 'general.submenu.upgrade_storage' %>
+  <% end %>
+</li>

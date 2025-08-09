@@ -1,0 +1,55 @@
+<% gender_es = {'polls' => 'f', 'classifieds' => 'm', 'items' => 'm'} %>
+<% objects_name ||= 'items' %>
+<div class="dropdown dropdown-filter no-js">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+    <span class="text">
+      <% case request.path %>
+      <% when send("#{objects_name}_path") %>
+        <i class="fa fa-circle-o with-background"></i> <%= t('general.all_categories') %>
+      <% when send("filtered_#{objects_name}_path", :public) %>
+        <i class="fa fa-globe with-background"></i> <%= t 'general.public' %>
+      <% when send("filtered_#{objects_name}_path", :user) %>
+        <i class="fa fa-user-o with-background"></i> <%= t('general.your_record', record_name: t("general.#{objects_name}")) %>
+      <% when send("filtered_#{objects_name}_path", :saved) %>
+        <i class="fa fa-bookmark-o with-background"></i> <%= t("general.saved_record_#{gender_es[objects_name]}", record_name: t("general.#{objects_name}").capitalize) %>
+      <% when send("filtered_#{objects_name}_path", :hidden) %>
+        <i class="fa fa-eye-slash with-background"></i> <%= t("general.hidden_record_#{gender_es[objects_name]}", record_name: t("general.#{objects_name}").capitalize) %>
+      <% when send("filtered_#{objects_name}_path", :reported) %>
+        <i class="fa fa-ban with-background"></i> <%= t("general.reported_record_#{gender_es[objects_name]}", record_name: t("general.#{objects_name}").capitalize) %>
+      <% end %>
+    </span>
+    <span class="caret"></span>
+  </button>
+    <ul class="dropdown-menu">
+    <li>
+      <%= link_to send("#{objects_name}_path") do %>
+        <i class="fa fa-circle-o with-background"></i> <%= t 'general.all_categories' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to send("filtered_#{objects_name}_path", :public) do %>
+        <i class="fa fa-globe with-background"></i> <%= t 'general.public' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to send("filtered_#{objects_name}_path", :user) do %>
+        <i class="fa fa-user-o with-background"></i> <%= t('general.your_record', record_name: t("general.#{objects_name}")) %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to send("filtered_#{objects_name}_path", :saved) do %>
+        <i class="fa fa-bookmark-o with-background"></i> <%= t("general.saved_record_#{gender_es[objects_name]}", record_name: t("general.#{objects_name}").capitalize) %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to send("filtered_#{objects_name}_path", :hidden) do %>
+        <i class="fa fa-eye-slash with-background"></i> <%= t("general.hidden_record_#{gender_es[objects_name]}", record_name: t("general.#{objects_name}").capitalize) %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to send("filtered_#{objects_name}_path", :reported) do %>
+        <i class="fa fa-ban with-background"></i> <%=  t("general.reported_record_#{gender_es[objects_name]}", record_name: t("general.#{objects_name}").capitalize) %>
+      <% end %>
+    </li>
+  </ul>
+</div>

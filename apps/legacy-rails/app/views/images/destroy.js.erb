@@ -1,0 +1,4 @@
+$('.photos-gallery .photo-container#<%= @image.id %>').remove();
+<% if @image.home? %>
+  $('.home-image .image-container').replaceWith('<%= j render("images/profile_cover", imageable: @image.imageable) %>');
+<% end %>

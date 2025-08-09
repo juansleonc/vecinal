@@ -1,0 +1,21 @@
+CondoMedia is an application for managing condominiums, where companies (with property managers) can manage one or multiple buildings (create/edit buildings, create/edit available apartments, etc), and residents (that belong to a building) can communicate with the property managers and perform a series of actions within the app (send a personal message to another user, see contact information of other users, write/comment in the buildings wall).
+
+The application has one main page in the 'www' subdomain, where users can sign up and sign in. When a new company is created (when an administrator signs up is asked to either join an existing company or to create a new one), a namespace for that company is created as well: /companies/:namespace with a public 'Company' page. Buildings have their own URL too, but via subdomains: building_subdomain.domain.com with its public page (which is similar to the company public page, the main difference is that the company public page contains info about all of its buildings, while the building public page only contains info about this specific one).
+
+There are 4 main roles in the application:
+
+- Administrator: This one refers to the property managers, which belong to a Company (via the accountable relationship), and are the ones that can manage buildings that belong to that company. The first administrator to sign up creates a new company, but the other ones need a code to join an existing company (this is generated when the company is created, I think the user is asked for the 'ID', but its not the actual id of the company, instead this is another field called 'code' -I think-), and then an existing administrator needs to 'accept' the new one before they have access. Administrators also grant access to the building to residents when they sign up.
+
+- Resident: Residents can only see information related to the building they belong to (via the accountable relationship, which by the way is polymorphic, so if a user accountable's is a Company, then its role is 'administrator', if its accountable is a Building, then its role is 'resident').
+
+- Supplier: Right now the can only sign up, and then they are redirected to a welcome page. We don't care about this ones yet.
+
+- Super Administrator: This type of user is located in a different model (all other users are a 'User', but this one is an 'AdminUser'). This user is the type of user that can manage EVERYTHING in the app via RailsAdmin. I don't think we're going to do much with this type of user either.
+
+One important thing to have in mind during setup is the following: since this app uses subdomain, some extra config is needed for this to work (accessing localhost:3000 will not work). There are mainly two options: 1. use pow as the webserver (personally I don't like pow, so I use option 2), 2. create some hosts in the hosts file:
+
+127.0.0.1   condo-media.local www.condo-media.local mybuilding.condo-media.local
+
+You need at least these three records, don't forget to add the buildings subdomains to this file when you create them, otherwise you'll get an error. Also, don't forget to add the ':3000' port at the end of the url just when typing it in the browser.
+
+In the secrets file I have exposed some keys that are good for development (so you don't have to create your own), I'm not sure if for some of them (like facebook and linkedin) the URL is important, I suggest you use the same domain I use: "condomedia.local"

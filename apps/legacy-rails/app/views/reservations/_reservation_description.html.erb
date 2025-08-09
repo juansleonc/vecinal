@@ -1,0 +1,67 @@
+<div class="list-group-item-content" id="reservation-content-<%= reservation.id %>">
+    <div class="title hidden-xs">
+    <span class="black"><%= t 'reservations.booking_request' %>: <strong><%= amenity.name %></strong></span>
+    <div class="actions">
+        <%= render 'reservations/statuses', reservation: reservation, only_status: false %>
+        <%= link_to '#', class: 'close-item-content' do %>
+        <i class="fa fa-times"></i>
+        <% end %>
+    </div>
+    </div>
+
+    <div class="title visible-xs">
+    <div class="actions">
+        <%= render 'reservations/statuses', reservation: reservation, mobile: true, only_status: false %>
+        <%= link_to '#', class: 'close-item-content' do %> <i class="fa fa-times"></i> <% end %>
+    </div>
+    <div class="title-text"><%= amenity.name %></div>
+    </div>
+
+    <div class="username clearfix">
+    <span class="pull-right hidden-xs"><%= reservation.created_at.strftime('%l:%M %P %b %e, %Y') %></span>
+    <span class="pull-right visible-xs"><%= reservation.created_at.strftime('%b %e') %></span>
+    <%= render 'shared/logo_left', logoable: reserver %>
+    <%= with_profile_banner_link reserver %>
+    </div>
+
+    <div class="content-reservation">
+        <%= content_with_emoji simple_format(reservation.message) %>
+        <div>
+            <div class="header">
+                <h4><%= t 'general.details' %></h4>
+            </div>
+            <div class="content_details">
+                <%= mi.event %>
+                <p style="color:#acacae;"><%= t 'general.when' %></p>
+                <p><%= I18n.localize reservation.date , format: '%a %d %b, %Y' %></p>
+            </div>
+            <div class="content_details">
+                <%= mi.schedule %>
+                <p style="color:#acacae;"><%= t 'general.time' %></p>
+                <p><%= reservation.time_from.strftime '%H:%M' %> - <%= reservation.time_to.strftime '%H:%M' %></p>
+            </div>
+            <div class="content_details">
+                <%= mi.domain %>
+                <p style="color:#acacae;"><%= t 'general.community' %></p>
+                <p><%= reservation.amenity.building.name %></p>
+            </div>
+            <div class="content_details">
+                <%= mi.crop_original %>
+                <p style="color:#acacae;"><%= t 'general.amenity' %></p>
+                <p><%= reservation.amenity.name %></p>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="comments-replies" data_comment="<%= reservation.class.to_s.underscore + '-' + reservation.id.to_s + '-comments' %>">
+    <%= t('reservations.reply') %> (<%= reservation.comments.count %>)
+    </div>
+
+    <%= render('comments/commentable_comments',
+    commentable: reservation,
+    attachments_enabled: true,
+    hidden: true
+    ) %>
+
+</div>

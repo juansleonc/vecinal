@@ -1,0 +1,31 @@
+@import 'utilities'
+
+.poll.cols-divided-banner
+  hr.pa-separator
+    border: 0.5px solid $gray_background
+    margin: 0
+  .answer
+    margin: 7px 0
+    padding: 3px
+    a
+      color: #000
+    input[type=radio]
+      cursor: pointer
+    .popover .popover-content
+      white-space: nowrap
+  .votes
+    padding: 8px
+    margin: 0 -8px
+    border-top: 1px solid $gray_background
+    background-color: #FFFFFF
+
+.modal.poll-votes
+  .modal-body
+    padding: 10px
+  .poll-vote
+    padding: 5px 0
+    border-top: 2px solid $gray_background
+    &:last-child
+      border-bottom: 2px solid $gray_background
+    .username
+      color: #000

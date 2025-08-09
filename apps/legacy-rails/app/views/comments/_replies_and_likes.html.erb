@@ -1,0 +1,22 @@
+<%= render 'likes/list_modal', likeable: likeable %>
+
+<div class="replies-and-likes" id="replies-and-likes-for-<%= likeable.id %>">
+  <%= yield "replies_and_likes_additional_links_#{likeable.id}" %>
+
+  <%= link_to "#{likeable.likes.count} "+ (Like.model_name.human(count: 2).capitalize) , '#', class: 'info likes',
+    data: { toggle: 'modal', target: "#likes-for-#{likeable.id}" }
+  %>
+  <%= link_to "#{likeable.comments.count} "+ (t 'comments.comment'), '#', class: 'toggle-comments info comments' %>
+  <hr/>
+  <% blue = 'blue' if likeable.likes.where(user: current_user).count > 0 %>
+  <%= link_to toggle_like_path(likeable.class.name, likeable.id), remote: true, class: "like-action #{blue} after-rule" do %>
+    <i class="fa fa-thumbs-o-up"></i> <%= Like.model_name.human(count: 2).capitalize.chomp('s') %>
+  <% end %>
+
+  <% if can?(:comment_posts, Comment) %>
+    <%= link_to '#', class: 'toggle-comments after-rule', data_comment: likeable.class.to_s.underscore + '-' + likeable.id.to_s + '-comments' do %>
+      <i class="fa fa-comment-o"></i>
+      <%= t 'general.actions.comment' %>
+    <% end %>
+  <% end %>
+</div>

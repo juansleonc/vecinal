@@ -1,0 +1,6 @@
+<% if @company.present? && @company.valid? %>
+  <% current_user.reload %>
+  window.location.href = "<%= company_root_path @company %>";
+<% else %>
+  $('#new-company-modal .errors-container').html('<%= j render("shared/model_errors", resource: @company) %>');
+<% end %>

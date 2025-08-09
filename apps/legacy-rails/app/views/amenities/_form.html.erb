@@ -1,0 +1,25 @@
+<%= form_for Amenity.new, remote: true do |f| %>
+  <% buildings = current_user.buildings %>
+  <div class="errors-container"></div>
+  <div class="new-amenity-errors-container"></div>
+  <%= f.hidden_field :building_id %>
+  <div class="form-group">
+    <%= f.text_field :name, placeholder: (Amenity.human_attribute_name :name) , class: 'form-control' %>
+  </div>
+  <div class="form-group emoji-picker-container">
+    <%= f.text_area :description, placeholder: (Amenity.human_attribute_name :description), class: 'form-control', data: { emojiable: true } %>
+  </div>
+  <div class="form-group">
+    <div class="dropdown as-select" data-target="#amenity_building_id">
+      <button class="dropdown-toggle form-control" data-toggle="dropdown">
+        <span><i class="fa fa-circle-o with-background"></i> <%= t 'general.choose_community' %> <sup class="red"><strong>*</strong></sup></span>
+        <i class="fa fa-caret-down"></i>
+        <i class="fa fa-caret-up"></i>
+      </button>
+      <%= render 'shared/dropdown_as_select_list', objects: buildings %>
+    </div>
+  </div>
+  <div class="buttons-right">
+    <%= f.submit t('general.create'), class: 'btn btn-primary' %>
+  </div>
+<% end %>

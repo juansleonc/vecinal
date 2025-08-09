@@ -1,0 +1,80 @@
+<%= condomedia_form_for([@company, @building], auto_placeholder: @building.new_record?) do |f| %>
+
+  <%= render 'shared/model_errors', resource: @building %>
+
+  <div class="row">
+
+    <div class="col-sm-12"><h4 class="blue"><%= t 'general.overview' %></h4></div>
+
+    <div class="form-group col-sm-6">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :code, class: 'form-control', disabled: true %>
+    </div>
+    <div class="form-group col-sm-12">
+      <%= f.label :subdomain unless @building.new_record? %>
+      <div class="input-group">
+        <%= f.text_field :subdomain, class: 'form-control', skip_autolabel: !@building.new_record? %>
+        <div class="input-group-addon">.condo-media.com</div>
+      </div>
+    </div>
+
+    <!-- <div class="form-group col-sm-6">
+      <%#=
+        f.select :category,
+          options_for_select(
+            Building::CATEGORIES.each.map { |category| [t("general.building_types.#{category}"), category] },
+            @building.category
+          ),
+          {},
+          { class: 'form-control' }
+      %>
+    </div> -->
+    <div class="form-group col-sm-6">
+      <%= f.number_field :size, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-12">
+      <%= f.text_area :description, class: 'form-control js-auto-size' %>
+    </div>
+
+    <div class="col-xs-12"><hr/></div>
+
+    <div class="col-sm-12"><h4 class="blue"><%= t 'general.directions' %></h4></div>
+
+    <div class="form-group col-sm-12">
+      <%= f.text_field :address, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :city, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :region, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :country, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :zip, class: 'form-control' %>
+    </div>
+
+    <div class="col-xs-12"><hr/></div>
+
+    <div class="col-sm-12"><h4 class="blue"><%= t 'general.media' %></h4></div>
+
+    <div class="form-group col-sm-12">
+      <%= render 'images/images_section', f: f, model_object: @building %>
+    </div>
+    <div class="form-group col-sm-12">
+      <%= render 'images/logo_field', f: f,  model_object: @building %>
+    </div>
+
+    <div class="col-xs-12"><hr/></div>
+
+    <div class="col-xs-12 action-buttons">
+      <%= f.submit t('general.continue'), class: 'btn btn-primary' %>
+      <%= link_to t('general.cancel'), company_buildings_path(@company), class: 'cancel' %>
+    </div>
+  </div>
+
+<% end %>

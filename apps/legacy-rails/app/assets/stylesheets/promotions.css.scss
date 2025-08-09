@@ -1,0 +1,414 @@
+.well.promotion-header{
+  padding-top: 6px;
+  padding-bottom: 14px;
+  h1{
+    margin-top: 6px;
+  }
+  .btn.btn-primary.pull-right{
+    margin-top: 10px;
+  }
+  .fa.fa-question-circle{
+    font-size: 20px;
+  }
+}
+.well.promotion-detail{
+  padding: 0px 20px 20px;
+  color: #707070;
+  font-size: 12px;
+  .title{
+    h3{
+      display: inline-block;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      color: #000;
+      .fa{
+        color: #666;
+      }
+    }
+    .pull-right{
+      margin-top: 15px;
+    }
+  }
+  .promotion-buy{
+    text-align: center;
+    font-size: 12px;
+    color: #A7A7A7;
+    padding-right: 25px;
+    &> h1{
+      color: #505050;
+      font-weight: bold;
+      margin-bottom: 2px;
+      font-style: normal;
+    }
+    table.discount-detail{
+      width: 100%;
+      margin-top: 15px;
+      h5{
+        font-weight: bold;
+        line-height: 5px;
+      }
+    }
+    .countdown-container{
+      text-align: left;
+      h5{
+        font-weight: bold;
+        margin-top: 5px;
+        color: #CF5F27;
+      }
+    }
+    a.edit{
+      margin-top: 16px;
+      font-size: 2em;
+      margin-right: 10px;
+    }
+    .btn.btn-primary.report{
+      margin-bottom: 5px;
+    }
+    .btn.btn-primary{
+      background-color: #28AD50;
+      border-color: transparent !important;
+      font-style: italic;
+      padding: 10px;
+      border-radius: 10px;
+      &:hover{
+        background-color: #1E9E45 !important;
+        border-color: transparent;
+      }
+    }
+  }
+  .carousel-inner{
+    border-radius: 30px;
+    > .item{
+      max-height: 300px;
+    }
+  }
+  .carousel-control{
+    &.left{
+      border-radius: 30px 0 0 30px;
+    }
+    &.right{
+      border-radius: 0 30px 30px 0;
+    }
+    .fa-chevron-circle-left, .fa-chevron-circle-right{
+      position: absolute;
+      top: 45%;
+      z-index: 5;
+      font-size: 40px;
+      color: #ADADAD;
+    }
+    .fa-chevron-circle-left{
+      margin-left: -35px;
+    }
+  }
+  .description-list{
+    h3{
+      color: #000;
+    }
+    ul{
+      padding-left: 20px;
+      li{
+        font-size: 12px;
+        color: #008CBA;
+        margin-bottom: 10px;
+        span{
+          color: #A7A7A7;
+          word-wrap: break-word;
+        }
+      }
+    }
+    p{
+      color: #A7A7A7;
+      word-wrap: break-word;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+  }
+  .contact-details{
+    background-color: #F6F7F8;
+    border-radius: 15px;
+    margin: 10px 15px;
+    padding: 0px;
+    > h4{
+      margin: 0 0 10px;
+      color: #000;
+    }
+    .col-sm-7, .col-sm-5{
+      padding: 0;
+    }
+    .white-box{
+      margin-top: 0;
+      padding-right: 0;
+      > div{
+        padding: 0;
+        border-radius: 20px;
+        .google-map.small{
+          height: 200px;
+          width: 100%;
+          border-radius: 20px;
+        }
+      }
+    }
+    table{
+      width: 100%;
+      font-size: 12px;
+      color: #A7A7A7;
+      tr{
+        td:first-child{
+          font-weight: bold;
+          font-style: italic;
+          padding-right: 5px;
+        }
+        td{
+          line-height: 1.5em;
+          overflow: hidden;
+          max-width: 23vw;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+  .acquisitions, .back_to{
+    text-align: left;
+    font-size: 16px;
+  }
+  .back_to{
+    color: #00526E;
+    .fa{
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 767px){
+    padding: 0;
+    .contact-details{
+      margin: 0;
+      .white-box{
+        padding: 0 10px;
+      }
+    }
+    .promotion-buy .btn.btn-primary{
+      display: inline-block;
+    }
+    .title{
+      .pull-right{
+        margin-bottom: 15px;
+        margin-top: 0;
+      }
+      h3{
+        font-size: 20px;
+      }
+    }
+  }
+}
+.inner-section.reports{
+  color: #666;
+  h1{
+    margin-bottom: 15px;
+  }
+  .counters-container{
+    margin-bottom: 10px;
+    margin-top: 5px;
+    .statistics{
+      display: inline-block;
+      margin-left: 20px;
+    }
+  }
+  .btn-group.filter-counters{
+    margin-bottom: 10px;
+    @media (max-width: 460px){
+      .btn-default{
+        font-size: 13px;
+      }
+    }
+    &.display-reports{
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+  .statistic{
+    display: inline-block;
+    margin-top: 5px;
+    line-height: 1em;
+    text-align: center;
+    color: #9A9B9D;
+    font-size: 12px;
+    padding: 0 5px;
+    span{
+      color: #47709C;
+      font-size: 20px;
+    }
+    &.status{
+      font-size: 20px;
+      .fa{
+        margin-right: 10px;
+      }
+    }
+    &.small{
+      margin-left: 20px;
+    }
+  }
+  .dropdown{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+  table{
+    td{
+      max-width: 250px;
+    }
+    td.numeric{
+      text-align: center;
+    }
+    th.status{
+      min-width: 90px;
+    }
+    &.rounded-header tbody tr td{
+      .fa.fa-circle{
+        font-size: 10px;
+      }
+    }
+  }
+  #reports{
+    &.display-all{
+      .report.coupon, .report.deal{
+        display: table-row;
+      }
+    }
+    &.display-coupons{
+      .report:not(.coupon){
+        display: none !important;
+      }
+      .report.coupon{
+        display: table-row;
+      }
+    }
+    &.display-deals{
+      .report:not(.deal){
+        display: none !important;
+      }
+      .report.deal{
+        display: table-row;
+      }
+    }
+  }
+  .right-spaced{
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+  .finder.pull-right.header{
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  .available{
+    margin-bottom: 20px;
+    margin-left: 40px;
+    font-size: 12px;
+  }
+}
+.image-gallery-grid .img-gallery-column{
+  div.edit-status{
+    margin-bottom: 5px;
+  }
+  .img-description .footer{
+    .active .fa{
+      color: #00AC52;
+    }
+    .scheduled .fa{
+      color: #FFC746;
+    }
+    .expired .fa{
+      color: #F2142B;
+    }
+  }
+}
+.active{
+  color: #00AC52;
+}
+.inactive{
+  color: #F2142B;
+}
+.scheduled{
+  color: #FFC746;
+}
+.expired{
+  color: #F2142B;
+}
+.inner-section h1.promo-title{
+  font-size: 25px;
+  @media (max-width: 767px){
+    font-size: 20px;
+  }
+}
+.inner-section.my-stuff{
+  h1{
+    font-style: normal;
+    .fa{
+      color: #666;
+    }
+  }
+  button{
+    margin-top: 15px;
+    &.selected .name{
+      color: #008CBA;
+    }
+    &:first-child{
+      border-radius: 10px 0 0 10px;
+    }
+    &:nth-child(3){
+      border-radius: 0 10px 10px 0;
+    }
+    @media (max-width: 460px){
+      font-size: 13px;
+    }
+  }
+  .finder{
+    margin-bottom: 15px;
+  }
+  table{
+    td.title{
+      width: 42%;
+    }
+    td .fa-print{
+      color: #333;
+    }
+  }
+  #vouchers{
+    &.display-all{
+      .voucher.coupon, .voucher.deal{
+        display: table-row;
+      }
+    }
+    &.display-coupons{
+      .voucher:not(.coupon){
+        display: none !important;
+      }
+      .voucher.coupon{
+        display: table-row;
+      }
+    }
+    &.display-deals{
+      .voucher:not(.deal){
+        display: none !important;
+      }
+      .voucher.deal{
+        display: table-row;
+      }
+    }
+  }
+}
+.inner-section .well form.batch-redeem{
+  margin-top: 30px;
+  textarea{
+    background-color: #F6F7F8;
+    border: none;
+    border-radius: 10px;
+  }
+  .btn-primary{
+    border-radius: 15px;
+    font-size: 20px;
+    padding: 4px 20px;
+    margin-bottom: 10px;
+  }
+}
+.centered{
+  text-align: center;
+}

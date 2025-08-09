@@ -1,0 +1,18 @@
+<% if @comment.persisted? %>
+  $comments = $('#<%= @comment.commentable_type.underscore %>-<%= @comment.commentable_id %>-comments');
+  $comments.find('.new-commentable-comment textarea').val('').blur();
+  $comments.find('.new-commentable-comment .attachments-container').empty();
+  $comments.find('.new-commentable-comment').after('<%= j render(@comment) %>');
+  if($comments.find('.new-commentable-comment form').data('hide-actions') == 'yes') {
+    $comments.find('.new-commentable-comment .actions').hide();
+  }
+  $comments.find('.comment-count span.fa-stack.counter-globe').removeClass('hidden');
+  $comments.find('.comment-count span.fa-stack-1x').html('<%= @comment.commentable.comments.count %>');
+  $comments.prev('.comments-replies').find('.count').text('<%= @comment.commentable.comments.count %>');
+  $("span.timeago").timeago();
+  $('.emoji-wysiwyg-editor').empty();
+  $('#replies-and-likes-for-<%= @comment.commentable_id %>').find('.comments').text('<%= @comment.commentable.comments.count %> Comments');
+<% else %>
+  show_blocking_alert('error', "<%= @comment.errors.full_messages.join(', ').html_safe %>");
+<% end %>
+re_enable_elements();

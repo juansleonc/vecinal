@@ -1,0 +1,2201 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+es:
+  activerecord:
+    models:
+      user:
+        one: "usuario"
+        other: "usuarios"
+      company:
+        one: "empresa"
+        other: "empresas"
+      building:
+        one: "edificio"
+        other: "edificios"
+      image:
+        one: "imagen"
+        other: "imágenes"
+      apartment:
+        one: "apartamento"
+        other: "apartamentos"
+      comment:
+        one: "comentario"
+        other: "comentarios"
+      service_request:
+        one: "ticket"
+        other: "tickets"
+      event:
+        one: "evento"
+        other: "eventos"
+      business:
+        one: 'negocio'
+        other: 'negocios'
+      deal:
+        one: 'oferta'
+        other: 'ofertas'
+      coupon:
+        one: 'cupón'
+        other: 'cupones'
+      coupon_redemption:
+        one: 'redimir cupón'
+        other: 'redimir cupones'
+      deal_purchase:
+        one: 'comprar oferta'
+        other: 'comprar ofertas'
+      message:
+        one: 'mensaje'
+        other: 'mensajes'
+      invite:
+        one: 'invitación'
+        other: 'invitaciones'
+      folder:
+        one: documento
+        other: documentos
+      amenity:
+        one: Reserva
+        other: Reservas
+      availability:
+        one: disponibilidad
+        other: disponibilidades
+      reservation:
+        one: reservación
+        other: reservaciones
+      poll:
+        one: encuesta
+        other: encuestas
+      poll_answer:
+        one: respuesta
+        other: respuestas
+      poll_vote:
+        one: voto
+        other: votos
+      review:
+        one: revisión
+        other: revisiones
+      classified:
+        one: Publicación
+        other: Publicaciones
+      payment:
+        one: Pago
+        other: Facturación
+      like:
+        one: Me gusta
+        other: Me gusta
+      user_balance:
+        one: "Estado"
+        other: "Estados"
+    attributes:
+      user:
+        first_name: "Nombre"
+        last_name: "Apellido"
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
+        current_password: "Contraseña actual"
+        accountable_code: "Código"
+        role: "Rol"
+        full_name: "Nombre Completo"
+        building_name: "Nombre del Edificio"
+        apartment_number: "Numero de Apartamento"
+        locale: 'Idioma'
+        role: 'Rol'
+        accountable: Comunidad
+        education: Educación
+        relationship: Estado Civil
+        hometown: Ciudad de Residencia
+      company:
+        name: "Empresa, Organización o Nombre Comercial"
+        name1: "Empresa"
+        namespace: "Condo Media URL"
+        category: "Categoría"
+        email: "Correo"
+        phone: "Teléfono"
+        extension: "Extensión"
+        fax: "Fax"
+        website: "Sitio Web"
+        country: "País"
+        region: "Región/Departamento"
+        city: "Ciudad"
+        address: "Dirección"
+        zip: "Código Postal"
+        opening_hours: "Horario"
+        description: "Descripción"
+        logo: "Logo"
+        code: "ID"
+        location: 'Ubicación'
+        sign_agreement: 'Términos y condiciones'
+        confirm_legal_representation: 'Confirmar representación legal'
+      business:
+        code: 'ID'
+        name: "Nombre del Negocio"
+        name1: "Negocio"
+        phone: "Teléfono"
+        extension: "Extensión"
+        country: "País"
+        region: "Región"
+        city: "Ciudad"
+        address: "Dirección"
+        zip: "Código Postal"
+        email: "Correo"
+        namespace: "Condo Media URL"
+        description: 'Descripción'
+        opening_hours: 'Horario'
+        website: 'Sitio Web'
+        location: 'Ubicación'
+        sign_agreement: 'Términos y condiciones'
+        confirm_legal_representation: 'Confirmar representación legal'
+      building:
+        code: "ID de Página"
+        name: "Nombre del edificio"
+        name1: "Comunidad"
+        building_or_place_name: Edificio o nombre del lugar
+        street_address: Dirección de la calle
+        state_providence: Estado/Provincia
+        subdomain: "Condo Media URL"
+        category: "Categoría"
+        description: "Descripción"
+        size: "Numero de apartamentos"
+        address: "Dirección"
+        city: "Ciudad"
+        region: "Región"
+        country: "País"
+        zip: "Código Postal"
+        images: "Fotos"
+        logo: "Logo"
+        units: 'Número Apartamento'
+        email: Correo
+        phone: Teléfono
+        website: Sitio Web
+        opening_hours: Horario
+        community_id: "ID de Comunidad"
+        managed_by: 'Administrado por'
+        remove_page: 'Eliminar página'
+        billing_information: "Información Facturación"
+      contact_details:
+        apartment_number: Apto/Casa
+        phone: Teléfono
+        emergency_contact_name: Contacto en caso de emergencia
+        emergency_contact_phone: Teléfono en caso de emergencia
+        tenant: Arrendatario
+        owner: Propietario
+        move_in_date: Fecha de mudanza
+        user_type: Tipo de usuario
+        mobile_phone: Celular
+        home_phone: Teléfono
+        garage: Garaje
+        locker: Locker
+        links: Enlaces
+        birth_day: Cumpleaños
+        birth_year: Fecha Nacimiento
+        sex: Género
+        work: Trabajo
+        education: Educación
+        relationship: Relación
+        hometown: Barrio
+      contact_form:
+        name: 'Nombre Completo'
+        email: "Correo electrónico"
+        subject: "Asunto"
+        message: "Mensaje"
+      apartment:
+        building_id: 'Seleccione el edificio'
+        apartment_number: 'Numero de Apartamento'
+        category: 'Categoría'
+        available_at: 'Disponible desde'
+        show_price: 'Precio'
+        price: '$'
+        size_ft2: 'Área (pies2)'
+        bedrooms: 'Habitaciones'
+        bathrooms: 'Baños'
+        furnished: 'Amoblado'
+        pets: 'Mascotas'
+        show_contact: 'Información de Contacto'
+        secondary_phone_number: 'Teléfono'
+        secondary_email: 'Correo Electrónico'
+        title: 'Titulo'
+        description: 'Descripción'
+        images: 'Imágenes'
+      message:
+        sender: 'De'
+        receiver: 'Para'
+        title: "Asunto"
+        content: "Contenido"
+        urgent: "Urgente"
+        notify_user: "Notificar a usuario por email"
+        add_to_sticky_notes: "Agregar a notas rápidas"
+        receivers: 'Destinatarios'
+      service_request:
+        responsible_id: 'Responsable'
+        title: "Asunto"
+        content: "Contenido"
+        urgent: "Urgente"
+        category: 'Categoría'
+        case: "caso # %{num}"
+      event:
+        sender_id: "Remitente"
+        title: "Titulo"
+        category: "Categoría"
+        date: "Fecha de inicio"
+        repeat_frequency: "Recurrencia"
+        expires_at: "Repetir hasta"
+        location: "Ubicación"
+        receiver_type: "A:"
+        receivers: "+ Agregar nombres..."
+        details: "Detalles"
+        add_to_sticky_notes: "Agregar a notas rápidas"
+        logo: "Imagen"
+        rsvp: 'RSVP'
+        end_time: 'Fecha de finalización'
+        notify_user: 'Notificar por Correo'
+        sign_agreement: 'Términos y Condiciones'
+      deal:
+        category: 'Categoría'
+        title: 'Titulo'
+        price: 'Precio sin descuento'
+        discount: 'Porcentaje de descuento'
+        number: 'Numero de ofertas'
+        description: 'Describa la oferta…'
+        fine_print: 'Liste las restricciones de la oferta…'
+        sign_agreement: 'Comprendo las leyes que aplican como establecimiento de comercio a través de este sitio web y acepto que todos los productos y servicios cumplen a cabalidad con esas leyes'
+        available_at: 'Disponible a partir de'
+        finish_at: 'Hasta'
+        highlight: 'Resaltar oferta'
+        top: 'Promover oferta'
+        images: 'Imágenes'
+        show_highlight: 'Resaltar oferta'
+        show_top: 'Promover oferta'
+        last_day_to_claim: 'Fecha límite para reclamar oferta'
+        requires_shipping: 'Requiere envío'
+        impressions: 'Vistas'
+        clicks: 'Clics'
+        sign_agreement: 'Términos y condiciones'
+      coupon:
+        category: 'Categoría'
+        title: 'Titulo'
+        number: 'Numero de cupones'
+        description: 'Describir la promoción…'
+        fine_print: 'Liste las restricciones de la promoción…'
+        sign_agreement: 'Comprendo las leyes que aplican como establecimiento de comercio a través de este sitio web y acepto que todos los productos y servicios cumplen a cabalidad con esas leyes'
+        available_at: 'Disponible a partir de'
+        finish_at: 'Hasta'
+        highlight: 'Resaltar cupón'
+        top: 'Promover cupón'
+        show_highlight: 'Resaltar cupón'
+        show_top: 'Promover cupón'
+        last_day_to_claim: 'Fecha límite para reclamar oferta'
+        impressions: 'Vistas'
+        clicks: 'Clics'
+        sign_agreement: 'Términos y condiciones'
+        images: 'Imágenes'
+      coupon_redemption:
+        coupon: 'Cupón'
+        user: 'Usuario'
+        created_at: 'Impreso'
+        redeemed: 'Redimido'
+      deal_purchase:
+        user: 'Usuario'
+        deal: 'Oferta'
+        created_at: 'Creado'
+        status: 'Estado'
+        price: 'Precio'
+        quantity: 'Cantidad'
+        address: 'Dirección'
+        city: 'Ciudad'
+        region: 'Región'
+        country: 'País'
+        sign_agreement: 'Términos y condiciones'
+      invite:
+        first_name: 'Nombre'
+        last_name: 'Apellido'
+        email: 'Correo electrónico'
+        emails: 'Correo electrónico'
+        role: 'Rol'
+        accountable_id: 'Comunidad'
+      comment:
+        content: 'Contenido'
+      folder:
+        name: Nombre
+        level: Nivel
+        father: Padre
+      attachment:
+        file_attachment_file_name: Nombre Archivo
+        file_attachment_content_type: Tipo de Contenido
+        file_attachment_file_size: Tamaño Archivo
+        file_attachment_updated_at: Actualizado en
+      amenity:
+        name: Nombre
+        description: Descripción
+        rental_fee: Costo?
+        rental_value: Valor renta
+        deposit: Deposito?
+        deposit_value: Valor depósito
+        maximun_rental_time: Tiempo máximo de reserva
+      availability:
+        day: Dia
+        time_from: Desde
+        time_to: Hasta
+      reservation:
+        date: Fecha
+        time_from: Desde
+        time_to: Hasta
+        status: Estado
+        payment: Pago
+        message: Mensaje
+        amenity: Servicio
+      poll:
+        publisher: Publicado por
+        question: Pregunta
+        end_date: Fecha final
+        duration: Duración
+        num_days: '# dias'
+        end_date_date: Fecha
+      poll_answer:
+        name: Nombre
+        add_choice: Agregar respuesta
+      review:
+        user: Usuario
+        rank: Rango
+        comment: Comentario
+      classified:
+        title: Titulo
+        price: Precio
+        description: Descripción
+        publisher: Publicado por
+        building: Edificio
+    errors:
+      models:
+        business:
+          owner_has_a_role_already: "El usuario ya tiene un rol asignado"
+          can_not_update_plan: 'No está disponible la actualización, el número de cupones activos excede el límite permitido del plan contratado'
+        company:
+          owner_has_a_role_already: "El usuario ya tiene un rol asignado"
+          namespace_format: "Solo puede contener letras minúsculas, números '-' y '_'"
+          can_not_update_plan: 'No está disponible la actualización, el número de edificios excede el límite permitido del plan contratado'
+        user:
+          accountable_not_found: "No encontrado"
+        contact_details:
+          tenant_or_owner: 'Debe seleccionar el tipo de propietario'
+        building:
+          subdomain_format: "solo puede contener letras minúsculas, '-' y números, debe empezar con una letra, debe finalizar con una letra o número"
+          email_or_password_wrong: 'Correo electrónico o contraseña incorrectos'
+        message:
+          cant_be_blank: "El campo no puede estar en blanco"
+        event:
+          cant_be_blank: "El campo no puede estar en blanco"
+        coupon_redemption:
+          no_coupons_available: 'No hay cupones disponibles en este momento'
+          not_available_yet: 'Aun no está disponible'
+          currently_unavailable: 'Actualmente no está disponible'
+        deal_purchase:
+          no_deals_available: 'No hay ofertas disponibles en este momento'
+          not_available_yet: 'Aun no está disponible'
+          currently_unavailable: 'Actualmente no está disponible'
+        deal:
+          cant_delete_has_purchases: "Borrado no permitido, actualmente hay compras en curso"
+          minimum_4_weeks_after_end: 'Mínimo 4 semanas después del vencimiento de la oferta'
+        coupon:
+          cant_delete_has_redemptions: "Borrado no permitido, actualmente tiene cupones por redimir"
+          minimum_4_weeks_after_end: 'Mínimo 4 semanas después del vencimiento de la oferta'
+        invite:
+          community_not_exists: 'Esta comunidad no existe'
+        folder:
+          not_self: no puede ser si mismo
+          limit_reached: alcanzó el límite
+          can_not_delete_root_folder: Usted no puede borrar estar carpeta raiz
+        attachment:
+          less_than: "Archivos deben ser menos de %{max_size}"
+        reservation:
+          not_available: No está disponible en este tiempo
+        poll:
+          be_in_future: debe ser programada a futuro
+        account_balance:
+          attributes:
+            community_id:
+              inclusion: "seleccionada no está dentro de tus buildings"
+      messages:
+        model_invalid: "La validación ha fallado: %{errors}"
+        inclusion: "no está incluido(a) en la lista"
+        exclusion: "es reservado(a)"
+        invalid: "no es válido(a)"
+        confirmation: "no coincide %{attribute}"
+        accepted: "debe ser aceptado"
+        empty: "no puede estar vacío"
+        blank: "no puede ser vacío"
+        present: "debe ser vacío"
+        too_long:
+          one: "es muy largo(a) (máximo 1 caracter)"
+          other: "es muy largo(a) (máximo %{count} caracteres)"
+        too_short:
+          one: "es muy corto(a) (mínimo 1 caracter)"
+          other: "es muy corto(a) (mínimo %{count} caracter)"
+        wrong_length:
+          one: "tiene longitud incorrecta (debe ser de 1 caracter)"
+          other: "tiene longitud incorrecta (debe ser de %{count} caracteres)"
+        not_a_number: "no es un número"
+        not_an_integer: "debe ser un entero"
+        greater_than: "debe ser mayor a %{count}"
+        greater_than_or_equal_to: "debe ser mayor o igual a %{count}"
+        equal_to: "debe ser igual a %{count}"
+        less_than: "debe ser menor a %{count}"
+        less_than_or_equal_to: "debe ser menor o igual a %{count}"
+        other_than: "debe ser diferente a %{count}"
+        odd: "debe ser impar"
+        even: "debe ser par"
+  accountable:
+    building:
+      name: "Edificio"
+      code: "Código del edificio"
+    company:
+      name: "Empresa"
+      code: "Código de la Empresa"
+  general:
+    category: 'Categoria'
+    when: 'Cuando'
+    time: 'Hora'
+    amenity: 'Zona Común'
+    post_all: 'All Posts'
+    post_hidden: 'Hidden Posts'
+    post_reported: 'Reported Posts'
+    asc: 'Nombre, A-Z'
+    desc: 'Nombre, Z-A'
+    last: 'Más recientes'
+    oldest: 'Más antiguos'
+    i_received: 'Recibido'
+    i_sent: 'Enviada'
+    change_password: 'Debes actualizar la contraseña para continuar en la aplicacion'
+    change_password_confirmation: 'Los campos deben coincidir para continuar'
+    terms_conditions: "Acepto <a href='https://communities.condo-media.com/es/terminos/'>terminos</a> y <a href='https://communities.condo-media.com/es/privacidad/'>condiciones</a> "
+    add_record: "Agregar"
+    choose_record: "Seleccionar %{record_name}"
+    create_record: "Nuevo"
+    create_record_f: "Nueva"
+    edit_record: "Editar %{record_name}"
+    create_timeline_comment: Nueva publicación
+    index_record: "Todos %{record_name}"
+    hidden_record_m: "%{record_name} ocultos"
+    reported_record_m: "%{record_name} reportados"
+    hidden_record_f: "%{record_name} ocultas"
+    reported_record_f: "%{record_name} reportadas"
+    saved_record_m: "%{record_name} guardados"
+    saved_record_f: "%{record_name} guardadas"
+    your_record: "Tus %{record_name}"
+    no_records: "No hay %{record_name} aun"
+    please_wait: "Por favor espere..."
+    welcome: "Bienvenido %{record_name}"
+    create: "Crear"
+    new: 'Nuevo'
+    new_f: 'Nueva'
+    edit: 'Editar'
+    save: "Guardar"
+    post: "Publicar"
+    posts: Publicaciones
+    the_posts: "las publicaciones"
+    the_reviews: "las revisiones"
+    reviews: revisiones
+    the_comments: los comentarios
+    comments: comentarios
+    users: usuarios
+    the_users: los usuarios
+    events: eventos
+    the_events: los eventos
+    items: items
+    polls: encuestas
+    classifieds: clasificados
+    edit_profile: "Editar perfil"
+    update: "Actualizar"
+    back: "Regresar"
+    continue: "Continuar"
+    remove: "Borrar"
+    hide_post: "Ocultar publicación"
+    report_post: "Reportar publicación"
+    report_user: "Reportar usuario"
+    cancel: "Cancelar"
+    yes_word: 'Si'
+    no_word: 'No'
+    maybe: "Tal vez"
+    confirm: 'Esta seguro?'
+    dashboard: 'Panel de Control'
+    requests: 'Invitaciones'
+    number_request: 'Caso #'
+    news_feed: 'Noticias'
+    text: 'Texto'
+    others: 'Otros'
+    photo: 'Foto'
+    file: 'Archivo'
+    search: 'Buscar'
+    account: 'Cuenta'
+    company_dashboard: "Panel de control de %{company_name}"
+    owner_information: 'Información del Propietario'
+    days: 'Días'
+    actions: 'Acciones'
+    pay: 'Pagar'
+    empty: 'Vacío'
+    report: 'Mostrar Reporte'
+    redeem: 'Redimir'
+    stripe_connect: 'Conectarse con Stripe'
+    no_javascript_error: 'JavaScript no está habilitado y es requerido para este formulario. Primero debe habilitarlo en las configuraciones de su navegador web.'
+    generic_error_message: 'Ha ocurrido un error, por favor intente más tarde.'
+    highlight: 'Resaltar'
+    top: 'Promover'
+    me: 'Yo'
+    group: 'Grupo'
+    page_not_exist: 'La página no existe'
+    certify_adult_and_agree: 'Certifico que soy mayor de 18 años y que he leído y acepto los términos'
+    terms_of_use: 'Condiciones del Servicio'
+    privacy_policy: 'Políticas de Privacidad'
+    and: 'y'
+    refund_policy: 'Políticas de Reembolso'
+    got_questions: 'Tiene inquietudes? Revise nuestras FAQs'
+    code: 'Código'
+    postal_code: 'Código Postal'
+    view_all: 'Ver Todos'
+    details: 'Detalles'
+    description: 'Descripción'
+    media: 'Medios'
+    total: 'Total'
+    create_a: "Crear un %{object_name}"
+    back_to: "Regresar a %{destiny}"
+    extension: 'Extensión'
+    from: 'De'
+    to: 'Para'
+    delete: "Borrar %{object_name}"
+    to_delete: "Borrar"
+    delete_warning: 'Cuidado, esta acción no se puede deshacer'
+    my_profile_edit: 'Mi Perfil - Editar'
+    options: 'opciones'
+    administration_office: 'Administración'
+    privacy: 'Privacidad'
+    terms: 'Términos'
+    take_tour: 'Tour virtual'
+    report_software_problem: 'Reportar un problema de la aplicación'
+    sales: 'Ventas'
+    customer_service: 'Servicio al Cliente'
+    id: 'ID'
+    overview: 'Introducción'
+    directions: 'Instrucciones'
+    logo: 'Logo'
+    info: 'Información'
+    connect_with: 'Conectar con'
+    connected_with: 'Conectado con'
+    stripe: 'Stripe'
+    print: 'Imprimir'
+    month: 'Mes'
+    year: "Año"
+    voucher: 'Cupón'
+    cm_url: 'CM URL'
+    terms_of_service: 'Términos de servicio'
+    send: 'Enviar'
+    about: "Acerca %{name}"
+    year: 'Año'
+    every_until: "Cada %{frequency} hasta"
+    at: 'en'
+    confirm_change: 'Esta seguro de cambiar este valor?'
+    highlights: 'Resaltar'
+    vouchers: 'Volantes'
+    managed: 'Administrado'
+    managed_by: 'Administrado por'
+    building_url: 'URL del edificio'
+    people: 'Personas'
+    more: 'Mas'
+    you_have_no: "No tiene %{objects}."
+    start_conversation: 'Inicia una conversación con miembros de tu comunidad'
+    comming_soon: 'Próximamente'
+    close: 'Cerrar'
+    left: 'para vencer'
+    closed: Cerrado
+    of: de
+    stars: estrellas
+    free: gratis
+    re_send: Reenviar
+    re_open: Reabrir
+    accept: Aceptar
+    ignore: Ignorar
+    or: o
+    insights: Estadísticas
+    shareable:
+      public: Público
+      who_should_see: Quien puede ver esto?
+      anyone: Cualquiera en Condo Media
+      my_community: Mi Comunidad
+      all_your_contacts: Todos tus contactos en Condo Media
+      my_communities: Mis Comunidades
+      my_contacts: Mis contactos en Condo Media
+      community_members: Miembros de la Comunidad
+      only_community_members: Solo personas en esta comunidad
+      management_only: Sólo la Administración
+    report_user:
+      reported: Reportado
+      unreport: Desreportar
+      report: Reportar
+      hidden: Oculto
+      unhide: Desocultar
+      hide: Ocultar
+      post: Publicación
+      user: Usuario
+    sexes:
+      m: Masculino
+      f: Femenino
+    relationships:
+      single: Soltero
+      in_one: En una Relación
+      married: Casado
+      separated: Separado
+      divorced: Divorciado
+    submenu:
+      management_portal: 'Portal de Administración'
+      my_stuff: 'Mis Compras'
+      profile: 'Perfil'
+      communities: Comunidades
+      plan: 'Suscripción'
+      billing: 'Pagos'
+      subscription: 'Suscripciones'
+      sales: 'Ventas'
+      page_roles: 'Rol de Usuarios'
+      version: 'Versión'
+      upgrade_storage: 'Mejorar Suscripción'
+      create_user: 'Crear usuarios'
+    building_types:
+      condominiums: "Condominio"
+      apartment_building: "Edificio de Apartamentos"
+      student_housing: "Edificio de Estudiantes"
+      senior_housing: "Edificio de adulto mayor"
+    company_types:
+      property_managers: "Administrador de Propiedades"
+      real_estate: "Inmobiliaria"
+      hoa: "Asociación de propietarios"
+      cooperative: "Cooperativa"
+      other: "Otro"
+    apartment_categories:
+      for_rent: 'Para Arrendar'
+      for_sale: 'Para la Venta'
+      only_display: 'Solo para exhibir'
+    apartment_bedrooms:
+      one: '1'
+      two: '2'
+      three: '3'
+      four: '4'
+      more: 'Mas'
+    apartment_bathrooms:
+      one: '1'
+      one_and_half: '1.5'
+      two: '2'
+      two_and_half: '2.5'
+      three: '3'
+      three_and_half: '3.5'
+      four: '4'
+      more: 'Mas'
+    apartment_price_options:
+      set_price: 'Ingresar Precio'
+      please_contact: 'Por favor contáctenos'
+    apartment_contact_options:
+      company_details: "Usar información de contacto de mi empresa"
+      other: 'Otro'
+    service_request_categories:
+      general: 'General'
+      repairs: 'Reparaciones'
+      complaints: 'Quejas'
+      fees: 'Pagos'
+      rent: 'Alquiler'
+      lease: 'Arriendo'
+      reservations: 'Reservaciones'
+      other: 'Otro'
+      plumbing: "Plomería"
+      heating: "Calentador"
+      appliances: "Accesorios"
+      electricity: "Electricidad"
+      complaint: "Queja"
+      authorized_guests: "Invitados Autorizados"
+    service_request_statuses:
+      pending: "Pendiente"
+      in_progress: "En Progreso"
+      resolved: "Resuelto"
+      closed: "Cerrado"
+      cancelled: "Cancelado"
+    event_categories:
+      informational: "Informativo"
+      social: "Social"
+    event_repeat_options:
+      no_repeat: "No repetir"
+      weekly: "Semanalmente"
+      monthly: "Mensualmente"
+      yearly: "Anualmente"
+    images:
+      select_home_picture: "Seleccione foto principal"
+      home_picture: "Foto principal"
+      formats: "(Formatos de imagen permitidos PNG, JPEG, o GIF)"
+    errors:
+      one: "1 error al intentar guardar %{resource}:"
+      other: "%{count} errores al intentar guardar %{resource}:"
+    promotion_categories:
+      food_and_drink: 'Comida y Bebidas'
+      local_services: 'Servicios Locales'
+      things_to_do: 'Cosas para Hacer'
+      boutique: 'Tiendas'
+      getaways: 'Salidas'
+      beauty_and_spas: 'Belleza y Spas'
+      health_and_fitness: 'Salud y Deporte'
+    deal_contact_options:
+      business_details: 'Detalles del Negocio'
+      other: 'Otro'
+    deal_purchase_statuses:
+      redeemed: 'Redimido'
+      not_redeemed: 'No redimido'
+    days_for_price: '%{days} días por $%{price}'
+    payment_options:
+      card_on_file: 'Usar tarjeta registrada *** %{last4card}'
+      another_card: 'Usar otra tarjeta'
+      select: 'Seleccione opción de pago'
+      no_card: 'Tarjeta no guardada'
+    locales:
+      en: 'English'
+      fr: 'Français'
+      es: 'Español'
+    marketplace: Clasificados
+    optional: Opcional
+    choose_community: Elegir comunidad
+    all_communities: Todas las comunidades
+    all_categories: Todas las categorias
+    public: Público
+    choose_role: Elegir rol
+    empty_items: "No hay %{objects} para mostrar"
+    confirm: Confirmar
+    transactions: Transacciones
+    activations: Activaciones
+    verification: Verificación
+    action: Acción
+    card: Tarjeta
+    intro: Intro
+    when: Cuando
+    where: Donde
+    amount: cantidad
+    community: Comunidad
+    next: Continuar
+    clicking_agree: Dando click en Continuar, usted esta aceptando nuestras
+    actions:
+      comment: Comentar
+      add: Agregar
+    offer: oferta
+    home_page: "Inicio"
+    account_balances: "Facturación"
+    submit: "Enviar"
+    filters:
+      all_communities: "Todas las comunidades"
+      all: "Todas"
+    apartment_number: "Apt/Suite/Piso"
+    maps: "Mapas"
+  routes:
+    privacy: privacidad
+    terms: terminos
+  stats:
+    last_days:   "últimos %{n} días"
+    last_months: "últimos %{n} meses"
+    this_year:    este año
+    last_year:    último año
+    my_communities: mis comunidades
+    users: usuarios
+    users_class: usuarios
+    comments_class: noticias
+    comments: comentarios
+    messages: mensajes
+    messages_class: mensajes
+    service_requests: requerimientos
+    service_requests_class: requerimientos
+    events: eventos
+    events_class: eventos
+    reservations: reservaciones
+    reservations_class: reservaciones
+    polls: encuestas
+    polls_class: encuestas
+    payments: pagos
+    payments_class: pagos
+    posts: publicaciones
+    replies: respuestas
+    open: abiertos
+    closed: cerrados
+    past: pasados
+    upcoming: próximos
+    attachments: documentos
+    attachments_class: documentos
+    files: documentos
+    files_class: documentos
+    storage: almacenamiento
+    amenities_class: zonas comunes
+    amenities: zonas comunes
+    votes: votos
+    transactions: transacciones
+    amount: cantidad
+    all_communities: todas las comunidades
+    print_report: imprimir reporte
+  finish_registration:
+    title: "Bienvenido a Condo Media"
+    choose_role: "Continuar como"
+    hello_user: "Hola %{name},"
+    im_a: "Soy un:"
+    resident: "Residente"
+    property_manager: "Administrador de Propiedades"
+    property_managers: "Empresas Administradoras"
+    managers: "Administradores"
+    residents: "Residentes"
+    buildings: "Edificios"
+    business: "Negocios"
+    supplier: "Negocio Local"
+    buildings: "Edificios"
+    building_code: "Por favor, seleccione su edificio"
+    company_joined: "Su empresa está registrada en Condo Media?"
+    create_company: "Por favor diligencia el siguiente formulario para crear el perfil de su empresa"
+    company_code: "Por favor, seleccione su empresa"
+    create_business: "Por favor diligencie el siguiente formulario para crear el perfil de su negocio"
+    cancel_join_request: "Cancelar Solicitud"
+    ask_to_join: "Solicitar Acceso"
+    new_buisness: "Nuevo Negocio"
+    new_property_management_company: "Nueva Empresa Administradora de Propiedades"
+    pending_access_request: "Solicitud de Acceso en Proceso"
+    company_join_banner1: "Únase a su Empresa de Administración. Si no está en el listado,"
+    building_join_banner1: "Únase a su Edificio. Si no está en el listado,"
+    click_here: "Haz click aquì"
+    company_join_banner2: "para crearla!"
+    building_join_banner2: "para crearlo!"
+    next_agree: "Para continuar, debes aceptar nuestras"
+    building_warning_title: " Únicamente Empresas Administradoras de Propiedades que se encuentren registradas pueden crear edificios."
+    building_warning_banner1: "Si es un Propietario, Miembro del consejo o Residente, diligencie el siguiente formulario para invitar al administrador a crear su edificio."
+    building_warning_banner2: "Si eres un administrador de propiedades, primero debes crear tu empresa de administración y luego podrás crear los edificios que administras."
+    get_started: "Empieza aquí"
+    getting_started: "Para Iniciar"
+    select_profile: "Selecciona tu tipo de perfil y tu comunidad"
+    building_email_manager: "Correo Electronico del Administrador de su Edificio"
+    building_message_invitation: "Mensaje corto para el administrador"
+    application: 'Aplicación'
+    notification: Notificación
+  comments:
+    placeholder: 'Escriba un comentario...'
+    all_buildings: 'Todos los edificios'
+    management_office: "Administración"
+    shared_with: "Compartido con %{with}"
+    share_with: 'Compartir con'
+    comment: 'Comentarios'
+    reported: "Comentario reportado"
+  messages:
+    export_by_days: 'Exportar reporte (últimos %{days} días)' 
+    status:
+      all: 'Todos'
+      unread: 'No leido'
+      urgent: 'Urgente'
+      warning: 'Advertencia'
+    title: "Mensajes"
+    filters:
+      inbox: 'Buzón'
+      unread: "No Leídos"
+      deleted: "Papelera"
+      done: "Atendido"
+    placeholder: 'Escribir un mensaje...'
+    to_placeholder: 'A:'
+    management_office: "Administración"
+    urgent: "Urgente"
+    receiver_types:
+      users: "Contactos Seleccionados"
+      buildings: "Todos los contactos del edificio"
+      companies: "Todos los contactos de la administración"
+    select_receivers: "+ Agregar nombres..."
+    select_receivers_group: "A:"
+    recipients: 'Enviar a'
+    read: 'Leído'
+    buildings_group: 'Grupo de edificios'
+    to: 'A'
+    add_names: 'Agregar Nombres...'
+    empty_trash: 'Vaciar Papelera'
+    mark_as_unread: 'Marcar como no leído'
+    mark_as_done: 'Marcar como atendido'
+    move_to_trash: 'Mover a Papelera'
+    warning: 'Advertencia'
+  service_requests:
+    title: "Casos"
+    re_open_case: Reabrir Caso
+    open_with: "Abrir como"
+    filters:
+      all: "Todos"
+      all_users: "Todos los Usuarios"
+      date: "Fecha"
+      pending: "Pendientes"
+      in_progress: "En Progreso"
+      closed: "Cerrados"
+      cancelled: "Cancelado"
+      all_responsibles: "Todos los responsables"
+      mine: "Míos"
+      company: "Sin asignar"
+      open: 'Abiertos'
+    management_office: "Administración"
+    urgent: "Urgente"
+    to_placeholder: 'Responsable:'
+    responsible: "Responsable"
+    status: "Estado"
+    ticket: 'Tiquete'
+    case: "Caso"
+    requests: 'PQRS'
+    request: 'Caso'
+    request_spec: ''
+    change_status: "cambió estado a: %{status}"
+    change_responsible: "cambió responsable a: %{responsible}"
+    mark_as_pending: "Marcar pendiente"
+    mark_as_in_progress: "Marcar en progreso"
+    mark_as_resolved: 'Marcar Resuelto'
+    mark_as_closed: "Marcar cerrado"
+    delete: "Borrar"
+    content: Escribir un mensaje
+    select_category: Seleccionar cartegoría
+    open: abrir
+    assign_to: Asignar a
+    publisher: "Publicador"
+  contacts:
+    title: "Personas"
+    type: "Tipo"
+    filters:
+      all: "Todos"
+      company: "Empresas"
+    management_office: "Administración"
+    unit: "Número de apartamento"
+    reported: "Usuario reportado"
+    unconfirmed: 'Inactivo'
+    user_unconfirmed: 'Usuarios inactivos'
+    confirmed: 'Activo'
+    user_confirmed: 'Usuarios activos'
+    export_csv: 'Exportar lista de usuarios'
+  events:
+    select_receivers: "+ Agregar nombres..."
+    select_receivers_group: "A:"
+    select_category: "Categoría"
+    select_repeat_frequency: "Frecuencia"
+    management_office: "Administración"
+    informed: "Informado"
+    acknowledged: "Atendido"
+    going: "Si"
+    not_going: "No"
+    maybe: "Tal vez"
+    are_you_aware: "Estas enterado?"
+    are_you_going: "Asistirás?"
+    receiver_types:
+      users: "Contactos Seleccionados"
+      buildings: "Todos los contactos del edificio"
+      companies: "Todos los contactos de la administración"
+    next_event: 'Siguiente evento'
+    upcoming: 'Próximos'
+    past: 'Anteriores'
+    to: 'Hasta'
+    edit: "Editar"
+    name: "Nombre del evento"
+    location: "Ubicación"
+    date: "Fecha"
+    start_time: "Hora inicio"
+    end_time: "Hora fin"
+    write_comment: "Descripción del evento"
+    share_with: "Invitar a"
+    people: personas
+  contact_details:
+    title: "Detalles de contacto"
+    add_contact_details: "Por favor diligencie el siguiente formulario para solicitar acceso a %{building}"
+    emergency_contact: 'Contacto de Emergencia'
+    type: 'Tipo'
+    tenant: Arrendatario
+    owner: Propietario
+  wait_for_acceptance:
+    title: "Pendiente por aceptación"
+    description: "Su solicitud de acceso ha sido enviada a %{company}.<br/><br/>Usted recibirá una confirmación por correo electrónico tan pronto sea aprobada."
+  mailer:
+    new_message:
+      subject: "%{name} le envió un mensaje en Condo Media"
+      header: "le envió un %{message}."
+    new_event:
+      subject: "%{name} publicó un evento en Condo Media"
+      header: "publicó un %{event}."
+    new_invite:
+      subject: "%{name} le invitó a unirse a la comunidad %{community} en Condo Media"
+      header: "le envió una invitación."
+      content: "<strong>%{name}</strong> le invitó a unirse a la comunidad <strong>%{community}</strong> a través de la aplicación Condo Media, donde usted podrá realizar cualquier tipo de consulta con la administración, realizar PQRS, participar en encuestas, reservar zonas sociales, recibir comunicados importantes sobre su copropiedad, consultar documentación importante y consultar su facturación."
+      content_extra: "Condo Media es una red social privada que le permitirá interactuar con la administración de manera rápida y segura, desde su computador o celular." 
+      content_extra2: 'Para ingresar por favor hacer click en el siguiente botón.'
+    request_processed:
+      subject: "Su solicitud para ingresar a %{community} fue %{outcome} en Condo Media"
+      header: "Su solicitud de ingreso fue %{outcome} por el administrador."
+      content: "Su solicitud de ingreso a <strong>%{community}</strong> fue %{outcome} en Condo Media."
+      approved: aprobada
+      declined: rechazada
+    new_join_request:
+      subject: "%{name} desea ingresar a la comunidad %{community} en Condo Media"
+      header: "envió una %{request}."
+      content: "%{name} desea ingresar a la comunidad <strong>%{community}</strong>."
+      request: solicitud de ingreso
+    new_wall_comment:
+      subject: "%{name} escribió en su muro en Condo Media"
+      header: "escribió en su %{timeline}."
+      timeline: muro
+    new_classified:
+      subject: "%{name} publicó una nueva oferta en Condo Media"
+      header: "publicó una nueva %{offer}."
+      offer: oferta
+    new_poll:
+      subject: "%{name} publicó una nueva encuesta en Condo Media"
+      header: "publicó una nueva %{poll}."
+    new_reservation_repĺay:
+      subject: "Reserva - %{amenity} - %{building}"
+    new_news_repĺay:
+      subject: "Noticia - %{building}"
+    new_comment_reply:
+      subject: "%{name} respondió a su comentario en Condo Media"
+      header: "respondió a su %{commentable}."
+    new_service_request:
+      subject: "%{name} creo un nuevo ticket en Condo Media"
+      header: "creó un nuevo %{request}."
+    new_reservation:
+      subject: "%{name} creó una nueva solicitud de reserva en Condo Media"
+      header: "creó una nueva %{reservation}."
+      request: solicitud de reserva
+    report_software_problem:
+      header: "creó un nuevo reporte de problema de software."
+    report_payment_account_updated:
+      subject: "La cuenta de %{building} fue gruardada"
+      header: "guardó la cuenta para el edificio %{building}"
+    new_review:
+      subject: "%{name} hizo una revisión en Condo Media"
+      header: "hizo una nueva %{review} en esta comunidad"
+    new_review_reply:
+      subject: "%{name} respondió una revisión en Condo Media"
+      header: "respondió una revisión en su comunidad."
+    view_on_condomedia: Ver en Condo Media
+    footer: "Este mensaje ha sido enviado a %{email}. Si no desea recibir futuros mensajes de Condo Media, por favor cambie su configuración de notificationes, contacte al administrador de su comunidad, envíe un correo a info@condo-media.com o elimine su susbcripción (si aplica)."
+    # These translations are not used, we kept here for future implementation for sales and purchases.
+    new_sale:
+      subject: 'New sale'
+      have_sale_from: "Congratulations, %{buyer} bought  a new voucher for '%{deal_name}'"
+      visit_condomedia: 'Please visit condo media for more details'
+    new_purchase:
+      subject: 'New purchase'
+      have_new_purchase: "Thank you for shopping at Condo Media. You have purchased a voucher for '%{deal_name}'. For more details or to print your voucher please visit My Stuff"
+    above_link: 'Si el boton superior no funciona, haga click en la URL o cópiela y péguela directamente en tu navegador:'
+  businesses:
+    contact_details: 'Detalles de Contacto'
+    redeem: 'Redimir'
+    mark_not_redeemed: 'Marcar como no redimido'
+    reports: 'Reportes'
+    online_redemption: 'Redimir'
+    customers: 'Clientes'
+    revenue: 'Ingresos'
+    nearby: 'Mi barrio'
+    confirm_legal_representation: 'Confirmo que soy un representante legal de esta empresa y tengo los derechos para actuar en su nombre para la creación de esta página'
+    track_sales: 'Redima los cupones para hacer seguimiento a sus ventas y clientes'
+    whats_nearby: "Negocios cercanos?"
+    plans:
+      desc_1: 'Personalización del portal web'
+      desc_2: 'Listado del perfil de negocios'
+      desc_3a: 'Promueva hasta'
+      desc_3b: 'Cupones imprimibles ilimitados'
+      desc_4: 'Publicitar y vender ofertas'
+      desc_5: 'Mercadeo Geo localizado'
+      desc_6: 'Reportes inteligentes'
+      desc_7: 'Seguimiento de Ventas'
+      desc_8: 'mas…'
+    vouchers_available: 'Volantes disponibles'
+  subscriptions:
+    name: Suscripciones
+    stripe_successfully_connected: 'Exitosamente conectado a Stripe'
+    was_problem_with_payment_info: 'Hubo un problema con la información de pago, por favor intente de nuevo'
+    stripe_problem_connecting_payment_account: 'Hubo un problema al conectarse con su cuenta de Stripe, por favor intente de nuevo'
+    subscription: 'Plan'
+    subscription_made_correctly: 'Te has registrado exitosamente al plan'
+    must_select_plan: 'Debe seleccionar un plan'
+    must_be_accepted: 'Debe ser aceptado'
+    next_payment: Próximo pago
+    used: usado
+    upgrade_storage: Cambiar plan
+  deals:
+    buy_now: 'Comprar ahora'
+    value: 'Valor'
+    discount: 'descuento'
+    you_save: 'ahorro'
+    limited_time_only: 'Tiempo limitado!'
+    the_deal: 'La oferta'
+    the_fine_print: 'Restricciones'
+    sale_vouchers: 'Ofertas'
+    offer_to_customer: 'Ofrece las mejores ofertas a los clientes cercanos a usted'
+    how_does_work: 'Como funciona?'
+    connect_with_stripe: 'Conectar con Stripe'
+    promote_deal: 'Promover oferta'
+    include_shipping_costs: 'Por favor, incluir los costos de envío en el precio sin descuento'
+    not_create_deals_until_register: 'No puedes crear ninguna oferta hasta que te conectes con Stripe (para asegurar el pago, debes ingresar la información de tu cuenta bancaria).'
+    sell_your_vouchers: 'Vende tus ofertas a los clientes más cercanos'
+    purchase_latestes_promotions: 'Encuentra las mejores ofertas más cerca de ti'
+    find_best_promotions: 'Encuentra increíbles promociones en tu barrio'
+    new: Nueva Oferta
+  coupons:
+    description: 'Descripción'
+    the_fine_print: 'Restricciones'
+    print: 'Imprimir Cupón'
+    limited_time_only: 'Tiempo limitado!'
+    can_not_update_coupon_limit_of_plan: "No puedes actualizar tus cupones porque has excedido tu plan"
+    can_not_create_coupon_limit_of_plan: "No puedes crear más cupones porque has excedido tu plan"
+    promote_coupon: 'Promover cupón'
+    printed: 'Impreso'
+    promotion: 'La promoción'
+    offer_discount_vouchers: 'Ofrece cupones de descuento a los clientes más cercanos a ti'
+    find_exclusive_vouchers: 'Encuentra cupones de descuento exclusivos de negocios cercanos'
+    print_date: 'Imprimir fecha'
+    valid_from: 'Válido desde'
+  coupon_redemptions:
+    print_before_closing: 'Por favor, imprimir antes de cerrar esta página'
+    cut_along_the_dotted_line: 'Por favor, cortar sobre la línea punteada  (la fecha del cupón debe estar visible)'
+    must_be_present: 'El cupón debe ser presentado al momento del pedido o este puede ser rechazado'
+    coupons_condo_media: 'Cupones Condo Media'
+    valid_till: 'Valido hasta'
+    search_by_id: "Ingresa el número del cupón (puedes ingresar varios cupones separados por coma)"
+    not_found: 'No se encontraron cupones redimidos'
+    coupons_are_redeemed: 'Cupones redimidos exitosamente'
+    your_coupons: 'Tus cupones'
+    reprint: 'Volver a imprimir'
+    how_to_use: 'Como usar esto'
+    print_voucher: 'Imprimir cupón'
+    scheduled_reservation: 'Se requiere reserva programada con el establecimiento'
+    present_voucher: 'Presentar cupón al momento de llegada'
+    enjoy: 'Disfrute'
+    customer_support: 'Soporte al cliente'
+    contact_us: 'Contáctenos'
+    right_to_cancel: 'Derecho a cancelar'
+    see: 'Ver'
+    full_terms: 'Términos y condiciones'
+  deal_purchases:
+    card_number: 'Número de tarjeta de crédito'
+    search_by_id: "Ingrese el ID del cupón (puedes ingresar varios cupones separados por coma)"
+    deals_are_redeemed: 'Ofertas redimidas exitosamente'
+    payment_made_correctly: 'Pago realizado correctamente'
+    your_purchased_deals: 'Tus compras'
+    security_code: 'Codigo de Seguridad (CVC)'
+    card_expiration: 'Fecha de expiración'
+    item_description: 'Descripción'
+    unit_price: 'Precio'
+    total: 'Total'
+    payment_information: 'Información de Pago'
+    complete_order: 'Complete la orden'
+    address: 'Dirección'
+    redeemed: 'Redimido'
+    print_before_closing: 'Por favor, imprimir antes de cerrar esta página'
+    cut_along_the_dotted_line: 'Por favor, cortar sobre la línea punteada (la fecha de la oferta debe estar visible)'
+    must_be_present: 'El cupón debe ser presentado en el momento del pedido o este puede ser rechazado'
+    deals_condo_media: 'Ofertas Condo Media'
+    valid_till: 'Válido hasta'
+  plans:
+    title: 'Plan'
+    choose_plan: 'Seleccione el plan que mejor se ajuste a las necesidades de su negocio'
+    three_steps: '3 pasos simples'
+    free: 'Gratis'
+    select: 'Seleccione plan'
+    step: "Paso %{step}"
+    step1: 'Seleccione su plan'
+    step2: 'Revisar orden'
+    item: 'Elemento'
+    unit_price: 'Precio'
+    number_units: 'Numero'
+    total_month: 'Total / Mes'
+    cancel_any_time: 'Puedes cancelar en cualquier momento o cambiar a nuestro plan gratuito'
+  invoices:
+    history: 'Historial'
+    due_date: 'Fecha Limite'
+    concept: 'Concepto'
+    amount: 'Cantidad'
+    period: 'Periodo'
+    payment_interval: 'Intervalo de pago'
+    plan: 'Plan'
+    type: 'Tipo'
+    next_invoice: 'Siguiente pago'
+    date: 'Fecha'
+    status: 'Estado'
+    reference: 'Referencia'
+    paid: 'Pagado'
+    not_paid: 'No pagado'
+    description: 'Descripción'
+    view_plan: 'Ver plan'
+  promotions:
+    active: 'Activo'
+    expired: 'Caducado'
+    scheduled: 'Programado'
+    type: 'Tipo'
+    launched: 'Activo'
+    expires: 'Vence'
+    status: 'Estado'
+    views: 'Vistas'
+    sold: 'Vendidos'
+    clicks: 'Clics'
+    acquisitions: 'Compras'
+    last_day_to_claim: 'Ultimo día para reclamar'
+    purchase_date: 'Fecha de pago'
+    voucher_only_for_condomedia_users: 'Este cupón está disponible únicamente para usuarios de Condo Media'
+    redeemed: 'Redimido'
+    print_voucher: 'Imprimir Cupón'
+    view_reports: 'Ver Reportes'
+    find_stores_and_shops: 'Encontrar almacenes y tiendas cercanas'
+    voucher_must_present: 'El cupón debe ser presentado en el momento del pedido o este puede ser rechazado'
+    mark_redeemed: 'Marcar como redimido'
+    mark_not_redeemed: 'Marcar como no redimido'
+  reports:
+    insights_your_offerings: 'Reportes'
+    filters:
+      all: 'Todos'
+      coupons: 'Cupones'
+      deals: 'Ofertas'
+  payments:
+    name: 'Pagos'
+    username: 'Nombre de Usuario'
+    date: 'Fecha'
+    community: 'Comunidad'
+    description: 'Descripción'
+    card: 'Tarjeta'
+    ref: 'Ref #'
+    total: 'Total'
+    amount: 'Cantidad'
+    customer: 'Cliente'
+    quantity: 'Cantidad'
+    balance: 'Balance'
+    statuses: [~, Pagado, Rechazado, Pendiente, Fallado]
+    get_started:
+      accept: 'Aceptar pagos en linea'
+      get_paid: 'Recibe pagos activando Pagos en Linea'
+      details: Comisiones, Alquiler, Reservas y mas<br/>Configuración en Segundos<br/>Buenos Precios
+      button: 'Empezar'
+    history: 'Historial de Pagos'
+    enable: Habilitar pagos
+    account_created: Cuenta creada
+  companies:
+    new: "Nueva Empresa"
+    confirm_legal_representation: 'Confirmo que soy un representante legal de esta empresa y tengo los derechos para actuar en su nombre para la creación de esta página'
+    plans:
+      desc_1: 'Administración centralizada'
+      desc_2: 'Personalización del sitio web de sus edificios'
+      desc_3a: "Crear y administrar hasta"
+      desc_3b: 'Crear y administrar'
+      desc_4: 'Exhibición ilimitada de apartamentos'
+      desc_5: 'Invita a usuarios ilimitados'
+      desc_6: 'Noticias'
+      desc_7: 'Mensajes privados'
+      desc_8: 'Tickets'
+      desc_9: 'Eventos'
+      desc_10: 'Calendario'
+      desc_11: 'y más'
+      unlimited: 'ILIMITADO'
+      buildings: "Edificios"
+      basic: 
+        name: 'BASICO'
+        price: '$50.000/mes'
+      premiun: 
+        name: 'PROFESIONAL'
+        price: '$150.000/mes'
+      pro: 
+        name: 'EMPRESA'
+        price: '$850.000/mes'
+      elite: 
+        name: 'ELITE'
+        price: 'CONTACTANOS'
+  roles:
+    administrator: 'Administrador'
+    resident: 'Propietario'
+    residents: 'Propietarios'
+    supplier: 'Proveedor'
+    admins: 'Admins'
+    board_member: 'Consejo'
+    tenant: 'Arrendatario'
+    agent: 'Agente'
+    collaborator: 'Colaborador'
+    header:
+      company: Join your community. If your property management company is not listed, create it.
+      building: Join your community. If your building is not listed, invite your property manager to create it.
+      business: Join your community. If your business is not listed, create it.
+  buildings:
+    create_and_invite: 'Crear tus edificios e invita a los residentes a unirse a su comunidad'
+    new: 'Nuevo Edificio'
+  apartments:
+    create_and_showcase: 'Crea apartamentos ilimitados y exhíbelos al público'
+    bedrooms: 'Habitaciones'
+    bathrooms: 'Baños'
+    available: 'Disponible'
+    filters:
+      all: 'Todos'
+      for_rent: 'Para Arrendar'
+      for_sale: 'Para la Venta'
+  users:
+    edit_or_remove: 'Editar o elimina usuarios de tu comunidad'
+    status: 'Estado'
+    active: 'Activo'
+    pending: 'Pendiente'
+    date: 'Fecha'
+    community: 'Comunidad'
+    links: Enlaces
+    work: Trabajo
+    education: Educación
+    hometown: Barrio
+    birthday: Cumpleaños
+    privated: "Privado"
+    resend: 'Se envió nuevamente el correo de confirmación'
+  requests:
+    invite_people: 'Invita personas a tu comunidad'
+  invites:
+    invites: 'Invitaciones'
+    sent: 'Invitaciones enviadas'
+    received: 'Invitaciones recibidas'
+    i_sent: 'Enviadas'
+    i_received: 'Recibidas'
+    invites_sent: 'Invitación enviada exitosamente'
+    email_list: 'Ingresa el correo electrónico (puedes agregar varias direcciones separadas por coma)'
+    invalid_email_format: "El correo electrónico: '%{email}' tiene un formato inválido "
+    sent_on: "Invitación enviada el %{date}"
+    resent_successfully: 'Su invitación ha sido reenviada exitosamente'
+    resend: 'Reenviar'
+    accept: 'Aceptar'
+    reject: 'Rechazar'
+    expel: 'Expulsar'
+    now_member: "You are now member of the %{community} community"
+    single: "Invitación unitaria"
+    bulk: "Carga masiva"
+    message_bulk: "Copiar y pegar informacion de usuarios desde archivos .xls o .xlsx"
+    fields_for_bulk: |
+      Nombre...        Apellido...        Correo electrónico...        Apt/Suite/Piso...
+      Nombre...        Apellido...        Correo electrónico...        Apt/Suite/Piso...
+      Nombre...        Apellido...        Correo electrónico...        Apt/Suite/Piso...
+      Nombre...        Apellido...        Correo electrónico...        Apt/Suite/Piso...
+  home:
+    sign_up: REGISTRO GRATIS
+    sign_in: INICIAR SESIÓN
+    section-1:
+      header: Conéctate con las personas en tu edificio
+      paragraph: Condo Media es una solución de administración de propiedades en la nube, segura y gratuita, que los residentes adoran y en la que los administradores confían.
+    section-2:
+      paragraph: Fácil, rapido y seguro
+    section-3:
+      header: Cientos de residentes y administradores de propiedades usan Condo Media para comunicarse e interactuar
+      paragraph: Condo Media permite de manera fácil y rápida colaborar con las personas de tu edificio. No te quedes atrás, obten mejores resultados y transforma la forma en que trabajas.
+    section-4:
+      header: Inicia en tres simples pasos
+      step-1: Crea una cuenta
+      step-2: Únete a tu edificio
+      step-3: Disfruta
+    section-5:
+      benefits: Beneficios para la comunidad
+      header: Diseñado para tu edificio, con estilo profesional y libre de publicidad
+      panel-1:
+        header: COMUNICACIÓN
+        paragraph: Envia mensajes instantáneos, notificaciones privadas y comparte noticias.
+      panel-2:
+        header: RECAUDO
+        paragraph: Pagos en línea de administración, reservas de zonas comunes, arrendamientos y más.
+      panel-3:
+        header: COLABORACIÓN
+        paragraph: Publica eventos, encuestas, reserva de zonas comunes y avisos clasificados
+      panel-4:
+        header: GESTIÓN
+        paragraph: Monitorea el estado de todas tus solicitudes y quejas.
+      panel-5:
+        header: ALMACENAMIENTO
+        paragraph: Comparte documentos y accede a tus archivos desde cualquier lugar.
+      panel-6:
+        header: SEGURIDAD
+        paragraph: Su informacion estará completamente privada y protegida.
+    section-6:
+      header: Prueba Condo Media Gratis
+      paragraph: No requiere descarga de aplicaciones ni tarjetas de crédito. Llámanos en cualquier momento que necesites ayuda.
+    footer:
+      condo_media: Condo Media Inc.
+  footer:
+    copyright: 2017 Condo Media Inc.
+    privacy: Política de Privacidad
+    terms: Términos del Servicio
+    language:
+      en: 'Inglés'
+      fr: 'Francés'
+      es: 'Español'
+      change: Cambiar Idioma
+  public_pages:
+    home:
+      title: "Perfil"
+    about:
+      title: "Acerca"
+    contact:
+      title: "Contacto"
+      send: "Enviar"
+      message_sent: "Mensaje enviado"
+    apartments:
+      title: "Apartamentos"
+      no_apartments: "No hay apartamentos para mostrar."
+    apartment:
+      title: "Apartamento"
+      no_photos: "No hay fotos para mostrar"
+      contact_details: "Detalles de Contacto"
+    buildings:
+      title: "Edificios"
+      no_buildings: "No hay edificios para mostrar."
+    building:
+      title: "Edificios"
+      no_photos: "No hay fotos para mostrar"
+      contact_details: "Detalles de Contacto"
+    photos:
+      title: "Fotos"
+      no_photos: "No hay fotos para mostrar."
+    coupons_deals:
+      title: 'Cupones y Ofertas'
+      no_coupons_deals: 'No hay cupones u ofertas para mostrar'
+    contact_us: 'Contáctenos'
+    nearby:
+      title: 'Mi barrio'
+      no_businesses: 'No hay negocios para mostrar'
+  tours:
+    next: "Siguiente"
+    back: "Regresar"
+    finish: "Terminar"
+    exit: "Salir"
+    property_managers:
+      step_1:
+        title: "Tour virtual"
+        description: "Aprenda como aprovechar Condo Media. Nosotros le ayudaremos a sacar el máximo provecho de nuestras herramientas para que puedas crecer tu negocio y mejorar la experiencia de tus usuarios."
+        attach: ".navbar .container-fluid top"
+      step_2:
+        title: "Perfil"
+        description: "Perfil es el portal público de tu empresa y donde puedes mantener contacto con clientes externos y mostrar todas tus propiedades"
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(1) right"
+      step_3:
+        title: "Noticias"
+        description: "Noticias es el lugar donde tú puedes descubrir que está sucediendo en tu comunidad y en donde los residentes pueden publicar y compartir información de interés. Como Administrador de Propiedades estarás habilitado para ver y administrar las publicaciones de todas las urbanizaciones, mientras que los residentes solo estarán habilitados para ver información de los edificios donde viven."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(2) right"
+      step_4:
+        title: "Mensajes"
+        description: "Usa tu buzón de entrada para enviar mensajes privados o anuncios generales todos los contactos de tu comunidad. Usted puede marcar los mensajes por nivel de urgencia, enviar copias a direcciones de correo electrónico personales, incluso confirmar cuando ellos hayan leído el mensaje."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(3) right"
+      step_5:
+        title: "Contactos"
+        description: "El área de contactos es un directorio donde puedes encontrar fácilmente información detallada de tus administradores y residentes como números de teléfono, direcciones de correo electrónico, contactos de emergencia y más. Aquí usted podría actualizar la información de contacto de los usuarios y ver el registro de la actividad de los miembros de la comunidad."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(4) right"
+      step_6:
+        title: "Tickets"
+        description: "Tickets es un sencillo y rápido sistema de administración de casos que permite gestionar las solicitudes de servicios y mantenimiento de todas las propiedades. Usted puede asignar tiquetes al equipo de trabajo y cambiar el nivel de prioridad de cada tarea, mientras los residentes son informados del estado de sus solicitudes en tiempo real."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(5) right"
+      step_7:
+        title: "Eventos"
+        description: "Permite programar reuniones con solicitudes  RSVP o informar a los residentes acerca de actividades programadas por la administración como mantenimiento del ascensor; realizar la programación de actividades nunca había sido tan fácil. El calendario de eventos permite que usted mantenga informados a los residentes de lo que está pasando o va a pasar en su edificio."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(6) right"
+      step_8:
+        title: "Invitaciones"
+        description: "Permite invitar personas a unirse a la comunidad, también permite aceptar o denegar solicitudes de acceso de usuarios residentes o administradores de la comunidad. Usted puede también invitar personas a unirse a través de su correo electrónico o simplemente compartir la URL de Condo Media de sus propiedades para que cada usuario solicite acceso a la comunidad directamente."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(8) right"
+      step_9:
+        title: "Roles de usuario"
+        description: "Aquí usted puede administrar completamente los privilegios de los usuarios o puede borrar usuarios. Perfiles de usuario permite que usted revise su comunidad y verifique el estado de cada usuario y se asegure que todos los usuarios tienen los permisos adecuados de acuerdo a su condición."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(9) right"
+      step_10:
+        title: "Apartamentos"
+        description: " Exhiba sus apartamentos en la red. Usted tendrá la posibilidad de publicar apartamentos para la venta o arrendamiento asociados a cada uno de sus edificios. Todos aparecerán en el perfil público de sus propiedades y todas las personas alrededor del mundo las podrán ver."
+        attach: ".container .row .public-header .public-submenu ul li:nth-of-type(3) top"
+      step_11:
+        title: "Edificios"
+        description: "Puedes crear un portal web profesional para cada uno de tus edificios. Justo después de creado, usted puede invitar a sus residentes para que se unan a la comunidad."
+        attach: ".container .row .public-header .public-submenu ul li:nth-of-type(4) top"
+    residents:
+      step_1:
+        title: "Tour virtual"
+        description: " Aprenda como aprovechar Condo Media. Nosotros le ayudaremos a sacar el máximo provecho de nuestras herramientas, para que puedas crecer tu negocio y mejorar la experiencia de sus usuarios."
+        attach: ".navbar .container-fluid top"
+      step_2:
+        title: "Perfil"
+        description: "Perfil es el portal publico de su edificio donde usted puede acceder fácilmente a información relacionada a su comunidad, encontrar la información de contacto de la administración o incluso encontrar apartamentos en venta o arriendo."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(1) right"
+      step_3:
+        title: "Noticias"
+        description: "Noticias es el lugar donde los residentes y administradores publican y comparten información importante. Tienes algo que decir y quieres que todas las personas de tu efificio lo sepan? Esta usted vendiendo alguna cosa? Necesita ayuda de alguno de sus vecinos? Noticias es el lugar para todo esto. "
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(2) right"
+      step_4:
+        title: "Mensajes"
+        description: "Use Buzón de entrada para enviar mensajes privados a sus vecinos o a la oficina de administración. Usted puede marcar sus mensajes por nivel de urgencia e incluso enviar una copia directamente a al correo electrónico personal de los usuarios."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(3) right"
+      step_5:
+        title: "Contactos"
+        description: " La carpeta de contactos es un directorio donde usted puede encontrar información de sus vecinos y de los administradores de propiedades. *Su información personal es completamente privada y únicamente esta visible para los administradores de propiedades. Los vecinos tienen acceso limitado a su información confidencial (ellos únicamente podrán ver su foto de perfil y su nombre completo, pero no detalles de contacto o número de apartamento)."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(4) right"
+      step_6:
+        title: "Tickets"
+        description: "Tiene una queja? Hay fugas en el lavadero? Necesita reservar el ascensor? Genere una solicitud en cualquier momento desde cualquier lugar y realice el seguimiento de sus solicitudes en tiempo real."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(5) right"
+      step_7:
+        title: "Eventos"
+        description: "Aquí usted puede ver y mantenerse informado acerca del calendario de eventos de su edificio. Usted también podrá crear eventos personales e invitar a personas de su urbanización a estos eventos."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(6) right"
+    suppliers:
+      step_1:
+        title: "Tour virtual"
+        description: " Aprenda como aprovechar Condo Media. Nosotros le ayudaremos a sacar el máximo provecho de nuestras herramientas, para que puedas crecer tu negocio y mejorar la experiencia de sus usuarios"
+        attach: ".navbar .container-fluid top"
+      step_2:
+        title: "Perfil"
+        description: "Perfil es el portal público de tu negocio donde usted puede conectarse con sus clientes locales, establecer su marca y exhibir sus ofertas y promociones."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(1) right"
+      step_3:
+        title: "Cupones"
+        description: "Selecciones y atraiga nuevos clientes con cupones de descuentos gratuitos. Publique sus cupones mientras genera ingresos adicionales por ventas de elementos específicos, incremente la fidelización de clientes y el posicionamiento de marca."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(2) right"
+      step_4:
+        title: "Ofertas"
+        description: "Incremente sus ingresos por venta de ofertas atractivas a clientes locales. Las personas estarán disponibles para comprar sus productos y servicios directamente a través de nuestra plataforma y usted puede cerrar las ventas cuando lo desee."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(3) right"
+      step_5:
+        title: "Redención y Reportes "
+        description: "Marcar los cupones usados y las ofertas como redimidas para realizar un seguimiento de sus ingresos y servicio al cliente. Explora la pestaña de reportes para comprender el impacto de tus ofertas."
+        attach: ".navbar .submenu-links .dropdown-menu.submenu li:nth-of-type(4) right"
+  devise:
+    welcome: Bienvenido a Condo Media
+    welcome_content: 'Condo Media es un software de administración de propiedades que conecta a los vecinos y los administradores de edificios. Todo lo que necesitas hacer es iniciar sesión para comenzar.'
+    to_enter: 'Ingresar a Condo Media'
+    sign_up: "Registro"
+    its_free: "Es gratuito"
+    sign_out: "Cerrar sesión"
+    need_help: "Necesita Ayuda?"
+    next: "Continuar"
+    didnt_receive_confirmation_instructions: "No recibí correo electrónico con las instrucciones de registro"
+    sign_in_with: "Ingresar con"
+    resend_confirmation_instructions: "Reenviar instrucciones de confirmación de correo electrónico"
+    change_your_password: "Cambie su contraseña"
+    set_change_your_password: "Por favor configure su contraseña"
+    new_password: "Nueva Contraseña"
+    confirm_new_password: "Confirmar nueva contraseña"
+    forgot_your_password: "Olvido su contraseña?"
+    forgot_my_password: "Olvidé mi clave"
+    send_me_reset_password_instructions: "Enviar instrucciones para restablecer contraseña"
+    send: "Enviar"
+    edit_user: "Editar usuario"
+    waiting_confirmation_for: "Pendiente por confirmación:"
+    password_leave_blank: "Dejar espacio en blanco si no quiere cambiarlo"
+    current_password_explanation: "Ingrese su contraseña para confirmar cambios"
+    sign_in: "Ingresar"
+    start: 'Iniciar'
+    sign_up_social: 'Registrarse'
+    remember_me: "Mantenerme registrado"
+    finish_registration: "Terminar registro"
+    sign_in_facebook_linkedin: 'Ingresar con su cuenta de Facebook o Linkedin'
+    quick_easy_secure: "Es rápido, fácil y seguro – Su información es completamente privada en Condo Media"
+    create_account: 'Crear una cuenta'
+    hereby_agree: 'Acepto términos y condiciones'
+    already_a_member: 'Ya es miembro?'
+    company_id_address_zip: 'Nombre de la empresa, Dirección o Código Postal'
+    building_id_address_zip: 'Nombre del edificio, Dirección o Código Postal'
+    user_details: 'Detalles de Usuario'
+    community_details: 'Detalles de la Comunidad'
+    password_changed: Su contraseña ha sido cambiada exitosamente!
+    sign_up_free: Registrese gratis
+    select_issue: Necesita ayuda? Seleccione el problema
+    recovery_email: Correo de recuperación
+    continue_with: Continuar con %{option}
+    use_email_way: O utilizar email para
+    registrations:
+      user:
+        use_email_way: 'Usuario registrado'
+  faqs:
+    plans:
+      q1: 'Mi información personal es segura?'
+      a1: 'Por su puesto. Nosotros valoramos su seguridad y privacidad. Su número de tarjeta de crédito es enviado a través de una comunicación cifrada (SSL), el cual va a directamente contra la plataforma electrónica de pagos. En ningún momento la información de la tarjeta de crédito es guardada en nuestros servidores. Además, nosotros no vendemos ninguna información personal a Terceros, incluyendo comerciantes a quienes haya comprado productos o servicios. Si le gustaría conocer más información de la privacidad de su información. Por favor leer los detalles de nuestra política de privacidad'
+      q2: 'Puedo cambiar o cancelar mi orden?'
+      a2: 'Si usted compra un plan en Condo Media, usted puede cambiar al plan gratuito en cualquier momento y usted puede cancelar su plan hasta 14 días después de la fecha de pago, no hay preguntas requeridas; a menos que se estipule algo diferente en el detalle del contrato.'
+      q3: 'Puedo reembolsar mi orden?'
+      a3: ' Condo Media tiene una política de reembolso de « 14 días para devolución de dinero » para todas las ofertas, con excepción de ofertas en las que se especifique lo contrario.'
+      complete_policy_here: 'política de privacidad completa'
+      q4: 'Tiene más inquietudes?'
+      a4: 'Por favor no dude en visitar nuestro sitio web o contáctenos a través de correo electrónico'
+    deals:
+      q1: 'Que pasa después de poner la orden? '
+      a1a: 'Usted recibirá una confirmación por correo electrónico.'
+      a1b: 'Una vez haga clic sobre el botón de pagos (« Finalizar Orden »), su tarjeta de crédito será cargada y usted recibirá a través de correo electrónico un cupón que incluye todas la cosas que necesita para redimir su producto o servicio.'
+      q2: 'Puedo cambiar o cancelar mi orden?'
+      a2: 'Si usted compra cupones en Condo Media, usted puede cancelar su orden hasta 14 días después del pago, no hay preguntas requeridas, siempre y cuando el cupón no haya sido usado y aun este vigente; a menos que se especifique lo contrario en los detalles de la oferta.'
+      q3: 'Mi información personal es segura?'
+      a3: 'Por su puesto. Nosotros valoramos su Seguridad y privacidad. Su números de tarjeta de crédito es enviado a través de una comunicación cifrada (SSL), el cual va a directamente contra la plataforma electrónica de pagos. En ningún momento la información de la tarjeta de crédito es guardada en nuestros servidores. Además, nosotros no vendemos ninguna información personal a Terceros, incluyendo comerciantes a quienes haya comprado productos o servicios. Si le gustaría conocer más información de la privacidad de su información. Por favor leer los detalles de nuestra política de privacidad'
+      q4: 'Puedo reembolsar mi orden?'
+      a4: 'Condo Media tiene una política de reembolso de « 14 días para devolución de dinero » para todas las ofertas, con excepción de ofertas en las que se especifique lo contrario. Ver Oferta'
+      q5: 'Tiene más preguntas?'
+      a5a: ' Por favor no dude en visitar nuestro sitio web o contáctenos a nuestro número de teléfono 438-998-5221 o a nuestro correo electrónico'
+      a5b: 'y nosotros le responderemos dentro de las próximas 24 horas.'
+  folders:
+    folder_name: Nombre de la carpeta
+    header_names:
+      name: Nombre
+      date: Fecha
+      size: Tamaño
+      created_by: Creado por
+    link_description:
+      list: Ver en lista
+      icons: Ver en íconos
+      u_file: Subir archivo
+      new_foler: Crear nueva carpeta
+      delete: Borrar seleccionado
+    errors:
+      limit_files: "Usted no puede subir más de %{number} archivos"
+      file_size_less_than: "Cada archivo deber ser menos de %{size}"
+    new_item_menu:
+      new_folder: Nueva Carpeta
+      upload_files: Subir Archivos
+    rename: Renombrar
+    delete: Borrar
+    download: Descargar
+    home: Home
+    files: archivo
+  amenities:
+    new: Nueva Zona Común
+    list: Lista de servicios
+    add_short_name: Asigna un nombre corto
+    tell_more_about: Describe detalladamente la zona común
+    add_value: $ Adicionar valor
+    hours: '# Horas'
+    availability_types:
+      selected_hours: Abierto en
+      allways_open: Siempre abierto
+      no_available: No disponible
+    reserve: Reservar
+    fee: Costo
+    deposit: Depósito
+    max_time: "%{hours} horas máximo"
+    calendar: 'Calendario'
+    days: 'Dia(s)'
+    hours: 'Hora(s)'
+    week: 'Semana(s)'
+    month: 'Mes(es)'
+    year: 'Año'
+    per: 'por'
+    subtitle_length: 'Duración máxima de la reserva'
+    subtitle_max: 'Reservas máximas por usuario'
+    subtitle_approval: 'Establecer aprobación automática'
+    auto_approval: 'Aprobación automática'
+    interval: 'Intervalos de reserva'
+    approval:
+      istrue: 'Si'
+      isfalse: 'No'
+    errors:
+      reservation_length: "La reserva tiene un tiempo máximo de %{length} %{type}"
+      reservations_per_user: "No puedes tener más de %{max_reservations_per_user} reservas por %{type} "
+      reservations_working_hours: 'Solo puede elegir el horario establecido para las reservas de la zona comun que es de %{time_from} a %{time_to}'
+  reservations:
+    all_status_reservation: 'Todos los estados'
+    all_month_filter: 'Todos los meses'
+    write_about: Escribe un mensaje o realiza una petición especial
+    amenity: Reservar Zona
+    time: Tiempo
+    statuses:
+      pending: Pendiente
+      approved: Aprobado
+      pre-approved: Pre-aprobado
+      cancelled: Rechazado
+      denied: Negar
+      past:
+        pending: Pendiente
+        approved: Aprobado
+        cancelled: Rechazado
+        denied: Negado
+    mark_statuses:
+      pending: Marcar pendiente
+      approved: Marcar aprobado
+      pre-approved: Marcar pre-aprobado
+      cancelled: Marcar rechazado
+      denied: marcar denegado
+    change_status: "cambió estado a %{status}"
+    submition: Creado
+    created: Su reservación ha sido creada
+    booking_request: Reservación
+    date: "Fecha"
+    start_time: "Hora de inicio"
+    end_time: "Hora de finalización"
+    write_message_or_request: "Escribe tu mensaje o requerimiento"
+    view_hours: "Ver horas"
+    reply: "Comentar"
+    details: "Detalles"
+    changed_status_to_pending: "cambió estado pendiente"
+    changed_status_to_approved : "cambió estado a aprobado"
+    changed_status_to_cancelled: "cambió estado a cancelado"
+    changed_status_to_pre-approved : "cambió estado a pre-aprobado"
+    where: 'Donde'
+    Time: 'Hora'
+    community: 'Comunidad'
+    amenity: 'Zona comun'
+    filter: 
+      by_month: 'Filtro por mes'
+  polls:
+    min_max: "mínimo %{min}, máximo %{max}"
+    see_all: Ver todos
+    ask_a_question: Escribe una pregunta...
+    new: Nueva encuesta
+    duration: Duración (# días)
+    end_date: Fecha fin
+    create: Crear
+    poll: encuesta
+  reviews:
+    tell_people: Di a los demás qué te parece
+    rate_experience: ¿Cómo calificas esta experiencia?
+    ranks: [Deficiente, Aceptable, Bueno, Muy bueno, Excelente]
+    no_reviews: Sin revisiones
+  classifieds:
+    add_short_name: Agregar un nombre corto
+    tell_more: Cuéntanos más de la publicación
+    new: Nuevo clasificado
+    new_offer: Nueva oferta
+    subject: Asunto
+    price: Precio (Opcional)
+    description: Descripción
+  user_roles:
+    administrator:
+      title: Administradores
+      description: Equipo del administrador de propiedades
+    resident:
+      title: Residentes
+      description: Inquilinos, Propietarios y Miembros del Consejo
+    supplier:
+      title: Local Business
+      description: Stores shops and nearby suppliers
+  payment_accounts:
+    statuses:
+      in_progress: EN PROCESO
+      active: <i class="fa fa-check"></i>
+      nil: '-'
+    online_payments:
+      enabled: ACTIVADO
+      disabled: DESACTIVADO
+  privacy_policy:
+    cm_inc: 'Condo Media Inc.'
+    p1: 'Condo Media Inc. se compromete a proteger la seguridad y privacidad de sus datos personales y asegurar que llevamos a cabo nuestro negocio de acuerdo con las leyes sobre privacidad, protección de datos y seguridad de datos. Esperamos que la información de política proporcionada a continuación le ayudará a entender qué información Condo Media puede recolectar y cómo la usamos, protegemos y compartimos.'
+    p2: 'Por favor, lea esta Política de Privacidad cuidadosamente. Al acceder o utilizar nuestro sitio web y cualquier software o aplicación móvil asociada, usted reconoce que ha leído, entiende y acepta que quedará vinculado por los términos de esta política de privacidad y nuestras condiciones de uso.'
+    sub1:
+      name: 'Que información recopila Condo Media?'
+      item1: 'Información de identificación personal'
+      p1: 'Información de identificación personal es información que le puede identificar como un usuario final específico. Esto incluye información tal como su nombre, dirección, número de teléfono o dirección de correo electrónico ("Información Personal"). Condo Media sólo recopila información personal que usted decida proporcionarnos. En algunos casos, usted proporciona esta información a nosotros directamente. En otros casos, usted proporciona esta información a nosotros a través de nuestros aliados.'
+      item2: 'Información que no es de identificación personal'
+      p2: 'Además de la información personal, Condo Media también puede recopilar información que no es de identificación personal (por ejemplo, tipo de navegador de Internet y sistema operativo utilizado, los nombres de dominio de la página web desde la cual se conecta, número de visitas, tiempo medio de permanencia, páginas vistas). Esta información es utilizada por nosotros para mejorar nuestros contenidos de la web, las experiencias de los clientes y prácticas empresariales.'
+      item3: 'Cookies'
+      p3: 'Cuando usted visita nuestro sitio web, podemos almacenar alguna información en su computador que nos asegura que podemos reconocerlos la próxima vez que visite nuestro sitio. Si usted prefiere no tener que esto ocurra, se puede optar por desactivar esta función en el computador.'
+    sub2:
+      name: 'Como protegemos la información que recopilamos?'
+      p1: 'Condo Media toma precauciones que son consistentes con las prácticas de la industria para garantizar la seguridad de su información personal. Nos esforzamos por proteger su información personal de la pérdida, destrucción, falsificación, manipulación y acceso no autorizado o divulgación.'
+    sub3:
+      name: 'Divulgación de información personal'
+      p1: ' No vamos a compartir, vender, alquilar o intercambiar su información personal con otras partes, excepto a lo descrito a continuación:'
+      p2: 'Podemos compartir su información con terceros proveedores de servicios. Nosotros ofrecemos servicios y productos a través de terceros. Estos proveedores de servicios de terceros realizan funciones en nuestro nombre, como enviar y distribuir nuestros correos electrónicos de administración y promoción. Podemos compartir su información personal con dichos proveedores de servicios para cumplir con los pedidos, entregar paquetes, enviar postales o de correo electrónico, eliminar información repetitiva de las listas de clientes, análisis de datos, proporcionar asistencia de marketing, proporcionar resultados y enlaces de búsqueda, los procesos de pagos con tarjeta de crédito, la operación de nuestro sitio web o aplicaciones, solucionar problemas y para proporcionar servicio al cliente. También podemos recopilar información personal de los individuos y las empresas ("Afiliados") con los que tenemos relaciones comerciales y compartir su información con proveedores de servicios para llevar a cabo nuestras tareas administrativas. Por ejemplo, cuando usted ordena un servicio, liberamos la información de su tarjeta de crédito por el banco emisor de la tarjeta para confirmar el pago del servicio y en su caso, libere su dirección a la prestación de servicios para prestar el servicio. Del mismo modo, podemos revelar información de un afiliado a nuestro banco para enviar un pago. Motivamos a terceros proveedores de servicios para adoptar y publicar las políticas de privacidad. Sin embargo, el uso de su información personal por dichas partes se rige por las políticas de privacidad de dichas partes y no está sujeto a nuestro control.'
+      p3:
+        name: ' Condo Media solamente revelará su información personal sin su consentimiento, si somos:'
+        item1: 'Requeridos por la Ley; o'
+        item2: 'Debemos hacerlo para apoyar o proteger nuestros propios derechos, como para recaudar el dinero adeudado o para buscar mecanismos legales.'
+      p4: 'En cualquier caso, Condo Media solamente revelará la información personal en la medida necesaria. No estamos obligados a proteger la información personal que está disponible públicamente.'
+    sub4:
+      name: 'Divulgación de información que no es de identificación personal'
+      p1: 'Podemos divulgar o compartir información no personal con nuestros socios, afiliados y anunciantes. Por ejemplo, podemos compartir información demográfica agregada (que no incluye ninguna información personal) con los anunciantes de terceros o empresas de publicidad de terceros y otras partes según lo dispuesto a continuación: '
+      p2: 'Nosotros usamos compañías de publicidad de terceros para realizar anuncios cuando usted visita nuestro sitio web. Estas compañías pueden utilizar la información de identificación no personal sobre sus visitas a este y otros sitios web con el fin de proporcionar mediante el uso de etiquetas de red anuncios sobre bienes y servicios que puedan ser de su interés.'
+      p3: 'También utilizamos proveedores de servicios para realizar seguimiento y análisis del uso y la información estadística de nuestros usuarios para administrar nuestro sitio web y mejorar constantemente su calidad. También podemos publicar esta información con fines de promoción o como un público representativo para los anunciantes. Tenga en cuenta que nosotros no usamos la información personal en este caso, sólo los resúmenes generales de las actividades de nuestros usuarios. Estos datos se recogen en nuestro nombre, y es de uso y propiedad de nosotros.'
+    sub5:
+      name: 'Como usamos la información que recopilamos?'
+      p1: 'Cuando usted nos proporciona información personal, la utilizamos para responder a sus preguntas, procesar sus transacciones, proporcionar el acceso a cierta información o para apoyar nuestra relación de negocios en general. En algunos casos, el sitio web de Condo Media contiene enlaces a otros sitios web. Condo Media no es responsable de las prácticas de privacidad o el manejo del contenido de otros sitios web.'
+    sub6:
+      name: 'Como puedo actualizar mi información?'
+      p1: 'Es importante para Condo Media que la información que nosotros tenemos este actualizada y completa. Para actualizar su información personal realícelo a través de su perfil de usuario.'
+      p2: 'Al utilizar nuestro sitio, usted acepta las condiciones y procedimientos que hemos descrito.'
+      p3: 'Cualquier cambio a esta política será notificada oportunamente. Revise frecuentemente por cualquier actualización o cambio.'
+  terms_of_service:
+    p1: 'Gracias por visitar Condo Media!'
+    p2: 'Por favor, lea estos Términos detenidamente. Por el uso de Condo Media y sus productos asociados o al inscribirse para una cuenta, usted acepta los Términos y Condiciones. Este es un acuerdo legal.'
+    p3: 'Vamos a empezar con lo básico, incluyendo algunas definiciones que le ayudarán a entender este acuerdo. Condo Media ("Condo Media" o el "Servicio") es una plataforma basada en web y en una aplicación que se utiliza a través de la URL www.condo-media.com (nos referiremos a esta URK como el "Sitio Web") que enlaza a los residentes, los administradores de propiedades y las empresas locales en un entorno privado virtual para simplificar y promover los intercambios entre ellos. Este Sitio Web crea un mercado de tres vías para que los usuarios oferten y demanden productos y servicios dentro de su comunidad local. Condo Media es propiedad y está operado por Condo Media Inc., una corporación de Quebec ("Condo Media" o "nosotros"). Condo Media tiene empleados, contratistas independientes, y representantes ("nuestro equipo"). Como cliente del Servicio o de un representante de una entidad que es un cliente del Servicio, usted es un "miembro", según este acuerdo.'
+    p4: 'Términos de uso (“Términos,” incluyen la política de privacidad) definen los términos y condiciones sobre los cuales a usted le es permitido utilizar el servicio y como nosotros trataremos su información mientras usted sea miembro. Si usted tiene alguna pregunta por favor póngase en contacto con nosotros.'
+    title1:
+      name: 'CUENTA'
+    art1:
+      name: '1. Elegibilidad'
+      p1:
+        name: 'Para poder utilizar Condo Media, usted debe:'
+        item1: 'Ser mayor de 18 años de edad y apto para suscribir contratos;'
+        item2: 'completar el proceso de registro;'
+        item3: 'aceptar los términos y condiciones; y'
+        item4: 'proporcionar información de contacto verdadera, completa y mantenerla actualizada.'
+      p2: 'Para el uso de Condo Media, usted representa y garantiza que cumple con todos los requisitos mencionados anteriormente, y que no utilizará Condo Media de alguna forma que viole cualquier ley o regulación. Condo Media puede rechazar prestar el servicio, cerrar cuentas de los usuarios, y cambiar los requisitos de elegibilidad en cualquier momento.'
+    title2:
+      name: 'REPRESENTA Y GARANTIZA'
+      p1: '“Representar y Garantizar” es como hacer una promesa legalmente exigible.'
+    art2:
+      name: '2. Plazo'
+      p1: ' El plazo comienza cuando usted se inscribe en Condo Media y continúa mientras se utiliza el servicio. Al hacer clic en el botón e introduciendo su nombre de usuario significa que oficialmente ha "firmado" los Términos. Si usted se inscribe en Condo Media en nombre de una empresa u otra entidad, usted declara y garantiza que tiene los derechos para aceptar estas Condiciones en su nombre.'
+    art3:
+      name: '3. Cambios'
+      p1: 'Nosotros podemos cambiar cualquiera de los Términos mediante la publicación actualizada de las Condiciones de Uso en nuestro sitio web y / o mediante el envío de un correo electrónico a la última dirección de correo electrónico que nos entregue. A menos que usted finalice su cuenta dentro de los primeros diez (10) días, las nuevas Condiciones se harán efectivos inmediatamente y se aplicarán para cualquier servicio nuevo o actual de Condo Media. Podemos cambiar el Sitio Web, el Servicio, o cualquier característica del servicio en cualquier momento.'
+    art4:
+      name: '4. Cuenta y Contraseña'
+      p1: 'Usted es responsable de mantener su nombre de cuenta y contraseña de manera confidencial. También es responsable de cualquier cuenta a la que usted tenga acceso así esté o no autorizado el uso. Usted nos notificará inmediatamente de cualquier uso no autorizado de sus cuentas. No somos responsables por las pérdidas, robos o ataques cibernéticos de sus contraseñas. Nosotros no tenemos acceso a su contraseña actual, y por razones de seguridad, sólo podemos restablecer su contraseña.'
+    title3:
+      name: 'PAGOS'
+    art5:
+      name: '5. Planes Mensuales'
+      p1: ' Nuestros cargos por planes mensuales se publican en nuestro sitio web y se pueden cambiar de vez en cuando. Si cualquier parte de un mes está incluido en el plazo, el pago se debe realizar por el mes completo. La fecha para el pago oportuno del servicio de cada mes es en la misma fecha, o la fecha más cercana en ese mes del día en que se inscribió con nosotros e hizo su primer pago mensual (la "Fecha de Pago").'
+    art6:
+      name: '6. Tarjetas de Crédito'
+      p1: " Siempre y cuando usted sea miembro o tenga un saldo pendiente con nosotros, usted nos proporcionara información de una tarjeta de crédito válida y nos autorizará para deducir de esa tarjeta de crédito los gastos mensuales. Usted reemplazará la información para cualquier tarjeta de crédito que expire con la información de otra tarjeta de crédito válida. Cualquier persona que use una tarjeta de crédito representa y garantiza que él o ella está autorizado para utilizar la tarjeta de crédito y que cualquiera de los cargos que puedan ser facturados a la tarjeta de crédito no serán rechazados. Si, por alguna razón no podemos procesar su pedido con la tarjeta de crédito, intentaremos contactarlo a través de correo electrónico y suspenderemos su cuenta hasta que su pago pueda ser procesada."
+    art7:
+      name: '7. Reembolsos'
+      p1: " Le entregaremos un reembolso de un mes de servicio pre pagado si dejamos de brindar nuestros servicios a usted por una razón que no está descrito en estas Condiciones o en nuestra política de uso aceptable. Usted no tendrá derecho a un reembolso de nosotros en cualquier otra circunstancia. Podemos ofrecer un reembolso si un Miembro lo solicita a través de un caso a través del Sitio Web."
+    art8:
+      name: '8. Cambios'
+      p1: ' Podemos cambiar nuestras tarifas en cualquier momento mediante la publicación de una nueva estructura de precios en nuestro sitio web y / o el envío de una notificación por correo electrónico.'
+    title4:
+      name: 'DERECHOS'
+    art9:
+      name: '9. Derechos de Propiedad de nosotros'
+      p1: ' Usted deberá respetar nuestros derechos de propiedad en el sitio web y el software utilizado para funcionar Condo Media (derechos de propiedad incluyen las patentes, marcas comerciales, marcas de servicio y derechos de autor).'
+    art10:
+      name: '10. Política de privacidad'
+      p1: 'Podemos utilizar o publicar su información de acuerdo con nuestras políticas de privacidad. Nuestra política de seguridad será tratada como parte de este estos términos.'
+    title5:
+      name: 'REGLAS Y ABUSO'
+    art11:
+      name: '11. Reglas Generales'
+      p1:
+        name: 'Usted se compromete a seguir las siguientes reglas:'
+        item1: ' No cargar, publicar, reenviar o publicar un enlace con contenido de material abusivo, obsceno, discriminatorio, de acoso, despectivo o difamatorio.'
+        item2: ' No se debe publicar, cargar, reenviar o enviar enlaces a cadenas de correos, correo no deseado, mensajes de spam o chismes.'
+        item3: 'Nunca revele información comercialmente sensible, en contra de la competencia, privada o confidencial.'
+        item4: "No publique o reenvíe cualquier contenido que pertenece a un tercero a menos que tenga el debido consentimiento."
+        item5: 'Antes de incluir un enlace de terceros en el Sitio Web, compruebe que usted tiene los permisos para realizarlo de acuerdo a los términos y condiciones de ese sitio web.'
+        item6: " Evite publicar su información de contacto donde ellos puedan ser fácilmente accedidos y utilizados por personas que no necesitan ni tienen la intención de verlos y nunca publicar información de contacto de cualquier otra persona."
+        item7: ' En particular la subida de archivos, reenvío o publicación de un enlace de cualquiera de los siguientes tipos de material en un sitio web de medios sociales, ya sea a título personal o profesional, ascenderá a una falta grave (esta lista no es extensa): (a) material pornográfico (es decir, la escritura, imágenes, películas y clips de vídeo de carácter sexual explícito o que genere excitación); (b) una declaración falsa y difamatoria sobre una persona u organización; (c) material que sea ofensivo, obsceno, penalmente discriminatorio, despectiva o que puede causar vergüenza para nosotros, nuestros clientes o nuestro personal; (d) la información confidencial sobre nosotros o cualquiera de nuestros empleados o clientes (que no cuente con la autorización expresa para difundir); (e) cualquier otra declaración que pueda crear cualquier responsabilidad (ya sea penal o civil para usted o nosotros); o (f) material de violación de los derechos de autor u otros derechos de propiedad intelectual, o que invadan la privacidad de cualquier persona.'
+      p2: ' Si usted viola cualquiera de estas reglas, estaremos obligados a suspender o cancelar su cuenta.'
+    art12:
+      name: '12. Reportes de Abuso'
+      p1: 'Si usted considera que alguien está violando cualquiera de os términos descritos, por favor infórmenos inmediatamente y repórtelo a través de nuestro equipo'
+    art13:
+      name: '13. Cumplimiento de leyes'
+      p1: ' Usted manifiesta y garantiza que el uso de Condo Media cumplirá con todas las leyes y reglamentos aplicables. Usted es responsable de determinar si nuestros servicios son adecuados para su uso de acuerdo a las normas y leyes vigentes.'
+    title6:
+      name: 'RESPONSABILIDAD'
+    art14:
+      name: '14. Limitación de Responsabilidad'
+      p1:  ' En la máxima permitida por la ley, usted asume plena responsabilidad por cualquier pérdida que resulte de su uso del Sitio Web y de sus Servicios, incluyendo cualquier descarga desde el Sitio Web. Nosotros y nuestro equipo no será responsable de ningún daño directo, indirecto, punitivo, especial o consecuente en cualquier circunstancia, incluso si están basados en negligencia o hayamos sido advertidos de la posibilidad de esos daños. Nuestra responsabilidad total para todas las reclamaciones que se hagan sobre el Servicio en cualquier mes no será más de lo que usted nos pagó por el servicio del mes anterior.'
+    art15:
+      name: '15. Sin Garantías'
+      p1: 'En la máxima permitida por la ley, nosotros proporcionamos el material en el Sitio Web y el Servicio como está. Eso significa que no ofrecemos garantías de ningún tipo ya sea expresa o implícita, incluyendo pero no limitado también a las garantías de comercialización y adecuadas para un propósito particular.'
+    title7:
+      name: 'Garantías de comercialización'
+      p1: ' Dado que las personas utilizan Condo Media para una variedad de razones, no podemos garantizar que va a satisfacer sus necesidades específicas.'
+    art16:
+      name: '16. Indemnización'
+      p1: ' Usted se compromete a indemnizar y mantener a paz y salvo a nosotros y a nuestro equipo de cualquier pérdida (incluyendo honorarios de abogados) que resulten de cualquier reclamación que se realice los cuales no estén permitidos bajo los Términos de "Limitación de Responsabilidad" u otra disposición. También se compromete a indemnizar y mantener en paz y salvo de cualquier pérdida (incluyendo honorarios de abogados) que resulte de reclamaciones de terceros que usted o alguien hizo utilizando su contraseña que de ser cierto, violaría cualquiera de estos Términos.'
+    title8:
+      name: 'INDEMNIZACION'
+      p1: ' Indemnización es un acuerdo para compensar a alguien por una pérdida.'
+    art17:
+      name: '17. Honorarios de Abogado'
+      p1: ' Si se presenta una acción en su contra alegando que violó los presentes Términos y esta prevalece, tenemos derecho a recuperar los gastos ocasionados por honorarios de abogados y los daños y perjuicios u otras a los que haya lugar.'
+    art18:
+      name: '18. Interposición de Recurso'
+      p1: 'Si usted viola estos Términos entonces podemos solicitar medidas cautelares (lo que significa que podemos solicitar una orden judicial para detenerlo) u otra interposición de recurso. '
+    art19:
+      name: '19. Aviso Legal'
+      p1: ' Nosotros y nuestro equipo no somos responsables por el comportamiento de un anunciante, enlaces de otros sitios web, u otros miembros.'
+    title9:
+      name: 'Restricciones'
+    art20:
+      name: '20. Cesiones'
+      p1: ' Usted no podrá ceder ninguno de sus derechos bajo este acuerdo a cualquier otra persona. Nosotros podremos ceder sus derechos a cualquier otra persona o entidad a nuestra discreción.'
+    art21:
+      name: '21. Aplicación de Leyes'
+      p1: 'Las leyes de la provincia de Quebec, a excepción de conflictos de leyes, se aplicarán a cualquier conflicto relacionado con estos Términos o el Servicio.'
+    art22:
+      name: '22. Fuerza Mayor'
+      p1: ' Nosotros no seremos responsables de cualquier retraso o fallo en el rendimiento de cualquier parte del Servicio, por cualquier causa fuera de nuestro control. Esta incluido pero no limitado a actos de la naturalez, los cambios en la ley o reglamentos, embargos, guerras, actos de terrorismo, disturbios, incendios, terremotos, accidentes nucleares, inundaciones, huelgas, cortes de energía, acción volcánica, condiciones climáticas inusuales y severas, y los actos de los piratas informáticos o los proveedores de servicios de Internet de terceros.'
+    art23:
+      name: '23. Supervivencia'
+      p1: ' Incluso si este acuerdo se termina, las siguientes secciones seguirán siendo aplicables: Derechos de propiedad, Cumplimiento de las leyes, limitación de responsabilidad, no hay garantías, indemnización, Aplicacion de Leyes, Divisibilidad y Acuerdo completo.'
+    art24:
+      name: '24. Divisibilidad'
+      p1: ' Si resulta que una sección de este Acuerdo no es ejecutable, entonces esa sección será retirada o editada tanto como sea necesario, y el resto de las Condiciones seguirán siendo válidas.'
+    art25:
+      name: '25. Interpretación'
+      p1: ' Los encabezados y texto de la barra lateral se proporcionan sólo para hacer este acuerdo más fácil de leer y entender. El hecho de escribir estas Condiciones no afectará a la forma en que este Acuerdo se interpreta.'
+    art26:
+      name: '26. Enmiendas y Renuncias'
+      p1: ' Las enmiendas o cambios a estos Términos y Condiciones no serán efectivos hasta que sean publicados en el Sitio Web. Aparte de eso, las condiciones adicionales pueden aplicarse a ciertas características del servicio (los "Términos Adicionales"). Los términos adicionales se considerarán incorporados a las presentes Condiciones cuando se active la función. Donde haya un conflicto entre estos Términos y las Condiciones adicionales, las Condiciones adicionales serán las aplicables. Si no se toman medidas de manera inmediata en caso de violación de estos Términos, no estamos renunciando a cualquier derecho en virtud de los Términos y todavía podríamos actuar en algún momento.'
+    art27:
+      name: '27. Avisos'
+      p1: ' Cualquier aviso estará vigente cuando se lo enviemos al último correo electrónico o dirección física que usted nos dio o se publique en nuestro sitio web. Cualquier aviso para nosotros será efectiva una vez se entregue a nosotros.'
+    art28:
+      name: '28. Acuerdo Completo'
+      p1: ' Estos Términos y nuestra Política de Privacidad (todos los cuales se incorporan en estos términos de referencia), y cualquier término adicional que usted haya acordado hace parte del acuerdo completo y sustituye todos los anteriores acuerdos, declaraciones y entendimientos.'
+  merchant_agreement:
+    name: 'Términos y condiciones comerciales'
+    title: ' TERMINOS Y CONDICIONES COMERCIALES '
+    nps: 4
+    p1: ' Gracias por elegir publicar sus productos u ofertas con Condo Media! Estamos muy emocionados de tenerlo como nuestro socio.'
+    p2: ' Por favor lea estos Términos comerciales cuidadosamente. Al publicar sus productos u ofertas en Condo Media, usted está aceptando estos Términos Comerciales, además de nuestros términos estándar. Este es un acuerdo legal.'
+    p3: ' Estos términos comerciales se denominaran en este documento como el "Acuerdo de comercial" o "Acuerdo" y es acordado entre Condo Media Inc., una corporación de Quebec y usted, como comerciante. Colectivamente, Condo Media y el comerciante se conocen como las "Partes".'
+    p4: ' El comerciante desea ofrecer sus productos o servicios a la venta a través de cupones que pueden ser canjeados por bienes y / o servicios seleccionados del comerciante con un descuento (el "Cupón(s)"), este se ofrece para su compra a los usuarios de la plataforma Condo Media en http://www.condo-media.com (el "Sitio Web"); y Condo Media desea vender cupones del comerciante a los compradores en el Sitio Web, el comerciante es el vendedor de los bienes y los servicios, y siendo Condo Media el vendedor de los derechos intangibles contenidos en el Cupón del comerciante.'
+    nsubs: 7
+    sub1:
+      name: '1. Programa de Cupones'
+      nps: 18
+      p1: '1.1. Información del Cupón'
+      p2: ' Condo Media promocionará y mostrará el cupón en el Sitio Web. Merchant es el vendedor de los bienes y servicios descritos en el cupón. El cupon en sí será enviado al comprador electrónicamente. El comprador será el encargado de redimir el cupón del Comerciante.'
+      p3: 'a. La entrega de ofertas: Condo Media puede ofrecer cupones del comerciante hasta la cantidad máxima seleccionada en una variedad de formatos: a través de la función de oferta del día, a través de otros tipos de ofertas secundarias, a través de su establecimiento comercial, o a través de su red de afiliados. Todos estos tipos de ofertas pueden ser ofrecidos a toda la base de suscriptores que hacen parte de Condo Media, o a los asociados de las comunidades asociadas a Condo Media.'
+      p4: 'b. Cada cupón estará sujeto a ninguna restricción distinta de la prevista en el presente documento. Cada cupón expirará en la Fecha de Vencimiento del cupón. Sin embargo, después de la Fecha de Vencimiento del cupón, el comerciante de acuerdo a la ley por un tiempo definido podrá: (1) seguir permitiendo cupones no redimidos a ser redimidos por el producto o servicio especificado en el comprobante o (2) permitir que el cupón sea redimido para adquirir bienes o servicios del comerciante hasta por la cantidad que el comprador pagó por el cupón. El comerciante es consciente y reconoce que la ley puede requerir al comerciante redimir cupones más allá de sus fechas de vencimiento establecidos y el comerciante se compromete a hacerlo (de acuerdo a la ley que aplique).'
+      p5: 'c. Reembolsos parciales: Si un cliente redime un cupón  por menos de su valor nominal, el comerciante será responsable de la emisión de un bono del remanente o la entrega del efectivo equivalente a la diferencia entre el valor nominal y el importe reembolsado de acuerdo a la ley que aplique.'
+      p6: 'd. El comerciante acuerda que en la prestación de los productos / servicios que son objeto del cupón, no va a imponer tasas o gravámenes extras o adicionales que contradigan los términos establecidos en la descripción del cupón.'
+      p7: '1.2 Venta de Cupones.'
+      p8: 'El comerciante autoriza a Condo Media para ofrecer, vender y distribuir cupones, de conformidad con el presente Acuerdo. El comerciante reconoce que Condo Media podrá terminar la publicación o promoción de los Cupones en cualquier momento.'
+      p9: '1.3 Publicación y entrega de Cupones'
+      p10: 'Los cupones se publicarán en el Sitio Web. Si hay un número máximo de cupones designados para la venta, Condo Media usará esfuerzos considerables para cesar la publicación del cupón, una vez que ha recibido ofertas de compra igual al número máximo de cupones.'
+      p11: 'La activación del cupón significa que puede ser utilizado para las compras con el comerciante de conformidad con los términos del cupón el cual se activará inmediatamente después de la compra. Condo Media entregará los cupones al comprador electrónicamente. Una vez que un cupón se entregue al comprador, el comerciante será el único responsable de todo el servicio al cliente en relación con el cupón y para el suministro de todos los bienes y servicios especificados en el cupón. Condo Media se reserva además el derecho de continuar, pero no estará obligado de rechazar, revisar o interrumpir la publicación de cualquier cupón y exigir al comerciante editar o modificar el mismo por cualquier razón incluir sin restricción en el cupón de Condo Media las especificaciones o las leyes que apliquen.'
+      p12: '1.4 Pago'
+      p13: 'Condo Media deberá remitir el pago al Comerciante acuerdo con los tiempos y términos establecidos en esta Sección 1.4. Condo Media pagará el 85% (ochenta y cinco por ciento) al comerciante del valor de cada cupón correctamente activado que un comprador ha pagado totalmente a través del Sitio Web de Condo Media. El comerciante debe estar habilitado para vender y recaudar impuestos, y será el responsable del pago de todos los impuestos de todas las ventas de los bienes y servicios que se describen en la oferta. Condo Media enviara el importe recaudado al Comerciante al final de cada mes calendario. El comerciante acepta y reconoce que en el evento que el comerciante no quiera o no pueda cumplir con sus obligaciones en virtud del presente Acuerdo, el Comerciante deberá reembolsar a Condo Media y / o sus clientes todos el dinero de todos los cupones no redimidos. Los importes retenidos por Condo Media son una compensación a Condo Media por el servicio de publicidad y venta de los cupones del comerciante.'
+      p14: 'Condo Media deberá ganar y ser pagado quince por ciento (15%) del valor de cada cupón adquirido a través de la página web como una comisión de administración y procesamiento.'
+      p15: '1.5 Deposito.'
+      p16: 'Las Partes acuerdan los plazos de pagos de ventas descrito en la Sección 1.4 y reconocen que los pagos escalonados se traducirá en fondos para el desempeño comercial, que se han recibido de la actividad comercial en Condo Media. En el caso de un procedimiento de quiebra u otra liquidación del comerciante antes que el comerciante haya cumplido con su obligación en virtud del presente Acuerdo, las Partes acuerdan que se considerarán tales fondos que han sido mantenidos en fideicomiso por el comerciante de Condo Media y Condo Media tendrá título indiscutible y la propiedad sobre todos esos fondos. Además, si el importe excede los $ 50,000 en el total, Condo Media se reserva el derecho de revisar el historial de crédito del comerciantes antes de utilizar los fondos.'
+      p17: '1.6 Licencia.'
+      p18: 'El comerciante a Condo Media una licencia no exclusiva a nivel mundial y el derecho a usar, reproducir, licenciar, mostrar, distribuir y transmitir el nombre, el logo del comerciante y las marcas registradas ("Marca Comercial") y cualquier fotografía, gráficos, ilustraciones, texto y otros contenidos proporcionados o especificados por el comerciante ("Contenido") en relación con la comercialización, promoción, venta o distribución de cupones, en todos y por todos los medios o formatos en los que dichos cupones se comercializan, promueven, transmiten, venden o distribuyen, incluyendo y no limitado a los medios de comunicación del Sitio Web de Condo Media.'
+    sub2:
+      name: '2. Duración y Terminación.'
+      nps: 1
+      p1: ' El presente Acuerdo permanecerá en vigencia durante el tiempo de un (1) año después de la fecha de activación o la última fecha en la que un usuario de Condo Media redima un Cupón ofrecido por el comerciante a través de Condo Media. Condo Media podrá terminar el presente acuerdo en cualquier momento por cualquier razón dando aviso al comerciante de manera escrita de dicha terminación. El vencimiento del plazo no afectará en modo alguno el uso del comprador del Cupón, o la obligación del comerciante para la redención del Cupón. Las secciones 3, 4, 5, 6 y cualquier reclamo de pagos debido a Condo Media, están incluidos pero no limitados a la sección 1.5 a continuarán en vigencia ante vencimiento o terminación de este Acuerdo.'
+    sub3:
+      name: '3. Representación Comercial, Garantías e Indemnizaciones'
+      nps: 2
+      p1: '3.1 El comerciante declara y garantiza en todo el Término que: (a) El comerciante tiene el derecho, poder y autoridad para celebrar el presente Acuerdo; (b) El comerciante está autorizado para vender y recaudar impuestos en todas las áreas en que los bienes y servicios de los que el comerciante ofrece y que se prestarán de conformidad con los términos y descripciones del cupón; (c) el cupón, al ser activado y entregado por Condo Media deberá estar disponible de manera inmediata para ser redimido por el comprador; (d) los términos y condiciones del cupón, incluidos los posibles descuentos o los bienes y servicios ofrecidos en virtud del mismo, cumplen con todas, no violará ninguna ley  local, provincial, federal, estatuto, regla, reglamento u orden ( "Leyes"), incluido pero no limitado a, cualquier ley y / o reglamento que rige el uso, venta y / o distribución de alcohol, las leyes que rigen los cupones, tarjetas de regalo y / o certificados de regalo; (e) el comerciante posee todos los derechos, títulos e intereses sobre las Marcas y Contenidos; y tiene el derecho de conceder las licencias en las marcas y contenido establecidos en este Acuerdo; (f) los cupones y cualquier tipo de publicidad o promoción de productos y servicios relacionados con los mismos, no constituirá la publicidad falsa, engañosa o desleal en virtud de cualquier ley aplicable al comercio; y (g) las marcas y el contenido no violarán ningún derecho de autor, marca registrada u otro derecho de propiedad intelectual o derecho de privacidad o publicidad de cualquier tercero o cualquier ley.'
+      p2: '3.2 El comerciante se compromete a defender, indemnizar y mantener a Condo Media, sus entidades afiliadas y relacionadas y cualquiera de sus funcionarios, directores, agentes y empleados de y contra cualquier reclamo, demandas, investigaciones, sanciones, daños, pérdidas o gastos (incluido pero no limitado a los honorarios y costos de abogados) que surjan de o en relación con materias que implican el cupón, la oferta o la venta del cupón en el Sitio Web y de cualquier otra reclamación que surja de este Acuerdo.'
+    sub4:
+      name: '4. Cumplimiento de las tarjetas de regalo y certificados de regalo:'
+      nps: 1
+      p1: ' El comerciante se compromete a cumplir con cualquier y todas las leyes locales, provinciales y federales relacionadas con la venta y la oferta de los cupones, así como todos aquellos demás asuntos que se describen en el presente Acuerdo.'
+    sub5:
+      name: '5. Derechos de Propiedad Intelectual.'
+      nps: 1
+      p1: '5.1 El comerciante acepta y reconoce que Condo Media posee todos los derechos, títulos e intereses del Sitio Web de Condo Media, marcas Condo Media, y cualquier software, tecnología o herramientas usadas por Condo Media para promover, comercializar, vender, generar o distribuir los cupones (colectivamente el "Condo Media IP"). El comerciante no podrá alquilar, arrendar, sub licenciar, distribuir, transferir, copiar, reproducir, descargar, visualizar, modificar o parcialmente el Condo Media IP o cualquier parte del mismo, o utilizar el Condo Media IP como un componente o parte de los productos o servicios considerados ofrecidos por el comerciante para vender, sub licenciar, arrendar, acceder o distribuir. El Comerciante no preparará cualquier trabajo derivado basado en el Condo Media IP. El Comerciante no traducirá, realizará ingeniería inversa, descompilará o desensamblará el Condo Media IP.'
+    sub6:
+      name: '6.Limitacion de Responsabilidad'
+      nps: 2
+      p1: 'A EXCEPCIÓN DE LAS OBLIGACIONES DE INDEMNIZACIÓN EN VIRTUD DEL PRESENTE, EN NINGÚN CASO NINGUNA DE LAS PARTES SERÁ RESPONSABLE O OBLIGADO A LA OTRA PARTE O CUALQUIER TERCERO DE CUALQUIER FORMA PARA CUALQUIER INCIDENCIA, EJEMPLAR, CONSECUENCIA, PUNITIVOS O INDIRECTOS ESPECIALES DE CUALQUIER TIPO, INDEPENDIENTEMENTE DE LA FORMA DE ACCIÓN, YA SEA EN CONTRATO, AGRAVIO, NEGLIGENCIA, ESTRICTA RESPONSABILIDAD DEL PRODUCTO, O CUALQUIER OTRA FORMA, AUN CUANDO SE HAYA INFORMADO DE LA POSIBILIDAD DE TALES DAÑOS POR ADELANTADO, CONDO MEDIA TIENE RESPONSABILIDAD UNICA Y COMPLETA CON EL COMERCIANTE, PARA CUALQUIER RECLAMO DERIVADO DE RELACIÓN CON ESTE CONTRATO O CUALQUIER ERROR, OMISION O EXTRAVIO DE LOS CUPONES ESTARÁ LIMITADA EN VIRTUD DE LA CANTIDAD DE CUOTAS PAGADAS. ESTA LIMITACIÓN DE RESPONSABILIDAD SE APLICARÁ EN LA MEDIDA MÁXIMA PERMITIDA POR LA LEY APLICABLE Y SIN PERJUICIO DE LA FALLA DE CUALQUIER RECURSO LIMITADO.'
+      p2: ' Cualquier reclamación que surja de o en relación con cualquier error u omisión en un cupón se debe hacer en el plazo de seis (6) meses de la primera publicación del cupón. De lo contrario, se considerará que el comerciante renuncia a la reclamación.'
+    sub7:
+      name: '7. Otros'
+      nps: 6
+      p1: ' Las Partes son contratistas independientes. Ninguna disposición de este Acuerdo se interpretará para la creación de una alianza, asociación, franquicia o una relación de agencia entre las Partes. Ninguna de las Partes tiene la autoridad, sin el consentimiento previo por escrito de la otra Parte, de obligar o comprometer a la otra Parte de ninguna manera.'
+      p2: ' Este acuerdo constituye el acuerdo completo entre las partes en relación con su objeto y reemplaza todos los acuerdos orales o escritos anteriores o contemporáneos relativos a su objeto. Este acuerdo puede ser enmendado o modificado por mutuo acuerdo de los representantes autorizados de las Partes por escrito.'
+      p3: ' El comerciante no podrá ceder o transferir sus derechos u obligaciones bajo este Acuerdo, a menos que sea por disposición de la ley o con el consentimiento previo por escrito de Condo Media.'
+      p4: 'EXCEPCIÓN DE LO ESTABLECIDO EN ESTE ACUERDO, NINGUNA DE LAS PARTES REALIZA NINGUNA DECLARACIÓN O GARANTÍA, EXPRESA O IMPLICITA, INCLUIDO SIN ESTAR LIMITADO A CUALQUIER GARANTÍA DE COMERCIALIZACIÓN, IDONEIDAD PARA UN PROPÓSITO PARTICULAR O NO INFRACCIÓN. CONDO MEDIA NO DA GARANTIA, NI GARANTIZA QUE LOS SERVICIOS OFRECIDOS EN O A TRAVÉS DEL SITIO WEB SERÁ ININTERRUMPIDO O LIBRE DE ERRORES, QUE LOS CUPONES ESTARAN LIBRES DE ERRORES O QUE CUALQUIER ERROR, OMISION O EXTRAVIO EN LOS CUPONES SERAN CORREGIDOS, O QUE LOS CUPONES TRAERAN AL COMERCIANTE INGRESOS O BENEFICIOS.'
+      p5: 'El presente Acuerdo se regirá por las leyes de la provincia de Quebec.'
+      p6: 'Al agregar un catálogo de cupones a nuestro Sitio Web, usted como comerciante acepta y estará obligado por los términos del presente Acuerdo.'
+  images:
+    change_cover: Cambiar foto de portada
+    change_profile: Cambiar foto perfil
+    make_cover: Poner como portada
+  profiles:
+    my_profile: Mi Perfil
+    see_more: Ver más ...
+    timeline: Biografía
+    whats_new: Algo nuevo para contar?
+    photos: Fotos
+    calendar: Calendario
+    about: Acerca de
+    reviews: Revisiones
+    settings: Configuración
+    offers: Ofertas
+    leave_community:
+      title: Abandonar comunidad
+      message: Abandonar comunidad significa que te vas a retirar de tu actual comunidad. Después de dar click en confirmar, todos tus contactos, publicaciones, e información asociada con tu comunidad será eliminada y no podrá ser recuperada.
+      password: Por favor digite su contraseña
+      confirm: Confirmar
+    contact_information: Información de contacto
+    other_details: Otros detalles
+    notifications:
+      title: Notificaciones
+      option1: Enviar correo cuando alguien responda a mis mensajes privados?
+      option2: Enviar correo cuando alguien responda a mis comentarios?
+      option3: Enviar correo cuando alguien escriba en mi perfil público?
+      option4: Enviar correo cuando se publica una nueva encuesta?
+      option5: Enviar correo cuando se publica un nuevo evento?
+      option6: Enviar correo cuando se publica un aviso clasificado?
+    public_profile: Perfil público
+    password: Contraseña
+  settings:
+    users:
+      who_can_see_your_name: Quien puede ver tu nombre?
+      who_can_see_your_email: Quien puede ver tu correo?
+      who_can_see_my_profile: Quien puede ver tu información de perfil?
+      who_can_see_my_posts: Quien puede ver tus publicaciones?
+      who_can_post_timeline: Quien puede publicar sobre tu biografía?
+      who_can_see_others_posts: Quien puede ver otras publicaciones de tu biografía?
+      email_when_message: Enviarme correo electrónico cuando alguien me envíe un mensaje?
+      email_when_reply_my_comment: Enviarme correo electrónico cuando alguien responda a mis comentarios?
+      email_when_write_on_profile: Enviarme correo electrónico cuando alguien escriba sobre mi perfil público?
+      email_when_new_poll: Enviarme correo electrónico cuando una nueva encuesta sea publicada?
+      email_when_new_event: Enviarme correo electrónico cuando un nuevo evento sea publicado?
+      email_when_new_classified: Enviarme correo electrónico cuando un nuevo clasificado sea publicado?
+      email_when_new_service_request: Enviarme correo electrónico cuando un nuevo caso sea creado?
+      email_when_new_reservation: Enviarme correo electrónico cuando una nueva solicitud de reserva sea creada?
+      email_when_new_join_request: Enviarme correo electrónico cuando se realice una nueva invitación?
+      notification_mail_signature: Configure su firma
+    communities:
+      who_can_see_contact_information: Quien puede ver la información de contacto de la comunidad?
+      who_can_post_timeline: Quien puede publicar en la biografía de la comunidad?
+      who_can_see_others_posts: ¿Quién puede ver lo que otros publican en la biografía de la comunidad?
+      who_can_comment_posts: ¿Quién puede comentar en las publicaciones de la comunidad?
+      who_can_create_events: ¿Quién puede crear eventos?
+      who_can_create_polls: ¿Quién puede crear encuestas?
+      who_can_send_messages: ¿Quién puede enviar mensajes directos?
+      who_can_create_offers: ¿Quién puede crear clasificados?
+      who_can_review: Quién puede calificar o hacer una revisión de la comunidad?
+      email_when_post_timeline: Enviarme un correo cuando alguien publique en la biografía de la comunidad?
+      email_when_post_timeline_reply: Enviarme un correo cuando alguien responda a un comentario en la biografía de la comunidad?
+      email_when_review: Enviarme un correo cuando alguien califique o haga una revisión a la comunidad?
+      email_when_review_reply: Enviarme un correo cuando alguien responda a una revisión?
+      admin_default_requests: Asignar casos a?
+      admin_default_reservations: Asignar reservas a?
+      append_message_to_outgoing_notifications: Adjuntar mensaje a las notificaciones salientes
+    values:
+      public: Público
+      my_community: Mi Comunidad
+      management_only: Sólo la Administración
+      community_members: Miembros de la Comunidad
+      'si': 'Si'
+      'no': 'No'
+  plans:
+    one: Plan
+    other: Planes
+    change: Cambiar Plan
+    storage_space: Almacenamiento
+    online_payments: Pagos en Línea
+    overview: Descripción general
+  exceptions:
+    not_found: "¡Lo sentimos! La página que buscas no existe."
+    internal_error: "Lo sentimos. Ha ocurrido un error."
+    error_404: "Error 404"
+    error_500: "Error 500"
+    not_found_suggestion: "No podemos encontrar la página que estás buscando. Por favor dirígete a la página de"
+    internal_error_suggestion: "Por favor, inténtalo de nuevo más tarde. Si el error persiste, contáctenos a"
+  account_balances:
+    no_records: "No hay estados de cuenta disponibles"
+    new_record: "+ Nuevo"
+    account_balance: "Estado de Cuenta"
+    form:
+      subject: "Título"
+      choose_file: "Seleccionar archivo"
+      upload_date: "Fecha"
+      submit: "Enviar"
+      upload_instruction: "Sube el estado de cuenta de los residentes (.xls o .xlsx)"
+  user_balances:
+    co_ownership: "Coopropiedad"
+    apartment: "Bloque - Ap"
+    concept: "Concepto"
+    previous_balance: "Saldo anterior"
+    this_month: "Este mes"
+    total: "TOTAL"
+    total_to_pay: "TOTAL A PAGAR =====>"
+    billing_number: "No Doc. Cobro:"
+    previous_payment: "PAGO ANTERIOR:"
+    filters:
+      month: "Mes"
+      year: "Año"
+
+# defaults for spanish
+  date:
+    abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sab]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    order: [año, mes, día]
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: cerca de 1 hora
+        other: "cerca de %{count} horas"
+      about_x_months:
+        one: cerca de 1 mes
+        other: "cerca de %{count} meses"
+      about_x_years:
+        one: cerca de 1 año
+        other: "cerca de %{count} años"
+      almost_x_years:
+        one: al menos 1 año
+        other: "al menos %{count} años"
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de un minuto
+        other: "menos de %{count} minutos"
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: "menos de %{count} segundos"
+      over_x_years:
+        one: más de 1 año
+        other: "más de %{count} años"
+      x_days:
+        one: 1 dia
+        other: "%{count} dias"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_years:
+        one: 1 año
+        other: "%{count} años"
+      x_seconds:
+        one: 1 segundos
+        other: "%{count} segundos"
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minutos
+      month: Mes
+      second: Segundos
+      year: Año
+  time:
+    formats:
+      default: '%B %d, %Y'
+  will_paginate:
+    previous_label: "&#60;"
+    next_label: "&#62;"
+    page_gap: "&hellip;"
+
+    page_entries_info:
+      single_page:
+        zero:  "No %{model} encontró"
+        one:   "Mostrando 1 %{model}"
+        other: "Mostrando %{count} %{model}"
+      single_page_html:
+        zero:  "No %{model} encontró"
+        one:   "Mostrando <b>1</b> %{model}"
+        other: "Mostrando <b>&nbsp;%{count}</b> %{model}"
+
+      multi_page: "%{from} - %{to} de %{count}"
+      multi_page_html: "<b>%{from}&nbsp;-&nbsp;%{to}</b> de <b>%{count}</b>"
+
+    # models:
+    #   entry:
+    #     zero:  entries
+    #     one:   entry
+    #     few:   entries
+    #     other: entries
+
+    # line_item:
+    #   page_entries_info:
+    #     single_page:
+    #       zero:  "Your shopping cart is empty"
+    #       one:   "Mostrando one item in your cart"
+    #       other: "Mostrando all %{count} items"
+    #     multi_page: "Mostrando items %{from} - %{to} of %{count} in total"

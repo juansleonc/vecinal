@@ -1,0 +1,64 @@
+<li class="<%= 'active' if @submenu_item == 'news_feed' %>">
+  <%= link_to news_feed_path do %>
+    <%= mi.dashboard %>
+    <%= t 'general.news_feed' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'messages' %>">
+  <%= link_to messages_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    <%= mi.chat %>
+    <%= t 'messages.title' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'requests' %>">
+  <%= link_to service_requests_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    <%= mi.build %>
+    <%= t 'service_requests.requests' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'events' %>">
+  <%= link_to events_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    <%= mi.event %>
+    <%= Event.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'folders' %>">
+  <%= link_to folders_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    <%= mi.folder %>
+    <%= Folder.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'people' %>">
+  <%= link_to contacts_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    <%= mi.group %>
+    <%= t 'contacts.title' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'amenities' %>">
+  <%= link_to amenities_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    
+    <i class="material-icons">event_available</i>
+
+
+    <%= Amenity.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'polls' %>">
+  <%= link_to polls_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    <%= mi.poll %>
+    <%= Poll.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'classifieds' %>">
+  <%= link_to classifieds_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    <%= mi.local_offer %>
+    <%= t 'general.marketplace' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'payments' %>">
+  <%= link_to user_balances_url(subdomain: subdomain, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]), class: ('active' if @submenu_item == 'payments') do %>
+    <%= mi.credit_card %>
+    <%= Payment.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="hidden divider hidden-xs"></li>

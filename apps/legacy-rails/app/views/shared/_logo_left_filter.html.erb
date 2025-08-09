@@ -1,0 +1,5 @@
+<% size ||= :square; left ||= 'left' %>
+
+<div class="logo-wrapper <%= left + ' ' + local_assigns[:extra_class].to_s %>">
+  <%= '<i class="material-icons">business</i>'.html_safe %>
+</div>

@@ -1,0 +1,141 @@
+<% communities_link = I18n.locale.to_s == 'fr' ? 'https://communities.condo-media.com' : "https://communities.condo-media.com/#{I18n.locale}" %>
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title><%= @page_title || 'Condo Media' %></title>
+    <link rel="icon" type="image/png" href="<%= asset_url 'favicon.png' %>"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="Create an account or log into Condo Media. The private social network for property managers, residents and local Businesses." />
+    <meta name="robots" content="index, follow" />
+    <meta name="application-name" content="Condo Media "/>
+    <meta name="author" content="Condo Media"/>
+    <meta name="keywords" content="condo media, condo media inc, condomedia, condomediainc, property management, property management software, property manager, property managers, residents, resident, resident portal, buildings, building, apartment building, condominiums, condos, condo, condo software, management software, gestion des co-propriétés, gestion des condos, portail pour les gestionnaires, copropriété, residents, portail pour les residents"/>
+    <%= csrf_meta_tags %>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-65944118-1', 'condo-media.com');
+      ga('send', 'pageview');
+
+    </script>
+
+    <noscript>
+      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KBW87G" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KBW87G');
+      <% if current_user %>
+        ga('set', '&uid', '<%= current_user.id %>');
+      <% end %>
+    </script>
+
+    <%= stylesheet_link_tag "home", media: 'all' %>
+
+  </head>
+
+  <body class="home-page">
+    <%= render 'layouts/navbar_public' %>
+
+    <div class="container-fluid">
+      <section class="row section-1">
+        <div class="col-md-4 col-sm-12 col-md-offset-1 presentation">
+          <h1><%= t 'home.section-1.header' %></h1>
+          <hr class="separator">
+          <p><%= t 'home.section-1.paragraph' %></p>
+          <br/>
+          <div class="buttons">
+            <%= link_to t('home.sign_up'), new_registration_url(:user, subdomain: 'www'), class: 'btn btn-transparent' %>
+            <%= link_to t('home.sign_in'), new_session_url(:user, subdomain: 'www'), class: 'btn btn-default' %>
+          </div>
+        </div>
+        <div class="col-md-8 col-sm-12 image-container pull-right">
+          <%= image_tag 'home/building.png' %>
+        </div>
+      </section>
+
+      <% if false %>
+        <!-- Commented until product owner sent the final mockup -->
+        <section class="row section-2">
+          <div class="col-xs-12 col-md-11 col-md-offset-1 presentation">
+            <%= link_to t('home.sign_up'), new_registration_url(:user, subdomain: 'www'), class: 'btn btn-transparent' %>
+            <h1><%= t 'home.section-2.paragraph' %></h1>
+          </div>
+        </section>
+      <% end %>
+
+      <section class="row section-3">
+        <div class="col-md-5 col-md-offset-1 col-sm-12 presentation">
+          <h1><%= t 'home.section-3.header' %></h1>
+          <hr class="separator">
+          <p><%= t 'home.section-3.paragraph' %></p>
+          <%= link_to t('home.sign_up'), new_registration_url(:user, subdomain: 'www'), class: 'btn btn-transparent' %>
+        </div>
+        <div class="col-md-6 col-sm-12 image-container">
+          <%= image_tag 'home/computer1.svg' %>
+        </div>
+      </section>
+
+      <section class="row section-4">
+        <div class="col-md-6 col-sm-12 image-container">
+          <%= image_tag 'home/computer2.svg' %>
+        </div>
+        <div class="col-md-5 col-md-offset-1 col-sm-12 presentation">
+          <h1><%= t 'home.section-4.header' %></h1>
+          <hr class="separator">
+          <p>
+            <span class="number-square">1</span><%= t 'home.section-4.step-1' %><br/>
+            <span class="number-square">2</span><%= t 'home.section-4.step-2' %><br/>
+            <span class="number-square">3</span><%= t 'home.section-4.step-3' %><br/>
+          </p>
+          <%= link_to t('home.sign_up'), new_registration_url(:user, subdomain: 'www'), class: 'btn btn-transparent' %>
+        </div>
+      </section>
+
+      <section class="row section-5">
+        <div class="col-md-10 col-md-offset-2 col-md-pull-1 col-sm-12 no-padding">
+          <span class="benefits"><%= t 'home.section-5.benefits' %></span>
+          <br/>
+          <hr class="separator green">
+          <h1><%= t 'home.section-5.header' %></h1>
+          <br/><br/>
+          <% pannel_images = %w[communication collaboration storage collection management security] %>
+          <div class="row">
+            <% icons = %w[fa-share-alt-square fa-rss fa-server fa-credit-card fa-cogs fa-shield] %>
+            <% 6.times do |i| %>
+              <div class="col-md-4 col-sm-6 col-xs-12 panel-wrapper">
+                <div class="panel">
+                  <i class="fa <%= icons[i] %> green"></i>
+                  <h2><%= t "home.section-5.panel-#{i+1}.header" %></h2>
+                  <br/>
+                  <p><%= t "home.section-5.panel-#{i+1}.paragraph" %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </section>
+
+      <section class="row section-6">
+        <div class="col-xs-12 presentation">
+          <h1><%= t 'home.section-6.header' %></h1>
+          <p><%= t 'home.section-6.paragraph' %></p>
+          <br/>
+          <%= link_to t('home.sign_up'), new_registration_url(:user, subdomain: 'www'), class: 'btn btn-primary' %>
+        </div>
+      </section>
+    </div>
+
+    <%= render 'layouts/copyright_footer' %>
+
+    <%= render 'shared/change_language_modal' %>
+
+    <%= javascript_include_tag 'home' %>
+
+  </body>
+</html>

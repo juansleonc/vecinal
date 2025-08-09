@@ -1,0 +1,5 @@
+<% size ||= :square; left ||= 'left' %>
+<div class="logo-wrapper <%= left + ' ' + local_assigns[:extra_class].to_s %>">
+  <%= image_tag logoable.logo.url(:square) %>
+  <span class="no-logo-letter"><%= logoable.first_name_letter %></span>
+</div>

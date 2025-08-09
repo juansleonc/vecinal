@@ -1,0 +1,7 @@
+<% if @report_software_problem_form.errors.any? %>
+  $('.modal#report-software-problem .form-errors-container').html('<%= j render("shared/model_errors", resource: @report_software_problem_form) %>');
+<% else %>
+  $('.modal#report-software-problem').modal('hide');
+  toastr.success("<%= t 'public_pages.contact.message_sent' %>");
+  clean_form($('.modal#report-software-problem form'));
+<% end %>

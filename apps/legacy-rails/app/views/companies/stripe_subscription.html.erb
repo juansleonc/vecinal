@@ -1,0 +1,106 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'https://js.stripe.com/v2/' %>
+  <%= javascript_tag "Stripe.publishableKey = '#{Rails.application.secrets.stripe_publishable_key}';" %>
+<% end %>
+
+<% @submenu_title = t 'subscriptions.subscription'
+  @submenu_item = 'plan'
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 subscriptions">
+  <%= render 'companies/subscription_tabs' %>
+  <% if @company.buildings.present? %>
+    <ul class="list-group cm-list communities-plans">
+      <li class="list-group-item clearfix header gray-bg">
+        <div class="col-xs-12 no-padding"><%= t 'subscriptions.name' %></div>
+      </li>
+      <li class="list-group-item clearfix header">
+        <div class="col-xs-3 no-padding"><%= t 'users.community' %></div>
+        <div class="col-xs-3 text-centered"><%= t 'plans.one' %></div>
+        <div class="col-xs-2 text-centered"><%= t 'users.status' %></div>
+        <div class="col-xs-2 text-centered"><%= t 'subscriptions.next_payment' %></div>
+        <div class="col-xs-2 text-centered"><%= t 'general.action' %></div>
+      </li>
+      <% @company.buildings.each do |building| %>
+        <li class="list-group-item clearfix with-content" data-target="#content-plan-building-<%= building.id %>">
+          <div class="col-xs-3 no-padding">
+            <%= render 'shared/logo_left', logoable: building %>
+            <%= building.name %>
+          </div>
+          <div class="col-xs-3 text-centered">Basic</div>
+          <div class="col-xs-2 text-centered">0% <%= t 'subscriptions.used' %></div>
+          <div class="col-xs-2 text-centered">N/A<%#= (building.created_at).strftime '%Y-%m-%d' %></div>
+          <div class="col-xs-2 text-centered">
+            <%#= link_to 'Upgrade plan', '#', data: { toggle: 'modal', target: '#change-plan-modal' } %>
+            <%= link_to (t 'subscriptions.upgrade_storage'), '#' %>
+          </div>
+        </li>
+
+        <div class="list-group-item-content" id="content-plan-building-<%= building.id %>">
+          <div class="title">
+            <div class="username">
+              <%= image_tag building.logo.url(:square), class: 'logo' %>
+              <span class="name"><%= building.name %></span>
+              <br/>
+              <span class="info"><%= building.address %></span>
+            </div>
+            <div class="actions">
+              <%= link_to '#', class: 'close-item-content' do %><i class="fa fa-times"></i><% end %>
+            </div>
+          </div>
+          <div class="content">
+            <table class="table plan-details">
+              <thead>
+                <tr>
+                  <th><%= t 'plans.one' %></th>
+                  <th><%= t 'general.details' %></th>
+                  <th><%= t 'users.status' %></th>
+                  <th><%= t 'general.card' %></th>
+                  <th><%= t 'subscriptions.next_payment' %></th>
+                  <th><%= t 'invoices.amount' %></th>
+                  <th><%= t 'general.action' %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Basic</td>
+                  <td>5 GB</td>
+                  <td>0% used</td>
+                  <td>N/A</td>
+                  <td>N/A<%#= (building.created_at + 1.years).strftime '%Y-%m-%d' %></td>
+                  <td>$0.00 CAD</td>
+                  <td><%= link_to 'Upgrade plan', '#' %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-check-square-o', objects: t('subscriptions.name').downcase %>
+  <% end %>
+</div>
+
+<div class="modal fade form-new-object" id="change-plan-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"><%= 'plans.change' %></h4>
+      </div>
+      <div class="modal-body">
+        <%= condomedia_form_for @company, url: company_save_subscription_path(@company), remote: true do |f| %>
+          <div class="errors-container"></div>
+          <div class="form-group row">
+            <div class="col-sm-6 col-md-4 col-xs-12">
+
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

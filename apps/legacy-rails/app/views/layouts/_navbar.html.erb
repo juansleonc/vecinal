@@ -1,0 +1,401 @@
+<% if user_signed_in? %>
+  <nav class="navbar navbar-default navbar-fixed-top cm-navbar">
+    <div class="container-fluid">
+      <div class="navbar-header open">
+        <a class="navbar-brand" href="#">
+          <%= material_icon.menu %>
+          <%= @submenu_title %>
+        </a>
+        <ul class="dropdown-menu <%= @action_for_search %>">
+          <% if current_user.admin? %>
+            <%= render 'layouts/menu_items_admin' %>
+          <% elsif current_user.resident? %>
+            <%= render 'layouts/menu_items_board_member' %>
+          <% elsif current_user.supplier? %>
+            <%= render 'layouts/menu_items_supplier' %>
+          <% elsif current_user.board_member? %>
+            <%= render 'layouts/menu_items_board_member' %>
+          <% elsif current_user.tenant? %>
+            <%= render 'layouts/menu_items_board_member' %>
+          <% elsif current_user.agent? %>
+            <%= render 'layouts/menu_items_board_member' %>
+          <% elsif current_user.collaborator? %>
+            <%= render 'layouts/menu_items_collaborator' %>
+          <% else %>
+            <%= render 'layouts/menu_items_no_role' %>
+          <% end %>
+          <%#= render 'layouts/privacy_terms_item' %>
+        </ul>
+      </div>
+
+      <!-- search bar -->
+      <% @action_for_search ||= search_messages_path() %>
+      <form class="navbar-form navbar-left hidden-xs " method="get" action="<%= @action_for_search %>" id="navbar-remote-search-form">
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="<%= t 'general.search' %>">
+              <%= material_icon.search %>
+            </button>
+          </div>
+          <input type="text" class="form-control" placeholder="<%= t 'general.search' %>" name="query" value="<%= params[:query] %>">
+          
+          <% if params[:b].present? %>
+            <input type="hidden" name="b" value="<%= params[:b] %>">
+          <% end %>
+          <% if params[:responsible].present? %>
+            <input type="hidden" name="responsible" value="<%= params[:responsible] %>">
+          <% end %>
+          <% if params[:order].present? %>
+            <input type="hidden" name="order" value="<%= params[:order] %>">
+          <% end %>
+          <% if params[:c].present? %>
+            <input type="hidden" name="c" value="<%= params[:c] %>">
+          <% end %>
+          <% if params[:filter].present? %>
+            <input type="hidden" name="filter" value="<%= params[:filter] %>">
+          <% end %>
+        </div>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user.admin? || current_user.collaborator? %>
+          <li class="hidden-xs notifications dropdown">
+            <% has_invites = user_notifications_manager.invites_received > 0 %>
+            <%= link_to '#', class: "dropdown-toggle #{'white' if has_invites}", data: { toggle: 'dropdown' } do %>
+              <%= material_icon.person_add %>
+              <% if has_invites %>
+                <span class="notifications-badge"><%= user_notifications_manager.invites_received %></span>
+              <% end %>
+            <% end %>
+            <ul class="dropdown-menu">
+              <li class="header"><i class="fa fa-user-plus"></i> <%= t 'invites.invites'%></li>
+              <li>
+                <%= link_to company_invites_received_url(current_user.accountable, subdomain: 'www') do %>
+                  <%= t 'invites.i_received'%>
+                  <% if has_invites %>
+                    <span class="notifications-badge"><%= user_notifications_manager.invites_received %></span>
+                  <% end %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to (t 'invites.i_sent'), create_users_url %>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+        <li class="hidden-xs notifications dropdown">
+          <% has_messages = user_notifications_manager.messages_total > 0 %>
+          <a href="#" class="dropdown-toggle <%= 'white' if has_messages %>" data-toggle="dropdown">
+            <%= material_icon.chat %>
+            <% if has_messages %>
+              <span class="notifications-badge"><%= user_notifications_manager.messages_total %></span>
+            <% end %>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header"><i class="fa fa-inbox"></i> <%= Message.model_name.human(count: 2).capitalize %></li>
+            <li>
+              <%= link_to messages_url(subdomain: subdomain_for_user) do %>
+                <%= t 'messages.filters.inbox' %>
+                <% if user_notifications_manager.messages_inbox > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.messages_inbox %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to messages_done_url(subdomain: subdomain_for_user) do %>
+                <%= t 'messages.filters.done' %>
+                <% if user_notifications_manager.messages_done > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.messages_done %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to messages_trash_url(subdomain: subdomain_for_user) do %>
+                <%= t 'messages.filters.deleted' %>
+                <% if user_notifications_manager.messages_deleted > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.messages_deleted %></span>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <li class="hidden-xs notifications dropdown">
+          <% has_notifications = user_notifications_manager.general_notifications > 0 %>
+          <a href="#" class="dropdown-toggle <%= 'white' if has_notifications %>" data-toggle="dropdown">
+            <%= material_icon.notifications %>
+            <% if has_notifications %>
+              <span class="notifications-badge"><%= user_notifications_manager.general_notifications %></span>
+            <% end %>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="bundle-header"><i class="fa fa-bell"></i> <%= t 'profiles.notifications.title' %></li>
+            <li class="header"><i class="fa fa-info-circle"></i> <%= ServiceRequest.model_name.human(count: 2).capitalize %></li>
+            <li>
+              <%= link_to service_requests_url(subdomain: subdomain_for_user) do %>
+                <%= t 'service_requests.filters.open' %>
+                <% if user_notifications_manager.service_requests_open > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.service_requests_open %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to closed_service_requests_url(subdomain: subdomain_for_user) do %>
+                <%= t 'service_requests.filters.closed' %>
+                <% if user_notifications_manager.service_requests_closed > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.service_requests_closed %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li class="separator"></li>
+            <li class="header"><i class="fa fa-calendar"></i> <%= Event.model_name.human(count: 2).capitalize %></li>
+            <li>
+              <%= link_to events_url(subdomain: subdomain_for_user) do %>
+                <%= t 'events.upcoming' %>
+                <% if user_notifications_manager.events_upcoming > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.events_upcoming %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to past_events_url(subdomain: subdomain_for_user) do %>
+                <%= t 'events.past' %>
+                <% if user_notifications_manager.events_past > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.events_past %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li class="separator"></li>
+            <li class="header"><i class="fa fa-exclamation-circle"></i> <%= t 'general.others' %></li>
+            <li>
+              <%= link_to polls_url(subdomain: subdomain_for_user) do %>
+                <%= Poll.model_name.human(count: 2).capitalize %>
+                <% if user_notifications_manager.polls > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.polls %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to reservations_url(subdomain: subdomain_for_user) do %>
+                <%= Reservation.model_name.human(count: 2).capitalize %>
+                <% if user_notifications_manager.reservations > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.reservations %></span>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+
+        <li class="visible-xs-inline-block notifications dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-search"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <form id="navbar-remote-search-form-mobile" method="get" action="<%= @action_for_search %>">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="query" value="<%= params[:query] %>">
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+               <% if params[:b].present? %>
+                <input type="hidden" name="b" value="<%= params[:b] %>">
+              <% end %>
+              <% if params[:responsible].present? %>
+                <input type="hidden" name="responsible" value="<%= params[:responsible] %>">
+              <% end %>
+              <% if params[:order].present? %>
+                <input type="hidden" name="order" value="<%= params[:order] %>">
+              <% end %>
+              <% if params[:c].present? %>
+                <input type="hidden" name="c" value="<%= params[:c] %>">
+              <% end %>
+              <% if params[:filter].present? %>
+                <input type="hidden" name="filter" value="<%= params[:filter] %>">
+              <% end %>
+            </form>
+          </ul>
+        </li>
+
+        <li class="visible-xs-inline-block notifications dropdown">
+          <% has_any_notification = user_notifications_manager.total_notifications > 0 %>
+          <a href="#" class="dropdown-toggle <%= 'white' if has_any_notification %>" data-toggle="dropdown">
+            <%= material_icon.notifications %>
+            <% if has_any_notification %>
+              <span class="notifications-badge"><%= user_notifications_manager.total_notifications %></span>
+            <% end %>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header"><i class="fa fa-inbox"></i> <%= Message.model_name.human(count: 2).capitalize %></li>
+            <li>
+              <%= link_to messages_url(subdomain: subdomain_for_user) do %>
+                <%= t 'messages.filters.inbox' %>
+                <% if user_notifications_manager.messages_inbox > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.messages_inbox %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to messages_done_url(subdomain: subdomain_for_user) do %>
+                <%= t 'messages.filters.done' %>
+                <% if user_notifications_manager.messages_done > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.messages_done %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to messages_trash_url(subdomain: subdomain_for_user) do %>
+                <%= t 'messages.filters.deleted' %>
+                <% if user_notifications_manager.messages_deleted > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.messages_deleted %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li class="separator"></li>
+            <li class="header"><i class="fa fa-info-circle"></i> <%= ServiceRequest.model_name.human(count: 2).capitalize %></li>
+            <li>
+              <%= link_to service_requests_url(subdomain: subdomain_for_user) do %>
+                <%= t 'service_requests.filters.open' %>
+                <% if user_notifications_manager.service_requests_open > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.service_requests_open %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to closed_service_requests_url(subdomain: subdomain_for_user) do %>
+                <%= t 'service_requests.filters.closed' %>
+                <% if user_notifications_manager.service_requests_closed > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.service_requests_closed %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li class="separator"></li>
+            <li class="header"><i class="fa fa-user-plus"></i> <%= t 'invites.invites'%></li>
+            <li>
+              <%= link_to company_invites_received_url( current_user.accountable, subdomain: subdomain_for_user) do %>
+                <%= t 'invites.i_received'%>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to (t 'invites.i_sent'), company_invites_sent_url(current_user.accountable, subdomain: subdomain_for_user) %>
+            </li>
+            <li class="separator"></li>
+            <li class="header"><i class="fa fa-calendar"></i> <%= Event.model_name.human(count: 2).capitalize %></li>
+            <li>
+              <%= link_to events_url(subdomain: subdomain_for_user) do %>
+                <%= t 'events.upcoming' %>
+                <% if user_notifications_manager.events_upcoming > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.events_upcoming %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to past_events_url(subdomain: subdomain_for_user) do %>
+                <%= t 'events.past' %>
+                <% if user_notifications_manager.events_past > 0 %>
+                  <span class="notifications-badge"><%= user_notifications_manager.events_past %></span>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <li class="notifications dropdown user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <%= render 'shared/logo_left', logoable: current_user %>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header">
+              <%= render 'shared/logo_left', logoable: current_user, size: :standard %>
+              <div class="user-details">
+                <span class="title"><%= current_user.full_name %></span>
+                <br/>
+                <span class="subtitle"><%= current_user.email %></span>
+                <br/>
+                <%= link_to (t 'profiles.my_profile'), user_profile_url(current_user, subdomain: subdomain_for_user), class: 'btn btn-primary' %>
+              </div>
+            </li>
+            <% if current_user.admin? || current_user.collaborator? %>
+              <% company = current_user.accountable %>
+              <li>
+                <%= link_to company_root_url(company, subdomain: 'www') do %>
+                  <%= render 'shared/logo_left', logoable: company %>
+                  <div class="user-details">
+                    <span class="title"><%= company.name %></span>
+                    <br/>
+                    <span class="subtitle"><%= company.address %></span>
+                  </div>
+                <% end %>
+              </li>
+              <% company.buildings.limit(2).each do |building| %>
+                <li>
+                  <%= link_to building_root_url(subdomain: building) do %>
+                    <%= render 'shared/logo_left', logoable: building %>
+                    <div class="user-details">
+                      <span class="title"><%= building.name %></span>
+                      <br/>
+                      <span class="subtitle"><%= building.address %></span>
+                    </div>
+                  <% end %>
+                </li>
+              <% end %>
+              <li><%= link_to (t 'profiles.see_more'), company_buildings_url(company, subdomain: 'www'), class: 'blue' %></li>
+            <% elsif current_user.resident? %>
+              <% building = current_user.accountable %>
+              <li>
+                <% company = building.company %>
+                <%= link_to company_root_url(company, subdomain: 'www') do %>
+                  <%= render 'shared/logo_left', logoable: company %>
+                  <div class="user-details">
+                    <span class="title"><%= company.name %></span>
+                    <br/>
+                    <span class="subtitle"><%= company.address %></span>
+                  </div>
+                <% end %>
+              </li>
+              <li class="inner-link with-logo">
+                <%= link_to building_root_url(building) do %>
+                  <%= render 'shared/logo_left', logoable: building %>
+                  <div class="user-details">
+                    <span class="title"><%= building.name %></span>
+                    <br/>
+                    <span class="subtitle"><%= building.address %></span>
+                  </div>
+                <% end %>
+              </li>
+            <% elsif current_user.supplier? %>
+              <% business = current_user.accountable %>
+              <li>
+                <%= link_to business_root_path(business) do %>
+                  <%= render 'shared/logo_left', logoable: business %>
+                  <div class="user-details">
+                    <span class="title"><%= business.name %></span>
+                    <br/>
+                    <span class="subtitle"><%= business.address %></span>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+            <li class="separator"></li>
+            <li class="hidden header with-link">
+              <%= link_to '#', id: "take-a-tour" do %>
+                <i class="fa fa-bus"></i> <%= t 'general.take_tour' %>
+              <% end %>
+            </li>
+            <li class="separator"></li>
+            <li class="header with-link feedback">
+              <%= link_to '#', class: 'modal-or-remote',
+                data: { target: '#report-software-problem', path: users_report_software_problem_path } do %>
+                <i class="fa fa-exclamation-triangle yellow-bg"></i> <%= t 'general.report_software_problem' %>
+              <% end %>
+            </li>
+            <li class="separator"></li>
+            <li class="header with-link logout">
+              <%= link_to destroy_user_session_path, method: 'delete' do %>
+                <i class="fa fa-sign-out gray-bg"></i> <%= t('devise.sign_out') %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<% end %>

@@ -1,0 +1,26 @@
+@import 'utilities'
+
+.modal.form-new-object .modal-body form
+  #single-invitation
+    display: block
+  #bulk-import
+    display: none
+    > p.black
+      margin-top: 25px
+  &.bulk-import
+    #single-invitation
+      display: none
+    #bulk-import
+      display: block
+  .links-for-select-mode a
+    padding-bottom: 4px
+    color: #000
+    i.fa
+      margin-right: 5px
+    &:first-child
+      margin-right: 20px
+    &.active
+      border-bottom: 3px solid $cm_blue
+      font-weight: 600
+  #member-role-selector
+    display: none

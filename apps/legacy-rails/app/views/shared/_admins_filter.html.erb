@@ -1,0 +1,38 @@
+<% 
+query = "&query=#{params[:query]}" if params[:query].present?  && !params[:query].empty?
+building = "&b=#{params[:b]}" if params[:b].present? && !params[:b].empty?
+company = "&c=#{params[:c]}" if params[:c].present? && !params[:c].empty?
+month = "&c=#{params[:month]}" if params[:month].present? && !params[:month].empty?
+order = "&c=#{params[:order]}" if params[:order].present? && !params[:order].empty?
+user_used = User.find params[:responsible] if params[:responsible].present? && params[:responsible] != 'all'
+
+%>
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+        <% if user_used %>
+            <%= render 'shared/logo_left', logoable: user_used, left: '' %> <%= user_used.full_name %>
+        <% else %>
+            <span class="text"><i class="fa fa-user-o with-background"></i> <%= t 'service_requests.filters.all_users' %> </span>
+        <% end %>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="<%= "#{request.path}?responsible=all#{query}#{building}#{company}#{month}#{order}" %>" data-class="display-all" class="with-logo">
+        <i class="fa fa-user-o with-background"></i> <%= t 'service_requests.filters.all_users' %> </a></li>
+        <% if current_user.admin?%>
+            <% current_user.company_contacts.each do |admin| %>
+                <li>
+                    <a href="<%= "#{request.path}?responsible=#{admin.id}#{query}#{building}#{company}#{month}#{order}" %>" class="with-logo" data-class="responsible-<%= admin.id %>">
+                    <%= render 'shared/logo_left', logoable: admin, left: '' %> <%= admin.full_name %>
+                    </a>
+                </li>
+            <% end %>
+        <% else %> 
+            <li>
+                <a href="#" class="with-logo" data-class="responsible-<%= current_user.id %>">
+                <%= render 'shared/logo_left', logoable: current_user, left: '' %> <%= current_user.full_name %>
+                </a>
+            </li>
+        <% end %>
+    </ul>
+</div>

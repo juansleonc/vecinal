@@ -1,0 +1,28 @@
+<% @submenu_title = 'Search'; @action_for_search = search_service_requests_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 service-requests-index">
+
+  <%= render 'shared/search_results_headers', current_model: t('service_requests.request') %>
+  <div class="under-tabs">
+    <% if current_user.admin? || current_user.board_member? || current_user.collaborator? %>
+
+      <%#= render 'shared/communities_filter', items: '#service-requests .service-request', width_company: true %>
+      <%= render 'shared/communities_filter_new',
+      items: '#service-requests .service-request',
+      width_company: true,
+      class_objects: 'service_requests',
+      with_filter_options: true,
+      to_controller: 'service_requests',
+      data_by_community: @contacts_by_accountable %>
+
+
+    <% end %>
+  </div>
+  <% if @service_requests.present? %>
+    <ul class="list-group cm-list load-more-at-bottom" id="service-requests" data-next-path="<%= @next_path %>">
+      <%= render partial: 'residents/service_requests/service_request', collection: @service_requests %>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-info-circle', objects: ServiceRequest.model_name.human(count: 2) %>
+  <% end %>
+</div>

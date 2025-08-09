@@ -1,0 +1,25 @@
+<% @submenu_title = Amenity.model_name.human(count: 2).capitalize; @submenu_item = 'amenities' %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 show-amenity timeline-view">
+    <%= render 'show_menu' %>
+    <div class="content-reservations">    
+        <div class="form-group pull-right" id="content_filter_month">
+            <label class="sr-only" for="filter_month">Amount (in dollars)</label>
+            <div class="input-group">
+                <div class="input-group-addon"><i class="material-icons">event</i></div>
+                <%= text_field_tag t('reservations.date'), @filter_date, class: 'form-control', id: "filter_month" %>
+            </div>
+        </div>
+    </div>
+
+    <div>
+    <% if @reservations.present? %>
+        <ul class="list-group cm-list load-more-at-bottom" id="reservations" data-next-path="<%= @next_path %>">
+            <%= render @reservations %>
+        </ul>
+    <% else %>
+        <%= render 'shared/empty_items', icon: 'fa-calendar-check-o', objects: Reservation.model_name.human(count: 2) %>
+    <% end %>
+    </div>
+</div>
+<%= render 'reservations/new_form_modal', amenity: @amenity %>

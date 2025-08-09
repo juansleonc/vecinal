@@ -1,0 +1,59 @@
+<% @submenu_title = t('payments.name'); @submenu_item = 'payments';
+has_payments = current_user.has_payment_accounts? && @payments.count > 0
+  @action_for_search = search_payments_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c])
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 payments">
+
+  <div class="cm-nav-links">
+    
+    <%= render 'shared/payments_nav_links', transactions: 'active' %>
+
+    <% if current_user.resident? && current_user.payments_enabled? %>
+      <%= link_to 'Make a payment', '#', data: { toggle: 'modal', target: '#new-payment-modal' }, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <% if has_payments %>
+    <div class="under-tabs">
+      <%= render 'shared/communities_filter', items: '#payments .payment' if current_user.admin? || current_user.collaborator? %>
+      <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+    </div>
+  <% end %>
+
+  <% if current_user.has_payment_accounts? %>
+    <%= render 'payments/payment_list' %>
+  <% elsif current_user.admin? || current_user.collaborator? %>
+    <div class="panel panel-default">
+      <div class="panel-body get-started">
+        <h4><strong><%= t 'payments.get_started.accept' %></strong></h4>
+        <p class="icon"><i class="fa fa-credit-card fa-4x orange"></i></p>
+        <h4><%= t 'payments.get_started.get_paid' %></h4>
+        <p class="info">
+          <%= t('payments.get_started.details').html_safe %>
+        </p>
+        <%= link_to t('payments.get_started.button'), payment_accounts_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-credit-card', objects: Payment.model_name.human(count: 2) %>
+  <% end %>
+</div>
+
+<% if current_user.resident? && current_user.payments_enabled? %>
+  <div class="modal fade form-new-object" id="new-payment-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Payment</h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,85 @@
+<% comment ||= timeline_comment; commentable = comment.commentable; commentable_type = comment.commentable_type %>
+
+<% if commentable_type != 'User' || commentable == comment.user || can?(:see_profile_posts_from_others, commentable) %>
+  <div class="timeline-comment cols-divided-banner post **" id="comment-<%= comment.id %>">
+
+    <%= render 'shared/post_dropdown_actions', model_object: comment, controller: 'comments' %>
+
+    <%= render 'shared/info_reported_icon',
+      object_name: comment.class.name.downcase,
+      status: comment.is_reported(current_user),
+      toggle: "modal",
+      target: "#reporters-modal-#{comment.id}" %>
+
+    <% publisher = comment.user %>
+    <div class="publisher">
+      <%= render 'shared/logo_left', logoable: publisher %>
+      <span class="username">
+        <%= with_profile_banner_link publisher %>
+        <% if publisher != commentable %>
+          <i class="fa fa-caret-right"></i>
+          <% if commentable.class.name == 'User' %>
+            <%= with_profile_banner_link commentable %>
+          <% else %>
+            <strong class="black"><%= commentable.name %></strong>
+          <% end %>
+        <% end %>
+        <br/>
+        <span class="info"><%= l comment.created_at %></span>
+        <% if publisher == commentable %>
+          <%= shareable_recipient_link(comment) %>
+        <% end %>
+      </span>
+    </div>
+
+    <p class="description"><%= content_with_emoji simple_format(comment.content) %></p>
+
+    <%= render 'attachments/attachments', attachmentable: comment %>
+    <%= render 'comments/replies_and_likes', likeable: comment %>
+
+    <% options = {
+      commentable: comment,
+      attachments_enabled: true,
+      disable_new: !can?(:comment_posts, Comment)
+    } %>
+
+    <%= render partial: 'comments/commentable_comments', locals: options %>
+
+  </div>
+
+  <% if comment.reported? %>
+    <!-- Reporters popover -->
+    <div class="modal fade form-new-object" id="reporters-modal-<%= comment.id %>">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title"><%= t 'comments.reported' %></h4>
+          </div>
+          <div class="modal-body">          
+            <div class="reporters">
+              <div class="navigation-tabs">
+                <a class="tab active">
+                  <span><%= t 'general.people' %></span>
+                  <span class="reporters-counter">
+                    (<%= comment.marks_count "reported" %>)
+                  </span>
+                </a>
+              </div>
+
+              <% comment.markers.reported.includes(:user).each do |marker| %>
+                <div class="reporter">
+                  <%= render 'shared/logo_left', logoable: marker.user, left: '' %>
+                  <span class="user-name"><%= marker.user.full_name %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>

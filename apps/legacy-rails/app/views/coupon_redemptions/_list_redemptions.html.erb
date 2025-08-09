@@ -1,0 +1,29 @@
+<table class="table rounded-header centered" id="redemptions">
+  <thead>
+    <tr>
+      <th><%= t 'general.code' %></th>
+      <th class="hidden-xs"><%= t 'payments.customer' %></th>
+      <th class="hidden-xs"><%= t 'general.postal_code' %></th>
+      <th class="hidden-xs"><%= t 'promotions.purchase_date' %></th>
+      <th><%= CouponRedemption.human_attribute_name(:redeemed) %></th>
+      <th><%= t('general.actions') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @coupon_redemptions.count > 0 %>
+      <% @coupon_redemptions.each do |redemption| %>
+        <%= render 'coupon_redemptions/update_coupon_redemption', redemption: redemption %>
+      <% end %>
+    <% else %>
+      <tr>
+        <td>0</td>
+        <td class="hidden-xs">0</td>
+        <td class="hidden-xs">0</td>
+        <td class="hidden-xs">0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

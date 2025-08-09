@@ -1,0 +1,129 @@
+<% @submenu_title = t 'service_requests.requests'; @submenu_item = 'requests'; @action_for_search = search_service_requests_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 service-requests-index">
+
+  <div class="cm-nav-links">
+    <%= link_to t('service_requests.filters.open'), service_requests_path, class: @open_tab %>
+    <%= link_to t('service_requests.filters.closed'), closed_service_requests_path, class: @closed_tab %>
+    <% if can? :create, ServiceRequest %>
+      <%= link_to '+ ' + t('general.create_record', record_name: t('service_requests.request')), '#', class: 'btn btn-primary',
+      data: { toggle: 'modal', target: '#new-service-request-modal' } %>
+    <% end %>
+  </div>
+
+
+  
+  <div class="under-tabs">
+    <% if current_user.admin? || current_user.collaborator? %>
+
+      <%#= render 'shared/communities_filter', items: '#service-requests .service-request', width_company: true %>
+      <%= render 'shared/communities_filter_new',
+      items: '#service-requests .service-request',
+      width_company: true,
+      class_objects: 'service_requests',
+      with_filter_options: true,
+      to_controller: 'service_requests',
+      data_by_community: @contacts_by_accountable %>
+
+
+      <div class="dropdown filter-users">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+          <span class="text">
+            <% if @filter_responsible.present? %>
+              <%= render 'shared/logo_left', logoable: @filter_responsible, left: '' %> <%= @filter_responsible.full_name %>
+            <% else %>
+              <i class="fa fa-user-o with-background"></i>
+              <%= t 'service_requests.filters.all_users' %> </span>
+            <% end %>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="<%= service_requests_path(responsible: 'all', order: params[:order], b: params[:b], c: params[:c]) %>" data-class="display-all" class="with-logo">
+            <i class="fa fa-user-o with-background"></i> <%= t 'service_requests.filters.all_users' %> </a></li>
+          <% current_user.company_contacts.order(:first_name).each do |admin| %>
+            <li>
+              <a href="<%= service_requests_path(responsible: admin.id, order: params[:order], b: params[:b], c: params[:c]) %>" class="with-logo" >
+                <%= render 'shared/logo_left', logoable: admin, left: '' %> <%= admin.full_name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+
+      
+        <div class="dropdown options settings btn-default hidden-xs">
+          <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+            <%= mi.settings %>
+          <% end  %>
+          <ul class="dropdown-menu">
+            
+            <%
+            html = ''
+            ServiceRequest::REPORT_TYPE.each do | days |
+              html += '<li>'
+              html += link_to t("messages.export_by_days", days: days), export_service_requests_path(:days => days,:c => params[:c], :b => params[:b],format: "csv")
+              html += '</li>'
+            end
+            %>
+            <%= html.html_safe %>
+          </ul>
+        </div>
+    <% elsif current_user.board_member? %>
+      <div class="dropdown filter-users">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+          <span class="text">
+            <% if params[:responsible] != 'all' %>
+              <%= render 'shared/logo_left', logoable: current_user, left: '' %> <%= current_user.full_name %>
+            <% else %>
+              <i class="fa fa-user-o with-background"></i>
+              <%= t 'service_requests.filters.all_users' %> </span>
+            <% end %>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="<%= service_requests_path(responsible: 'all', order: params[:order], b: params[:b], c: params[:c]) %>" data-class="display-all" class="with-logo">
+            <i class="fa fa-user-o with-background"></i> <%= t 'service_requests.filters.all_users' %> </a></li>
+            <li>
+              <a href="<%= service_requests_path(responsible: current_user.id, order: params[:order], b: params[:b], c: params[:c]) %>" class="with-logo" >
+                <%= render 'shared/logo_left', logoable: current_user, left: '' %> <%= current_user.full_name %>
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+    <% else %>
+      <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+    <% end %>
+
+  </div>
+
+  <ul class="list-group cm-list " id="service-requests">
+    <%= render partial: 'residents/service_requests/service_request', collection: @service_requests %>
+  </ul>
+  
+  <%= render 'shared/empty_items', icon: 'fa-info-circle', objects: ServiceRequest.model_name.human(count: 2) if @service_requests.blank? %>
+  <div class='content-pagination'>
+    <%= page_entries_info @service_requests %>
+    <%= will_paginate @service_requests, :renderer => 'LinkRenderer' %>
+  </div>
+</div>
+
+<% if can? :create, ServiceRequest %>
+  <div class="modal fade form-new-object" id="new-service-request-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title"><%= t 'general.create_record', record_name: t('service_requests.request') %></h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'residents/service_requests/form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

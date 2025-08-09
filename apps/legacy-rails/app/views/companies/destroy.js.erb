@@ -1,0 +1,6 @@
+<% if @company.errors.any? %>
+  $('#destroy-company-modal .form-errors-container').html('<%= j render("shared/model_errors", resource: @company) %>');
+<% elsif @company.destroyed? %>
+  $('#destroy-company-modal').modal('hide');
+  window.location.href = "<%= finish_registration_communities_path %>";
+<% end %>

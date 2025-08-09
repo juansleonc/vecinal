@@ -1,0 +1,141 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'https://js.stripe.com/v2/' %>
+  <%= javascript_tag "Stripe.publishableKey = '#{Rails.application.secrets.stripe_publishable_key}';" %>
+<% end %>
+
+<% @submenu_title = t 'subscriptions.subscription'
+  @submenu_item = 'plan'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 subscription">
+  <div class="well clearfix">
+    <div class="col-xs-12">
+      <h1>
+        <i class="fa fa-money"></i>
+        <span class="black"><%= t 'subscriptions.subscription' %></span>
+      </h1><br/>
+      <span class="page-descriptor">
+        <%= t 'plans.choose_plan' %>
+        <span class="green"><%= t 'plans.three_steps' %></span>
+      </span>
+    </div>
+
+    <div class="col-xs-12 step">
+      <strong><%= t 'plans.step', step: 1 %></strong>
+      <span class="step-name"><span>&bull;</span> <%= t 'plans.step1' %></span>
+    </div>
+
+    <div class="plans-container col-xs-12 no-padding">
+      <%= form_tag business_save_subscription_path(@business), method: 'patch', class: 'stripe-card-form' do %>
+        <%= hidden_field_tag :plan_id, @business.stripe_subscription_plan %>
+        <% plans = @business.plans.sort_by { |p| p.name } %>
+        <% plans.each do |plan| %>
+          <div class="col-sm-4 plan-container">
+            <div class="plan">
+              <div class="plan-name">
+                <h1><%= plan.name %></h1><br/>
+                <% if plan.amount == 0 %>
+                  <h1 class="blue"><%= t('plans.free') %></h1><br/>
+                <% else %>
+                  <h1 class="blue"><%= plan.amount/100 %></h1> / <%= t('general.month').downcase %><br/>
+                <% end %>
+                <% selected_plan = plan.id == @business.stripe_subscription_plan %>
+                <i class="fa fa-check-circle business-selected-plan <%= 'hidden' if !selected_plan %>"></i>
+                <button type="button" class="btn btn-primary business-select-plan <%= 'hidden' if selected_plan %>"
+                  data-plan="<%= plan.id %>">
+                  <%= t 'plans.select' %>
+                </button>
+              </div>
+              <div class="plan-descriptor">
+                <%= t 'businesses.plans.desc_1' %><br/>
+                <%= t 'businesses.plans.desc_2' %><br/>
+                <%= t 'businesses.plans.desc_3a' %>
+                <span class="blue"><%= @business.coupons_by_plan plan.id %></span>
+                <%= t 'businesses.plans.desc_3b' %><br/>
+                <%= t 'businesses.plans.desc_4' %><br/>
+                <%= t 'businesses.plans.desc_5' %><br/>
+                <%= t 'businesses.plans.desc_6' %><br/>
+                <%= t 'businesses.plans.desc_7' %><br/>
+                <%= t 'businesses.plans.desc_8' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="col-xs-12 step">
+          <strong><%= t 'plans.step', step: 2 %></strong>
+          <span class="step-name"><span>&bull;</span> <%= t 'plans.step2' %></span>
+        </div>
+
+        <div class="col-xs-12">
+          <table class="table rounded-header">
+            <thead>
+              <tr class="italic">
+                <th><%= t 'plans.item' %></th>
+                <th><%= t 'plans.unit_price' %></th>
+                <th><%= t 'plans.number_units' %></th>
+                <th><%= t 'plans.total_month' %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @business.plans.each do |plan| %>
+                <% selected_plan = plan.id == @business.stripe_subscription_plan %>
+                <tr class="no-border plan-detail <%= 'hidden' if !selected_plan %>" id="<%= plan.id %>">
+                  <td><%= plan.name + ' ' + t('plans.title') %></td>
+                  <td><%= number_to_currency plan.amount.to_f/100 %></td>
+                  <td><%= @business.coupons_by_plan(plan.id).to_s + ' ' + Coupon.model_name.human(count: 2) %></td>
+                  <td><%= number_to_currency plan.amount.to_f/100 %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <span class="orange"><%= t 'plans.cancel_any_time' %></span>
+        </div>
+
+        <div class="col-xs-12"><hr/></div>
+
+        <div class="col-xs-12 step">
+          <strong><%= t 'plans.step', step: 3 %></strong>
+          <span class="step-name">
+            <span>&bull;</span> <%= t 'deal_purchases.payment_information' %>
+            <i class="fa fa-cc-visa"></i>
+            <i class="fa fa-cc-mastercard"></i>
+          </span>
+        </div>
+
+        <div class="col-md-7 no-padding">
+          <%= render 'shared/stripe_card_fields', customer: @business %>
+        </div>
+
+        <div class="col-xs-12">
+          <% check_box_label = "#{t 'general.certify_adult_and_agree'}
+            #{link_to t('general.privacy_policy'), send("privacy_#{I18n.locale.to_s}_path"), target: '_blank'}  #{t 'general.and'}
+            #{link_to t('general.terms_of_service'), send("terms_#{I18n.locale.to_s}_path"), target: '_blank'}."
+            # Commented by future implementation
+            #{link_to t('general.refund_policy'), REFUND_POLICY_URL, target: '_blank'}."
+          %>
+          <%= check_box_tag :sign_agreement, 1, false,
+            class: 'awesome-checkbox',
+            data: {
+              'icon-checked' => 'fa fa-check-circle-o',
+              'icon-unchecked' => 'fa fa-circle-o',
+              'label-content-checked' => check_box_label,
+              'label-content-unchecked' => check_box_label,
+            }
+          %>
+        </div>
+
+        <div class="col-xs-12 action-buttons">
+          <%= submit_tag t('deal_purchases.complete_order'), class: 'btn btn-primary', id: 'buy-btn' %>
+          <%= link_to t('general.cancel'), business_root_path(@business), class: 'cancel' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12"><hr/></div>
+
+    <div class="col-xs-12">
+      <%= render 'shared/faqs_plans' %>
+    </div>
+
+  </div>
+</div>

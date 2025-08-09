@@ -1,0 +1,85 @@
+<%= condomedia_form_for @business do |f| %>
+
+  <%= render 'shared/model_errors', resource: @business %>
+
+  <div class="row">
+
+    <div class="col-sm-12"><h4 class="blue"><%= t 'general.overview' %></h4></div>
+
+    <div class="form-group col-sm-6">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :code, class: 'form-control', disabled: true %>
+    </div>
+    <div class="form-group col-sm-12">
+      <%= f.label :namespace unless @business.new_record? %>
+      <div class="input-group">
+        <div class="input-group-addon right">condo-media.com/businesses/</div>
+        <%= f.text_field :namespace, class: 'form-control', skip_autolabel: !@business.new_record? %>
+      </div>
+    </div>
+    <div class="form-group col-sm-12">
+      <%= f.text_area :description, class: 'form-control js-auto-size' %>
+    </div>
+
+    <div class="col-xs-12"><hr/></div>
+    <div class="col-sm-12"><h4 class="blue"><%= t 'contact_details.title' %></h4></div>
+
+    <div class="form-group col-sm-12">
+      <%= f.text_field :email, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :phone, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :extension, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :website, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :opening_hours, class: 'form-control' %>
+    </div>
+
+    <div class="col-xs-12"><hr/></div>
+    <div class="col-sm-12"><h4 class="blue"><%= t 'general.directions' %></h4></div>
+
+    <div class="form-group col-sm-6">
+      <%= f.text_field :address, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :location, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :city, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :region, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :country, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <%= f.text_field :zip, class: 'form-control' %>
+    </div>
+
+    <div class="col-xs-12"><hr/></div>
+    <div class="col-xs-12"><h4 class="blue"><%= t 'general.media' %></h4></div>
+
+    <div class="form-group col-sm-12">
+      <%= render 'images/images_section', f: f, model_object: @business %>
+    </div>
+    <div class="form-group col-sm-12">
+      <%= render 'images/logo_field', f: f,  model_object: @business %>
+    </div>
+
+    <div class="col-xs-12"><hr/></div>
+
+    <div class="col-xs-12 action-buttons">
+      <%= f.submit t('general.continue'), class: 'btn btn-primary' %>
+      <%= link_to t('general.cancel'), business_root_path(@business), class: 'cancel' %>
+    </div>
+
+  </div>
+<% end %>

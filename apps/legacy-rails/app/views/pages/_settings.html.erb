@@ -1,0 +1,152 @@
+<div class="cm-tabs merge-with-content switcher-content">
+  <ul class="nav nav-tabs">
+    <li class="active black">
+      <%= link_to '#', data: { target: '#notifications' } do %>
+        <i class="fa fa-envelope-o"></i> <%= t('profiles.notifications.title') %>
+      <% end %>
+    </li>
+    <li class="black">
+      <%= link_to '#', data: { target: '#public-profile'} do %>
+        <i class="fa fa-user-circle-o"></i> <%= t('profiles.public_profile') %>
+      <% end %>
+    </li>
+  </ul>
+  <div class="white-bar"></div>
+</div>
+
+<div class="panel panel-default merge-with-tabs profile-settings">
+  <div class="panel-body">
+    <%= form_for :setting, url: url do |f|  %>
+      <div class="table switchable visible" id="notifications">
+          <% model_object.settings_notifications.each do |setting| %>
+            <% current_setting = model_object.setting_for setting %>
+            <div class="row border-b">
+              <% 
+              
+              if setting != 'append_message_to_outgoing_notifications' %>
+                <div class="col-xs-9">
+                  <%= f.label setting, t("settings.communities.#{setting}") %>
+                </div>
+                <div class="col-xs-3">
+                  <label class="switch pull-right">
+                  <% values = model_object.setting_values_for(setting) %>
+                  <%= f.check_box setting, 
+                    {checked: current_setting == values[0]}, 
+                    checked_value = values[0], 
+                    unchecked_value = values[1] %>
+                  <span class="slider round"></span>
+                </label>
+                </div>
+                <div class="col-xs-12">
+                  <hr>
+                </div>
+              <% elsif model_object.class.name == 'Company'  %>
+                <div class="col-xs-9 col-md-3">
+                  <%= f.label setting, t("settings.communities.#{setting}") %>
+                </div>
+                <div class="col-xs-12 col-md-9">
+                  <div class="content-options">
+                    <div class="dropdown pull-right options">
+                      <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+                        <%= mi.more_vert %>
+                      <% end %>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <%= link_to t("events.edit"), '#',id: setting,class: 'edit' %>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="to-edit hidden">
+                    <div>
+                      <%= f.hidden_field setting, id: :append_message_to_outgoing_notifications_area, value: (current_setting == 'yes' ? '' : current_setting) %>
+                      <trix-editor input="append_message_to_outgoing_notifications_area"></trix-editor>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            
+          <% end %>
+        
+      </div>
+
+      <table class="table switchable" id="public-profile">
+        <tbody>
+          <% model_object.settings_profile.each do |setting| %>
+            <% current_setting = model_object.setting_for setting %>
+            <tr>
+              <td><%= f.label setting, t("settings.communities.#{setting}") %></td>
+              <td>
+                <%= f.hidden_field setting, value: current_setting %>
+                <div class="dropdown as-select pull-right" data-target="#setting_<%= setting %>">
+                  <a class="dropdown-toggle black" data-toggle="dropdown">
+                    <span><%= t "settings.values.#{current_setting}" %></span> <%= mi.more_vert.css_class('blue-light') %>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <% model_object.setting_values_for(setting).each do |value| %>
+                      <li>
+                        <%= link_to t("settings.values.#{value}"), "#", data: { id: value } %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          
+          <% if model_object.class.to_s == 'Building' %>
+            <tr>
+              <td><%= t('settings.communities.admin_default_requests') %></td>
+              <td>
+              
+              <%= f.hidden_field :admin_default_requests, value: model_object.admin_default_requests %>
+              <div class="dropdown as-select pull-right" data-target="#setting_admin_default_requests">
+                <a class="dropdown-toggle black" data-toggle="dropdown">
+                  <span><%= model_object.name_admin_default_requests %></span> <%= mi.more_vert.css_class('blue-light') %>
+                </a>
+                <ul class="dropdown-menu">
+                  <% model_object.admins.each do |admin| %>
+                  
+                    <% if admin.confirmed_at.present? %>
+                      <li>
+                        <%= link_to admin.first_name + ' ' + admin.last_name, "#", data: { id: admin.id } %>
+                      </li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </div>
+              </td>
+            </tr>
+            <tr>
+              <td><%= t('settings.communities.admin_default_reservations') %></td>
+              <td>
+              
+              <%= f.hidden_field :admin_default_reservations, value: model_object.admin_default_reservations %>
+              <div class="dropdown as-select pull-right" data-target="#setting_admin_default_reservations">
+                <a class="dropdown-toggle black" data-toggle="dropdown">
+                  <span><%= model_object.name_admin_default_reservations %></span> <%= mi.more_vert.css_class('blue-light') %>
+                </a>
+                <ul class="dropdown-menu">
+                  <% model_object.admins.each do |admin| %>
+                  
+                    <% if admin.confirmed_at.present? %>
+                      <li>
+                        <%= link_to admin.first_name + ' ' + admin.last_name, "#", data: { id: admin.id } %>
+                      </li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </div>
+              </td>
+            </tr>
+          <%end%>
+          
+        </tbody>
+      </table>
+      <br/>
+      <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+      <%= link_to t('general.cancel'), '#', class: 'btn btn-default', id: 'cancel-changes' %>
+    <% end %>
+  </div>
+</div>

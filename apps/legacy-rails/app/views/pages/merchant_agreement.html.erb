@@ -1,0 +1,27 @@
+<% @submenu_title = t 'merchant_agreement.name' %>
+<div class="inner-section col-xs-12">
+  <div class="well clearfix politics">
+    <center>
+      <h1>
+        <%= t('privacy_policy.cm_inc').upcase %>
+        <br/>
+        <%= t('merchant_agreement.title').upcase %>
+      </h1>
+    </center>
+
+    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+      <% for i in 1..t('merchant_agreement.nps') do %>
+        <p><%= t "merchant_agreement.p#{i}" %></p>
+      <% end %>
+      <br/>
+      <% for i in 1..t('merchant_agreement.nsubs') do %>
+        <p><strong><%= t "merchant_agreement.sub#{i}.name" %></strong></p>
+        <% for j in 1..t("merchant_agreement.sub#{i}.nps") do %>
+          <p><%= t "merchant_agreement.sub#{i}.p#{j}" %></p>
+        <% end %>
+      <% end %>
+      <br/>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+# Controladores y acciones
+
+- `ApplicationController`: hooks globales (locale, subdominio, auth, permisos, zona horaria) y helpers de paginación/notificaciones.
+- `UsersController`: index/edit/update, `my_stuff`, reportes/software, perfiles (banner, about, photos, settings), cambio de contraseña, export, borrar usuarios, leave_community.
+- `CustomDevise::RegistrationsController/ConfirmationsController`: registro, búsqueda/creación masiva, confirmaciones personalizadas.
+- `FinishRegistrationController`: compañías, edificios, búsqueda, set_role, create_community, cancel.
+- `ResidentsController`: news_feed, contacts (+search/reported), communities.
+- `MessagesController`: inbox (sort/filtros), new/create/destroy, marcas read/unread/deleted/done/destroyed, move_to_inbox, empty_trash, receivers, search.
+- `ServiceRequestsController`: index/closed/new/create/destroy, change_status, change_responsible, mark_as_read, search, rank, selectable_publishers, export.
+- `EventsController`: index/past/calendar, selection_changed_*; create/destroy; mark_as_acknowledged/yes/no/maybe; toggle_save/hide/report; search.
+- `AmenitiesController`: index/show/create/update/destroy; reviews/photos/calendar; search; `get_limit_time`, `get_operating_schedule`.
+- `ReservationsController`: create/index/get_schedule/change_status/change_responsible/destroy/mark_as_read/search.
+- `PollsController`: index/create/destroy/search/toggle_save/hide/report; `PollVotesController`: create/update.
+- `ClassifiedsController`: index/create/edit/update/destroy/search/toggle_save/hide/report.
+- `CommentsController`: load_timeline_comment/create/destroy/toggle_report/toggle_hide.
+- `FoldersController`: index/show/create/update/destroy; add/update/destroy_attachment; search.
+- `PaymentsController`: index/create/search; helpers de verificación SHA.
+- `PaymentAccountsController`: index/new/create/edit/update.
+- `AccountBalancesController`: create/destroy_all; `UserBalancesController`: index/destroy/print/print_all/destroy_selected/search.
+- `CompaniesController`: edit/update; invites_sent/received (aceptar/rechazar); Stripe: planes/subs/invoices; buildings/apartments/users anidados; update_logo/settings/búsqueda.
+- `BuildingsController`: index/search/show/new/edit/create/update/destroy/update_logo/update_settings.
+- `ApartmentsController`: index/show/new/edit/create/update/destroy.
+- `BusinessessController`: welcome/edit/update; Stripe connect/response/subscription; invoices; batch_redeem; reports/payments; nearby; update_logo.
+- `CouponsController`, `CouponRedemptionsController`, `DealsController`, `DealPurchasesController`, `LikesController`.
+- `DashboardController`: index, actualizar contenidos/reportes/imprimir; selección de modelo/fechas.
+- `PagesController`: páginas públicas por subdominio/namespace; privacy/terms; change_language.
+- `InboundEmailsController`: index (webhook de correo entrante).

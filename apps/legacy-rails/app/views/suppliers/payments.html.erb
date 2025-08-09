@@ -1,0 +1,56 @@
+<% @submenu_title = t 'general.submenu.sales'
+  @submenu_item = 'sales'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 height-expanded reports">
+  <div class="well clearfix">
+    <div class="col-xs-12 no-padding">
+      <h1>
+        <i class="fa fa-usd"></i>
+        <span class="black"><%= t 'general.submenu.sales' %></span>
+      </h1>
+    </div>
+
+    <div class="col-md-7 col-sm-8 hidden-xs no-padding">
+      <div class="date-filter">
+        <%= t('general.from') %>:
+        <input type="text" class="form-control trigger-datepicker" id="filter-sales-from-date-input">
+      </div>
+      <div class="date-filter">
+        <%= t('general.to')%>:
+        <input type="text" class="form-control trigger-datepicker" id="filter-sales-to-date-input">
+      </div>
+      <div class="statistic small">
+        <span>$</span><span id="payments-balance"></span><br/>
+        <%= t 'payments.balance' %>
+      </div>
+    </div>
+
+    <div class="finder pull-right header col-md-5 col-sm-4 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-sales-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <table class="table rounded-header payments" id="sales">
+      <thead>
+        <tr class="italic">
+          <th><%= t 'payments.date' %></th>
+          <th><%= t 'payments.description' %></th>
+          <th><%= t 'payments.quantity' %></th>
+          <th class="hidden-xs"><%= t 'payments.customer' %></th>
+          <th><%= t 'payments.amount' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payments.each do |payment| %>
+          <tr class="sale" data-date="<%= payment.created_at.strftime '%Y-%m-%d' %>" data-price="<%= payment.price %>">
+            <td><%= payment.created_at.strftime '%b %d, %Y' %></td>
+            <td><%= link_to payment.deal.title, deal_purchases_path(payment.deal) %></td>
+            <td class="centered"><%= payment.quantity %></td>
+            <td class="hidden-xs"><%= payment.user.email %></td>
+            <td><%= number_to_currency payment.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

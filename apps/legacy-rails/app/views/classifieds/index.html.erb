@@ -1,0 +1,100 @@
+<% @submenu_title = t 'general.marketplace'; @submenu_item = 'classifieds'; @action_for_search = search_classifieds_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 classifieds-index">
+
+  <div class="cm-nav-links">
+    <%= link_to t('general.marketplace'), classifieds_path, class: 'active' %>
+
+    <% if can? :create, Classified %>
+      <%= link_to '+ ' + t('general.create_record', record_name: t('general.offer')), '#', class: 'btn btn-primary',
+        data: { toggle: 'modal', target: '#new-classified-modal' } %>
+    <% end %>
+  </div>
+
+  <div class="under-tabs">
+    <%= render 'shared/cards_filter', objects_name: 'classifieds' %>
+    <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+  </div>
+
+  <div class="cols-divided-sm-2 load-more-at-bottom" id="classifieds" data-next-path="<%= @next_path %>">
+    <%= render @classifieds %>
+  </div>
+  <%= render 'shared/empty_items', icon: 'fa-thumb-tack', objects: t('general.marketplace').downcase if @classifieds.blank? %>
+  <div class='content-pagination'>
+    <%= page_entries_info @classifieds %>
+    <%= will_paginate @classifieds, :renderer => 'LinkRenderer' %>
+  </div>
+</div>
+
+<% if can? :create, Classified %>
+  <div class="modal fade form-new-object" id="new-classified-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title"><%= t('general.create_record', record_name: t('general.offer')) %></h4>
+        </div>
+        <div class="modal-body">
+          <%= form_for Classified.new, remote: true do |f| %>
+            <div class="form-errors-container"></div>
+            <div class="user clearfix">
+              <%= render 'shared/logo_left', logoable: current_user %>
+              <div>
+              <div class="user-name"><%= current_user.full_name %></div>
+              <%#= link_to 'Edit', user_about_path(current_user) %>
+              <!-- Init - falta el permioso de solo administrador -->
+              <% if current_user.admin? %>
+                <a class="open-as-button"><%= t 'service_requests.open_with' %></a>
+                <div class="input-group hidden publisher-selector">
+                  <span class="input-group-addon"><%= fa_icon 'user' %></span>
+                  <%= f.select :publisher_id, [], {},
+                    { 
+                      class: 'select2-with-format-ajax',
+                      id: 'service-request-publisher',
+                      data: { 
+                        placeholder: t('service_requests.publisher'), 
+                        lang: I18n.locale, 
+                        path: selectable_publishers_service_requests_path
+                      }
+                    }
+                  %>
+                </div>
+
+                <button type="button" class="close-publisher-selector btn btn-default hidden">
+                  <%= t 'general.cancel' %>
+                </button>
+              <!-- End -->
+              <% end %>
+            </div>
+            </div>
+            <br/>
+
+            <div class="form-group">
+              <%= f.text_field :title, placeholder: t('classifieds.subject'), class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.number_field :price, placeholder: t('classifieds.price'), step: 0.01, min: 0, class: 'form-control' %>
+            </div>
+
+            <div class="form-group with-icon emoji-picker-container">
+              <%= f.text_area :description, placeholder: t('classifieds.description'), class: 'form-control', data: { emojiable: true } %>
+              <%= link_to_add_attachment f %>
+            </div>
+            <div class="form-group no-margin">
+              <div class="row attachments-container"></div>
+            </div>
+
+            <div class="buttons-right">
+              <%= render 'shared/dropdown_as_select_for_shareable', f: f %>
+              <%= f.submit t('general.post'), class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= render 'shared/modal_spinner'%>

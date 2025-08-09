@@ -1,0 +1,15 @@
+<% @submenu_title = 'Search'; @action_for_search = search_user_balances_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c], filter: params[:filter]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 user-balances-index">
+  <!-- Filters -->
+  <% load_filter = render 'user_balances/filter' %>
+  <%= render 'shared/search_results_headers', current_model: UserBalance.model_name.human(count: 2).capitalize, load_filter: load_filter %>
+
+  <% if @user_balances.present? %>
+    <ul class="list-group cm-list load-more-at-bottom" id="user-balances" data-next-path="<%= @next_path %>">
+      <%= render partial: 'user_balances/user_balance', collection: @user_balances %>
+    </ul>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-inbox', objects: UserBalance.model_name.human(count: 2) %>
+  <% end %>
+</div>

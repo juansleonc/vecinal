@@ -1,0 +1,15 @@
+<%= form_for poll_vote, remote: true do |f| %>
+  <%= f.hidden_field :poll_answer_id %>
+  <% poll_vote.poll.poll_answers.each do |pa| %>
+    <hr class="pa-separator"/>
+    <div class="answer answered" data-bg-width="<%= pa.percentage_votes %>">
+      <%= link_to '#', class: 'poll-answer', data: { id: pa.id } do %>
+        <%= pa.name %>
+        <% if pa.id == poll_vote.poll_answer_id %>
+          <i class="fa fa-check green"></i>
+        <% end %>
+      <% end %>
+      <span class="pull-right" <%= cm_popover '', "#{pa.poll_votes.count} #{t 'contacts.title'}" %>><%= pa.percentage_votes %>%</span>
+    </div>
+  <% end %>
+<% end %>

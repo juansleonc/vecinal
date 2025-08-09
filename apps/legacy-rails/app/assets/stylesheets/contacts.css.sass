@@ -1,0 +1,208 @@
+@import 'utilities'
+
+#communities-filter-new
+  .logo-wrapper  
+    img
+      width: 20px
+
+.unconfirmed
+  color: #212020
+.under-tabs.compactable
+  display: flex
+  justify-content: flex-end
+  .order-by-button
+    display: flex
+    i
+      margin: auto
+  .dropdown.options
+    display: flex
+    .dropdown-menu
+      right: 0
+      left: auto
+    a
+      display: flex
+      color: #000000
+      i
+        margin: auto
+.inner-section.contacts-index
+  .list-group.cm-list
+    .list-group-item.contact
+      cursor: initial
+      padding: 10px
+      .header
+        display: inline-block
+        img.logo
+          width: 80px
+          height: 80px
+          float: left
+          margin-right: 10px
+        .username
+          display: inline-block
+          line-height: 1.4em
+          .name
+            color: #000
+            font-size: 12px
+            font-weight: 600
+          i.fa
+            width: 13px
+      .actions
+        right: 15px
+        top: 35px
+        z-index: 100
+        > .dropdown
+          display: inline-block
+          > a
+            padding: 0 5px
+            font-size: 1.3em
+            color: $gray_text
+          ul.dropdown-menu
+            left: initial
+            right: 0
+      .actions-user
+        margin-top: 25px
+        a.btn
+          padding: 5px 30px
+          margin-right: 10px
+          font-weight: bold
+          font-size: 0.9em
+
+  @media (max-width: $sc_xs)
+    .list-group.cm-list .list-group-item.contact
+      .actions
+        display: inline-block
+        right: 0px
+        top: calc(50% - 20px)
+        z-index: initial
+        padding: 15px
+        > a
+          display: none
+      .header
+        width: 100%
+        .username
+          width: calc(100% - 90px)
+          +line-ellipsis
+        .username
+          line-height: 1.2em
+          .actions-user
+            margin-top: 2px
+            a.btn
+              padding: 5px 20px
+              &:first-child
+                margin-right: 5px
+
+.profile-banner
+  display: none
+  position: absolute
+  z-index: 1000
+  background-color: #fff
+  min-width: 300px
+  box-shadow: 0 0 4px $gray
+  .home-image
+    width: 310px
+    height: 120px
+    overflow: hidden
+    img
+      width: 100%
+  .logo-wrapper
+    float: left
+    margin: -30px 5px 0
+    border: 3px solid #fff
+    box-shadow: 0 0 5px
+    > img
+      width: 80px
+  .contact-info
+    display: inline-block
+    margin-left: 5px
+    font-size: 0
+    line-height: 1em
+    padding: 8px 0
+    span.name
+      font-weight: 600
+      font-size: 12px
+      color: #000
+    span.info
+      font-size: 12px
+      i.fa
+        width: 12px
+    > span
+      line-height: 1.5em
+  .bottom-actions
+    background-color: #f2f2f2
+    padding: 8px
+    border-top: 1px solid #cecece
+    .btn
+      padding: 4px 6px
+      background-color: transparent
+      width: 50%
+      font-weight: 600
+      &:first-child
+        margin-right: -5px
+        border-radius: 3px 0 0 3px
+      &:last-child
+        border-radius: 0 3px 3px 0
+
+.contacts-panels.row
+  margin-right: -5px
+  margin-left: -5px
+  .contact-panel
+    padding: 0 5px
+    .tag-tooltip:hover.active
+      color: #00AC52
+    .tag-tooltip:hover.inactive
+      color: #F2142B
+    .tag-tooltip
+      i
+        font-size: 14px
+    .contact-panel-content
+      font-size: 0.8em
+      color: $gray_light
+      padding: 10px 5px
+      box-shadow: 1px 1px 4px 0px $gray
+      text-align: center
+      background-color: #fff
+      margin-bottom: 15px
+      height: 245px
+      .name
+        color: #000
+        font-size: 12px
+        font-weight: 600
+      .logo-wrapper
+        margin-bottom: 10px
+        > img
+          width: 95px
+        .no-logo-letter
+          font-size: 20px
+      a.btn
+        text-transform: uppercase
+        padding: 5px
+        width: 45%
+        margin: 10px auto 0
+        font-size: 0.9em
+      a.at-bottom
+        display: inline-block
+        margin-top: 5px
+        color: #2978f6
+      .dropdown.actions
+        position: absolute
+        right: 10px
+        top: 10px
+        a.dropdown-toggle
+          font-size: 1.3em
+          color: $gray_light
+          padding: 5px
+        ul.dropdown-menu
+          left: initial
+          right: 5px
+      .reported-icon
+        cursor: pointer
+        color: #ED0000
+        font-size: 20px
+        margin-right: 10px
+        position: absolute
+        top: 10px
+        left: 25px
+.dropdown.settings
+  padding: 10px
+  a
+    i
+      font-size: 17px

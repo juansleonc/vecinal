@@ -1,0 +1,10 @@
+$('.home-image .image-container').replaceWith('<%= j render("images/profile_cover", imageable: @image.imageable) %>');
+
+<% if @new_image %>
+  $('.photos-gallery#photos').append('<%= j render(@image) %>');
+<% end %>
+
+$('body').click();
+$('.loading-overlay').hide();
+$('form#new-home-image input[type=file]').val('');
+

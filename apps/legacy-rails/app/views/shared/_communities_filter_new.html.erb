@@ -1,0 +1,75 @@
+<div class="dropdown " data-items="<%= items %>" id="communities-filter-new">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+    <span class="text">
+      <i class="fa fa-circle-o with-background"></i>
+      <%= t('general.all_communities') %> (<span class="all-items-count-new"><%= @total_invites %></span>)
+    </span>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <% 
+    class_objects ||= 'Items'
+    with_filter_options ||= false 
+    param_query = "?query=#{params[:query]}" if params[:query].present?
+    status = "&status=#{params[:status]}" if params[:status].present?
+    responsible = "&responsible=#{params[:responsible]}" if params[:responsible].present?
+    %>
+    <li>
+      <%= link_to "#{request.path}#{param_query}#{status}#{responsible}", class: "with-logo", data: { class: 'display-all' } do %>
+        <i class="fa fa-circle-o with-background"></i> <%= t 'general.all_communities' %> (<span class="all-items-count-new"><%= @total_invites %></span>)
+      <% end %>
+    </li>
+
+    <% if local_assigns[:width_public] %>
+      <li>
+        <%= link_to '#', class: 'with-logo', data: { class: 'Public-0' } do %>
+          <i class="fa fa-globe with-background"></i> <%= t 'general.public' %> (<span class="items-count"></span>)
+        <% end %>
+      </li>
+    <% end %>
+    <%
+    html = '';
+    param_query = "&query=#{params[:query]}" if params[:query].present?
+    status = "&status=#{params[:status]}" if params[:status].present?
+    param_date_filter = ''
+    param_date_filter = "&filter=#{params[:filter]}" unless params[:filter].blank?
+    responsible = "&responsible=#{params[:responsible]}" if params[:responsible].present?
+    month = "&month=#{params[:month]}" if params[:month].present?
+    order = "&order=#{params[:order]}" if params[:order].present?
+    company = current_user.my_company
+    
+    data_by_community.each do |contact|
+      contact.each do |type, qty|
+        if type == company.class.name + '-' +company.id.to_s
+          %>
+            <li>
+              <%= link_to "#{request.path}?c=" + company.id.to_s + param_query.to_s + param_date_filter + status.to_s + responsible.to_s + month.to_s + order.to_s, class: 'with-logo' do %>
+                <%= render 'shared/logo_left_filter', logoable: company, left: '' %>
+                <%= company.name %> (<span class="items-count"><%= qty %></span>)
+              <% end %>
+            </li>
+          <%
+        end 
+      end
+    end
+
+    current_user.buildings.order(:name).each do |building| 
+      data_by_community.each do |contact|
+        contact.each do |type, qty|
+          if type == building.class.name + '-' + building.id.to_s
+            %>
+            <li>
+              <%= link_to "#{request.path}?b=" + building.id.to_s + param_query.to_s + param_date_filter + status.to_s + responsible.to_s + month.to_s + order.to_s, class: 'with-logo' do %>
+                <%= render 'shared/logo_left_filter', logoable: building, left: '' %>
+                <%= building.name %> (<span class="items-count"><%= qty %></span>)
+              <% end %>
+            </li>
+            <% 
+          end
+        end
+      end
+
+    end 
+    %>
+  </ul>
+</div>

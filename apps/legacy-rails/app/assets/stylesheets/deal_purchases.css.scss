@@ -1,0 +1,95 @@
+#stripe_error{
+  font-size: 12px;
+}
+.deal-purchase-buy{
+  font-style: italic;
+  color: #7F7F7F;
+  h2, p{
+    margin: 0 0 15px 15px;
+  }
+  .header-separator, .deal-info{
+    margin-bottom: 10px;
+  }
+  .deal-info img{
+    border-radius: 10px;
+  }
+  .price{
+    text-align: center;
+  }
+  .deal-name, .order, .quantity{
+    font-size: 18px;
+    color: #000000;
+  }
+  .quantity{
+    text-align: center;
+    width: 60%;
+    height: 30px;
+    margin-left: 25%;
+    padding: 0 8px;
+    @media (max-width: 457px){
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+  h2.payment-order, p{
+    margin-bottom: 25px;
+  }
+  .submit-buttons{
+    margin-bottom: 15px;
+  }
+  .btn.btn-default.faqs-toggle{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #F6F7F8;
+    border: none;
+    .fa.fa-caret-down{
+      font-size: 27px;
+      color: #217DC8;
+    }
+    &:focus{
+      outline: none;
+    }
+    @media (max-width: 460px){
+      font-size: 13px;
+    }
+  }
+  .faqs-container{
+    font-style: normal;
+    text-align: justify;
+    p{
+      margin: 0 0 10.5px;
+    }
+  }
+  ul.dropdown-menu{
+    width: 96%;
+    margin: 0 2%;
+    padding: 5px;
+  }
+  .blue-borders form .action-buttons .btn-primary{
+    padding: 5px 19px;
+  }
+  @media (max-width: 460px){
+    .well.clearfix h2{
+      font-size: 20px;
+    }
+    .deal-name, .price{
+      font-size: 12px;
+    }
+    .price > div{
+      white-space: nowrap;
+    }
+  }
+}
+.table-container{
+  table.payments{
+    color: #666;
+    td.centered{
+      text-align: center;
+    }
+  }
+}
+

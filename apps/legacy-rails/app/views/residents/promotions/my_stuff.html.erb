@@ -1,0 +1,84 @@
+<% @submenu_title = t 'general.submenu.my_stuff'
+  @navbar_style = 'green'
+  @submenu_item = 'my_stuff'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 my-stuff">
+  <div class="well clearfix">
+    <h1 class="col-xs-12 no-padding">
+      <i class="fa fa-cart-arrow-down"></i>
+      <span class="black"><%= t('general.submenu.my_stuff') %></span>
+    </h1>
+    <br/>
+    <div class="btn-group col-sm-7 col-xs-12 no-padding filter-counters">
+      <button class="btn btn-default display-vouchers pressed" data-class="display-all">
+        <span class="filter-name"><%= t('reports.filters.all') %></span>
+        (<span id="stuff-count-all"></span>)
+      </button>
+       <button class="btn btn-default display-vouchers" data-class="display-coupons">
+        <span class="filter-name"><%= Coupon.model_name.human(count: 2).capitalize %></span>
+        (<span id="stuff-count-coupons"></span>)
+      </button>
+       <button class="btn btn-default display-vouchers" data-class="display-deals">
+        <span class="filter-name"><%= Deal.model_name.human(count: 2).capitalize %></span>
+        (<span id="stuff-count-deals"></span>)
+      </button>
+    </div>
+
+    <div class="finder pull-right col-sm-5 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-vouchers-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <table class="table rounded-header display-all" id="vouchers">
+      <thead>
+        <tr class="italic">
+          <th class="hidden-xs"><%= t 'general.code' %></th>
+          <th class="hidden-xs"><%= t 'promotions.type' %></th>
+          <th><%= Coupon.human_attribute_name(:title) %></th>
+          <th class="hidden-xs"><%= t 'promotions.purchase_date' %></th>
+          <th><%= t 'promotions.last_day_to_claim' %></th>
+          <th class="hidden-xs"><%= t 'promotions.redeemed' %></th>
+          <th><%= t 'general.actions' %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @vouchers.each do |voucher| %>
+          <% if voucher.class.name == 'CouponRedemption' %>
+            <% coupon = voucher.coupon %>
+            <tr class="voucher coupon">
+              <td class="hidden-xs"><%= voucher.printable_id %></td>
+              <td class="hidden-xs"><%= Coupon.model_name.human.capitalize %></td>
+              <td class="title"><%= link_to coupon.title, business_coupon_path(coupon.business, coupon) %></td>
+              <td class="hidden-xs"><%= voucher.created_at.strftime '%b %d, %Y' %></td>
+              <td><%= coupon.last_day_to_claim.strftime '%b %d, %Y' if coupon.last_day_to_claim %></td>
+              <td class="<%= voucher.redeemed ? 'green' : 'red' %> hidden-xs"><%= voucher.redeemed.to_s.capitalize %></td>
+              <td>
+                <%= link_to raw('<i class="fa fa-print"></i>'), coupon_redemption_path(voucher),
+                  data: { toggle: 'popover', trigger: 'hover', content: t('general.print'), placement: 'top' },
+                  target: '_blank' unless voucher.redeemed
+                %>
+              </td>
+            </tr>
+          <% elsif voucher.class.name == 'DealPurchase' %>
+            <% deal = voucher.deal %>
+            <tr class="voucher deal">
+              <td class="hidden-xs"><%= voucher.printable_id %></td>
+              <td class="hidden-xs"><%= Deal.model_name.human.capitalize %></td>
+              <td class="title"><%= link_to deal.title, business_deal_path(deal.business, deal) %></td>
+              <td class="hidden-xs"><%= voucher.created_at.strftime '%b %d, %Y' %></td>
+              <td><%= deal.last_day_to_claim.strftime '%b %d, %Y' if deal.last_day_to_claim %></td>
+              <td class="<%= voucher.redeemed ? 'green' : 'red' %> hidden-xs"><%= voucher.redeemed.to_s.capitalize %></td>
+              <td>
+                <%= link_to raw('<i class="fa fa-print"></i>'), deal_purchase_path(voucher),
+                  data: { toggle: 'popover', trigger: 'hover', content: t('general.print'), placement: 'top' },
+                  target: '_blank' unless voucher.redeemed
+                %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

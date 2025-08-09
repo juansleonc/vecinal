@@ -1,0 +1,62 @@
+<%= form_for Poll.new, remote: true do |f| %>
+  <div class="errors-container"></div>
+
+  <div class="user clearfix">
+    <%= render 'shared/logo_left', logoable: current_user, size: :standard %>
+    <strong><%= current_user.full_name %></strong>
+  </div>
+  <br/>
+
+  <div class="form-group with-icon emoji-picker-container normal-height">
+    <%= f.text_area :question, skip_autolabel: true, placeholder: t('polls.ask_a_question'), class: 'form-control', data: { emojiable: true } %>
+    <%= link_to_add_attachment f %>
+  </div>
+  <div class="form-group no-margin">
+    <div class="row attachments-container"></div>
+  </div>
+
+  <hr/>
+
+  <div class="poll-answers-container">
+    <% 2.times do |i| %>
+      <%= f.fields_for :poll_answers, PollAnswer.new do |pa| %>
+        <div class="form-group with-icon">
+          <%= pa.text_field :name, skip_autolabel: true, placeholder: t('activerecord.attributes.poll_answer.add_choice'),
+            class: 'form-control js-auto-size' %>
+          <%= link_to '#', class: 'delete-poll-answer on-input' do %>
+            <i class="fa fa-close"></i>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= link_to '+ ' + t('activerecord.attributes.poll_answer.add_choice'), '#', data: { secuency: 2 }, class: 'add-poll-answer black' %>
+  </div>
+
+  <hr/>
+
+  <div class="form-group">
+    <%= f.radio_button :days_or_date, 'days', checked: true %>
+    <div class="short">
+      <%= f.number_field :duration, placeholder: (t 'polls.duration'), class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.radio_button :days_or_date, 'date' %>
+    <div class="short with-icon">
+      <%= f.text_field :end_date_date, placeholder: (t 'polls.end_date'), class: 'form-control trigger-datepicker', disabled: true %>
+      <i class="fa fa-clock-o on-input"></i>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="buttons-right">
+    <%= render 'shared/dropdown_as_select_for_shareable', f: f %>
+    <%= f.submit (t 'polls.create'), class: 'btn btn-primary' %>
+  </div>
+
+<% end %>

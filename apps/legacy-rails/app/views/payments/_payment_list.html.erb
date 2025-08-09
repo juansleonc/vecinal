@@ -1,0 +1,15 @@
+<% if @payments.present? %>
+  <ul class="list-group cm-list as-table load-more-at-bottom" id="payments" data-next-path="<%= @next_path %>">
+    <li class="list-group-item clearfix header text-centered gray-bg">
+      <div class="col-xs-2"><%= t('payments.date') %></div>
+      <div class="col-xs-2"><%= t('payments.amount') %></div>
+      <div class="col-xs-3"><%= t('payments.username') %></div>
+      <div class="col-xs-3"><%= t('payments.community') %></div>
+      <!-- <div class="col-xs-1">Status</div> -->
+      <div class="col-xs-2">Reference #</div>
+    </li>
+    <%= render @payments %>
+  </ul>
+<% else %>
+  <%= render 'shared/empty_items', icon: 'fa-credit-card', objects: Payment.model_name.human(count: 2) %>
+<% end %>

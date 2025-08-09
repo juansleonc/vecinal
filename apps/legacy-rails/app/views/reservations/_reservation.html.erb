@@ -1,0 +1,74 @@
+<% 
+reserver = reservation.reserver; 
+amenity = reservation.amenity
+unread = can?(:mark_as_read, reservation) && reservation.unread?(current_user) ? 'unread' : ''
+%>
+<div class="reservation responsible-<%= if current_user.admin? then reservation.responsible_id else reservation.reserver_id end %> Building-<%= reservation.amenity.building_id %> <%= reservation.status %> <%= unread %>"
+  id="reservation-<%= reservation.id %>" data-mark-as-read-path="<%= mark_as_read_reservation_path reservation %>">
+  <% with_content = can?(:comment, reservation) ? 'with-content' : 'no-content' %>
+  <li class="list-group-item clearfix <%= with_content %>" data-target="#reservation-content-<%= reservation.id %>">
+    <div class="col-xs-3 no-padding overflow-e hidden-xs">
+      <div class="content-logo">
+        <%= render 'shared/logo_left', logoable: reserver %>
+        <p><%=  with_profile_banner_link reserver %></p>
+        <p><%= reservation.user.contact_details.apartment_numbers.join(',') + ' - ' + reservation.amenity.building.name %></p>
+      </div>
+    </div>
+    <div class="col-xs-7 content_short_description hidden-xs">
+      <div class="col-xs-4 no-padding overflow-e hidden-xs">
+        <%= mi.crop_original %>
+        <div>
+          <p><span style="color:#acacae;"><%= t 'general.amenity' %></span> </p>
+          <p><%= amenity.name %></p>
+        </div>
+      </div>
+      <div class="col-xs-4 no-padding overflow-e hidden-xs">
+        <%= mi.event %>
+        <div>
+          <p><span style="color:#acacae;"><%= t 'general.when' %></span></p>
+          <p><%= I18n.localize reservation.date , format: '%a %d %b, %Y' %></p>
+        </div>
+      </div>
+      <div class="col-xs-4 no-padding overflow-e hidden-xs">
+        <%= mi.schedule %>
+        <div>
+          <p><span style="color:#acacae;"><%= t 'general.time' %></span></p>
+          <p><%= reservation.time_from.strftime '%H:%M' %> - <%= reservation.time_to.strftime '%H:%M' %></p>
+        </div>
+      </div>
+    </div>
+      
+    <div class="col-xs-2 no-padding hidden-xs">
+      <div class="content-status">
+        <%= render 'reservations/statuses', reservation: reservation, only_status: true %>
+      </div>
+      
+    </div>
+    <div class="visible-xs">
+      
+      <span class="badge danger pull-right status-<%= reservation.status %>">
+        <%= t("reservations.statuses.#{reservation.status}") %>
+      </span>
+      <%= render 'shared/logo_left', logoable: reserver %>
+
+      <div>
+        <div class="username overflow-e"><%= reserver.full_name %></div>
+        <div class="title overflow-e"><%= amenity.building.name %></div>
+        <div class="title overflow-e"><%= amenity.name %></div>
+        <div class="info overflow-e">
+        
+          <%= I18n.localize reservation.date , format: '%a %d %b, %Y' %>
+          <%= reservation.time_from.strftime '%H:%M' %> - <%= reservation.time_to.strftime '%H:%M' %>
+        </div>
+      </div>
+       
+    </div>
+  </li>
+  <% if can? :comment, reservation %>
+    <%= render 'reservations/reservation_description', 
+      amenity: amenity,
+      reserver: reserver,
+      reservation: reservation
+    %>    
+  <% end %>
+</div>

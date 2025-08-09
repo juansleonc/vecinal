@@ -1,0 +1,4 @@
+selector = $("#accountable-code-selector-<%= params[:type] %>")
+selector.empty();
+selector.append('<%= j render("users/accountable_code_selection") %>');
+$('ul.accountable-code-selector-list').show();

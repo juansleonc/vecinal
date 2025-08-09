@@ -1,0 +1,118 @@
+<% @folder ||= attachment.attachmentable; modal_target = "#update-attachment-modal-#{attachment.id}" %>
+
+<div class="col-md-3 col-sm-4 col-xs-6 attachment-container document" id="attachment-<%= attachment.id %>">
+  <div class="link-dblclick no-selectable-text" data-path="<%= folder_destroy_attachment_path @folder, attachment %>"
+    data-target="<%= modal_target %>" data-download-url="<%= attachment.file_attachment.url %>"
+    data-file-name="<%= attachment.file_attachment_file_name %>">
+    <% if attachment.image? %>
+      <%= link_to '', attachment.file_attachment.url(:original), data: { lightbox: "folder-#{@folder.id}-images" },
+        class: 'link-dblclick-target'
+      %>
+      <div class="image-holder">
+        <%= image_tag attachment.file_attachment.url(:thumb) %>
+      </div>
+      <div class="file-name"><%= attachment.file_attachment_file_name %></div>
+    <% else %>
+      
+      <%= link_to '', "https://docs.google.com/gview?url=#{attachment.file_attachment.url}&embedded=true", target: '_blank', class: 'link-dblclick-target fancybox'%>
+        <div class="image-holder file">
+          <%= image_tag Attachment::IMAGES_NAMES_MAP[attachment.file_extension.to_sym] %>
+        </div>
+        <div class="file-name"><%= attachment.file_attachment_file_name %></div>
+      
+    <% end %>
+    <div class="document-details">
+      <div class="creator">
+        <%= attachment.created_by ? attachment.created_by.full_name : '' %>
+      </div>
+      <div class="date">
+        <%= attachment.updated_at.strftime '%d %b %y' %>
+      </div>
+      <div class="size">
+        <%= number_to_human_size attachment.file_attachment_file_size %>
+      </div>
+    </div>
+  </div>
+
+  <div class="list-group contextual-menu hidden-xs hidden-sm">
+    <% if can? :manage, @folder %>
+      <%= link_to '#', class: 'list-group-item',
+        data: {toggle: 'modal', target: modal_target } do
+      %>
+        <i class="fa fa-pencil-square-o"></i>
+        <%= t 'folders.rename' %>
+      <% end %>
+    <% end %>
+    <% if can? :read, @folder %>
+      <%= link_to attachment.file_attachment.url, download: attachment.file_attachment_file_name,
+        class: 'list-group-item download' do
+      %>
+        <i class="fa fa-download"></i>
+        <%= t 'folders.download' %>
+      <% end %>
+    <% end %>
+    <% if can? :manage, @folder %>
+      <%= link_to '#', class: 'delete list-group-item' do %>
+        <i class="fa fa-trash-o"></i>
+        <%= t 'folders.delete' %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="dropdown actions visible-xs visible-sm">
+    <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+      <i class="fa fa-ellipsis-v"></i>
+    <% end %>
+    <ul class="dropdown-menu">
+      <% if can? :manage, @folder %>
+        <li>
+          <%= link_to '#',  data: {toggle: 'modal', target: modal_target } do %>
+            <i class="fa fa-pencil-square-o"></i>
+            <%= t 'folders.rename' %>
+          <% end %>
+        </li>
+      <% end %>
+      <% if can? :read, @folder %>
+        <li>
+          <%= link_to attachment.file_attachment.url, download: attachment.file_attachment_file_name do %>
+            <i class="fa fa-download"></i>
+            <%= t 'folders.download' %>
+          <% end %>
+        </li>
+      <% end %>
+      <% if can? :manage, @folder %>
+        <li>
+          <%= confirm_destroy folder_destroy_attachment_path(@folder, attachment), remote: true do %>
+            <i class="fa fa-trash-o"></i>
+            <%= t 'folders.delete' %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <% if can? :manage, @folder %>
+    <div class="modal fade form-new-object" id="update-attachment-modal-<%= attachment.id %>">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title"><%= t 'folders.rename' %></h4>
+          </div>
+          <div class="modal-body">
+            <%= condomedia_form_for attachment, url: folder_update_attachment_path(@folder, attachment), remote: true do |f| %>
+              <div class="attachment-errors-container"></div>
+              <div class="form-group">
+                <%= f.text_field :file_attachment_file_name, class: 'form-control' %>
+              </div>
+              <%= f.submit t('general.save'), class: 'btn btn-primary' %>
+              <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'general.cancel' %></button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

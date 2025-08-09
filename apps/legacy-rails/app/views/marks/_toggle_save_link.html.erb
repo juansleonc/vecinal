@@ -1,0 +1,6 @@
+<% if can? :toggle_save, markable %>
+  <% blue = 'blue' if markable.marked?(current_user, 'saved') %>
+  <%= link_to toggle_link, remote: true, class: "pull-right toggle-saved #{blue}" do %>
+    <%= mi.bookmark_border %>
+  <% end %>
+<% end %>

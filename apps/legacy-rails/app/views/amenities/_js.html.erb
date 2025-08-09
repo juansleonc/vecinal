@@ -1,0 +1,49 @@
+<script>
+var i, j, selection, zeroFill;
+selection = '';
+i = 0;
+zeroFill = function(number, width) {
+  width -= number.toString().length;
+  if (width > 0) {
+    return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
+  }
+  return number + '';
+};
+i = 0;
+while (i < 23) {
+  j = zeroFill(i, 2);
+  selection += '<option value=\'' + j + ':00\'>' + j + ':00' + '</option>';
+  selection += '<option value=\'' + j + ':30\'>' + j + ':30' + '</option>';
+  i++;
+}
+var show_values_selector = function (selected){
+  var length_type = selected;
+  if (length_type == 'days') {
+    $('.length_days').show();
+    $('.length_hours').hide();
+  }else{
+    $('.length_days').hide();
+    $('.length_hours').show();
+  }
+}
+$(document).ready(function() {
+  
+  show_values_selector('<%= @amenity.reservation_length_type %>');
+  $('#amenity_reservation_length_type_selector .dropdown-menu li > a').click(function(){
+    var type = $(this).data('type');
+    show_values_selector(type);
+  });
+
+  $('.select-timepicker').each(function(){
+    var selected_time = $( this ).data('selected-time'),
+    index = selection.indexOf(selected_time.trim()),
+    cut_word = index + selected_time.length + 1,
+    first_part = selection.substring(0, cut_word),
+    last_part = selection.substring(cut_word),
+    append = first_part + ' selected="selected" ' + last_part;
+    
+    return $( this ).append(append);
+  });
+  
+});
+</script>

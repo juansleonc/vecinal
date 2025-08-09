@@ -1,0 +1,39 @@
+<% controller ||= params[:controller] %>
+<div class="dropdown pull-right options no-js">
+  <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+    <%= mi.more_vert %>
+  <% end %>
+  <ul class="dropdown-menu">
+
+    <% action_report = model_object.marked?(current_user, 'reported') ? t('general.report_user.unreport') : t('general.report_user.report') %>
+    <% action_report_user = model_object.publisher.marked?(current_user, 'reported') ? t('general.report_user.unreport') : t('general.report_user.report') %>
+    <% action_hide = model_object.marked?(current_user, 'hidden') ? t('general.report_user.unhide') : t('general.report_user.hide') %>
+
+    <% if can? :toggle_hide, model_object %>
+      <li><%= link_to "#{action_hide} post", url_for(action: "toggle_hide", id: model_object.id, controller: controller), remote: true %></li>
+    <% end %>
+
+    <% if can? :toggle_report, model_object %>
+      <li>
+        <%= link_to "#{action_report} post", url_for(action: 'toggle_report', id: model_object.id, controller: controller), remote: true %>
+      </li>
+    <% end %>
+
+    <% if can? :toggle_report, model_object.publisher %>
+      <li><%= link_to "#{action_report_user} user", toggle_report_user_path(model_object.publisher) %></li>
+    <% end %>
+
+    <% if can? :destroy, model_object %>
+      <li>
+        <%= confirm_destroy model_object, remote: true do %>
+          <%= t 'general.delete', object_name: '' %>
+        <% end %>
+      </li>
+    <% end %>
+
+    <% unless current_user.role %>
+      <li><%= link_to 'No actions to do', '#' %></li>
+    <% end %>
+
+  </ul>
+</div>

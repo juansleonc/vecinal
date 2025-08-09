@@ -1,0 +1,64 @@
+<% @submenu_title = Coupon.model_name.human(count: 2).capitalize
+  @submenu_item = 'coupons'
+  @navbar_style = 'green'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 residents-vouchers">
+  <div class="well clearfix">
+    <div class="white-box">
+      <div>
+        <div class="google-map" data-longitude="<%= current_building.longitude %>"
+          data-latitude="<%= current_building.latitude %>" data-name="<%= current_building.name %>"
+          data-markers="<%= get_markers @near_businesses[:businesses], :coupons %>"
+          data-drop-main="<%= asset_url 'drop_blue.png' %>" data-drop-sec="<%= asset_url 'drop_green.png' %>">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-7 col-xs-12 no-padding">
+      <h4>
+        <i class="fa fa-scissors"></i>
+        <span class="italic"><%= Coupon.model_name.human(count: 2).capitalize %></span>
+      </h4>
+      <span class="page-descriptor"><%= t 'coupons.find_exclusive_vouchers' %></span>
+    </div>
+
+    <div class="finder pull-right col-sm-5 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-coupons-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <div class="col-xs-12 no-padding">
+      <div class="row image-gallery-grid" id="coupons">
+        <% @near_businesses[:coupons].each do |coupon| %>
+          <% business = coupon.business %>
+          <div class="col-sm-4 col-lg-3 img-gallery-col-container">
+            <div class="img-gallery-column coupon">
+              <%= image_tag 'star_icon.png', class: 'highlight' if coupon.highlight? %>
+              <%= link_to image_tag(coupon.main_image.image.url :medium_thumb),
+                  resident_business_coupon_add_click_path(business.namespace, coupon.id) %>
+              <div class="img-description">
+                <div class="description-header">
+                  <%= coupon.title %>
+                </div>
+                <span class="medium-soft"><%= business.name %></span><br/>
+                <strong><i class="fa fa-map-marker"></i> <%= business.city %></strong>
+                <%= business.distance_rounded request.location %>
+                <%= link_to t('general.print'), coupon_redemption_print_path(coupon.id), target: '_blank',
+                    class: 'print active'
+                %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if @near_businesses[:coupons].blank? %>
+    <div class="empty-items-container">
+      <%= t 'general.you_have_no', objects: Coupon.model_name.human(count: 2) %>
+      <br/>
+      <%= t 'general.comming_soon' %>
+    </div>
+  <% end %>
+
+</div>

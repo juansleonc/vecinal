@@ -1,0 +1,19 @@
+<div class="col-xs-3 attachment-div <%= 'hidden-div' if f.object.file_attachment.blank? %>">
+  <div class="image-holder">
+    <%= image_tag '' %>
+    <%= link_to '#', class: 'remove-attachment' do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  </div>
+
+  <div class="hidden-div">
+    <% if f.object.id.present? %>
+      <%= f.hidden_field :id %>
+    <% else %>
+      <%= f.file_field :file_attachment, class: 'attachment-field', accept: Attachment.all_extensions_to_s,
+        data: { images_map: map_images_to_asset_path(Attachment::IMAGES_NAMES_MAP) }
+      %>
+    <% end %>
+    <%= f.hidden_field :_destroy, class: 'destroy-attachment', value: f.object.file_attachment.present? ? '0' : '1' %>
+  </div>
+</div>

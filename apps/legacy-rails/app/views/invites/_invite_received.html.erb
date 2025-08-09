@@ -1,0 +1,25 @@
+<% user = invite_received %>
+<div class="col-md-3 col-sm-6 col-xs-12 contact-panel <%= user.accountable.class.name %>-<%= user.accountable.id %>"
+  id="user-<%= user.id %>">
+  <div class="contact-panel-content">
+    <%= render 'shared/user_logo_on_panel', user: user %>
+    <br>
+    <%= user.accountable.name %>
+    <br>
+    <%= user.email %>
+    <br>
+    <i class="fa fa-user-circle-o"></i> <%= t "roles.#{user.role}" %>
+    <br>
+    <%= user.updated_at.strftime '%b %d, %Y' %>
+    <br>
+    <%= link_to t('general.accept'), company_accept_user_path(@company, user_id: user.id), method: :post, data: { remote: true },
+      class: 'btn btn-primary'
+    %>
+    <%= link_to '', company_reject_user_path(@company, user_id: user.id), method: :post, data: { remote: true },
+      class: 'hidden confirmed-destroy'
+    %>
+    <%= link_to t('general.ignore'), '', data: { swal_confirm: t('general.confirm'), swal_confirm_yes: t('general.yes_word'),
+      swal_confirm_no: t('general.no_word') }, class: 'confirm-destroy btn btn-default'
+    %>
+  </div>
+</div>

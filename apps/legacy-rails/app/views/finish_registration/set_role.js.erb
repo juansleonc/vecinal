@@ -1,0 +1,19 @@
+<% if current_user.valid? %>
+  swal({
+    title: '',
+    text: "<%= t('wait_for_acceptance.description', company: current_user.accountable.name).html_safe %>",
+    type: 'success',
+    timer: 15000,
+    confirmButtonColor: '#2978f6',
+    html: true
+  });
+  $('#communities .community a.btn').addClass('disabled');
+  $('#<%= current_user.accountable_type %>-<%= current_user.accountable_id %>').remove();
+  $('#communities').prepend('<%= j render("finish_registration/community", community: current_user.accountable) %>');
+  $('.finish-registration-communities .under-tabs').addClass('requested');
+  $('.cm-tabs i.fa.pending').removeClass('requested');
+  $('.cm-tabs li.<%= current_user.role %> i.fa.pending').addClass('requested');
+  $('#new-community-launcher').addClass('hidden');
+<% else %>
+  toastr.error('<%= current_user.errors.full_messages.join(", ") %>');
+<% end %>

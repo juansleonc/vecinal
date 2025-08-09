@@ -1,0 +1,11 @@
+<% data_opts = [@start, @final, @step, @backward] %>
+<% Countable::MODELS_CHART.each do |model_chart| %>
+	<div class="chart-content-printable" data-model="<%= model_chart.name.downcase %>">
+		<%= render 'chart_navigation' %>
+		<% data =  model_chart.data_chart(*data_opts, @users) %>
+		<div id="line-chart-<%= model_chart.name %>" class="line-chart" data-labels="<%= data[:labels].to_json %>" data-series="<%= data[:series].to_json %>">
+  		Loading...
+		</div>
+		<p class="between-date"><%= between_date @final.to_time, @start.to_time %></p>
+	</div>
+<% end %>

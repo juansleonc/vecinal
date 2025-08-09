@@ -1,0 +1,3 @@
+$('body').append("<%= j render('residents/contacts/profile_banner', contact: @user) %>");
+$profile_banner = $('.profile-banner#<%= @user.id %>');
+$profile_banner.css( {'left': window.mouseX, 'top': window.mouseY} ).show();

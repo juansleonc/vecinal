@@ -1,0 +1,40 @@
+<% @navbar_hidden_xs = true %>
+<div class="container-fluid devise-admin-details">
+  <div class="row">
+    <div class="col-md-6 col-sm-8 col-xs-12 authentication-form">
+      <div class="devise contact-information">
+        <h2><%= t 'finish_registration.application' %></h2>
+        <p><%= t('admin_details.add_admin_details', company: current_user.company_name) %></p>
+
+        <div class="row">
+          <%= condomedia_form_for(@admin_details, url: users_set_admin_details_path, auto_placeholder: @admin_details.new_record?) do |f| %>
+            <div class="col-sm-12">
+              <%= render 'shared/model_errors', resource: @admin_details %>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <%= f.text_field :title_position, class: 'form-control' %>
+            </div>
+            <div class="form-group col-sm-6">
+              <%= f.text_field :department, class: 'form-control' %>
+            </div>
+            <div class="form-group col-sm-6">
+              <%= f.number_field :phone, class: 'form-control' %>
+            </div>
+            <div class="form-group col-sm-6">
+              <%= f.number_field :extension, class: 'form-control' %>
+            </div>
+            <div class="col-sm-12">
+              <center>
+                <%= f.submit t('general.continue'), class: 'btn btn-success btn-lg' %>
+              </center>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-sm-12 no-padding">
+          <%= link_to t('general.cancel'), finish_registration_cancel_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

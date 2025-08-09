@@ -1,0 +1,34 @@
+<% @submenu_title = Folder.model_name.human(count: 2).capitalize; @submenu_item = 'folders'; @action_for_search = search_folders_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 folders <%= 'list-mode' if cookies[:list_mode] %>">
+
+  <div class="cm-nav-links">
+    <%= link_to Folder.model_name.human(count: 2).capitalize, folders_path, class: 'active' %>
+  </div>
+
+  <div class="under-tabs path-container hidden-xs">
+    <div class="actions">
+      <%= link_to '#', class: 'change-folder-mode hidden-xs' do %>
+        <i class="fa fa-list" <%= cm_popover '', t('folders.link_description.list') %>></i>
+        <i class="fa fa-th-large" <%= cm_popover '', t('folders.link_description.icons') %>></i>
+      <% end %>
+    </div>
+    <%= render 'shared/order_by_button', btn_text: 'AZ ' %>
+  </div>
+  <% if @folders.present? %>
+    <div class="documents-container">
+      <%= render 'list_header' %>
+      <div class="folders-container clearfix load-more-at-bottom" id="documents" data-next-path="<%= @next_path %>">
+        <%= render @folders %>
+      </div>
+      <div class='content-pagination'>
+      <%= page_entries_info @contacts %>
+      <%= will_paginate @contacts, :renderer => 'LinkRenderer' %>
+    </div>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-folder-o', objects: Folder.model_name.human(count: 2) %>
+  <% end %>
+
+
+</div>

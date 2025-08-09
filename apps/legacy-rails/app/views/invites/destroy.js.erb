@@ -1,0 +1,3 @@
+<% if @invite.destroyed? %>
+  $('#invite-<%= @invite.id %>').remove();
+<% end %>

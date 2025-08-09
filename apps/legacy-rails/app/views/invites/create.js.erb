@@ -1,0 +1,5 @@
+<% if @invite.persisted? %>
+  window.location.href = "<%= company_invites_sent_path current_user.accountable %>";
+<% else %>
+  $('#new-invite-modal .form-errors-container').html('<%= j render("shared/model_errors", resource: @invite) %>');
+<% end %>

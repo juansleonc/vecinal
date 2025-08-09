@@ -1,0 +1,55 @@
+<% @submenu_title = t 'promotions.view_reports'
+  @submenu_item = 'reports'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 reports">
+  <div class="well clearfix">
+    <div class="col-xs-12 no-padding">
+      <h1 class="promo-title">
+        <i class="fa fa-scissors"></i>
+        <%= link_to @coupon.title, business_coupon_path(@coupon.business, @coupon) %>
+      </h1>
+
+      <%= link_to t('general.back_to', destiny: t('businesses.reports')),
+        business_reports_path(current_user.accountable),
+        class: 'pull-right right-spaced hidden-xs'
+      %>
+    </div>
+
+    <div class="col-xs-12 no-padding available hidden-xs">
+      <strong><%= Coupon.human_attribute_name(:available_at) %>: </strong>
+      <%= @coupon.available_at.strftime '%b %d, %Y' %>&nbsp;
+      <strong><%= t 'general.to' %>: </strong><%= @coupon.finish_at.strftime '%b %d, %Y' %>&nbsp;
+      <strong><%= t 'promotions.last_day_to_claim' %>: </strong><%= @coupon.last_day_to_claim.strftime '%b %d, %Y' if @coupon.last_day_to_claim %>
+    </div>
+
+    <div class="col-sm-8 col-xs-12 no-padding counters-container">
+      <div class="statistic status">
+        <i class="fa fa-circle <%= @coupon.status %>"></i> <%= t "promotions.#{@coupon.status}" %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span><%= @coupon.impressions %></span><br/>
+        <%= t 'promotions.views' %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span><%= @coupon.clicks %></span><br/>
+        <%= Coupon.human_attribute_name(:clicks) %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span><%= @coupon.acquisitions %></span><br/>
+        <%= t('promotions.acquisitions') %>
+      </div>
+      <div class="statistic hidden-xs">
+        <span id="redemptions-redeemed"></span><br/>
+        <%= CouponRedemption.human_attribute_name(:redeemed) %>
+      </div>
+    </div>
+
+    <div class="finder pull-right header col-sm-4 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-redemptions-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+  	<%= render 'list_redemptions' %>
+
+  </div>
+</div>

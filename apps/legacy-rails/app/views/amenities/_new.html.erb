@@ -1,0 +1,19 @@
+<% if can? :manage, Amenity %>
+  <div class="modal fade form-new-object" id="new-amenity-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title"><%= t('general.create_record_f', record_name: Amenity.model_name.human.capitalize) %></h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'amenities/form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+

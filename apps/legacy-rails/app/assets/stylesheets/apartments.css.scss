@@ -1,0 +1,12 @@
+#apartments{
+  &.display-rent{
+    .single-apartment:not(.for_rent){
+      display: none !important;
+    }
+  }
+  &.display-sale{
+    .single-apartment:not(.for_sale){
+      display: none !important;
+    }
+  }
+}

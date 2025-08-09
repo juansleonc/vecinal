@@ -1,0 +1,4 @@
+$('body').append('<%= j render("edit") %>');
+launch_time_picker();
+window.emojiPicker.discover();
+$('.modal#edit-amenity-modal-<%= @amenity.id %>').modal('show');

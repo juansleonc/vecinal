@@ -1,0 +1,29 @@
+<div class="col-sm-4 col-lg-3 cm-gallery-grid-item building" id="company-<%= @company.id %>">
+  <div class="cm-gallery-grid-item-content">
+    <%= link_to company_root_url(@company, subdomain: 'www') do %>
+      <%= image_tag @company.home_image.image.url(:medium_thumb) %>
+    <% end %>
+    <div class="details">
+      <div class="header">
+        <span class="name overflow-e"><%= @company.name %></span>
+      </div>
+      <span class="overflow-e"><%= @company.full_address %></span>
+
+      <% if can? :manage, @company %>
+        <div class="dropdown actions">
+          <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+            <%= mi.more_vert %>
+          <% end %>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to t('general.edit'), company_public_about_url(@company, subdomain: 'www') %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+      <div class="review-avg-stars">
+        <%= review_avg_stars @company %>
+      </div>
+    </div>
+  </div>
+</div>

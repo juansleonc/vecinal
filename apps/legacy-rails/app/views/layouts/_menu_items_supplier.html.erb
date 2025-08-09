@@ -1,0 +1,49 @@
+<% business = current_user.accountable %>
+<li class="<%= 'active' if @submenu_item == 'home' %>">
+  <%= link_to business_root_path(business, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-home"></i>
+    <%= t 'public_pages.home.title' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'coupons' %>">
+  <%= link_to business_coupons_path(business, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-scissors"></i>
+    <%= Coupon.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'deals' %>">
+  <%= link_to business_deals_path(business, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-tag"></i>
+    <%= Deal.model_name.human(count: 2).capitalize %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'redeem' %>">
+  <%= link_to business_batch_redeem_path(business, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-barcode"></i>
+    <%= t 'businesses.redeem' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'reports' %>">
+  <%= link_to business_reports_path(business, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-bar-chart"></i>
+    <%= t 'businesses.reports' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'sales' %>">
+  <%= link_to business_payments_path(business, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-usd"></i>
+    <%= t 'general.submenu.sales' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'plan' %>">
+  <%= link_to business_stripe_subscription_path(business, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-money"></i>
+    <%= t 'general.submenu.plan' %>
+  <% end %>
+</li>
+<li class="<%= 'active' if @submenu_item == 'billing' %>">
+  <%= link_to business_stripe_invoices_path(business, query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) do %>
+    <i class="fa fa-file-text-o"></i>
+    <%= t 'general.submenu.billing' %>
+  <% end %>
+</li>

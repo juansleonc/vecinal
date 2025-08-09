@@ -1,0 +1,15 @@
+<% @submenu_title = 'Search'; @action_for_search = search_news_feed_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 dashboard">
+
+  <%= render 'shared/search_results_headers', current_model: t('general.news_feed') %>
+
+  <div class="cols-divided-sm-2">
+    <div id="comments" class="load-more-at-bottom" data-next-path="<%= @next_path %>">
+      <%= render partial: 'comments/timeline_comment', collection: @comments %>
+    </div>
+  </div>
+
+  <%= render 'shared/empty_items', icon: 'fa-newspaper-o', objects: 'news' if @comments.blank? %>
+
+</div>

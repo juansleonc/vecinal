@@ -1,0 +1,10 @@
+<% options = { 
+    model: params[:item][:class].constantize, 
+    col1: params[:item][:col1], 
+    col2: params[:item][:col2], 
+    start: params[:since] || 12.months.ago, 
+    finish: params[:until] || Time.now
+  } %>
+$('#<%= table_name(options[:model]) %>-table').replaceWith('<%= j render(partial: "dashboard/report_content", locals: options) %>');
+sum_columns_table($('#<%= table_name(options[:model]) %>-table').find('table'));
+$('#<%= table_name(options[:model]) %>-table').closest('.report').find('.print-report').attr('href', '<%= print_report_path(item: params[:item], since: options[:start], until: options[:final]) %>');

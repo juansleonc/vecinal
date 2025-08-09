@@ -1,0 +1,18 @@
+<div class="row photos-gallery" id="photos">
+
+  <% if can? :update, imageable %>
+    <div class="col-lg-3 col-sm-4 col-xs-6 photo-container change-image-icon">
+      <%= link_to '+', '#', class: 'change-image', data: { form_target: 'form#new-images' } %>
+    </div>
+  <% end %>
+  <%= render imageable.images %>
+</div>
+
+<% if can? :update, imageable %>
+  <%= form_for :image, url: create_multiple_images_path, html: { multipart: true, remote: true, class: 'hidden', id: 'new-images' } do |f| %>
+    <%= f.hidden_field :imageable_id, value: imageable.id %>
+    <%= f.hidden_field :imageable_type, value: imageable.class.name %>
+    <%= f.hidden_field :home, value: false %>
+    <%= file_field_tag 'images[]', multiple: true, accept: Image.allowed_extensions %>
+  <% end %>
+<% end %>

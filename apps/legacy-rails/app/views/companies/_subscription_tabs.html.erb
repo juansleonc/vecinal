@@ -1,0 +1,5 @@
+<div class="cm-nav-links">
+  <%= link_to t('plans.other'), company_stripe_plans_path(@company), class: @plans_tab %>
+  <%= link_to t('subscriptions.name'), company_stripe_subscription_path(@company), class: @subscriptions_tab %>
+  <%= link_to t('general.submenu.billing'), company_stripe_invoices_path(@company), class: @invoices_tab %>
+</div>

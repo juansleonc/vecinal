@@ -1,0 +1,37 @@
+<div class="cm-tabs">
+  <div class="buttons-block search-selector">
+
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+        <i class="fa fa-search"></i>
+        <span class="text"><%= current_model %></span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><%= link_to t('general.news_feed'), '#', data: { action: search_news_feed_path } %></li>
+        <li><%= link_to Message.model_name.human(count: 2).capitalize, '#', data: { action: search_messages_path } %></li>
+        <li><%= link_to t('service_requests.request'), '#', data: { action: search_service_requests_path } %></li>
+        <li><%= link_to Event.model_name.human(count: 2).capitalize, '#', data: { action: search_events_path } %></li>
+        <li><%= link_to Folder.model_name.human(count: 2).capitalize, '#', data: { action: search_folders_path } %></li>
+        <li><%= link_to 'Contacts', '#', data: { action: search_contacts_path } %></li>
+        <li><%= link_to Amenity.model_name.human(count: 2).capitalize, '#', data: { action: search_amenities_path } %></li>
+        <li><%= link_to Reservation.model_name.human(count: 2).capitalize, '#', data: { action: search_reservations_path } %></li>
+        <li><%= link_to Poll.model_name.human(count: 2).capitalize, '#', data: { action: search_polls_path } %></li>
+        <li><%= link_to t('general.marketplace'), '#', data: { action: search_classifieds_path } %></li>
+        <li><%= link_to Payment.model_name.human(count: 2).capitalize, '#', data: { action: search_payments_path } %></li>
+        <li><%= link_to t('invites.received'), '#', data: { action: search_invites_received_company_path(current_user.accountable) } %></li>
+        <li><%= link_to t('invites.sent'), '#', data: { action: search_users_path } %></li>
+        <li><%= link_to UserBalance.model_name.human(count: 2).capitalize, "#", data: {action: search_user_balances_path} %></li>
+      </ul>
+    </div>
+    <button type="button" class="btn btn-default re-search"><i class="fa fa-refresh"></i></button>
+
+
+  </div>
+    
+  <div class="white-bar with-border">
+  </div>
+  <% if defined? load_filter %>
+  <%= load_filter %>
+  <% end %>
+</div>

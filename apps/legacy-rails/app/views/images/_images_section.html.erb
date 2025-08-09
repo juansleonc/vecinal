@@ -1,0 +1,9 @@
+<label>
+  <%= model_object.class.human_attribute_name(:images) %> <span class="info"><%= t 'general.images.formats', size: '778 x 508' %></span>
+</label>
+<div class="row images-container">
+  <%= link_to_add_image t('general.add_record', record_name: t('public_pages.photos.title')), f %>
+  <%= f.fields_for :images do |builder| %>
+    <%= render 'images/form', f: builder %>
+  <% end %>
+</div>

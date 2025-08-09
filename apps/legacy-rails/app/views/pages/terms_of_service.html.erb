@@ -1,0 +1,101 @@
+<% @submenu_title = t 'general.terms_of_service'
+  @submenu_item = 'privacy_terms'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+
+  <div class="cm-nav-links">
+    <%= link_to 'Privacy Policy', send("privacy_#{I18n.locale.to_s}_path") %>
+    <%= link_to 'Terms of service', send("terms_#{I18n.locale.to_s}_path"), class: 'active' %>
+  </div>
+
+  <div class="well clearfix politics">
+    <div class="col-md-10 col-md-offset-1 col-xs-12">
+      <h3>
+        <%= t('privacy_policy.cm_inc').upcase %>
+        <br/>
+        <%= t('general.terms_of_service').upcase %>
+      </h3>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1 col-xs-12">
+      <% for i in 1..4 do %>
+        <p><%= t "terms_of_service.p#{i}" %></p>
+      <% end %>
+      <br/>
+      <p><strong><%= t 'terms_of_service.title1.name' %></strong></p>
+      <p><strong><%= t 'terms_of_service.art1.name' %></strong></p>
+      <p><%= t 'terms_of_service.art1.p1.name' %></p>
+      <ol>
+        <% for i in 1..4 do %>
+          <li><%= t "terms_of_service.art1.p1.item#{i}" %></li>
+        <% end %>
+      </ol>
+      <p><%= t 'terms_of_service.art1.p2' %></p>
+      <br/>
+
+      <p><strong><%= t 'terms_of_service.title2.name' %></strong></p>
+      <p><%= t 'terms_of_service.title2.p1' %></p>
+      <% for i in 2..4 do %>
+        <p><strong><%= t "terms_of_service.art#{i}.name" %></strong></p>
+        <p><%= t "terms_of_service.art#{i}.p1" %></p>
+      <% end %>
+      <br/>
+
+      <p><strong><%= t 'terms_of_service.title3.name' %></strong></p>
+      <% for i in 5..8 do %>
+        <p><strong><%= t "terms_of_service.art#{i}.name" %></strong></p>
+        <p><%= t "terms_of_service.art#{i}.p1" %></p>
+      <% end %>
+      <br/>
+
+      <p><strong><%= t 'terms_of_service.title4.name' %></strong></p>
+      <p><strong><%= t 'terms_of_service.art9.name' %></strong></p>
+      <p><%= t 'terms_of_service.art9.p1' %></p>
+      <p><strong><%= t 'terms_of_service.art10.name' %></strong></p>
+      <p><%= t 'terms_of_service.art10.p1' %></p>
+      <br/>
+
+      <p><strong><%= t 'terms_of_service.title5.name' %></strong></p>
+      <p><strong><%= t 'terms_of_service.art11.name' %></strong></p>
+      <p><%= t 'terms_of_service.art11.p1.name' %></p>
+      <ul>
+        <% for i in 1..7 do %>
+          <li><%= t "terms_of_service.art11.p1.item#{i}" %></li>
+        <% end %>
+      </ul>
+      <p><%= t 'terms_of_service.art11.p2' %></p>
+      <p><strong><%= t 'terms_of_service.art12.name' %></strong></p>
+      <p><%= t 'terms_of_service.art12.p1' %></p>
+      <p><strong><%= t 'terms_of_service.art13.name' %></strong></p>
+      <p><%= t 'terms_of_service.art13.p1' %></p>
+      <br/>
+
+      <p><strong><%= t 'terms_of_service.title6.name' %></strong></p>
+      <p><strong><%= t 'terms_of_service.art14.name' %></strong></p>
+      <p><%= t 'terms_of_service.art14.p1' %></p>
+      <p><strong><%= t 'terms_of_service.art15.name' %></strong></p>
+      <p><%= t 'terms_of_service.art15.p1' %></p>
+      <br/>
+
+      <p><strong><%= t 'terms_of_service.title7.name' %></strong></p>
+      <p><%= t 'terms_of_service.title7.p1' %></p>
+      <p><strong><%= t 'terms_of_service.art16.name' %></strong></p>
+      <p><%= t 'terms_of_service.art16.p1' %></p>
+      <br/>
+
+      <p><strong><%= t 'terms_of_service.title8.name' %></strong></p>
+      <p><%= t 'terms_of_service.title8.p1' %></p>
+      <% for i in 17..19 do %>
+        <p><strong><%= t "terms_of_service.art#{i}.name" %></strong></p>
+        <p><%= t "terms_of_service.art#{i}.p1" %></p>
+      <% end %>
+      <br/>
+
+      <p><strong><%= t 'terms_of_service.title9.name' %></strong></p>
+      <% for i in 20..28 do %>
+        <p><strong><%= t "terms_of_service.art#{i}.name" %></strong></p>
+        <p><%= t "terms_of_service.art#{i}.p1" %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module FinishRegistrationHelper
+end

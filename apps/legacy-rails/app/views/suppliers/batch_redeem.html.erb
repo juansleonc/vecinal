@@ -1,0 +1,43 @@
+<% @submenu_title = t 'businesses.online_redemption'
+  @submenu_item = 'redeem'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <h1 class="col-xs-12 no-padding">
+      <i class="fa fa-barcode"></i>
+      <span class="black"><%= t 'businesses.online_redemption' %></span>
+    </h1>
+
+    <span class="italic page-descriptor"><%= t 'businesses.track_sales' %></span>
+
+    <div class="row">
+      <%= form_tag business_batch_redeem_path, method: 'get', id: 'redemptions-search', class: 'batch-redeem' do %>
+        <div class="form-group col-xs-12">
+          <%= text_area_tag :query, params[:query], placeholder: t('coupon_redemptions.search_by_id').capitalize,
+            class: 'form-control js-auto-size'
+          %>
+        </div>
+
+        <div class="form-group col-xs-12">
+          <label class="radio-inline">
+            <%= radio_button_tag :promo, 'coupon', params[:promo] == 'coupon' || !params[:promo] %>
+            <%= Coupon.model_name.human.capitalize %>
+          </label>
+
+          <label class="radio-inline">
+            <%= radio_button_tag :promo, 'deal', params[:promo] == 'deal' %>
+            <%= Deal.model_name.human.capitalize %>
+          </label>
+        </div>
+
+        <div class="col-xs-12">
+          <%= submit_tag t('businesses.redeem'), class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= render 'coupon_redemptions/list_redemptions' if @coupon_redemptions %>
+    <%= render 'deal_purchases/list_purchases' if @deal_purchases %>
+
+  </div>
+</div>

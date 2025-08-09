@@ -1,0 +1,48 @@
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 contacts-index" data-user="<%= current_user.role %>">
+  <div class="cm-nav-links">
+    <%= link_to t('contacts.title'), contacts_path, class: 'active' %>
+    <%= link_to t('general.submenu.page_roles'), company_users_path(current_user.accountable) if current_user.admin? %>
+  </div>
+
+  <div class="under-tabs compactable">
+    <%= render 'shared/communities_filter_new',
+      items: '#contacts .contact-panel',
+      width_company: true,
+      class_objects: 'users',
+      to_controller: 'contacts',
+      with_filter_options: true,
+      data_by_community: @contacts_by_accountable %>
+<!-- @data_by_community @contacts_by_accountable -->
+    <%= render 'shared/order_by_button', btn_text: ' AZ ', add_class: 'hidden-xs' %>
+    
+  <% if current_user.admin? %>
+    <div class="dropdown options settings btn-default">
+      <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+        <%= mi.settings %>
+      <% end  %>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to t("contacts.export_csv"), users_export_path(:company => params[:c], :building => params[:b],format: "csv")%>
+        </li>
+        <li>
+          <%= link_to t("contacts.confirmed"), contacts_path(:status => 'confirmed',:c => params[:c], :b => params[:b], :order => params[:order]) %>          
+        </li>
+        <li><%= link_to t("contacts.unconfirmed"), contacts_path(:status => 'unconfirmed',:c => params[:c], :b => params[:b], :order => params[:order]) %></li>
+      </ul>
+    </div>
+  <% end %>
+  </div>
+
+  <% if @contacts.present? %>
+    <div class="contacts-panels row load-more-at-bottom" id="contacts" data-next-path="<%= @next_path %>">
+      <%= render partial: 'residents/contacts/contact', collection: @contacts %>
+    </div>
+    <div class='content-pagination'>
+      <%= page_entries_info @contacts %>
+      <%= will_paginate @contacts, :renderer => 'LinkRenderer' %>
+    </div>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-address-book-o', objects: User.model_name.human(count: 2) %>
+  <% end %>
+
+</div>

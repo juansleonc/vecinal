@@ -1,0 +1,64 @@
+<% @submenu_title = t 'messages.title'; @submenu_item = 'messages'; @action_for_search = search_messages_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 messages-index">
+
+  <div class="cm-nav-links new-to-bottom">
+    <%= link_to t('messages.filters.inbox'), messages_path, class: @inbox_tab %>
+    <%= link_to t('messages.filters.done'), messages_done_path, class: @done_tab %>
+    <%= link_to t('messages.filters.deleted'), messages_trash_path, class: @trash_tab %>
+    
+    <% if can? :create, Message %>
+      <%= link_to '+ ' + t('general.create_record', record_name: Message.model_name.human.capitalize), '#', class: 'btn btn-primary',
+        data: { toggle: 'modal', target: '#new-message-modal' }
+      %>
+    <% end %>
+  </div>
+
+  <div class="under-tabs clearfix">
+    <% if @empty_trash && @messages.present? %>
+        <%= confirm_destroy messages_empty_trash_path, remote: true, method: 'get' do %>
+          <%= t('messages.empty_trash') %>
+        <% end %>
+        
+    <% end %>
+
+    
+    <div class="order-by-status dropdown" id="order_by_status">
+      <% 
+      @status = params[:status] 
+      query = "&query=#{params[:query]}" if params[:query].present? 
+      building = "&b=#{params[:b]}" if params[:b].present?
+      company = "&c=#{params[:c]}" if params[:c].present?
+      status = "&status=#{params[:status]}" if params[:status].present?
+      %>
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span>
+          <i class="material-icons">query_builder</i>
+          <%= t 'messages.status.' + @status.to_s %>
+        </span>
+        <i class="fa fa-caret-down"></i>
+        
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="<%= "#{request.path}?status=all#{query}#{building}#{company}" %>"><%= t 'messages.status.all' %></a></li>
+        <li><a href="<%= "#{request.path}?status=unread#{query}#{building}#{company}" %>"><%= t 'messages.status.unread' %></a></li>
+        <li><a href="<%= "#{request.path}?status=urgent#{query}#{building}#{company}" %>"><%= t 'messages.status.urgent' %></a></li>
+        <li><a href="<%= "#{request.path}?status=warning#{query}#{building}#{company}" %>"><%= t 'messages.status.warning' %></a></li>
+      </ul>
+    </div>
+    <%= render 'shared/order_by_button', btn_text: ' AZ ' %>
+  </div>
+
+  <ul class="list-group cm-list load-more-at-bottom" id="messages" data-next-path="<%= @next_path %>">
+    <%= render partial: 'residents/messages/message', collection: @messages %>
+  </ul>
+  <%= render 'shared/empty_items', icon: 'fa-inbox', objects: Message.model_name.human(count: 2) if @messages.blank? %>
+  <div class='content-pagination'>
+    <%= page_entries_info @contacts %>
+    <%= will_paginate @contacts, :renderer => 'LinkRenderer' %>
+  </div>
+</div>
+
+<% if can? :create, Message %>
+  <%= render 'residents/messages/new_message_modal' %>
+<% end %>

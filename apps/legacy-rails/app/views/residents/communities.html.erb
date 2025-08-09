@@ -1,0 +1,23 @@
+<% @submenu_title = t('general.submenu.communities'); @submenu_item = 'communities'; @action_for_search = search_news_feed_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 buildings-index">
+  <div class="cm-tabs">
+    <ul class="nav nav-tabs">
+      <li class="active blue">
+        <%= link_to communities_url(subdomain: @building) do %>
+          <i class="fa fa-building-o"></i> <%= t('general.submenu.communities') %>
+        <% end %>
+      </li>
+    </ul>
+    <div class="white-bar"></div>
+  </div>
+
+  <div class="cm-gallery-grid" id="buildings">
+    <%= render @company %>
+    <%= render @building %>
+  </div>
+
+</div>
+
+
+

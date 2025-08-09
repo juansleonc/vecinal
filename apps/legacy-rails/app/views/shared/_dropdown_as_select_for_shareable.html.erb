@@ -1,0 +1,52 @@
+<%= f.hidden_field :recipient_id, value: nil %>
+<% my_community_text = current_user.admin? ? (t 'general.shareable.my_communities') : (t 'general.shareable.my_community') %>
+<div class="dropdown as-select shareable" data-target="#<%= f.object_name %>_recipient_id" data-target-type="#<%= f.object_name %>_recipient_type">
+  <% if current_user.member? && current_user.setting_for('who_can_see_my_posts') == 'my_community' %>
+    <% checked = 'MyCommunities' %>
+    <%= f.hidden_field :recipient_type, value: 'MyCommunities' %>
+    <button class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+      <span><i class="fa fa-circle-o"></i> <%= my_community_text %></span>
+      <i class="fa fa-caret-down"></i>
+    </button>
+  <% else %>
+    <% checked = 'Public' %>
+    <%= f.hidden_field :recipient_type, value: nil %>
+    <button class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+      <span><i class="fa fa-globe"></i> <%= t 'general.shareable.public' %> </span>
+      <i class="fa fa-caret-down"></i>
+    </button>
+  <% end %>
+  <ul class="dropdown-menu">
+    <li class="dropdown-header"><%= t 'general.shareable.who_should_see' %></li>
+    
+    <% if current_user.resident? %>
+      <li>
+        <%= link_to '#', data: { id: current_user.accountable_id, type: 'Building' }, class: "#{'checked' if checked == 'MyCommunities'}" do %>
+          <i class="fa fa-check"></i> <i class="fa fa-users"></i> <%= t 'general.shareable.my_community' %><br/>
+          <span class="info"><%= t 'general.shareable.all_your_contacts' %></span>
+        <% end %>
+      </li>
+    <% elsif current_user.admin? %>
+      <li>
+        <%= link_to '#', data: { id: nil, type: 'MyCommunities' }, class: "#{'checked' if checked == 'MyCommunities'}" do %>
+          <i class="fa fa-check"></i> <i class="fa fa-circle-o"></i> <%= t 'general.shareable.my_communities' %><br/>
+          <span class="info"><%= t 'general.shareable.my_contacts' %></span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to '#', data: { id: current_user.accountable_id, type: current_user.accountable_type } do %>
+          <i class="fa fa-check"></i> <i class="fa fa-home"></i> <%= current_user.accountable.name %><br/>
+          <span class="info"><%= t 'general.shareable.only_community_members' %></span>
+        <% end %>
+      </li>
+      <% current_user.buildings.each do |community| %>
+        <li>
+          <%= link_to '#', data: { id: community.id, type: community.class.name } do %>
+            <i class="fa fa-check"></i> <i class="fa fa-building-o"></i> <%= community.name %><br/>
+            <span class="info"><%= t 'general.shareable.only_community_members' %></span>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

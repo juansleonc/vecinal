@@ -1,0 +1,23 @@
+<% class_objects ||= 'posts' %>
+<% gender_es = {'posts' => 'f', 'classifieds' => 'm', 'reviews' => 'f', 'comments' => 'm', 'users' => 'm', 'events' => 'm'} %>
+
+<li>
+  <%= link_to url_for(controller: controller, action: action), class: 'with-logo' do %>
+    <%= t("general.index_record", record_name: t("general.the_#{class_objects.downcase}")) %>
+  <% end %>
+</li>
+<li>
+  <%= link_to url_for(controller: controller, action: action, filter: :hidden ), class: 'with-logo' do %>
+    <%= t("general.hidden_record_#{gender_es[class_objects]}", record_name: t("general.#{class_objects.downcase}").capitalize) %>
+  <% end %>
+</li>
+
+<% role = current_user.role %>
+
+<% if controller != 'users' && action != 'profile' %>
+  <li>
+    <%= link_to url_for(controller: controller, action: action, filter: :reported ), class: 'with-logo' do %>
+      <%= t("general.reported_record_#{gender_es[class_objects]}", record_name: t("general.#{class_objects.downcase}").capitalize) %>
+    <% end %>
+  </li>
+<% end %>

@@ -1,0 +1,19 @@
+<% @page_title = 'Welcome | Condo Media' %>
+
+<div class="container">
+  <div class="row">
+    <div class=" devise col-xs-12 welcome">
+      <%= link_to root_path do %>
+        <%= image_tag 'condomedia_white.png', width: 200, class: 'cm-home-logo' %>
+      <% end %>
+      <h4><%= t 'general.welcome', record_name: @user.full_name %></h4>
+      <!-- <p><i class="fa fa-envelope fa-4x blue"></i></p> -->
+      <br/>
+      <p>
+        <%= t('devise.registrations.signed_up_but_unconfirmed').html_safe %>
+        <br/><br/>
+        <%= link_to t('devise.need_help').upcase, need_help_url(subdomain: 'www') %>
+      </p>
+    </div>
+  </div>
+</div>

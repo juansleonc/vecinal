@@ -1,0 +1,51 @@
+<% @submenu_title = Poll.model_name.human(count: 2).capitalize; @submenu_item = 'polls'; @action_for_search = search_polls_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c]) %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 polls-index">
+
+  <div class="cm-nav-links">
+    <%= link_to Poll.model_name.human(count: 2).capitalize, polls_path, class: 'active' %>
+
+    <% if can? :create, Poll %>
+      <%= link_to '+ ' + t('general.create_record_f', record_name: t('polls.poll')), '#', class: 'btn btn-primary', data: { toggle: 'modal', target: '#new-poll-modal' } %>
+    <% end %>
+  </div>
+
+  <div class="under-tabs">
+    
+    <%= render 'shared/communities_filter_new',
+      items: '#polls .poll',
+      width_company: true,
+      class_objects: 'polls',
+      with_filter_options: true,
+      to_controller: 'polls',
+      data_by_community: @contacts_by_accountable %>
+    <%= render 'shared/cards_filter', objects_name: 'polls' %>
+  </div>
+
+  <div class="cols-divided-sm-2 load-more-at-bottom" id="polls" data-next-path="<%= @next_path %>">
+    <%= render @polls %>
+  </div>
+  <%= render 'shared/empty_items', icon: 'fa-bar-chart', objects: Poll.model_name.human(count: 2) if @polls.blank? %>
+  <div class='content-pagination'>
+    <%= page_entries_info @polls %>
+    <%= will_paginate @polls, :renderer => 'LinkRenderer' %>
+  </div>
+</div>
+
+<% if can? :create, Poll %>
+  <div class="modal fade form-new-object" id="new-poll-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title"><%= t('general.create_record_f', record_name: t('polls.poll')) %></h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,46 @@
+<% @submenu_title = t 'businesses.nearby'
+  @navbar_style = 'green'
+  @submenu_item = 'nearby'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 residents-vouchers">
+  <div class="well clearfix">
+    <div class="white-box">
+      <div>
+        <div class="google-map" data-longitude="<%= current_building.longitude %>"
+          data-latitude="<%= current_building.latitude %>" data-name="<%= current_building.name %>"
+          data-markers="<%= get_markers @businesses, :business %>"
+          data-drop-main="<%= asset_url 'drop_blue.png' %>" data-drop-sec="<%= asset_url 'drop_green.png' %>">
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- <div class="col-sm-7 col-xs-12 no-padding">
+      <h4><i class="fa fa-map-marker"></i> <%#= t 'businesses.whats_nearby' %></h4>
+      <span class="page-descriptor"><%#= t 'promotions.find_stores_and_shops' %></span>
+    </div>
+
+    <div class="finder pull-right col-sm-5 col-xs-12 no-padding">
+      <input type="text" class="form-control" id="filter-businesses-input">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <div class="col-xs-12 no-padding">
+      <div class="row image-gallery-grid" id="businesses">
+        <%# @businesses.each do |business| %>
+          <div class="col-lg-3 col-sm-4 img-gallery-column business">
+            <%#= render 'residents/promotions/business_nearby', business: business %>
+          </div>
+        <%# end %>
+      </div>
+    </div>
+  </div>
+
+  <%# if @businesses.blank? %>
+    <div class="empty-items-container">
+      <%#= t 'general.you_have_no', objects: Business.model_name.human(count: 2) + ' ' + t('businesses.nearby').downcase %>
+      <br/>
+      <%#= t 'general.comming_soon' %>
+    </div>
+  <%# end %> -->
+
+</div>

@@ -1,0 +1,10 @@
+<div class="exception-container">
+  <div class="exception">
+    <h5 clas="exception-type"><%= t 'exceptions.error_404' %></h5>
+    <h3 class="exception-title"><%= t 'exceptions.not_found' %></h3>
+    <p class="exceptions-suggestion">
+      <%= t 'exceptions.not_found_suggestion' %>
+      <%= link_to t('general.home_page').upcase, root_path %>
+    </p>  
+  </div>
+</div>

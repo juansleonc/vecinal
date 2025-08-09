@@ -1,0 +1,92 @@
+<% @submenu_title = t 'reports.insights_your_offerings'
+  @submenu_item = 'reports'
+%>
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 reports">
+  <div class="well clearfix">
+    <h1 class="col-xs-12 no-padding">
+      <i class="fa fa-bar-chart"></i>
+      <span class="black"><%= t 'reports.insights_your_offerings' %></span>
+    </h1>
+
+    <div class="col-xs-12 no-padding counters-container">
+
+      <div class="btn-group display-reports filter-counters no-padding">
+        <button type="button" class="btn btn-default pressed" data-class="display-all">
+          <span class="filter-name"><%= t('reports.filters.all') %></span> (<span class="all-reports-count"></span>)
+        </button>
+        <button type="button" class="btn btn-default" data-class="display-coupons">
+          <span class="filter-name"><%= t('reports.filters.coupons') %></span> (<span class="coupons-reports-count"></span>)
+        </button>
+        <button type="button" class="btn btn-default" data-class="display-deals">
+          <span class="filter-name"><%= t('reports.filters.deals') %></span> (<span class="deals-reports-count"></span>)
+        </button>
+      </div>
+
+      <div class="statistics hidden-xs no-padding">
+        <div class="statistic">
+          <span id="reports-impressions"></span><br/>
+          <%= t('promotions.views') %>
+        </div>
+        <div class="statistic">
+          <span id="reports-clicks"></span><br/>
+          <%= t('promotions.clicks') %>
+        </div>
+        <div class="statistic">
+          <span id="reports-acquisitions"></span><br/>
+          <%= t('promotions.acquisitions') %>
+        </div>
+        <div class="statistic">
+          <span id="reports-customers"></span><br/>
+          <%= t('businesses.customers') %>
+        </div>
+        <div class="statistic">
+          <span>$</span><span id="reports-revenue"></span><br/>
+          <%= t('businesses.revenue') %>
+        </div>
+      </div>
+
+      <div class="finder pull-right header col-lg-3 col-xs-12 no-padding">
+        <input type="text" class="form-control" id="filter-reports-input">
+        <i class="fa fa-search"></i>
+      </div>
+
+    </div>
+
+    <% promotions = @business.ordered_promotions %>
+    <% if promotions.count > 0 %>
+      <table class="table rounded-header display-all" id="reports">
+        <thead>
+          <tr class="italic">
+            <th class="hidden-xs"><%= t 'promotions.type' %></th>
+            <th><%= Coupon.human_attribute_name(:title) %></th>
+            <th><%= Coupon.human_attribute_name(:available_at) %></th>
+            <th><%= Coupon.human_attribute_name(:finish_at) %></th>
+            <th class="status"><%= t 'promotions.status' %></th>
+            <th class="hidden-xs"><%= t 'promotions.views' %></th>
+            <th class="hidden-xs"><%= t 'promotions.clicks' %></th>
+            <th class="hidden-xs"><%= t 'promotions.acquisitions' %></th>
+            <th class="hidden-xs"><%= CouponRedemption.human_attribute_name(:redeemed) %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% promotions.each do |promotion| %>
+            <tr class="report <%= promotion.type.downcase %>" data-impressions="<%= promotion.impressions %>"
+              data-clicks="<%= promotion.clicks %>" data-acquisitions="<%= promotion.acquisitions %>"
+              data-customers="<%= promotion.customers %>" data-revenue="<%= promotion.revenue %>">
+              <td class="hidden-xs"><%= promotion.type %></td>
+              <td><%= link_to promotion.title, promotion.report %></td>
+              <td><%= promotion.available_at.strftime '%b %d, %Y' %></td>
+              <td><%= promotion.finish_at.strftime '%b %d, %Y' %></td>
+              <td><span><i class="fa fa-circle <%= promotion.status %>"></i> <%= t "promotions.#{promotion.status}" %></span></td>
+              <td class="numeric hidden-xs"><%= promotion.impressions %></td>
+              <td class="numeric hidden-xs"><%= promotion.clicks %></td>
+              <td class="numeric hidden-xs"><%= promotion.acquisitions %></td>
+              <td class="numeric hidden-xs"><%= promotion.redeemed %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

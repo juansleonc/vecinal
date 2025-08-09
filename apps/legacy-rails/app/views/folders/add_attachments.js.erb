@@ -1,0 +1,12 @@
+<% if @error %>
+  toastr.error('<%= @error %>');
+<% else %>
+  <% @attachments.each do |attachment| %>
+    <% if attachment.persisted? %>
+      $('.attachments-container').append('<%= j render("attachment", attachment: attachment) %>');
+    <% else %>
+      toastr.error('<%= attachment.errors[:file_attachment].join(", ") %>');
+    <% end %>
+  <% end %>
+  $('.modal#modal-spinner').modal('hide');
+<% end %>

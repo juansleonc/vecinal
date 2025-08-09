@@ -1,0 +1,19 @@
+<ul class="dropdown-menu" aria-labelledby="chart-date-filter" id="filter-dates-list">
+  <% Countable::FILTER_DATES.each do |date| %>
+    <li>
+      <% options = { 
+        since: date[:time], 
+        model: @model,
+        step: date[:step], 
+        until: date[:until],
+        backward: date[:backward] } %>
+
+      <% options[:community] = @community.class.name if @community %>
+      <% options[:id] = @community.id if @community %>
+
+      <%= link_to full_update_chart_path(options), remote: true do %>
+        <%= t "stats.#{date[:t_type]}", n: date[:n] %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

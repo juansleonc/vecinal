@@ -1,0 +1,58 @@
+<div class="filters">
+    <%#= render('shared/building_filter', buildings: current_user.buildings) if current_user.admin? %>
+    <%= render 'shared/communities_filter_new',
+      items: '#events .event',
+      width_company: true,
+      class_objects: 'balances',
+      with_filter_options: true,
+      to_controller: 'balances',
+      data_by_community: @contacts_by_accountable %>
+
+    <div class="dropdown-filter input-group date monthpicker">
+      <input type="hidden">
+      <button class="btn btn-default">
+        <%= fa_icon "calendar-o" %>
+        <span>
+          <%= params.has_key?(:filter) ? params[:filter] : Date.current.beginning_of_month.strftime('%Y/%m') %>
+        </span>
+      </button>
+    </div>
+    <input type="hidden" id="param-building" value="<%= params[:b] %>">
+
+    <!-- <div class="dropdown-filter input-group date yearpicker">
+      <input type="hidden">
+      <button class="btn btn-default">
+        <%#= fa_icon "calendar-o" %>
+        <span><%#= params[:type] == "year" ? params[:filter] : t('general.year') %></span>
+      </button>
+    </div> -->
+
+    <!-- Options -->
+    <div class="dropdown hidden-xs">
+      <a class="dropdown-toggle" data-toggle="dropdown">
+        <%= material_icon.more_vert.css_class('toggle') %>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <% if params.has_key?(:b) %>
+            <%= link_to print_all_user_balances_path(type: params[:type], filter: params[:filter], b: params[:b]), class: "menu-item", target: :_blank do %>
+              <%= material_icon.print.css_class('option') %>
+              <span><%= t('general.print') %></span>
+            <% end %>
+          <% end %>
+        </li>
+
+        <% if can? :destroy_selected, UserBalance %>
+          <li>
+            <%= confirm_destroy(destroy_selected_user_balances_path(filter: params[:filter], b: params[:b]), remote: true, method: :post) do %>
+              <%= material_icon.delete.css_class('option') %>
+              <span><%= t('general.to_delete') %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <script>
+  var request_path = '<%= @request_path %>';
+  </script>

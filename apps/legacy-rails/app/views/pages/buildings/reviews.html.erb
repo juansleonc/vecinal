@@ -1,0 +1,11 @@
+<% @submenu_title = t('general.submenu.communities'); @submenu_item = 'communities' %>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 timeline-view">
+
+  <%= render 'pages/header', model_object: @building, with_filter: true, class_objects: 'reviews', controller: 'pages', action: 'building_reviews' %>
+
+  <div class="cols-divided-sm-2" id="reviews">
+    <%= render 'reviews/index', reviewable: @building %>
+  </div>
+
+</div>

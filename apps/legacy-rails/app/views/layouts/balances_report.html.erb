@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @page_title || 'Print Page' %></title>
+    <link rel="icon" type="image/png" href="<%= asset_url 'favicon.png' %>">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application" %>
+    <style>
+      td { border-top: none !important; }
+      tr.header { border-bottom: 1px solid black; }
+      hr { border-width: 1px; margin: 2em 0; }
+      .resident-info .logo-wrapper, .resident-info .logo-wrapper img {
+        width: 41px;
+        height: 41px;
+      }
+      
+      @media print {
+        .community-info { 
+          display: flex;
+          justify-content: flex-start;
+        }
+        .logo-wrapper {
+          display: inline-block;
+          position: relative;
+          width: 50px;
+          height: 50px;
+        }
+        .logo-wrapper img {
+          vertical-align: middle;
+        }
+        .no-logo-letter { 
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }  
+      }
+    </style>
+  </head>
+  <body class="print-page" style="font-size: 11px; color: black; font-family: 'Varela Round', sans-serif;">
+    <div class="row">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html> 

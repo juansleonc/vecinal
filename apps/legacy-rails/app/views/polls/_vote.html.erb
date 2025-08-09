@@ -1,0 +1,6 @@
+<div class="poll-vote clearfix">
+  <%= render 'shared/logo_left', logoable: vote.user %>
+  <%= link_to user_profile_path(vote.user) do %>
+    <span class="username"><strong><%= vote.user.full_name %></strong></span>
+  <% end %>
+</div>

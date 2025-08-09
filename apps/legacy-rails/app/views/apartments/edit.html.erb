@@ -1,0 +1,21 @@
+<% @submenu_title = t 'general.edit_record', record_name: Apartment.model_name.human
+  @submenu_item = 'home'
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2">
+  <div class="well clearfix">
+    <h1>
+      <i class="fa fa-bed"></i>
+      <span class="black"><%= t('general.edit_record', record_name: Apartment.model_name.human) %></span>
+    </h1>
+
+    <%= confirm_destroy(company_apartment_path @company, @apartment) do %>
+      <h1 class="pull-right"><i class="fa fa-trash"></i></h1>
+    <% end %>
+
+    <div class="blue-borders">
+      <%= render 'form' %>
+    </div>
+
+  </div>
+</div>

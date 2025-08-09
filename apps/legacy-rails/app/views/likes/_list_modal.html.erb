@@ -1,0 +1,23 @@
+<div class="modal fade form-new-object poll-votes" id="likes-for-<%= likeable.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"><%= (Like.model_name.human(count: 2).capitalize) %></h4>
+      </div>
+      <div class="modal-body">
+        <% likeable.likes.each do |like| %>
+          <% user = like.user %>
+          <div class="poll-vote clearfix">
+            <%= render 'shared/logo_left', logoable: user %>
+            <%= link_to user_profile_path(user) do %>
+              <span class="username"><strong><%= user.full_name %></strong></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

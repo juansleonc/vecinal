@@ -1,0 +1,14 @@
+[
+  {"key":"EPIC-001","title":"Autenticación y Acceso","description":"OIDC, roles, perfiles, settings básicos. Base para todo el sistema.","priority":"P0"},
+  {"key":"EPIC-002","title":"Social Básico (Mensajes/Comentarios)","description":"Comunicación 1:N con inbox simple y comentarios en comunidad.","priority":"P0"},
+  {"key":"EPIC-003","title":"Amenities y Reservas (MVP)","description":"CRUD de amenities, disponibilidad simple, creación/cancelación de reservas con validaciones y auto‑aprobación opcional.","priority":"P0"},
+  {"key":"EPIC-004","title":"ServiceDesk Básico","description":"Tickets (crear/asignar/cerrar), comentarios, filtros básicos.","priority":"P0"},
+  {"key":"EPIC-005","title":"Documentos y Multimedia","description":"Carpetas raíz por rol/comunidad, subida/descarga de adjuntos, políticas básicas.","priority":"P1"},
+  {"key":"EPIC-006","title":"Observabilidad y SLOs","description":"Dashboards RED/KPIs, trazas/logs, alertas SLO y runbooks mínimos.","priority":"P1"},
+  {"key":"EPIC-007","title":"Seguridad Mínima y Cumplimiento","description":"MFA admin, CSP/headers, secretos seguros, backups DB, respuesta a incidentes.","priority":"P1"},
+  {"key":"EPIC-008","title":"Búsqueda y Mejora de UX","description":"Búsquedas unificadas y mejoras de accesibilidad/i18n.","priority":"P2"},
+  {"key":"EPIC-009","title":"Encuestas y Clasificados (Social+)","description":"Reincorporar polls y clasificados con visibilidad y moderación básica.","priority":"P2"},
+  {"key":"EPIC-010","title":"Pagos y Promociones","description":"Stripe Connect, deals/coupons, compras/canje y métricas.","priority":"P2"},
+  {"key":"EPIC-011","title":"Ventas de Inmuebles","description":"Listados de propiedades, filtros, leads y programación de visitas.","priority":"P2"},
+  {"key":"EPIC-012","title":"Analytics Avanzadas","description":"KPIs extendidos, cohortes, funnels y exportaciones.","priority":"P3"}
+]

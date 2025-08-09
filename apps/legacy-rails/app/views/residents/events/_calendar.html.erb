@@ -1,0 +1,38 @@
+<div id="calendar" class="col-md-3 inner-section no-padding hidden-xs hidden-sm">
+  <div class="well">
+    <h2 id="month">
+      <% @date ||= Time.zone.now %>
+      <%= link_to events_calendar_path(month: @date - 1.month), remote: true do %>
+        <i class="fa fa-chevron-left"></i>
+      <% end %>
+
+      <span class="blue"><%= t('date.month_names')[@date.month] %></span> <%=  @date.strftime('%Y') %>
+
+      <%= link_to events_calendar_path(month: @date + 1.month), remote: true do %>
+        <i class="fa fa-chevron-right"></i>
+      <% end %>
+    </h2>
+    <% events_in_calendar = Event.in_calendar @date, current_user %>
+    <%= calendar_for events_in_calendar[:calendar], year: @date.year, month: @date.month, day: @date.day do |calendar| %>
+      <%= calendar.head *t('date.abbr_day_names') %>
+      <%= calendar.day(day_method: :date) do |date, events| %>
+        <%= date.day %>
+        <ul>
+          <% for event in events %>
+            <li>
+              <a href="#" data-toggle="modal" data-target="#event-<%= event.id || event.dup_id %>-modal">
+                <div class="calendar-point" data-toggle="tooltip" title="<%= event.title %>" data-placement="top">
+                </div>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% events_in_calendar[:modals].each do |event| %>
+      <%= render "residents/events/event_modal", event: event %>
+    <% end %>
+
+  </div>
+</div>

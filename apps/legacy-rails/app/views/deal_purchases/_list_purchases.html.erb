@@ -1,0 +1,29 @@
+<table class="table rounded-header centered" id="purchases">
+  <thead>
+    <tr>
+      <th><%= t 'general.code' %></th>
+      <th class="hidden-xs"><%= t 'payments.customer' %></th>
+      <th class="hidden-xs"><%= t 'general.postal_code' %></th>
+      <th class="hidden-xs"><%= t 'promotions.purchase_date' %></th>
+      <th><%= t 'deal_purchases.redeemed' %></th>
+      <th><%= t('general.actions') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @deal_purchases.count > 0 %>
+      <% @deal_purchases.each do |purchase| %>
+        <%= render 'deal_purchases/update_deal_purchase', purchase: purchase %>
+      <% end %>
+    <% else %>
+      <tr>
+        <td>0</td>
+        <td class="hidden-xs">0</td>
+        <td class="hidden-xs">0</td>
+        <td class="hidden-xs">0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

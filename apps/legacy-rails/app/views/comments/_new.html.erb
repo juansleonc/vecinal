@@ -1,0 +1,35 @@
+<% 
+
+new_comment = true
+if current_user.board_member? == true  
+  if 'ServiceRequest' == commentable.class.name
+    if commentable.user_id != current_user.id
+      new_comment = false
+    end
+  end
+end
+
+if new_comment %>
+  <div class="new-commentable-comment">
+    <%= form_for Comment.new, remote: true do |f| %>
+      <div class="attachments-container clearfix commentable   current_user <%=   %>">
+      </div>
+      <div class="inputs">
+        <%= f.hidden_field :commentable_type, value: commentable.class.name %>
+        <%= f.hidden_field :commentable_id, value: commentable.id %>
+        <div class="emoji-picker-container with-icon normal-height">
+          <%= f.text_area :content, class: "form-control #{'attachments-enabled' if attachments_enabled}",
+            placeholder: t('comments.placeholder'), rows: 1, 'disable-with' => t('general.please_wait'), data: { emojiable: true } %>
+          <%= link_to_add_attachment(f) if attachments_enabled %>
+        </div>
+      </div>
+      <div class="actions">
+        <%= f.submit t('general.send'), class: 'btn btn-primary btn-xs', 'disable-with' => t('general.please_wait') %>
+        <%= link_to t("general.cancel"), "#", class: 'cancel-comment btn btn-default btn-xs' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+
+

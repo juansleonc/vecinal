@@ -1,0 +1,1926 @@
+@import 'utilities'
+
+body
+  .dropdown-menu
+    max-height: 300px
+  background-color: $crumina_gray
+  color: $gray_text
+  padding-top: 70px
+  font-family: 'Varela Round', sans-serif
+  font-size: 12px
+  .btn
+    border-radius: 2px
+    font-size: 12px
+  .inner-section
+    word-break: normal
+    text-align: justify
+    margin-top: 10px
+  a, a:hover, a:focus
+    text-decoration: none
+  strong
+    color: $blue_dark
+  .dropdown-menu
+    /*max-height: 22em*/
+    overflow-y: auto
+  .input-group-addon:first-child
+    border-radius: 5px 0 0 5px
+  .input-group .form-control:last-child
+    border-radius: 0 5px 5px 0
+  .navbar-form .form-control
+    height: 35px
+  .cm-navbar.navbar.navbar-default
+    background-color: $cm_blue
+    box-shadow: 0 1px 2px $gray
+    height: 65px
+    .navbar-header
+      .navbar-brand
+        padding: 21px
+        color: #FFFFFF
+        height: 65px
+        min-width: 155px
+        max-width: 255px
+        font-size: 20px
+        overflow: hidden
+        white-space: nowrap
+        i.material-icons
+          width: 40px
+          padding-left: 2px
+      ul.dropdown-menu
+        background-color: $crumina_gray
+        -webkit-box-shadow: none
+        max-height: calc(100vh - 85px)
+        top: 123%
+        overflow-y: hidden
+        box-shadow: none
+        &:hover, &:active
+          overflow-y: auto
+        li
+          > a
+            color: $gray_text
+            padding: 8px
+            padding-left: 20px
+            font-size: 13px
+            i.material-icons
+              width: 40px
+              padding: 3px
+              font-size: 22px
+              vertical-align: text-bottom
+          &.active a, a:hover
+            background-color: #F4F7FA
+            color: $cm_blue
+            font-weight: bold
+          &.divider
+            height: 2px
+          &.privacy-terms
+            padding: 0 5px
+            a
+              padding: 0
+              display: inline
+              font-weight: normal !important
+              background-color: transparent !important
+            a, span
+              font-size: 0.8em !important
+          &.disabled a
+            cursor: default
+            &:hover
+              color: $gray_light
+              background-color: transparent
+    .navbar-form.navbar-left
+      margin: 8px auto
+      padding: 0
+      .input-group
+        width: 600px
+        max-width: calc(100vw - 490px)
+        .input-group-btn
+          width: 1%
+          button
+            padding: 6px 12px 6px 22px
+            color: #fff
+            border-radius: 5px 0 0 5px
+            &:focus
+              outline: 0
+        input.form-control
+          padding-left: 10px
+          color: #8BA3E0
+          border: none
+          box-shadow: none
+          &::-webkit-input-placeholder /* Chrome/Opera/Safari */
+            color: #8BA3E0
+          &::-moz-placeholder /* Firefox 19+ */
+            color: #8BA3E0
+          &:-ms-input-placeholder /* IE 10+ */
+            color: #8BA3E0
+          &:-moz-placeholder /* Firefox 18- */
+            color: #8BA3E0
+          &:focus
+            &::-webkit-input-placeholder
+              color: gray
+            &::-moz-placeholder
+              color: gray
+        .input-group-btn button, input.form-control
+          height: 48px
+          background-color: #1e76d4
+          font-size: 17px
+        &.focused
+          .input-group-btn button, input.form-control
+            background-color: #fff
+            color: gray
+    .nav.navbar-nav.navbar-right
+      margin-top: 9px
+      .notifications.dropdown
+        height: 57px
+        .notifications-badge
+          display: inline-block
+          line-height: 1em
+          background-color: #f00
+          color: #FFF
+          text-align: center
+          border-radius: 50%
+          font-weight: bold
+          padding: 2px
+          font-size: 9px
+        .dropdown-toggle
+          position: relative
+          line-height: 30px
+          font-size: 17px
+          color: #5094de
+          &.white, &:hover
+            color: #fff
+          &:hover, &:focus, &:active, &:visited
+            background-color: transparent
+          .notifications-badge
+            width: 13px
+            height: 13px
+            position: absolute
+            top: 7px
+            right: 7px
+            font-size: 9px
+        .dropdown-menu
+          background-color: #fff
+          //box-shadow: 0 0 4px $gray
+          min-width: 250px
+          padding: 10px
+          max-height: none
+          .notifications-badge
+            margin-left: 10px
+            width: 16px
+            height: 16px
+            vertical-align: top
+            line-height: 11px
+          li
+            border: 1px solid $gray_border
+            border-bottom: none
+            background-color: #fff
+            &.bundle-header
+              padding-bottom: 10px
+              border: none
+              i.fa
+                margin-right: 10px
+            &:last-child
+              border-bottom: 1px solid $gray_border
+            &.header
+              padding: 10px
+              background-color: #fff
+              color: #000
+              font-weight: 600
+              i.fa
+                padding: 5px
+                background-color: $blue_background
+                color: #fff
+                margin-right: 10px
+            > a
+              color: #616161
+              &:hover
+                background-color: $gray_hover
+            &.separator
+              margin-bottom: 10px
+        &.open > .dropdown-toggle
+          background-color: transparent
+          color: #fff
+        &.user-menu
+          .dropdown-toggle
+            padding: 8px 5px 5px
+            margin-right: 10px
+            .logo-wrapper
+              .no-logo-letter
+                font-size: 12px
+              > img
+                width: 32px
+          .dropdown-menu
+            max-height: calc(100vh - 50px)
+            // overflow-y: scroll
+            min-width: 300px
+            li > a
+              padding: 10px
+              &.blue
+                color: $cm_blue
+            .logo-wrapper
+              > img
+                width: 34px
+              .no-logo-letter
+                font-size: 12px
+            .user-details
+              .title
+                color: #000
+              .btn
+                margin-top: 5px
+                font-size: 12px
+                padding: 5px 10px
+            li.header
+              .logo-wrapper > img
+                width: 62px
+              .user-details
+                line-height: 1.2em
+                .title
+                  font-weight: 600
+                .subtitle
+                  font-weight: normal
+                  color: $gray
+              &.with-link
+                padding: 0
+                a
+                  color: #000
+                  font-weight: 600
+            i.fa
+              &.yellow-bg
+                background-color: $cm_yellow
+                color: #fff
+              &.gray-bg
+                color: #000
+                background-color: $gray_background
+  .nav-filter-pagination
+    float: right
+    .cm-pagination
+      display: inline-block
+      .btn-group .btn
+        padding: 4px 12px
+
+    .btn.btn-primary
+      padding: 6px 12px
+    .left-navigation
+      line-height: 2em
+      float: left
+      > a
+        color: $gray
+        font-size: 1.5em
+  .autohide-finder
+    vertical-align: middle
+    position: relative
+    display: inline-block
+    input
+      position: absolute
+      display: none
+      width: initial
+      height: 32px
+      right: 45px
+      top: 0
+      z-index: 1000
+    a
+      margin-right: 5px
+      color: #000
+      i.fa.fa-search
+        position: initial
+        background-color: #e7e7e7
+        border: 1px solid #cccccc
+        padding: 8px 10px
+      &.active i.fa.fa-search
+        background-color: $blue_background
+        color: #fff
+  .cm-tabs
+    margin-bottom: 10px
+    .filters
+      margin-top: 10px
+    .white-bar
+      width: 100%
+      height: 7px
+      background-color: #fff
+      border: 1px solid #DAE1E9
+      border-top-width: 0
+      &.with-border
+        border-top-width: 1px
+    .nav.nav-tabs
+      border-color: #DAE1E9
+    .nav.nav-tabs > li
+      min-width: 180px
+      text-align: center
+      > a
+        margin-right: 0
+        color: #000
+        i.fa
+          font-size: 1.2em
+          margin-right: 5px
+          &.pending
+            font-size: 0.9em
+            color: #f2192e
+            display: none
+            &.requested
+              display: inline-block
+      &:not(.active) > a
+        background-color: #fafafa
+        border-color: #eee #eee #ddd
+      &.active, &:hover
+        > a
+          border-top-width: 2px
+          padding-top: 9px
+        &.blue > a
+          border-top-color: $cm_blue
+        &.green > a
+          border-top-color: $cm_green
+        &.black > a
+          border-top-color: $cm_black
+        &.yellow > a
+          border-top-color: $cm_yellow
+    .buttons-block
+      margin-bottom: 5px
+      .dropdown
+        display: inline-block
+      button.btn
+        padding: 5px 12px
+        margin-right: 5px
+    &.merge-with-content
+      margin-bottom: 0px
+      .white-bar
+        border-bottom-width: 0
+        height: 0
+  .no-padding
+    padding: 0 !important
+  .display-flex
+    display: flex  
+  .list-group
+    font-size: 12px
+  .cm-list.list-group
+    .list-group-item, .list-group-item-content .title
+      > .actions
+        position: absolute
+        right: 0
+        background-color: #fff
+        > a
+          color: #676767
+          font-size: 1.3em
+          margin-right: 10px
+          display: inline-block
+      .dropdown.options
+        vertical-align: middle
+        display: inline-block
+        > .dropdown-toggle
+          padding: 0 5px
+          color: $gray_text
+          font-size: 1.3em
+    .list-group-item
+      position: relative
+      padding: 10px 15px
+      font-size: 12px
+      color: #000
+      &.with-content
+        cursor: pointer
+        // border-color: #DAE1E9
+      &.header
+        font-weight: 600
+        color: #000
+        cursor: default
+      .actions
+        display: none
+        padding: 0 15px
+        background-color: #fff
+      .logo-wrapper > img
+        width: 30px
+      > div
+        line-height: 27px
+      .dropdown.options
+        float: right
+      &:hover > .actions
+        display: block
+      &.no-content
+        border-bottom: none
+      .with-profile-banner
+        font-weight: 100
+    .list-group-item-content
+      display: none
+      background-color: #fff
+      margin: 5px -5px
+      box-shadow: 0 0 5px
+      .title
+        position: relative
+        border-bottom: 1px solid #ddd
+        .actions
+          top: 10px
+      .username
+        padding: 15px
+        .name
+          font-weight: bold
+        img.logo
+          width: 35px
+      .content
+        padding: 0
+        color: $black
+        .space-top
+          margin-top: 15px
+        .paragraph
+          padding: 15px
+          .toggle-comments
+            margin-top: 15px
+            display: block
+            &.count-comments
+              font-size: 90%
+              color: $gray_text
+      .title
+        padding: 15px
+      .dropdown.options
+        margin: 0 10px
+      .recipients .pull-right
+        padding: 15px
+      .with-profile-banner
+        color: #000
+        font-weight: bold
+    &.as-table
+      .list-group-item
+        padding: 0px 15px
+        div[class|=col-xs]
+          padding: 5px
+    .unread .list-group-item
+      background-color: $gray_blue
+      .username, .title
+        font-weight: 600
+        color: #000
+      .actions
+        background-color: $gray_blue
+      .with-profile-banner
+        font-weight: 600
+  .comments-replies
+    padding: 15px
+    background-color: #f6f6f6
+    cursor: pointer
+    color: #676767
+    .material-icons
+      font-size: 12px
+
+  span.info, a.info
+    font-size: 80%
+    color: $gray_text
+  // Attachments
+  .attachments
+    padding-top: 10px
+  .attachments, .attachments-container
+    margin: 0 -5px
+    .attachment, .attachment-div
+      padding: 0 5px
+      .image-holder
+        position: relative
+        img
+          width: 100%
+        span.filename
+          display: block
+          position: absolute
+          left: 0
+          bottom: 0
+          font-size: 13px
+          padding: 5px
+          width: 100%
+          color: #333
+          background-color: rgba(255, 255, 255, 0.6)
+          text-align: center
+          @include line-ellipsis
+        .remove-attachment
+          position: absolute
+          top: 5px
+          right: 10px
+          color: #333
+          padding: 0px 5px
+          background-color: #FFF
+          border: 1px solid #333
+
+  
+  // Stats Dashboard
+
+  .line-chart
+    text-align: center
+    margin: 20px 0
+    position: relative
+    .ct-series
+      &.ct-series-a .ct-line
+        stroke: $cm_blue
+      &.ct-series-b .ct-line
+        stroke: $secondary
+        stroke-dasharray: 5px 2px
+
+  .print-content
+    .title
+      color: $black
+      font-weight: 700
+      margin: 15px 0
+      display: inline-block
+      font-family: 'Varela Round', sans-serif
+
+    .title:first-letter
+      text-transform: capitalize
+
+    .report
+      margin: 0 !important
+      width: 100%
+
+    .logo-wrapper
+      top: 8px
+      img
+        width: 35px
+
+  .nav-chart
+    .count
+      display: block
+      font-size: 25px
+      color: $black
+      font-weight: 100
+    span.model-name
+      text-transform: capitalize
+
+    li
+      width: 10.8%
+
+    a
+      text-align: center
+      border-top: .2693em solid transparent
+      transition: border-color .1s linear
+      color: $gray-text
+      font-size: 13px
+      padding: 10px 0
+
+      span
+        transition: color 0.5s
+
+      &.current, &:hover
+        color: $black
+        border-top: .2693em solid $cm_blue
+        background-color: transparent
+      &.current
+        font-weight: bold
+        .count
+          font-weight: bold
+
+      &:focus
+        outline: none
+        background-color: transparent
+
+  .increase
+    &.up
+      color: $highlight
+    &.down
+      color: $red
+    i.material-icons
+      font-size: 12px
+      position: relative
+      top: -1px
+      left: 3px
+  
+  .chart-content-printable
+    border-radius: 3px
+    border: $border
+    margin: 20px 0
+    .between-date
+      margin: 20px 0 15px
+      font-size: 13px
+      padding: 0px 26px
+
+    .dd-communities
+      width: 100%
+      display: inline-block
+      .dropdown
+        float: right
+        margin: 0
+        padding: 5px 0
+        font-weight: bold
+        button:first-letter
+          text-transform: capitalize
+          div.logo-wrapper
+            width: 25px
+            position: relative
+            top: -3px
+          img
+            width: 100%
+        ul.dropdown-menu
+          a
+            height: 50px
+            padding: 10px
+            //font-size: 12px
+            span.community-name
+              position: relative
+              top: 7px
+            &.with-icon-option
+              text-transform: capitalize
+              i.fa
+                font-size: 19px
+                margin-right: 10px
+              span
+                position: relative
+                top: -3px
+
+          .logo-wrapper, img
+            width: 30px
+            height: 30px
+
+  .report 
+    .between-date
+      margin: 10px 0
+    .table
+      word-break: normal
+      table-layout: fixed
+      tr:not(:last-child), thead
+        border-bottom: $border
+      td:first-child, th:not(:first-child)
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+
+  .popover-with-content
+    background-color: $white
+    position: absolute
+    width: 250px
+    z-index: 1
+    color: $black
+    .fa.times
+      position: relative
+      top: 0
+      right: 0
+
+  .reporters
+    .reporter
+      border-bottom: $border
+      padding: .5em 0
+      .user-name
+        color: $black
+    .logo-wrapper
+      margin-right: .5em
+      img
+        width: 41px
+  
+  .navigation-tabs
+    margin-bottom: .5em
+    .tab
+      display: inline-block
+      color: $black
+      border-bottom: 2px solid transparent
+      padding-bottom: 10px
+      margin-right: .5em
+      &.active
+        border-color: $cm_blue
+
+  .building-filter
+    word-break: normal
+    .with-logo
+      display: flex
+      align-items: center
+      
+      & > span
+        margin-left: .5em
+
+  .dropdown-filter .dropdown-menu li a
+    cursor: pointer
+
+  .datepicker
+    color: $black
+
+  .has-word-break-normal
+    word-break: normal
+
+  @media not print
+    &.print-page
+      background-color: $white
+      padding-top: 35px
+
+    .print-report
+      float: right
+      display: inline-block
+      text-transform: uppercase
+      font-size: 13px
+      i.fa
+        font-size: 18px
+        margin-left: 5px
+        position: relative
+        top: 2px
+
+    .report
+      display: inline-block
+      width: 49%
+      border-radius: 3px
+      border: none
+      .panel-heading
+        text-transform: capitalize
+        background-color: $white
+        font-weight: bold
+        padding: 15px 20px
+        border-radius: 3px 3px 0 0
+      table
+        color: $black 
+        th
+          border-bottom-width: 1px
+          color: $gray-text
+          text-transform: capitalize
+          font-weight: normal
+          &:not(:first-child)
+            text-align: center
+        td:not(:first-child)
+          color: $gray-text
+          text-align: center
+        tr
+          background-color: $white
+
+        td, th
+          border: none
+          &:first-child
+            width: 45%
+          &:not(:first-child)
+            width: 27.5%
+
+        td:first-child, th:first-child
+          padding-left: 0
+        td:last-child, tf:last-child
+          padding-right: 0
+
+      &:nth-of-type(odd)
+        margin: 1% 1% 1% 0%
+      &:nth-of-type(even)
+        margin: 1% 0% 1% 1%
+
+      .panel-footer
+        padding: 10px 20px
+        button
+          padding: 0
+
+      .panel-footer, .dropdown-toggle
+        background-color: transparent
+
+      .panel-content
+        padding: 10px 20px
+        height: 300px
+        overflow-y: scroll
+
+    .shadow
+      -webkit-box-shadow: 1px 1px 4px 0px $gray  
+      -moz-box-shadow:    1px 1px 4px 0px $gray
+      box-shadow:         1px 1px 4px 0px $gray
+
+    .chart-section
+      background-color: $white
+      border-radius: 3px
+    
+    .dropdown
+      .dropdown-toggle:first-letter, a:first-letter
+        text-transform: capitalize
+
+    .dd-communities .dropdown-toggle
+      font-weight: bold
+
+  // Comments
+  .commentable-comments
+    display: none
+    .new-commentable-comment
+      background-color: #F6F6F6
+      padding: 15px
+      border-top: 1px solid #dddddd
+      form
+        .actions
+          padding-top: 10px
+          a
+            color: $gray_text
+        .inputs
+          position: relative
+      .attachments-container .attachment-div
+        margin-bottom: 10px
+    .commentable-comment
+      background-color: #F6F6F6
+      border-top: 1px solid #ddd
+      padding: 10px 16px
+      .logo-wrapper > img
+        width: 35px
+      .comment-content
+        line-height: 1.2em
+        p
+          margin: 0
+          color: $black
+  .overflow-e
+    @include line-ellipsis
+    display: block
+  .under-tabs
+    margin-bottom: 10px
+    text-align: right
+    > div
+      margin-left: 2px
+      display: inline-block
+    .order-by-button a
+      margin-right: 5px
+  .btn.btn-primary
+    background-color: $cm_blue
+    border-color: $cm_blue
+    font-weight: 600
+    //box-shadow: 0px 1px 4px 0px $gray
+    &:hover
+      background-color: $cm_blue_dark
+      border-color: $cm_blue_dark
+  .dropdown-filter
+    .dropdown-toggle
+      .fa.with-background
+        background-color: transparent
+        padding: 0 4px
+      .logo-wrapper
+        margin-right: 4px
+        > img
+          width: 25px
+    ul.dropdown-menu a
+      &.with-logo
+        padding: 10px
+        .logo-wrapper
+          margin-right: 5px
+          > img
+            width: 30px
+        i.fa
+          vertical-align: middle
+          font-size: 19px
+          margin-right: 4px
+      .fa.with-background
+        margin-right: 4px
+  .cols-divided-sm-2
+    @media (min-width: 769px)
+      -webkit-column-count: 2 /* Chrome, Safari, Opera */
+      -moz-column-count: 2 /* Firefox */
+      column-count: 2
+      -webkit-column-gap: 12px /* Chrome, Safari, Opera */
+      -moz-column-gap: 12px /* Firefox */
+      column-gap: 12px
+  .cols-divided-banner
+    display: inline-block
+    width: 100%
+    margin-bottom: 12px
+    box-shadow: 1px 1px 4px 0px $gray
+    background-color: #fff
+    padding: 8px
+    padding-bottom: 0
+    color: $gray_text
+    border-radius: 3px
+    &.unread
+      box-shadow: 1px 1px 4px 0px $cm_blue
+    .publisher
+      margin-bottom: 8px
+    .dropdown.options a
+      color: $gray
+      &:hover
+        color: #000
+        font-weight: bold
+    .comments-replies, .commentable-comments
+      margin: 0 -10px
+    > .attachments
+      padding-top: 0
+      margin: 0 -2px 5px
+      .attachment
+        padding: 0 2px
+        .image-holder
+          margin-bottom: 4px
+  .hidden-div
+    display: none
+  .modal.form-new-object
+    .modal-header
+      padding: 15px 20px
+      background-color: #fff
+      button span
+        vertical-align: text-bottom
+      .modal-title
+        font-family: 'Varela Round', sans-serif
+        margin-top: 0
+        color: #000
+        font-weight: 600
+        font-size: 16px
+      .modal-sybtitle
+        font-family: 'Varela Round', sans-serif
+        margin: 0px
+        color: rgb(138, 138, 138)
+        
+    .modal-body
+      font-size: 15px
+      form
+        color: #000
+        .user
+          > img
+            width: 45px
+            margin-right: 10px
+            float: left
+        label
+          font-size: 12px
+          font-weight: 500
+          color: #000
+        select option
+          font-size: 12px
+          line-height: 1em
+        .form-group
+          .form-control
+            color: #000
+            &.not-disabled
+              background-color: transparent
+          > div.dropdown
+            button.dropdown-toggle.form-control
+              text-align: left
+              padding: 5px 10px
+              i.fa.fa-caret-down, i.fa.fa-caret-up
+                float: right
+                line-height: 1.7em
+              i.fa.fa-caret-down
+                display: inline-block
+              i.fa.fa-caret-up
+                display: none
+              i.fa.with-background
+                margin-right: 5px
+                background-color: $gray_background
+                padding: 5px 7px
+            img
+              width: 25px
+            .dropdown-menu
+              li > a
+                color: #000
+                padding: 10px
+              li > a, button span
+                font-size: 12px
+            .dropdown-menu
+              width: 100%
+            &.open_tab button.dropdown-toggle
+              i.fa.fa-caret-up
+                display: inline-block
+              i.fa.fa-caret-down
+                display: none
+          &.no-margin
+            margin-bottom: 0
+          .attachments-container .attachment-div
+            margin-bottom: 10px
+          .on-input
+            position: absolute
+            color: $gray_light
+            top: 10px
+            right: 15px
+            line-height: 1em
+            font-size: 20px
+            &.left
+              right: initial
+              left: 15px
+              &.with-background
+                left: 13px
+                top: 7px
+                font-size: 16px
+          .form-control.small
+            width: initial
+          &.row
+            margin-left: -5px
+            margin-right: -5px
+            div[class*=col]
+              padding: 0 5px
+              ul.dropdown-menu
+                width: calc(100% - 10px)
+                margin-left: 5px
+        .with-icon
+          position: relative
+          &.left input
+            padding-left: 44px
+        > .btn
+          margin-right: 5px
+          text-transform: uppercase
+          &.btn-default
+            color: $gray
+        hr
+          margin: 15px 0
+        @media (min-width: 769px)
+          .form-group .short
+            width: 50%
+            display: inline-block
+            margin-left: 5px
+      .panel.panel-default.information
+        i.fa
+          float: left
+          font-size: 35px
+          line-height: 45px
+        p
+          margin-left: 45px
+        a
+          color: #000
+          font-weight: 600
+      .buttons-right
+        text-align: right
+        .btn, .dropdown
+          display: inline-block
+        .dropdown.shareable
+          button
+            height: 39px
+            margin-right: 10px
+            i.fa
+              padding: 5px
+            i.fa.fa-check, span.info, br
+              display: none
+          ul.dropdown-menu
+            li.dropdown-header
+              text-transform: none
+              line-height: 2em
+              font-size: 11px
+            li a
+              background-color: $gray_background
+              border-bottom: 1px solid #fff
+              padding: 7px
+              padding-left: 22px
+              line-height: 1.2em
+              position: relative
+              color: #000
+              i.fa
+                width: 12px
+              i.fa.fa-check
+                display: none
+                position: absolute
+                top: 7px
+                left: 7px
+              span.info
+                padding-left: 15px
+              &.checked i.fa.fa-check
+                display: initial
+    &.receivers-list-modal
+      .modal-body
+        ul.list-inline
+          border-bottom: 1px solid $gray_border
+          margin-bottom: 10px
+          li
+            padding: 0 0 10px
+            margin-right: -4px
+            &:not(:last-child) a
+              border-right: 1px solid $gray_border
+            a
+              color: #000
+              display: block
+              text-align: center
+              min-width: 85px
+            &.active
+              border-bottom: 2px solid $cm_blue
+        > div
+          display: none
+          &.active
+            display: block
+          > div
+            color: #000
+            padding: 5px 0
+            img.logo
+              width: 35px
+            &:not(:last-child)
+              border-bottom: 1px solid $gray_border
+
+  .cm-gallery-grid
+    margin: 0 -5px
+    .cm-gallery-grid-item
+      padding: 0 5px
+      margin-bottom: 15px
+      .cm-gallery-grid-item-content
+        position: relative
+        box-shadow: 1px 1px 4px 0px gray
+        > a img
+          width: 100%
+        .details
+          background-color: #fff
+          padding: 8px 10px
+          font-size: 12px
+          .header
+            margin-bottom: 5px
+            .name
+              color: #000
+              font-size: 12px
+              font-weight: 600
+          .actions
+            float: right
+            > a
+              color: gray
+            ul.dropdown-menu
+              left: initial
+              right: 0
+          .review-avg-stars
+            margin: 5px 0
+            > i.fa
+              color: gold
+              font-size: 1.2em
+  .content-box
+    border: 1px solid $gray_border
+    padding: 0
+    margin-bottom: 10px
+    display: inline-block
+    width: 100%
+    .header
+      border-bottom: 1px solid $gray_border
+      padding: 10px 15px
+      font-weight: 600
+      color: $blue_dark
+      padding: 23px 25px 18px
+      //  text-transform: uppercase
+      background-color: #FFFFFF
+      a
+        color: $blue_dark
+        display: block
+        line-height: 1em
+        padding: 0.21em 0
+      i:hover
+        color: $cm_blue
+    .content
+      padding: 10px
+      color: $gray_text
+      background-color: #fff
+      table
+        margin: 10px
+        tr > td
+          padding-bottom: 1em
+          padding-top: 1em
+  .photos-gallery
+    margin: 0 -5px
+    min-height: 50vh
+    .photo-container
+      padding: 0 5px
+      margin-bottom: 10px
+      position: relative
+      img
+        width: 100%
+      &.change-image-icon > a.change-image
+        font-size: 5em
+        color: $gray_text
+        text-align: center
+        width: 100%
+        display: block
+        padding: 45px 0
+        border: 2px dashed $gray_text
+      .dropdown
+        position: absolute
+        top: 10px
+        right: 15px
+        a.dropdown-toggle
+          color: #fff
+          display: none
+          i.fa
+            background-color: rgba(0, 0, 0, 0.5)
+            font-size: 1.8em
+            line-height: 0.9em
+            border-radius: 5px
+            padding: 0.2px
+        ul.dropdown-menu
+          left: initial
+          right: 0
+      &:hover .dropdown a.dropdown-toggle
+        display: inline
+  .images-container
+    margin: 0 -5px
+    .add-image-grid
+      padding: 5px
+      a.btn
+        padding: 5px 12px
+    .image-div
+      padding: 0 5px
+      margin-bottom: 10px
+      .image-holder
+        height: 170px
+        overflow: hidden
+        img
+          width: 100%
+          height: 100%
+      label.awesome-checkbox-label.btn.btn-success, label.awesome-checkbox-label.btn.btn-primary, a.remove-image.btn.btn-danger
+        margin-top: 0
+        color: #fff
+        font-size: 0.8em
+  .timeline-view
+    .home-image
+      border: 1px solid $gray_border
+      margin-bottom: 10px
+      .name-and-options
+        padding: 15px
+        background-color: #fff
+        .name
+          color: #000
+          font-size: 18px
+        .dropdown > .dropdown-toggle
+          color: $gray_text
+      &.with-logo
+        position: relative
+        .name-and-options
+          padding-left: 200px
+      .image-container, .logo-container
+        .change-image-icon
+          position: absolute
+          > a
+            display: block
+            padding: 5px
+            color: $gray_light
+            font-size: 0.9em
+            word-break: break-word
+            i.fa
+              padding-right: 5px
+              font-size: 1.5em
+              float: left
+        &:hover
+          .change-image-icon > a
+            border: 1px solid $gray_light
+            background-color: rgba(0, 0, 0, 0.4)
+            color: #fff
+            span
+              display: inline
+          a.confirm-destroy
+            display: block
+      .image-container
+        overflow: hidden
+        position: relative
+        img
+          width: 100%
+        .change-image-icon
+          top: 20px
+          left: 20px
+          > a span
+            display: none
+            line-height: 20px
+      .logo-container
+        position: absolute
+        bottom: 20px
+        left: 15px
+        border-radius: 2px
+        box-shadow: 0 0 1px
+        img
+          border: 3px solid #fff
+          border-radius: 2px
+        .change-image-icon
+          display: none
+          bottom: 0
+          left: 0
+          width: 100%
+        &:hover
+          .change-image-icon
+            display: block
+        .no-logo-letter
+          font-size: 24px
+    .highlights.content-box
+      .data
+        float: left
+        text-align: center
+        width: 30%
+        color: #000
+        &.bigger
+          width: 40%
+        .name
+          display: block
+          font-size: 12px
+          color: $gray_light
+    .photos.content-box
+      .content
+        padding: 10px 5px
+      .image
+        padding: 0 2px
+        margin-bottom: 5px
+        img
+          width: 100%
+    .content-box.divided .content
+      padding: 0
+      .left, .right
+        padding: 0
+      .right
+        border-left: 1px solid $gray_border
+        form
+          padding: 15px
+      .list-group.filters
+        .list-group-item
+          border: none
+          &.active
+            background-color: transparent
+            border-left: 3px solid $cm_blue
+            color: #000
+            font-weight: bold
+            padding-left: 12px
+    .content-box.with-table table
+      font-size: 12px
+      color: $gray_text
+      td:first-child
+        @include line-ellipsis
+        padding-right: 10px
+        font-size: 12px
+        font-weight: 600
+        color: $blue_dark
+        i.fa
+          width: 18px
+          text-align: center
+  #blocking_message, .toastr-messages
+    display: none
+  #change-language-modal
+    .modal-dialog
+      @media (min-width: 768px)
+        width: 400px
+      .modal-content
+        text-align: left
+        .list-group-item
+          font-size: 1.2em
+          font-weight: 400
+  .google-map
+    width: 100%
+    height: 300px
+    &.small
+      height: 250px
+    &.medium
+      height: 360px
+  .modal#modal-spinner
+    i.fa
+      position: absolute
+      top: calc(50% - 37px)
+      left: calc(50% - 37px)
+      color: #fff
+  .select2.select2-container .selection .select2-selection
+    border-radius: 0
+    line-height: 24px
+    .select2-selection__rendered .select2-selection__choice
+      border-radius: 0
+  .select2-container--open .select2-dropdown .select2-results .select2-receiver-selector-item
+    font-size: 12px
+    display: flex
+    .logo-wrapper
+      margin-right: 5px
+      > img
+        width: 30px
+    span.black
+      color: #000
+      margin-right: 5px
+  .subscriptions
+    .plans .plan
+      padding: 10px
+      .plan-container
+        color: #000
+        text-align: center
+        background: $gray_background
+        padding: 10px
+        box-shadow: 0 0 5px $gray
+        .big
+          font-size: 1.5em
+        .btn
+          padding: 7px
+          width: 100%
+          margin: 12px 0
+    .list-group.cm-list
+      .list-group-item.header.gray-bg
+        text-transform: uppercase
+      .list-group-item-content
+        .title .username
+          padding: 0
+          line-height: 1.2em
+        .content
+          margin-left: 0
+          table
+            border: $border
+            margin-bottom: 0
+            thead
+              background-color: $gray_background
+  .gray-bg
+    background-color: $gray_background
+  .text-centered
+    text-align: center
+  .dropdown.as-select
+    .logo-wrapper
+      margin-right: 5px
+      .no-logo-letter
+        font-size: 10px
+    img
+      width: 30px
+    button
+      padding: 5px
+  .image-container
+    overflow: hidden
+  .loading-overlay
+    position: fixed
+    display: none
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: rgba(0,0,0,0.5)
+    z-index: 5000
+    cursor: pointer
+    i.fa
+      position: absolute
+      top: calc(50% - 0.5em)
+      left: calc(50% - 0.5em)
+      color: #fff
+  .empty-items-container
+    text-align: center
+    padding: 30px 0
+    color: #000
+    .fa
+      font-size: 4em
+      color: #ffac75
+      margin-bottom: 10px
+  .all-width
+    width: 100%
+    text-align: left
+    i.fa.pull-right
+      line-height: 1.6em
+    i.fa:not(.pull-right)
+      margin-right: 10px
+  .yellow-bg
+    background-color: #fcf8e3
+    a
+      color: #aa8668
+  .red-bg
+    background-color: #facfc9
+  .white-bg
+    background-color: #fff
+  .switch
+    position: relative
+    display: inline-block
+    width: 50px
+    height: 25px
+    input
+      display: none
+    .slider
+      position: absolute
+      cursor: pointer
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background-color: #ccc
+      -webkit-transition: .2s
+      transition: .2s
+      &:before
+        position: absolute
+        content: ""
+        height: 17px
+        width: 17px
+        left: 4px
+        bottom: 4px
+        background-color: white
+        -webkit-transition: .2s
+        transition: .2s
+      &.round
+        border-radius: 15px
+        &:before
+          border-radius: 50%
+    input:checked + .slider
+      background-color: #2196F3
+    input:focus + .slider
+      box-shadow: 0 0 1px $cm_blue
+    input:checked + .slider:before
+      -webkit-transform: translateX(26px)
+      -ms-transform: translateX(26px)
+      transform: translateX(26px)
+  .check-with-text
+    > input
+      display: inline-block
+      width: initial
+    > label
+      vertical-align: middle
+      margin-right: 10px
+  table.table
+    margin-bottom: 0
+    tr.no-bordered > td
+      border-top: none
+  .no-logo-letter
+    position: absolute
+    left: 0
+    top: 0
+    color: white
+    width: 100%
+    height: 100%
+    text-align: center
+    display: flex
+    justify-content: center
+    flex-direction: column
+  .logo-wrapper
+    display: inline-block
+    position: relative
+    &.left
+      float: left
+      margin-right: 10px
+      > img
+        width: 41px
+  .sweet-alert
+    > p
+      color: #000
+      border-bottom: 2px solid #eee
+      padding-bottom: 30px
+    button
+      margin-top: 10px
+      font-size: 15px
+      &.confirm
+        background-color: $cm_blue
+        border-radius: 2px
+      &.cancel
+        background-color: #ccc
+        border-radius: 2px
+  .dropdown-toggle > i.fa.fa-ellipsis-v
+    font-size: 20px
+    padding: 4px
+    color: $blue_light
+  .with-profile-banner
+    color: $blue_dark
+    font-weight: 600
+  // textarea js-auto-size
+  textarea.js-auto-size
+    box-sizing: border-box
+    max-height: 15em /* optional, but recommended */
+    min-height: 5em
+    overflow-x: hidden /* for Firefox (issue #5) */
+    line-height: 1.2em
+  .modal.form-new-object textarea.js-auto-size
+    min-height: 4em
+  .btn.btn-default
+    border: none
+    color: #000
+  // colors
+  .green
+    color: $cm_green !important
+  .blue
+    color: $cm_blue !important
+  .blue-light
+    color: $blue_light !important
+  .black
+    color: $cm_black !important
+  .red
+    color: $cm_red !important
+  .gray
+    color: $gray !important
+  .gray-text
+    color: $gray_text !important
+  .yellow
+    color: $cm_yellow !important
+  .orange
+    color: $cm_orange !important
+  i.fa.with-background
+    background-color: #eeeeee
+    /*padding: 5px 7px*/
+  .well.politics
+    color: #000
+    word-break: normal
+    text-align: justify
+    h3
+      font-size: 20px
+  .add-attachment-button
+    position: absolute
+    right: 1px
+    bottom: 3px
+    font-size: 20px
+    line-height: 0
+    color: $gray_text
+    padding: 5px
+    i.fa
+      padding: 0 2px
+  .emoji-picker-container
+    display: block
+    .emoji-wysiwyg-editor.form-control
+      -webkit-appearance: unset
+      padding-bottom: 25px
+      height: auto
+      min-height: 5em
+      &:empty:before
+        color: #9f9f9f
+    &.normal-height .emoji-wysiwyg-editor.form-control
+      min-height: unset
+      padding-bottom: 7px
+    .emoji-picker-icon
+      color: #a0a0a0
+      top: unset
+      bottom: 3px
+      right: 1px
+      padding: 5px
+      opacity: 1
+      font-size: 20px
+    &.with-icon .emoji-picker-icon
+      right: 32px
+  .add-attachment-button i.fa, .emoji-picker-icon
+    &:hover
+      color: #000
+  .emoji-image img
+    margin: 0 1px
+  .replies-and-likes
+    hr
+      margin: 10px 0 0
+    > a
+      margin-right: 15px
+      &.after-rule
+        color: $gray_text
+        padding: 14px 0
+        display: inline-block
+  .panel.panel-default.merge-with-tabs
+    border-top: none
+  .switchable:not(.visible)
+    display: none
+  p.black-text, p.black-text a
+    color: $black !important
+
+  .cols-divided-banner
+    .toggle-saved
+      color: #222222
+      font-size: 20px
+      display: none
+      margin: 0px 15px
+      &.blue
+        display: inline-block
+    &:hover .toggle-saved
+      display: inline-block
+    .reported-icon
+      cursor: pointer
+      color: #EA0000
+      font-size: 20px
+      display: inline-block
+      margin-right: 10px
+  .post
+    padding: 10px
+    padding-bottom: 0px
+    color: $black
+
+  .cm-nav-links
+    border: 1px solid $gray_border
+    margin-bottom: 10px
+    background-color: #fff
+    border-radius: 4px
+    padding: 0 10px
+    > a:not(.btn)
+      padding: 15px 0 13px
+      margin: 0 20px
+      color: $blue_light
+      display: inline-block
+      border-bottom: 2px solid transparent
+      &.active, &:hover
+        font-weight: bold
+        color: #000
+        border-color: $cm_blue
+    .btn
+      margin-top: 10px
+      margin-right: 10px
+      border-radius: 3px
+      padding: 4px 6px
+      float: right
+      font-weight: 100
+
+  i.material-icons
+    vertical-align: sub
+    word-break: normal
+
+  @media (max-width: $sc_xs)
+    .stats-dashboard
+      overflow-x: hidden
+    .ct-label.ct-horizontal
+      display: none
+    .nav-chart
+      li
+        width: 32%
+        a
+          padding: 10px 5px
+      .increase
+        display: none
+      .count
+        font-size: 13px
+        display: inline
+        margin: 0 5px
+    .report
+      width: 100%
+      &:nth-of-type(even), &:nth-of-type(odd)
+        margin: 15px 0
+
+    .cm-navbar.navbar.navbar-default .container-fluid
+      height: 60px
+      .navbar-header:not(.public)
+        display: inline-block
+        ul.dropdown-menu
+          display: none
+          right: 0
+          top: 102%
+          max-height: initial
+          height: calc(100vh - 100%)
+          overflow-y: scroll
+          padding: 10px
+          position: fixed
+          background-color: $gray_background
+          li
+            border: 1px solid $gray_border
+            &:not(:last-child)
+              border-bottom: none
+            > a
+              font-size: 1.2em
+              padding: 12px 15px
+        a.navbar-brand
+          padding: 21px
+          i.fa
+            padding: 19px
+      > .nav.navbar-nav.navbar-right
+        float: right
+        margin: 0 -15px
+        .notifications.dropdown
+          height: 38px
+          a.dropdown-toggle
+            padding: 16px
+          ul.dropdown-menu
+            top: 102%
+            box-shadow: none
+            background-color: $body_background
+            height: calc(100vh - 100%)
+            overflow-y: scroll
+          &.user-menu a.dropdown-toggle
+            margin-right: 0
+            padding: 17px 14px
+        li.notifications
+          ul.dropdown-menu
+            position: fixed
+            right: 0
+          &:not(.user-menu) ul.dropdown-menu li a
+            padding: 15px
+          &.user-menu
+            display: inline-block
+          form#navbar-remote-search-form-mobile .btn
+            height: 39px
+    .cm-tabs .nav.nav-tabs li
+      min-width: 75px
+    .timeline-view
+      &.about .content-box.divided .content .right form
+        padding: 0
+        .table > tbody > tr > td:first-child
+          width: initial
+      .home-image .logo-container
+        width: 40%
+        img
+          width: 100%
+    .modal.form-new-object
+      .modal-body form .form-group.row > div:not(:last-child)
+        margin-bottom: 15px
+    .cols-divided-banner .toggle-saved
+      display: inline-block
+    .cm-nav-links
+      > a:not(.btn)
+        margin: 0 7px
+      
+      .compact-text
+        letter-spacing: -0.5px
+      &.compact
+        padding: 0 8px
+        a:not(.btn)
+          margin: 0 15px
+      &.new-to-bottomreports
+        margin-bottom: 55px
+    .under-tabs
+      text-align: left
+      &.compactable
+        button.btn
+          padding: 8px 5px
+        span.text
+          letter-spacing: -0.3px
+
+    @media not print
+      .nav-chart
+        padding: 0 10px
+        li
+          width: 32%
+          .count
+            display: inline-block
+            font-size: 13px
+            margin: 0 5px
+          span.increase
+            display: none
+        a
+          padding: 10px 0
+
+      .report
+        width: 100%
+        display: block
+
+      .report:nth-of-type(odd), .report:nth-of-type(even)
+        margin: 10px 0
+
+  @media (max-width: $sc_xxs)
+    .inner-section
+      display: flex
+      flex-flow: column nowrap
+      padding: 0 5px
+      .cm-tabs
+        order: -10
+        .nav.nav-tabs li a
+          font-size: 12px
+          i.fa
+            font-size: 1em
+      .nav-filter-pagination
+        order: -9
+        text-align: right
+        margin-bottom: 10px
+    .autohide-finder input
+      position: fixed
+      top: 160px
+      left: 5px
+      width: calc(100% - 10px)
+    .timeline-view
+      .home-image
+        &.with-logo .name-and-options
+          padding-left: 15px
+        .logo-container, .image-container
+          .change-image-icon > a
+            border: 1px solid $gray_light
+            background-color: rgba(0, 0, 0, 0.4)
+            color: white
+            span
+              display: inline
+        .logo-container
+          bottom: 45px
+          left: 10px
+          .change-image-icon
+            display: block
+        .image-container
+          height: 230px
+          a:first-child img
+            height: 100%
+          .change-image-icon
+            top: 10px
+            left: 10px
+      .nav-buttons .btn
+        padding: 4px 8px
+      &.about .content-box.divided .content
+        .list-group.filters
+          margin-bottom: 0
+        form
+          .table > tbody
+            display: block
+            tr
+              display: block
+              border-top: 1px solid #dddddd
+              td
+                border: none
+                &:not(.hidden)
+                  display: block
+                &:first-child
+                  padding-bottom: 0
+    .cm-list.list-group
+      .list-group-item > div
+        line-height: 1.2em
+        img.logo
+          width: 50px
+        .username, .title
+          color: #000
+        .title, .info
+          font-size: 0.9em
+      .list-group-item-content
+        margin: 5px 0px
+        .title
+          padding: 0
+          .actions
+            position: static
+            text-align: right
+            /*word-spacing: 25px*/
+            border-bottom: 1px solid $gray_border
+            .left-actions
+              float: left
+              line-height: 2em
+              word-spacing: initial
+              a
+                color: $gray
+          .title-text, .actions
+            padding: 15px
+          .title-text.case
+            text-transform: capitalize
+            border-bottom: 1px solid $gray_border
+        .content
+          margin-left: 0
+    // .under-tabs
+        // margin-top: 50px
+        // text-align: right
+    .cm-nav-links .new-record
+      margin-right: 0
+    .cm-navbar.navbar.navbar-default .container-fluid a.navbar-brand
+      max-width: calc(100vw - 165px)
+
+// @media print
+//   .nav-chart
+//     padding: 0 10px
+//     li
+//       width: 32%
+//       .count
+//         display: block
+//         font-size: 25px
+//         margin: 0 5px
+//       span.increase
+//         display: block
+//         &.up
+//           color: #4CD964
+//         &.down
+//           color: #FF3B30
+//         i.material-icons
+//           font-weight: bold
+//           font-size: 12px
+//           position: relative
+//           top: -1px
+//           left: 3px
+//     a
+//       padding: 10px 0
+.container
+  margin-bottom: 55px
+  .content-pagination
+    text-align: right
+    .pagination
+      ul
+        padding-inline-start: 5px
+        a:nth-child(2),a:nth-child(4)
+          padding: 5px 10px
+          background: #ddd
+          color: #909090
+          font-size: 16px
+#order_by
+  button
+    span
+      i
+        font-size: 12px
+#communities-filter-new
+  i
+    font-size: 12px
+
+#lightbox 
+  .lb-close
+    z-index: 9999

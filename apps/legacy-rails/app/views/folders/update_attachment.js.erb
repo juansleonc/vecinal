@@ -1,0 +1,11 @@
+<% if @attachment.valid? %>
+  $('.attachments-container #attachment-<%= @attachment.id %> .file-name').text('<%= @attachment.file_attachment_file_name %>');
+  $('.attachments-container #attachment-<%= @attachment.id %> a.download').attr(
+    'download', '<%= @attachment.file_attachment_file_name %>'
+  )
+  $('.modal#update-attachment-modal-<%= @attachment.id %>').modal('hide');
+<% else %>
+  $('.attachments-container #attachment-<%= @attachment.id %> .attachment-errors-container').html(
+    '<%= j render("shared/model_errors", resource: @attachment) %>'
+  );
+<% end %>

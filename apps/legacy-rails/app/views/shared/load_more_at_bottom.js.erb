@@ -1,0 +1,5 @@
+$('.load-more-at-bottom').append(
+  '<%= @partial ? j(render partial: @partial, collection: @model_objects) : j(render @model_objects) %>'
+);
+$('.load-more-at-bottom').data('next-path', '<%= @next_path %>');
+update_communities_filter_counters();

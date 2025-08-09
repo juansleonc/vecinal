@@ -1,0 +1,78 @@
+<% @submenu_title = t('general.submenu.communities'); @submenu_item = 'communities'; @action_for_search = finish_registration_search_companies_path(query: params[:query], responsible: params[:responsible], order: params[:order], b: params[:b], c: params[:c])
+  geolocation = request.location
+%>
+
+<div class="inner-section col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-2 finish-registration-communities">
+  <%= render 'finish_registration/communities_header', modal_target: '#new-company-modal',
+    new_button_name: '+ ' + t('companies.new')
+  %>
+
+  <div class="under-tabs clearfix <%= 'requested' if current_user.accountable.present? %>">
+    <div class="col-xs-12 colored-banner red-bg">
+      <i class="fa fa-exclamation-triangle"></i> <%= t('finish_registration.pending_access_request') %>
+    </div>
+    <div class="col-xs-12 colored-banner white-bg">
+      <i class="fa fa-exclamation-triangle"></i> <%= t('finish_registration.company_join_banner1') %>
+      <%= link_to t('finish_registration.click_here'), '#', data: { toggle: 'modal', target: "#new-company-modal" } %>
+      <%= t('finish_registration.company_join_banner2') %>
+    </div>
+  </div>
+
+  <% if @companies.present? %>
+    <%= form_for current_user, url: finish_registration_set_role_path, method: :put, remote: true do |f| %>
+      <%= f.hidden_field :accountable_type, value: 'Company' %>
+      <%= f.hidden_field :accountable_code %>
+      <div class="cm-gallery-grid clearfix load-more-at-bottom" id="communities" data-next-path="<%= @next_path %>">
+        <%= render partial: 'finish_registration/community', collection: @companies %>
+      </div>
+    <% end %>
+  <% else %>
+    <%= render 'shared/empty_items', icon: 'fa-circle-o', objects: t('general.submenu.communities').downcase %>
+  <% end %>
+</div>
+
+<div class="modal fade form-new-object" id="new-company-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"> <%= t('finish_registration.new_property_management_company') %></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for current_user.build_company, url: finish_registration_create_community_path, remote: true do |f| %>
+          <div class="errors-container"></div>
+          <div class="form-group">
+            <%= f.text_field :name, class: 'form-control', placeholder: Company.human_attribute_name(:name) %>
+          </div>
+          <%= f.hidden_field :namespace %>
+          <div class="form-group">
+            <%= f.text_field :country, value: geolocation.country, class: 'form-control', placeholder: Company.human_attribute_name(:country) %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :address, class: 'form-control', placeholder: Company.human_attribute_name(:address) %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :city, value: geolocation.city, class: 'form-control', placeholder: Company.human_attribute_name(:city) %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :region, value: geolocation.state, class: 'form-control', placeholder: Company.human_attribute_name(:region) %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :zip, value: geolocation.postal_code, class: 'form-control', placeholder: Company.human_attribute_name(:zip) %>
+          </div>
+          <div class="clearfix">
+            <%= f.submit t('general.send'), class: 'btn btn-primary pull-right' %>
+            <small>
+              <%= t('finish_registration.next_agree') %>
+              <%= link_to t('general.privacy_policy'), send("privacy_#{I18n.locale.to_s}_path") %>
+              <%= t('general.and') %>
+              <%= link_to t('general.terms_of_use'), send("terms_#{I18n.locale.to_s}_path") %>.
+            </small>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
